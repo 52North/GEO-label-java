@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gvq:GVQ_FeedbackCollection xmlns:gvq="http://www.geoviqua.org/QualityInformationModel/3.1" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gmd19157="http://www.geoviqua.org/gmd19157" xmlns:updated19115="http://www.geoviqua.org/19115_updates" xmlns:gsrC="http://www.w3.org/2001/XMLSchema" xmlns:gsrD="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geoviqua.org/QualityInformationModel/3.1 ../GeoViQua_PQM_UQM.xsd">
+    <gvq:item>
+        <gvq:identifier>
+            <updated19115:MD_Identifier>
+                <gmd:code/>
+            </updated19115:MD_Identifier>
+        </gvq:identifier>
+        <gvq:subject>string</gvq:subject>
+        <gvq:primaryTarget>
+            <gvq:resourceRef>
+               <updated19115:MD_Identifier uuid="targetUID">
+                    <gmd:code>
+                        <gco:CharacterString>de.dwd.nkdz.maps.rsms.april.1971-1980</gco:CharacterString>
+					</gmd:code>
+                    <updated19115:codeSpace>
+                        <gco:CharacterString>clearinghouse.cisc.gmu.edu</gco:CharacterString>
+					</updated19115:codeSpace>
+				</updated19115:MD_Identifier> 
+            </gvq:resourceRef> 
+            <gvq:natureOfTarget>
+                <gvq:MD_ScopeCode codeList="http://www.geoviqua.org/gmd19157/resources/codeList.xml#MD_ScopeCode" codeListValue="metadata"/>
+			</gvq:natureOfTarget>
+        </gvq:primaryTarget>
+        <gvq:userRole><gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_UserRoleCode" codeListValue="researchEndUser"/></gvq:userRole>
+        <gvq:user>
+            <gvq:userDetails>
+                    <gmd:individualName>
+                        <gco:CharacterString>User G</gco:CharacterString>
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                        <gco:CharacterString>National Climate Data Centre of Norway</gco:CharacterString>
+                    </gmd:organisationName>
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            <gmd:phone>
+                                <gmd:CI_Telephone>
+                                    <gmd:voice>
+                                        <gco:CharacterString>+49 (0) 69 12345678</gco:CharacterString>
+                                    </gmd:voice>
+                                    <gmd:facsimile>
+                                        <gco:CharacterString>+49 (0) 69 12345678</gco:CharacterString>
+                                    </gmd:facsimile>
+                                </gmd:CI_Telephone>
+                            </gmd:phone>
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:deliveryPoint>
+                                        <gco:CharacterString>Weather Street</gco:CharacterString>
+                                    </gmd:deliveryPoint>
+                                    <gmd:city>
+                                        <gco:CharacterString>Oslo</gco:CharacterString>
+                                    </gmd:city>
+                                    <gmd:postalCode>
+                                        <gco:CharacterString>12345</gco:CharacterString>
+                                    </gmd:postalCode>
+                                    <gmd:country>
+                                        <gco:CharacterString>Norway</gco:CharacterString>
+                                    </gmd:country>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>UserG@ncdc.no</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                </gmd:CI_Address>
+                            </gmd:address>
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                        <gmd:CI_RoleCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_RoleCode" codeListValue="user"/>
+                    </gmd:role>
+            </gvq:userDetails>
+            <gvq:applicationDomain>http://www.eionet.europa.eu/gemet/concept/9278</gvq:applicationDomain>
+            <gvq:expertiseLevel>2</gvq:expertiseLevel>
+            <gvq:userRole><gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_UserRoleCode" codeListValue="researchEndUser"/></gvq:userRole>
+        </gvq:user>
+        <gvq:dateStamp>
+            <gco:DateTime>
+                2006-01-31T00:00:00.0Z
+			</gco:DateTime>
+		</gvq:dateStamp>
+        <gvq:qualityOverride>
+            <gvq:GVQ_DataQuality>
+                <gmd19157:scope/>
+                <gvq:discoveredIssue/>
+            </gvq:GVQ_DataQuality>
+        </gvq:qualityOverride>
+     
+        <gvq:userComment>
+            <gvq:comment>Excellent data, but the metadata is inconsistent, which makes it difficult to assess its fitness for purpose.</gvq:comment>
+            <gvq:mime-type>text/plain</gvq:mime-type>
+        </gvq:userComment>
+        <gvq:rating>
+            <gvq:score>3</gvq:score>
+            <gvq:justification>The data itself is of high quality, but the metadata record is patchy. It does comply with ISO 19139, however.</gvq:justification>
+        </gvq:rating>
+        <gvq:usage>
+           <gvq:reportAspect>
+             <gvq:GVQ_ReportAspectCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_ReportAspectCode" codeListValue="problem"/>
+			</gvq:reportAspect>
+            <gvq:usageDescription>I purchased this data for forecasting, and had never dealt with supplier Y before. I found that while the metadata on the supplier's website was compliant with ISO 19139, it was incomplete and I had difficulty assessing the quality of the data before purchase. I evaluated the metadata using the GeoViQua rubric to compare it to the required standards. </gvq:usageDescription>
+            <gvq:discoveredIssue>
+                <gvq:GVQ_DiscoveredIssue>
+                    <gvq:target xlink:href="targetUID"/>
+                    <gvq:knownProblem>
+                        <gco:CharacterString>The data itself is of high quality, but this metadata record is patchy. It does comply with ISO 19139, however.</gco:CharacterString>
+					</gvq:knownProblem>
+                    <gvq:referenceDoc>
+                        <gvq:GVQ_Publication>
+                            <gmd:title><gco:CharacterString>GeoViQua rubric illustrating completeness of the metadata.</gco:CharacterString></gmd:title>
+						    <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>1981-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_DateTypeCode" codeListValue="creation"/>
+                                    </gmd:dateType>
+                                 </gmd:CI_Date>
+							</gmd:date>
+                            <gvq:target xlink:href="targetUID"/>
+                            <gvq:category>
+                                <gvq:GVQ_PublicationCategoryCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_PublicationCategoryCode" codeListValue="webPage"/>
+							</gvq:category>
+                            <gvq:onlineResource>
+                                <gmd:CI_OnlineResource>
+                                    <gmd:linkage>
+                                        <gmd:URL><![CDATA[http://www.ogc.uab.cat/cgi-bin/geossback/GEOSSBack.cgi?accio=EstilXML&AfegirEstil=rubric&URL=http://clearinghouse.cisc.gmu.edu/geonetwork/srv/en/iso19139.xml?id=491540]]></gmd:URL>
+									</gmd:linkage>
+								</gmd:CI_OnlineResource>
+							</gvq:onlineResource>
+                        </gvq:GVQ_Publication>
+					</gvq:referenceDoc>
+				</gvq:GVQ_DiscoveredIssue>
+			</gvq:discoveredIssue>
+        </gvq:usage>
+        <gvq:domainURN>http://www.eionet.europa.eu/gemet/concept/9278</gvq:domainURN>
+        <gvq:tags>Climate,metadata</gvq:tags>
+    </gvq:item>
+	<gvq:item>
+        <gvq:identifier>
+            <updated19115:MD_Identifier>
+                <gmd:code/>
+            </updated19115:MD_Identifier>
+        </gvq:identifier>
+        <gvq:subject>string</gvq:subject>
+        <gvq:primaryTarget>
+            <gvq:resourceRef>
+               <updated19115:MD_Identifier uuid="targetUID">
+                    <gmd:code>
+                        <gco:CharacterString>de.dwd.nkdz.maps.rsms.april.1971-1980</gco:CharacterString>
+					</gmd:code>
+                    <updated19115:codeSpace>
+                        <gco:CharacterString>clearinghouse.cisc.gmu.edu</gco:CharacterString>
+					</updated19115:codeSpace>
+				</updated19115:MD_Identifier> 
+            </gvq:resourceRef> 
+            <gvq:natureOfTarget>
+                <gvq:MD_ScopeCode codeList="http://www.geoviqua.org/gmd19157/resources/codeList.xml#MD_ScopeCode" codeListValue="metadata"/>
+			</gvq:natureOfTarget>
+        </gvq:primaryTarget>
+        <gvq:userRole><gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_UserRoleCode" codeListValue="researchEndUser"/></gvq:userRole>
+        <gvq:user>
+            <gvq:userDetails>
+                    <gmd:individualName>
+                        <gco:CharacterString>User G</gco:CharacterString>
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                        <gco:CharacterString>National Climate Data Centre of Norway</gco:CharacterString>
+                    </gmd:organisationName>
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            <gmd:phone>
+                                <gmd:CI_Telephone>
+                                    <gmd:voice>
+                                        <gco:CharacterString>+49 (0) 69 12345678</gco:CharacterString>
+                                    </gmd:voice>
+                                    <gmd:facsimile>
+                                        <gco:CharacterString>+49 (0) 69 12345678</gco:CharacterString>
+                                    </gmd:facsimile>
+                                </gmd:CI_Telephone>
+                            </gmd:phone>
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:deliveryPoint>
+                                        <gco:CharacterString>Weather Street</gco:CharacterString>
+                                    </gmd:deliveryPoint>
+                                    <gmd:city>
+                                        <gco:CharacterString>Oslo</gco:CharacterString>
+                                    </gmd:city>
+                                    <gmd:postalCode>
+                                        <gco:CharacterString>12345</gco:CharacterString>
+                                    </gmd:postalCode>
+                                    <gmd:country>
+                                        <gco:CharacterString>Norway</gco:CharacterString>
+                                    </gmd:country>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>UserG@ncdc.no</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                </gmd:CI_Address>
+                            </gmd:address>
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                        <gmd:CI_RoleCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_RoleCode" codeListValue="user"/>
+                    </gmd:role>
+            </gvq:userDetails>
+            <gvq:applicationDomain>http://www.eionet.europa.eu/gemet/concept/9278</gvq:applicationDomain>
+            <gvq:expertiseLevel>1</gvq:expertiseLevel>
+            <gvq:userRole><gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_UserRoleCode" codeListValue="researchEndUser"/></gvq:userRole>
+        </gvq:user>
+        <gvq:dateStamp>
+            <gco:DateTime>
+                2006-01-31T00:00:00.0Z
+			</gco:DateTime>
+		</gvq:dateStamp>
+        <gvq:qualityOverride>
+            <gvq:GVQ_DataQuality>
+                <gmd19157:scope/>
+                <gvq:discoveredIssue/>
+            </gvq:GVQ_DataQuality>
+        </gvq:qualityOverride>
+     
+        <gvq:userComment>
+            <gvq:comment>Excellent data, but the metadata is inconsistent, which makes it difficult to assess its fitness for purpose.</gvq:comment>
+            <gvq:mime-type>text/plain</gvq:mime-type>
+        </gvq:userComment>
+        <gvq:rating>
+            <gvq:score>3</gvq:score>
+            <gvq:justification>The data itself is of high quality, but the metadata record is patchy. It does comply with ISO 19139, however.</gvq:justification>
+        </gvq:rating>
+        <gvq:usage>
+           <gvq:reportAspect>
+             <gvq:GVQ_ReportAspectCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_ReportAspectCode" codeListValue="problem"/>
+			</gvq:reportAspect>
+            <gvq:usageDescription>I purchased this data for forecasting, and had never dealt with supplier Y before. I found that while the metadata on the supplier's website was compliant with ISO 19139, it was incomplete and I had difficulty assessing the quality of the data before purchase. I evaluated the metadata using the GeoViQua rubric to compare it to the required standards. </gvq:usageDescription>
+            <gvq:discoveredIssue>
+                <gvq:GVQ_DiscoveredIssue>
+                    <gvq:target xlink:href="targetUID"/>
+                    <gvq:knownProblem>
+                        <gco:CharacterString>The data itself is of high quality, but this metadata record is patchy. It does comply with ISO 19139, however.</gco:CharacterString>
+					</gvq:knownProblem>
+                    <gvq:referenceDoc>
+                        <gvq:GVQ_Publication>
+                            <gmd:title><gco:CharacterString>GeoViQua rubric illustrating completeness of the metadata.</gco:CharacterString></gmd:title>
+						    <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>1981-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_DateTypeCode" codeListValue="creation"/>
+                                    </gmd:dateType>
+                                 </gmd:CI_Date>
+							</gmd:date>
+                            <gvq:target xlink:href="targetUID"/>
+                            <gvq:category>
+                                <gvq:GVQ_PublicationCategoryCode codeList="http://www.geoviqua.org/QualityInformationModel/3.1/resources/codeList.xml#GVQ_PublicationCategoryCode" codeListValue="webPage"/>
+							</gvq:category>
+                            <gvq:onlineResource>
+                                <gmd:CI_OnlineResource>
+                                    <gmd:linkage>
+                                        <gmd:URL><![CDATA[http://www.ogc.uab.cat/cgi-bin/geossback/GEOSSBack.cgi?accio=EstilXML&AfegirEstil=rubric&URL=http://clearinghouse.cisc.gmu.edu/geonetwork/srv/en/iso19139.xml?id=491540]]></gmd:URL>
+									</gmd:linkage>
+								</gmd:CI_OnlineResource>
+							</gvq:onlineResource>
+                        </gvq:GVQ_Publication>
+					</gvq:referenceDoc>
+				</gvq:GVQ_DiscoveredIssue>
+			</gvq:discoveredIssue>
+        </gvq:usage>
+        <gvq:domainURN>http://www.eionet.europa.eu/gemet/concept/9278</gvq:domainURN>
+        <gvq:tags>Climate,metadata</gvq:tags>
+    </gvq:item>
+</gvq:GVQ_FeedbackCollection>

@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.n52.geolabel</groupId>
+	<artifactId>geolabel</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+	<inceptionYear>2013</inceptionYear>
+
+	<modules>
+		<module>server</module>
+		<module>client</module>
+		<module>commons</module>
+	</modules>
+
+	<organization>
+		<name>52°North Initiative for Geospatial Open Source Software GmbH</name>
+		<url>http://52north.org</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Holger Hopmann</name>
+			<email>h.hopmann@52north.org</email>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<timezone>GMT+1</timezone>
+		</developer>
+
+		<developer>
+			<name>Victoria Lush</name>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+
+	<properties>
+		<jersey.version>1.17</jersey.version>
+		<guice.version>3.0</guice.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<logback.version>1.0.13</logback.version>
+		<saxon.version>8.7</saxon.version>
+		<httpcomponents.version>4.2</httpcomponents.version>
+		<junit.version>4.11</junit.version>
+		<commons-io.version>2.4</commons-io.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<header>license_header.txt</header>
+					<properties>
+						<year>${project.inceptionYear}</year>
+					</properties>
+					<includes>
+						<include>src/**/*.java</include>
+						<include>src/**/*.xml</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
