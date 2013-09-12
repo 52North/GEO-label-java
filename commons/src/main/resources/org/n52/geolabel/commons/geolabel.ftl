@@ -82,8 +82,8 @@
 			
 			<!-- Lineage -->
 			<g class="lineage" id="lineage">
-				<title>Lineage Information. Number of process steps:
-					${label.lineageFacet.processStepCount}</title>
+				<title>Lineage Information. 
+				Number of process steps: ${label.lineageFacet.processStepCount}</title><#lt>
 				<a xlink:href="${label.lineageFacet.drilldownURL!""}" target="_blank">
 				
 				<#assign higherFragment>
@@ -140,7 +140,8 @@
 
 			<!-- Producer Comments -->
 			<g class="producer_comments" id="producer_comments">
-				<title>Producer Comments. ${label.producerCommentsFacet.producerComments?join(", ")}</title>
+				<title>Producer Comments. 
+				${label.producerCommentsFacet.producerComments?join(", ")}</title><#lt>
 				<a xlink:href="${label.producerCommentsFacet.drilldownURL!""}" target="_blank">
 
 					<#assign higherFragment>
@@ -194,7 +195,8 @@
 			<!-- Standards Compliance -->
 			<g class="standards_compliance" id="standards_compliance">
 
-				<title>Standards Compliance ${label.standardsComplianceFacet.standards?join(", ")}</title>
+				<title>Standards Compliance.
+				${label.standardsComplianceFacet.standards?join(", ")}</title><#lt>
 				<a xlink:href="${label.standardsComplianceFacet.drilldownURL!""}" target="_blank">
 
 					<#assign higherFragment>
@@ -252,7 +254,8 @@
 			<!-- Quality Information -->
 			<g class="quality_information" id="quality_information">
 
-				<title>Quality Information. ${label.qualityInformationFacet.scopeLevels?join(", ")}</title>
+				<title>Quality Information. 
+				${label.qualityInformationFacet.scopeLevels?join(", ")}</title><#lt>
 				<a xlink:href="${label.qualityInformationFacet.drilldownURL!""}" target="_blank">
 
 					<#assign higherFragment>
@@ -295,15 +298,13 @@
 			<!-- User Feedback -->
 
 			<g class="user_feedback" id="user_feedback">
-				<title>
-					User Feedback
-					<#if label.userFeedbackFacet.totalFeedbacks??>
-						Total number of feedbacks: ${label.userFeedbackFacet.totalFeedbacks} </#if>
-					<#if label.userFeedbackFacet.averageRating??>
-						Average rating: ${label.userFeedbackFacet.averageRating}
-						(${label.userFeedbackFacet.totalRatings} ratings)
-					</#if>
-				</title>
+				<title>User Feedback.
+					<#if label.userFeedbackFacet.totalFeedbacks??><#t>
+						Total number of feedbacks: ${label.userFeedbackFacet.totalFeedbacks} </#if><#lt>
+					<#if label.userFeedbackFacet.averageRating??><#t>
+						Average rating: ${label.userFeedbackFacet.averageRating} (${label.userFeedbackFacet.totalRatings} ratings)<#lt>
+					</#if><#t>
+				</title><#lt>
 
 				<a xlink:href="${label.userFeedbackFacet.drilldownURL!""}" target="_blank">
 
@@ -348,15 +349,13 @@
 
 			<!-- Expert Feedback -->
 			<g class="expert_review" id="expert_review">
-				<title>
-					Expert Review
-					<#if label.expertFeedbackFacet.totalFeedbacks??>
-						Total number of reviews: ${label.expertFeedbackFacet.totalFeedbacks} </#if>
-					<#if label.expertFeedbackFacet.averageRating??>
-						Average rating: ${label.expertFeedbackFacet.averageRating}
-						(${label.expertFeedbackFacet.totalRatings} ratings)
-					</#if>
-				</title>
+				<title>Expert Review.
+					<#if label.expertFeedbackFacet.totalFeedbacks??><#t>
+						Total number of reviews: ${label.expertFeedbackFacet.totalFeedbacks} </#if><#lt>
+					<#if label.expertFeedbackFacet.averageRating??><#t>
+						Average rating: ${label.expertFeedbackFacet.averageRating} (${label.expertFeedbackFacet.totalRatings} ratings)<#lt>
+					</#if><#t>
+				</title><#lt>
 
 				<a xlink:href="${label.expertFeedbackFacet.drilldownURL!""}" target="_blank">
  
@@ -407,9 +406,8 @@
 
 			<!-- Citation Information -->
 			<g class="citations_information" id="citations_information">
-				<title>
-					Citations Information.
-					Total number of citations: ${label.citationsFacet.totalCitations} </title>
+				<title>Citations Information.
+					Total number of citations: ${label.citationsFacet.totalCitations}</title><#lt>
 
 				<a xlink:href="${label.citationsFacet.drilldownURL!""}" target="_blank">
 
