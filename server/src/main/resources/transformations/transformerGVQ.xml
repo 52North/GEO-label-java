@@ -93,17 +93,31 @@
 			</ratingsPath>
 		</expertFeedback>
 
-		<!-- <citations> <availabilityPath> //*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'] 
-			| //*[local-name()='identificationInfo']/*[local-name()='GVQ_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			| //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			| //*[local-name()='discoveredIssue']/*[local-name()='GVQ_DiscoveredIssue']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			| //*[local-name()='item']/*[local-name()='citation'] | //*[local-name()='item']/*[local-name()='usage']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			</availabilityPath> <citationsCountPath> count( //*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'] 
-			| //*[local-name()='identificationInfo']/*[local-name()='GVQ_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			| //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			| //*[local-name()='discoveredIssue']/*[local-name()='GVQ_DiscoveredIssue']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] 
-			| //*[local-name()='item']/*[local-name()='citation'] | //*[local-name()='item']/*[local-name()='usage']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication']) 
-			</citationsCountPath> </citations> -->
+		<citations>
+			<availabilityPath>
+				//gmd:identificationInfo/gvq:GVQ_DataIdentification/*:referenceDoc/gvq:GVQ_Publication
+				|
+				//gvq:dataQualityInfo/gvq:GVQ_DataQuality/*:report//*:referenceDoc/gvq:GVQ_Publication
+				|
+				//*:discoveredIssue/gvq:GVQ_DiscoveredIssue//*:referenceDoc/gvq:GVQ_Publication
+				|
+				//gvq:item/*:citation 
+				|
+				//gvq:item/gvq:usage//*:referenceDoc/gvq:GVQ_Publication
+			</availabilityPath>
+			<citationsCountPath>
+				count(
+				//gmd:identificationInfo/gvq:GVQ_DataIdentification/*:referenceDoc/gvq:GVQ_Publication
+				|
+				//gvq:dataQualityInfo/gvq:GVQ_DataQuality/*:report//*:referenceDoc/gvq:GVQ_Publication
+				|
+				//*:discoveredIssue/gvq:GVQ_DiscoveredIssue//*:referenceDoc/gvq:GVQ_Publication
+				|
+				//gvq:item/*:citation 
+				|
+				//gvq:item/gvq:usage//*:referenceDoc/gvq:GVQ_Publication)
+			</citationsCountPath>
+		</citations>
 	</facetDescriptions>
 
 </transformationDescription>
