@@ -59,10 +59,13 @@ public class GeoLabelResource {
 	@GET
 	@Path("/lml")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Label getLabelByURL(@QueryParam(Constants.PARAM_METADATA) URL metadataURL,
-			@QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL) throws IOException {
+	public Label getLabelByURL(
+			@QueryParam(Constants.PARAM_METADATA) URL metadataURL,
+			@QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL)
+			throws IOException {
 		if (metadataURL == null && feedbackURL == null) {
-			throw new WebApplicationException(Response.serverError().type(MediaType.TEXT_PLAIN)
+			throw new WebApplicationException(Response.serverError()
+					.type(MediaType.TEXT_PLAIN)
 					.entity("No metadata or feedback URL specified").build());
 		}
 
@@ -75,8 +78,10 @@ public class GeoLabelResource {
 	@Path("/lml")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Label getLabelByFile(@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
-			@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream) throws IOException {
+	public Label getLabelByFile(
+			@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
+			@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream)
+			throws IOException {
 		MetadataTransformer metadataTransformer = transformer.get();
 
 		Label label = new Label();
@@ -106,7 +111,9 @@ public class GeoLabelResource {
 		}
 
 		if (!hasData) {
-			throw new WebApplicationException(Response.serverError().type(MediaType.TEXT_PLAIN)
+			throw new WebApplicationException(Response
+					.status(Response.Status.BAD_REQUEST)
+					.type(MediaType.TEXT_PLAIN)
 					.entity("No metadata or feedback file specified").build());
 		}
 
@@ -116,9 +123,11 @@ public class GeoLabelResource {
 	@GET
 	@Path("/svg")
 	@Produces("image/svg+xml")
-	public Response getLabelSVGByURL(@QueryParam(Constants.PARAM_LML) URL lmlURL,
+	public Response getLabelSVGByURL(
+			@QueryParam(Constants.PARAM_LML) URL lmlURL,
 			@QueryParam(Constants.PARAM_METADATA) URL metadataURL,
-			@QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL, @QueryParam(Constants.PARAM_SIZE) Integer size,
+			@QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL,
+			@QueryParam(Constants.PARAM_SIZE) Integer size,
 			@QueryParam(Constants.PARAM_ID) String id) throws IOException {
 
 		Label label = null;
@@ -137,11 +146,12 @@ public class GeoLabelResource {
 	@Path("/svg")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces("image/svg+xml")
-	public Response getLabelSVGByFile(@FormDataParam(Constants.PARAM_LML) Label label,
+	public Response getLabelSVGByFile(
+			@FormDataParam(Constants.PARAM_LML) Label label,
 			@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
 			@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream,
-			@FormDataParam(Constants.PARAM_SIZE) Integer size, @FormDataParam(Constants.PARAM_ID) String id)
-			throws IOException {
+			@FormDataParam(Constants.PARAM_SIZE) Integer size,
+			@FormDataParam(Constants.PARAM_ID) String id) throws IOException {
 		if (label == null) {
 			label = getLabelByFile(metadataInputStream, feedbackInputStream);
 		}
@@ -166,26 +176,35 @@ public class GeoLabelResource {
 			@PathParam("ef") Availability expertFeedbackAvailability,
 			@PathParam("ci") Availability citationsAvailability,
 			//
-			@QueryParam(Constants.PARAM_SIZE) Integer size, @QueryParam(Constants.PARAM_ID) String id) {
+			@QueryParam(Constants.PARAM_SIZE) Integer size,
+			@QueryParam(Constants.PARAM_ID) String id) {
 
 		Label label = new Label();
 
-		label.getProducerProfileFacet().updateAvailability(producerProfileAvailability);
-		label.getProducerCommentsFacet().updateAvailability(producerCommentsAvailability);
+		label.getProducerProfileFacet().updateAvailability(
+				producerProfileAvailability);
+		label.getProducerCommentsFacet().updateAvailability(
+				producerCommentsAvailability);
 		label.getLineageFacet().updateAvailability(lineageAvailability);
-		label.getStandardsComplianceFacet().updateAvailability(standardsComplianceAvailability);
-		label.getQualityInformationFacet().updateAvailability(qualityInformationAvailability);
-		label.getUserFeedbackFacet().updateAvailability(userFeedbackAvailability);
-		label.getExpertFeedbackFacet().updateAvailability(expertFeedbackAvailability);
+		label.getStandardsComplianceFacet().updateAvailability(
+				standardsComplianceAvailability);
+		label.getQualityInformationFacet().updateAvailability(
+				qualityInformationAvailability);
+		label.getUserFeedbackFacet().updateAvailability(
+				userFeedbackAvailability);
+		label.getExpertFeedbackFacet().updateAvailability(
+				expertFeedbackAvailability);
 		label.getCitationsFacet().updateAvailability(citationsAvailability);
 
 		return createLabelSVGResponse(size != null ? size : 200, id, label);
 	}
 
-	private static Response createLabelSVGResponse(final int size, final String id, final Label label) {	
+	private static Response createLabelSVGResponse(final int size,
+			final String id, final Label label) {
 		return Response.ok().entity(new StreamingOutput() {
 			@Override
-			public void write(OutputStream stream) throws IOException, WebApplicationException {
+			public void write(OutputStream stream) throws IOException,
+					WebApplicationException {
 				label.toSVG(new OutputStreamWriter(stream), id, size);
 			}
 		}).type("image/svg+xml").build();

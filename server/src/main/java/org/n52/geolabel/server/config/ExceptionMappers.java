@@ -23,13 +23,12 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import javax.xml.bind.UnmarshalException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
 
 import com.sun.jersey.api.ParamException;
+import com.sun.jersey.api.container.ContainerException;
 
 public interface ExceptionMappers {
 
@@ -51,9 +50,17 @@ public interface ExceptionMappers {
 		@Override
 		public Response toResponse(IOException exception) {
 			log.error("Error processing request", exception);
-			exception.printStackTrace();
-			return Response.status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("").build();
+			return Response.status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("Error processing request").build();
 		}
 	}
 	
+	@Provider
+	@Singleton
+	public class ContainerExceptionMapper implements ExceptionMapper<ContainerException> {
+		@Override
+		public Response toResponse(ContainerException exception) {
+			log.error("Unexpected error while handling request", exception);
+			return Response.status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("Error processing request").build();
+		}
+	}
 }

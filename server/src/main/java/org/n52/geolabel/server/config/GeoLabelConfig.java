@@ -20,6 +20,7 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebListener;
 
+import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
@@ -47,12 +48,15 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 
 				bind(ParamExceptionMapper.class);
 				bind(IOExceptionMapper.class);
+				bind(ContainerExceptionMapper.class);
 
 				bind(MetadataTransformer.class);
 
 				Map<String, String> jerseyInitPrams = new HashMap<String, String>();
-				jerseyInitPrams.put(ServletContainer.JSP_TEMPLATES_BASE_PATH, "/WEB-INF/templates");
-				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
+				jerseyInitPrams.put(ServletContainer.JSP_TEMPLATES_BASE_PATH,
+						"/WEB-INF/templates");
+				jerseyInitPrams.put(
+						ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
 
 				filter("/*").through(GuiceContainer.class, jerseyInitPrams);
 			}
