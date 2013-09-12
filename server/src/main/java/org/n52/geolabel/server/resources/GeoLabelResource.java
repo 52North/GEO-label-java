@@ -182,23 +182,13 @@ public class GeoLabelResource {
 		return createLabelSVGResponse(size != null ? size : 200, id, label);
 	}
 
-	private static Response createLabelSVGResponse(final int size, final String id, final Label label) {
-		///// Now using Label.toSVG method
-
-		// Map<String, Object> model = new HashMap<String, Object>();
-		// model.put("size", size);
-		// model.put("label", label);
-		// model.put("id", id);
-		//
-		// return Response.ok(new Viewable("/geolabel.jspx", model)).build();
-		
-		
+	private static Response createLabelSVGResponse(final int size, final String id, final Label label) {	
 		return Response.ok().entity(new StreamingOutput() {
 			@Override
 			public void write(OutputStream stream) throws IOException, WebApplicationException {
 				label.toSVG(new OutputStreamWriter(stream), id, size);
 			}
-		}).type("image/svg+xml; charset=UTF-8").build();
+		}).type("image/svg+xml").build();
 	}
 
 }
