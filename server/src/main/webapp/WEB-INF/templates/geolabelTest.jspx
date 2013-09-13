@@ -16,43 +16,36 @@
     limitations under the License.
 
 -->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions" version="2.0">
 	<jsp:directive.page contentType="text/html; charset=UTF-8" />
 
 	<html>
-		<body>
-	
-			<h1>GEO Label File Upload Page</h1>
-	
-			<form action="svg" method="post" enctype="multipart/form-data">
-				<h3>Send XML metadata records to see the GEO label SVG
-					representation.</h3>
-				<label for="metadata">Select metadata document: </label> <input
-					type="file" name="metadata" id="metadata" /> <br /> <label
-					for="feedback">Select feedback document: </label> <input type="file"
-					name="feedback" id="feedback" /> <br /> <input type="submit"
-					name="submit" value="Submit" />
-			</form>
-		
-			<form action="lml" method="post" enctype="multipart/form-data">
-				<h3>Send XML metadata records to see the GEO label LML
-					representation.</h3>
-				<label for="metadata2">Select metadata document: </label> <input
-					type="file" name="metadata" id="metadata2" /> <br /> <label
-					for="feedback2">Select feedback document: </label> <input type="file"
-					name="feedback" id="feedback2" /> <br /> <input type="submit"
-					name="submit" value="Submit" />
-			</form>
-		
-			<form action="svg" method="post" enctype="multipart/form-data">
-				<h3>Send LML records to see the GEO label SVG representation.</h3>
-				<label for="lml">Select lml document: </label> <input type="file"
-					name="lml" id="lml" /> <br /> <input type="submit" name="submit"
-					value="Submit" />
-			</form>
-		</body>
-		
+<body>
+
+	<h1>GEO Label File Upload Page</h1>
+
+	<form action="svg" method="post" enctype="multipart/form-data">
+		<h3>Send XML metadata records to see the GEO label SVG representation.</h3>
+		<label for="metadata">Select metadata document: </label> <input type="file" name="metadata" id="metadata" /> <br />
+		<label for="feedback">Select feedback document: </label> <input type="file" name="feedback" id="feedback" /> <br />
+		<input type="submit" name="submit" value="Submit" />
+	</form>
+
+	<form action="lml" method="post" enctype="multipart/form-data">
+		<h3>Send XML metadata records to see the GEO label LML representation.</h3>
+		<label for="metadata2">Select metadata document: </label> <input type="file" name="metadata" id="metadata2" /> <br />
+		<label for="feedback2">Select feedback document: </label> <input type="file" name="feedback" id="feedback2" /> <br />
+		<input type="submit" name="submit" value="Submit" />
+	</form>
+
+	<form action="svg" method="post" enctype="multipart/form-data">
+		<h3>Send LML records to see the GEO label SVG representation.</h3>
+		<label for="lml">Select lml document: </label> <input type="file" name="lml" id="lml" /> <br /> <input type="submit"
+			name="submit" value="Submit" />
+	</form>
+
+</body>
+
 	</html>
 </jsp:root>

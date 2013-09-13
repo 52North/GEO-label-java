@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:glb="http://www.geolabel.net">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<f:view>
+		Test for landing page
+
+		<h:form>
+			<f:ajax>
+				<h:commandButton action="null" value="Test" />
+			</f:ajax>
+			<glb:geolabel
+				metadataUrl="http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml"
+				async="true"></glb:geolabel>
+
+		</h:form>
+	</f:view>
+</h:body>
+</html>

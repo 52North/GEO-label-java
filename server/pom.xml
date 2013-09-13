@@ -142,6 +142,12 @@
 
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
+			<artifactId>jsf</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${parent.groupId}</groupId>
 			<artifactId>commons</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
@@ -178,6 +184,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -232,14 +244,19 @@
 			<version>${jersey.version}</version>
 		</dependency>
 
-		<!-- test scope -->
-
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
 			<artifactId>client</artifactId>
 			<version>${parent.version}</version>
-			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+
+		<!-- test scope -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -255,12 +272,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-			<scope>test</scope>
-		</dependency>
 
 	</dependencies>
 

@@ -46,7 +46,7 @@ import org.n52.geolabel.server.mapping.MetadataTransformer;
 import com.sun.jersey.api.view.Viewable;
 import com.sun.jersey.multipart.FormDataParam;
 
-@Path("/")
+@Path("/api")
 public class GeoLabelResource {
 
 	private Provider<MetadataTransformer> transformer;

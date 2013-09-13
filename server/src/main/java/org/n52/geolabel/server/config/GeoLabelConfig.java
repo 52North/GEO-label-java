@@ -53,12 +53,10 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				bind(MetadataTransformer.class);
 
 				Map<String, String> jerseyInitPrams = new HashMap<String, String>();
-				jerseyInitPrams.put(ServletContainer.JSP_TEMPLATES_BASE_PATH,
-						"/WEB-INF/templates");
-				jerseyInitPrams.put(
-						ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
+				jerseyInitPrams.put(ServletContainer.JSP_TEMPLATES_BASE_PATH, "/WEB-INF/templates");
+				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
 
-				filter("/*").through(GuiceContainer.class, jerseyInitPrams);
+				filter("/api/*").through(GuiceContainer.class, jerseyInitPrams);
 			}
 		});
 	}
