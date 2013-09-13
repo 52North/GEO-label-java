@@ -45,7 +45,7 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 
 	protected static final String PARAM_DESIREDSIZE = Constants.PARAM_SIZE;
 
-	protected static String GEOLABEL_URL = "http://uncertgeo.aston.ac.uk/geolabel/silex/web/index.php/api/v1/geolabel";
+	protected static String GEOLABEL_URL = "http://www.geolabel.net/api/v1/geolabel";
 	// private static String GEOLABEL_URL =
 	// "http://www.geolabel.net/api/v1/geolabel";
 	// private static String GEOLABEL_URL =
