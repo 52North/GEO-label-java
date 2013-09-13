@@ -11,6 +11,7 @@
 		<module>server</module>
 		<module>client</module>
 		<module>commons</module>
+		<module>jsf</module>
 	</modules>
 
 	<organization>
@@ -24,10 +25,6 @@
 			<organization>${project.organization.name}</organization>
 			<organizationUrl>${project.organization.url}</organizationUrl>
 			<timezone>GMT+1</timezone>
-		</developer>
-
-		<developer>
-			<name>Victoria Lush</name>
 		</developer>
 	</developers>
 

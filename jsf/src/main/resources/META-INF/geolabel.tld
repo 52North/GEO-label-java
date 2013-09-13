@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>geolabel</short-name>
+	<uri>http://geolabel.info</uri>
+	<tag>
+		<name>geolabel</name>
+		<tag-class>org.n52.geolabel.component.GeoLabelComponentTag</tag-class>
+		<body-content>scriptless</body-content>
+
+		<attribute>
+			<name>metadataUrl</name>
+			<required>true</required>
+			<deferred-value>
+				<type>java.lang.String</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<name>size</name>
+			<required>false</required>
+			<deferred-value>
+				<type>int</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
+			<name>async</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+	</tag>
+</taglib>

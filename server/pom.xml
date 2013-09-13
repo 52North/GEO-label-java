@@ -15,6 +15,20 @@
 		<version>0.0.1</version>
 	</parent>
 
+	<developers>
+		<developer>
+			<name>Holger Hopmann</name>
+			<email>h.hopmann@52north.org</email>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<timezone>GMT+1</timezone>
+		</developer>
+
+		<developer>
+			<name>Victoria Lush</name>
+		</developer>
+	</developers>
+
 	<build>
 		<plugins>
 
