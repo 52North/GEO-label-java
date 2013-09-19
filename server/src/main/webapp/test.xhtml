@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:glb="http://www.geolabel.net">
+	xmlns:glb="http://www.geolabel.net"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 
@@ -14,15 +15,59 @@
 		Test for landing page
 
 		<h:form>
+			<h1>Test</h1>
 
-			<glb:geolabel
-				metadataUrl="http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml"
-				async="true" size="100"></glb:geolabel>
+			<h:panelGrid columns="2">
 
-			<glb:geolabel
-				metadataUrl="http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/FeedbackUseCase_7_7_metadata.xml"
-				async="true" size="100"></glb:geolabel>
+				<glb:geolabel id="label"
+					metadataUrl="#{landingPageBean.metadataUrl}"
+					feedbackUrl="#{landingPageBean.feedbackUrl}" async="true"
+					size="100"></glb:geolabel>
 
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:outputText value="Metadata URL" />
+						<h:inputText value="#{landingPageBean.metadataUrl}" />
+						<h:outputText value="Feedback URL" />
+						<h:inputText value="#{landingPageBean.feedbackUrl}" />
+					</h:panelGrid>
+
+					<h:commandButton value="Update">
+						<f:ajax execute="@form" render="label" />
+					</h:commandButton>
+				</h:panelGroup>
+			</h:panelGrid>
+
+		</h:form>
+
+		<h:form>
+			<h1>Examples</h1>
+			<h:panelGrid columns="4">
+				<ui:repeat var="example" value="#{landingPageBean.examplesList}">
+
+					<h:panelGrid columns="2">
+						<f:facet name="header">
+							<h:outputText value="#{example.title}" />
+						</f:facet>
+
+						<glb:geolabel id="label1" metadataUrl="#{example.metadataUrl}"
+							feedbackUrl="#{example.feedbackUrl}" async="true" size="100"></glb:geolabel>
+
+
+						<h:panelGrid columns="2">
+							<h:outputText value="Metadata URL" />
+							<h:outputLink value="#{example.metadataUrl}">
+								<h:outputText value="#{example.metadataUrl}" />
+							</h:outputLink>
+							<h:outputText value="Feedback URL" />
+							<h:outputLink value="#{example.feedbackUrl}">
+								<h:outputText value="#{example.feedbackUrl}" />
+							</h:outputLink>
+						</h:panelGrid>
+
+					</h:panelGrid>
+				</ui:repeat>
+			</h:panelGrid>
 		</h:form>
 	</f:view>
 </h:body>
