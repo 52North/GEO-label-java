@@ -15,11 +15,16 @@
  */
 package org.n52.geolabel.server.beans;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 @RequestScoped
@@ -84,5 +89,17 @@ public class LandingPageBean {
 
 	public List<Example> getExamplesList() {
 		return examplesList;
+	}
+
+	public String getServiceEndpoint() throws MalformedURLException {
+		ExternalContext externalContext = FacesContext.getCurrentInstance()
+				.getExternalContext();
+		HttpServletRequest request = (HttpServletRequest) externalContext
+				.getRequest();
+		URL requesturl = new URL(request.getRequestURL().toString());
+		URL serviceUrl = new URL(requesturl.getProtocol(),
+				requesturl.getHost(), requesturl.getPort(),
+				request.getContextPath() + "/api/svg/");
+		return serviceUrl.toString();
 	}
 }

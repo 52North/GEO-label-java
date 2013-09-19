@@ -14,26 +14,28 @@
 	<f:view>
 		Test for landing page
 
-		<h:form>
+		<h:form id="testForm">
 			<h1>Test</h1>
 
 			<h:panelGrid columns="2">
-
 				<glb:geolabel id="label"
 					metadataUrl="#{landingPageBean.metadataUrl}"
-					feedbackUrl="#{landingPageBean.feedbackUrl}" async="true"
+					feedbackUrl="#{landingPageBean.feedbackUrl}"
+					serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
 					size="100"></glb:geolabel>
 
 				<h:panelGroup>
 					<h:panelGrid columns="2">
 						<h:outputText value="Metadata URL" />
-						<h:inputText value="#{landingPageBean.metadataUrl}" />
+						<h:inputText value="#{landingPageBean.metadataUrl}"
+							style="width:500px;" />
 						<h:outputText value="Feedback URL" />
-						<h:inputText value="#{landingPageBean.feedbackUrl}" />
+						<h:inputText value="#{landingPageBean.feedbackUrl}"
+							style="width:500px;" />
 					</h:panelGrid>
 
 					<h:commandButton value="Update">
-						<f:ajax execute="@form" render="label" />
+						<f:ajax execute="testForm" render="label" />
 					</h:commandButton>
 				</h:panelGroup>
 			</h:panelGrid>
@@ -50,8 +52,10 @@
 							<h:outputText value="#{example.title}" />
 						</f:facet>
 
-						<glb:geolabel id="label1" metadataUrl="#{example.metadataUrl}"
-							feedbackUrl="#{example.feedbackUrl}" async="true" size="100"></glb:geolabel>
+						<glb:geolabel metadataUrl="#{example.metadataUrl}"
+							feedbackUrl="#{example.feedbackUrl}"
+							serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+							size="100"></glb:geolabel>
 
 
 						<h:panelGrid columns="2">
