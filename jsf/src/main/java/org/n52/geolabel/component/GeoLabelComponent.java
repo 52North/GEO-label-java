@@ -35,7 +35,7 @@ import org.n52.geolabel.client.GeoLabelRequestBuilder;
 public class GeoLabelComponent extends UIComponentBase {
 
 	enum PropertyKeys {
-		metadataUrl, feedbackUrl, size, async;
+		metadataUrl, feedbackUrl, size, async, serviceUrl;
 	}
 
 	public GeoLabelComponent() {
@@ -48,6 +48,14 @@ public class GeoLabelComponent extends UIComponentBase {
 
 	public void setMetadataUrl(String mMetadataUrl) {
 		getStateHelper().put(PropertyKeys.metadataUrl, mMetadataUrl);
+	}
+
+	public String getServiceUrl() {
+		return (String) getStateHelper().eval(PropertyKeys.serviceUrl);
+	}
+
+	public void setServiceUrl(String mServiceUrl) {
+		getStateHelper().put(PropertyKeys.serviceUrl, mServiceUrl);
 	}
 
 	public String getFeedbackUrl() {
@@ -110,9 +118,17 @@ public class GeoLabelComponent extends UIComponentBase {
 		ResponseWriter writer = context.getResponseWriter();
 
 		try {
-			GeoLabelRequestBuilder requestBuilder = GeoLabelClientV1
-					.createGeoLabelRequest().setForceDownload(true)
-					.setUseCache(true);
+			GeoLabelRequestBuilder requestBuilder;
+
+			if (getServiceUrl() != null && !getServiceUrl().isEmpty()) {
+				// Custom service url
+				requestBuilder = GeoLabelClientV1
+						.createGeoLabelRequest(getServiceUrl());
+			} else {
+				// Default service url
+				requestBuilder = GeoLabelClientV1.createGeoLabelRequest();
+			}
+
 			if (getMetadataUrl() != null && !getMetadataUrl().isEmpty())
 				requestBuilder.setMetadataDocument(getMetadataUrl());
 
@@ -121,6 +137,8 @@ public class GeoLabelComponent extends UIComponentBase {
 
 			if (getSize() != null)
 				requestBuilder.setDesiredSize(getSize());
+
+			requestBuilder.setForceDownload(true).setUseCache(true);
 
 			InputStream svg = requestBuilder.getSVG();
 			String svgString = IOUtils.toString(svg);
