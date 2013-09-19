@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
 	<tlib-version>1.0</tlib-version>
 	<short-name>geolabel</short-name>
-	<uri>http://geolabel.info</uri>
+	<uri>http://www.geolabel.net</uri>
 	<tag>
 		<name>geolabel</name>
 		<tag-class>org.n52.geolabel.component.GeoLabelComponentTag</tag-class>
