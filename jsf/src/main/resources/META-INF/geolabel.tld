@@ -18,6 +18,13 @@
 			</deferred-value>
 		</attribute>
 		<attribute>
+			<name>feedbackUrl</name>
+			<required>true</required>
+			<deferred-value>
+				<type>java.lang.String</type>
+			</deferred-value>
+		</attribute>
+		<attribute>
 			<name>size</name>
 			<required>false</required>
 			<deferred-value>

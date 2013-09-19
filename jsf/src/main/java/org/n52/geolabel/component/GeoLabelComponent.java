@@ -21,7 +21,6 @@ import java.io.InputStream;
 import javax.el.ValueExpression;
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceDependency;
-import javax.faces.application.ResourceHandler;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponentBase;
 import javax.faces.context.FacesContext;
@@ -36,7 +35,7 @@ import org.n52.geolabel.client.GeoLabelRequestBuilder;
 public class GeoLabelComponent extends UIComponentBase {
 
 	enum PropertyKeys {
-		metadataUrl, size, async;
+		metadataUrl, feedbackUrl, size, async;
 	}
 
 	public GeoLabelComponent() {
@@ -49,6 +48,14 @@ public class GeoLabelComponent extends UIComponentBase {
 
 	public void setMetadataUrl(String mMetadataUrl) {
 		getStateHelper().put(PropertyKeys.metadataUrl, mMetadataUrl);
+	}
+
+	public String getFeedbackUrl() {
+		return (String) getStateHelper().eval(PropertyKeys.feedbackUrl);
+	}
+
+	public void setFeedbackUrl(String mFeedbackUrl) {
+		getStateHelper().put(PropertyKeys.feedbackUrl, mFeedbackUrl);
 	}
 
 	public Integer getSize() {
@@ -100,15 +107,20 @@ public class GeoLabelComponent extends UIComponentBase {
 	 * @throws IOException
 	 */
 	private void writeLocalLabel(FacesContext context) throws IOException {
+		ResponseWriter writer = context.getResponseWriter();
+
 		try {
 			GeoLabelRequestBuilder requestBuilder = GeoLabelClientV1
-					.createGeoLabelRequest()
-					.setMetadataDocument(getMetadataUrl())
-					.setForceDownload(true).setUseCache(true);
+					.createGeoLabelRequest().setForceDownload(true)
+					.setUseCache(true);
+			if (getMetadataUrl() != null && !getMetadataUrl().isEmpty())
+				requestBuilder.setMetadataDocument(getMetadataUrl());
 
-			if (getSize() != null) {
+			if (getFeedbackUrl() != null && !getFeedbackUrl().isEmpty())
+				requestBuilder.setFeedbackDocument(getFeedbackUrl());
+
+			if (getSize() != null)
 				requestBuilder.setDesiredSize(getSize());
-			}
 
 			InputStream svg = requestBuilder.getSVG();
 			String svgString = IOUtils.toString(svg);
@@ -116,8 +128,6 @@ public class GeoLabelComponent extends UIComponentBase {
 			if (svgStartIndex == -1) {
 				throw new IOException("No valid SVG");
 			}
-
-			ResponseWriter writer = context.getResponseWriter();
 
 			writer.startElement("div", this);
 			writer.writeAttribute("id", getClientId(context), null);
@@ -131,6 +141,13 @@ public class GeoLabelComponent extends UIComponentBase {
 			writer.endElement("div");
 		} catch (IOException e) {
 			setServiceFailed(context);
+
+			writer.startElement("div", this);
+			writer.writeAttribute("id", getClientId(context), null);
+
+			writer.append("Service failed: " + e.getMessage());
+			writer.endElement("div");
+
 			throw e;
 		}
 	}
