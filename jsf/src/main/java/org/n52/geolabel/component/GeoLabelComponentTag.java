@@ -21,7 +21,12 @@ import javax.faces.webapp.UIComponentELTag;
 
 public class GeoLabelComponentTag extends UIComponentELTag {
 
+	private ValueExpression metadataContent;
+	private ValueExpression feedbackContent;
+
 	private ValueExpression metadataUrl;
+	private ValueExpression feedbackUrl;
+
 	private ValueExpression size;
 	private ValueExpression async;
 
@@ -39,25 +44,45 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 	protected void setProperties(UIComponent component) {
 		super.setProperties(component);
 		if (metadataUrl != null) {
-			component.setValueExpression(
-					GeoLabelComponent.PropertyKeys.metadataUrl.name(),
-					metadataUrl);
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.metadataUrl.name(), metadataUrl);
+		}
+
+		if (feedbackUrl != null) {
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.feedbackUrl.name(), feedbackUrl);
+		}
+
+		if (metadataContent != null) {
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.metadataContent.name(), metadataContent);
+		}
+
+		if (feedbackContent != null) {
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.feedbackContent.name(), feedbackContent);
 		}
 
 		if (size != null) {
-			component.setValueExpression(
-					GeoLabelComponent.PropertyKeys.size.name(), size);
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.size.name(), size);
 		}
 
 		if (async != null) {
-			component.setValueExpression(
-					GeoLabelComponent.PropertyKeys.async.name(), async);
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.async.name(), async);
 		}
 
 	}
 
 	public void setMetadataUrl(ValueExpression metadataUrl) {
 		this.metadataUrl = metadataUrl;
+	}
+
+	public void setFeedbackUrl(ValueExpression feedbackUrl) {
+		this.feedbackUrl = feedbackUrl;
+	}
+
+	public void setMetadataContent(ValueExpression metadataContent) {
+		this.metadataContent = metadataContent;
+	}
+
+	public void setFeedbackContent(ValueExpression feedbackContent) {
+		this.feedbackContent = feedbackContent;
 	}
 
 	public void setSize(ValueExpression size) {
@@ -76,7 +101,20 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		return metadataUrl;
 	}
 
+	public ValueExpression getFeedbackUrl() {
+		return feedbackUrl;
+	}
+
 	public ValueExpression getSize() {
 		return size;
 	}
+
+	public ValueExpression getMetadataContent() {
+		return metadataContent;
+	}
+
+	public ValueExpression getFeedbackContent() {
+		return feedbackContent;
+	}
+
 }

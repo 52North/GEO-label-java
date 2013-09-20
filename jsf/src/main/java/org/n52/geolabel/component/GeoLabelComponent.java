@@ -17,6 +17,7 @@ package org.n52.geolabel.component;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import javax.el.ValueExpression;
 import javax.faces.application.Resource;
@@ -27,6 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.apache.commons.io.IOUtils;
+import org.n52.geolabel.client.DocumentReference.Base;
 import org.n52.geolabel.client.GeoLabelClientV1;
 import org.n52.geolabel.client.GeoLabelRequestBuilder;
 
@@ -35,7 +37,7 @@ import org.n52.geolabel.client.GeoLabelRequestBuilder;
 public class GeoLabelComponent extends UIComponentBase {
 
 	enum PropertyKeys {
-		metadataUrl, feedbackUrl, size, async, serviceUrl;
+		metadataUrl, feedbackUrl, size, async, serviceUrl, metadataContent, feedbackContent;
 	}
 
 	public GeoLabelComponent() {
@@ -66,6 +68,22 @@ public class GeoLabelComponent extends UIComponentBase {
 		getStateHelper().put(PropertyKeys.feedbackUrl, mFeedbackUrl);
 	}
 
+	public String getFeedbackContent() {
+		return (String) getStateHelper().eval(PropertyKeys.feedbackContent);
+	}
+
+	public void setFeedbackContent(String mFeedbackContent) {
+		getStateHelper().put(PropertyKeys.feedbackContent, mFeedbackContent);
+	}
+
+	public String getMetadataContent() {
+		return (String) getStateHelper().eval(PropertyKeys.metadataContent);
+	}
+
+	public void setMetadataContent(String mMetadataContent) {
+		getStateHelper().put(PropertyKeys.metadataContent, mMetadataContent);
+	}
+
 	public Integer getSize() {
 		return (Integer) getStateHelper().eval(PropertyKeys.size);
 	}
@@ -88,10 +106,6 @@ public class GeoLabelComponent extends UIComponentBase {
 	}
 
 	public void encodeBegin(FacesContext context) throws IOException {
-		if (getMetadataUrl() == null) {
-			return;
-		}
-
 		if (Boolean.TRUE.equals(isAsync())) {
 			if (context.getPartialViewContext().isPartialRequest()) {
 				if (!isServiceFailed(context)) {
@@ -122,19 +136,31 @@ public class GeoLabelComponent extends UIComponentBase {
 
 			if (getServiceUrl() != null && !getServiceUrl().isEmpty()) {
 				// Custom service url
-				requestBuilder = GeoLabelClientV1
-						.createGeoLabelRequest(getServiceUrl());
+				requestBuilder = GeoLabelClientV1.createGeoLabelRequest(getServiceUrl());
 			} else {
 				// Default service url
 				requestBuilder = GeoLabelClientV1.createGeoLabelRequest();
 			}
 
-			if (getMetadataUrl() != null && !getMetadataUrl().isEmpty())
+			// Set metadata
+			if (getMetadataUrl() != null && !getMetadataUrl().isEmpty()) {
 				requestBuilder.setMetadataDocument(getMetadataUrl());
+			} else if (getMetadataContent() != null && !getMetadataContent().isEmpty()) {
+				requestBuilder
+						.setMetadataDocument(IOUtils.toInputStream(getMetadataContent(), Charset.forName("utf-8"))); // TODO
+																														// charset
 
-			if (getFeedbackUrl() != null && !getFeedbackUrl().isEmpty())
+			}
+			// Set feedback
+			if (getFeedbackUrl() != null && !getFeedbackUrl().isEmpty()) {
 				requestBuilder.setFeedbackDocument(getFeedbackUrl());
+			} else if (getFeedbackContent() != null && !getFeedbackContent().isEmpty()) {
+				requestBuilder
+						.setFeedbackDocument(IOUtils.toInputStream(getFeedbackContent(), Charset.forName("utf-8"))); // TODO
+																														// charset
+			}
 
+			// Further params
 			if (getSize() != null)
 				requestBuilder.setDesiredSize(getSize());
 
@@ -152,8 +178,7 @@ public class GeoLabelComponent extends UIComponentBase {
 			if (context.getPartialViewContext().isPartialRequest()) {
 				// Mask nested CDATA ends in partial response as geolabel svg
 				// may contain CDATA blocks
-				svgString = svgString
-						.replace("]]>", "<![CDATA[]]]]><![CDATA[>");
+				svgString = svgString.replace("]]>", "<![CDATA[]]]]><![CDATA[>");
 			}
 			writer.append(svgString.substring(svgStartIndex));
 			writer.endElement("div");
@@ -184,20 +209,15 @@ public class GeoLabelComponent extends UIComponentBase {
 		writer.writeAttribute("id", getClientId(), null);
 
 		writer.startElement("div", this);
-		Resource createResource = context.getApplication().getResourceHandler()
-				.createResource("spinner.gif");
+		Resource createResource = context.getApplication().getResourceHandler().createResource("spinner.gif");
 
 		int size = getSize() == null ? 16 : getSize();
 
-		writer.writeAttribute(
-				"style",
-				"width:" + size + "px;" + "height:" + size + "px;"
-						+ "background-image: url('"
-						+ createResource.getRequestPath() + "');"
-						+ "background-repeat:no-repeat;"
-						+ "background-position:center;",
+		writer.writeAttribute("style", "width:" + size + "px;" + "height:" + size + "px;" + "background-image: url('"
+				+ createResource.getRequestPath() + "');" + "background-repeat:no-repeat;"
+				+ "background-position:center;",
 
-				null);
+		null);
 
 		writer.endElement("div");
 
@@ -206,8 +226,7 @@ public class GeoLabelComponent extends UIComponentBase {
 		writer.startElement("script", null);
 		writer.writeAttribute("type", "text/javascript", null);
 
-		writer.append("jsf.ajax.request('" + getClientId(context)
-				+ "', null, {'render': '@this'});");
+		writer.append("jsf.ajax.request('" + getClientId(context) + "', null, {'render': '@this'});");
 
 		writer.endElement("script");
 
@@ -220,13 +239,9 @@ public class GeoLabelComponent extends UIComponentBase {
 	 * @param context
 	 */
 	private static void setServiceFailed(FacesContext context) {
-		ValueExpression expression = context
-				.getApplication()
-				.getExpressionFactory()
-				.createValueExpression(context.getELContext(),
-						"#{geoLabelResourcesBean}", GeoLabelResourcesBean.class);
-		GeoLabelResourcesBean resourcesBean = (GeoLabelResourcesBean) expression
-				.getValue(context.getELContext());
+		ValueExpression expression = context.getApplication().getExpressionFactory()
+				.createValueExpression(context.getELContext(), "#{geoLabelResourcesBean}", GeoLabelResourcesBean.class);
+		GeoLabelResourcesBean resourcesBean = (GeoLabelResourcesBean) expression.getValue(context.getELContext());
 		resourcesBean.setGeoLabelServiceFailed(true);
 	}
 
@@ -238,13 +253,9 @@ public class GeoLabelComponent extends UIComponentBase {
 	 * @return
 	 */
 	private static boolean isServiceFailed(FacesContext context) {
-		ValueExpression expression = context
-				.getApplication()
-				.getExpressionFactory()
-				.createValueExpression(context.getELContext(),
-						"#{geoLabelResourcesBean}", GeoLabelResourcesBean.class);
-		GeoLabelResourcesBean resourcesBean = (GeoLabelResourcesBean) expression
-				.getValue(context.getELContext());
+		ValueExpression expression = context.getApplication().getExpressionFactory()
+				.createValueExpression(context.getELContext(), "#{geoLabelResourcesBean}", GeoLabelResourcesBean.class);
+		GeoLabelResourcesBean resourcesBean = (GeoLabelResourcesBean) expression.getValue(context.getELContext());
 		return resourcesBean.isGeoLabelServiceFailed();
 	}
 
