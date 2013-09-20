@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:glb="http://www.geolabel.net" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<f:view>
+		Test for editor
+
+		<h:form>
+			<h1>Test</h1>
+			<p:panelGrid style="width:100%">
+				<f:facet name="header">
+					<p:row>
+						<p:column>GEO Label</p:column>
+						<p:column>Source Metadata</p:column>
+					</p:row>
+				</f:facet>
+
+				<p:row>
+					<p:column style="width:200px">
+						<glb:geolabel id="label" metadataContent="#{editorBean.metadataContent}"
+							feedbackContent="#{editorBean.feedbackContent}" serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+							size="200"></glb:geolabel>
+
+						<p:ajaxStatus style="width:16px;height:16px;" id="ajaxStatusPanel">
+							<f:facet name="start">
+								<h:outputText value="Updating..." />
+							</f:facet>
+
+							<f:facet name="complete">
+								<h:outputText value="" />
+							</f:facet>
+						</p:ajaxStatus>
+					</p:column>
+					<p:column>
+						<h:panelGroup>
+							<p:tabView id="tabView">
+								<p:tab id="tabMetadata" title="Metadata Document">
+									<p:inputTextarea value="#{editorBean.metadataContent}" style="width: 100%;" rows="20" autoResize="false" />
+								</p:tab>
+								<p:tab id="tabFeedback" title="Feedback Document">
+									<p:inputTextarea value="#{editorBean.feedbackContent}" style="width: 100%;" rows="20" autoResize="false" />
+								</p:tab>
+							</p:tabView>
+
+							<h:commandButton value="Update">
+								<f:ajax execute="@form" render="label" />
+							</h:commandButton>
+						</h:panelGroup>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+
+
+
+
+		</h:form>
+
+	</f:view>
+</h:body>
+</html>
