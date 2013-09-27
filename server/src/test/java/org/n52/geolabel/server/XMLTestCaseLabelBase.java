@@ -103,7 +103,7 @@ public class XMLTestCaseLabelBase extends XMLTestCase {
 		if (port == null) {
 			throw new RuntimeException("Jetty port system property not set");
 		}
-		return "http://localhost:" + port + "/";
+		return "http://localhost:" + port + "/api/";
 	}
 
 }

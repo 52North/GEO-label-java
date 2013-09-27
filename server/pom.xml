@@ -15,6 +15,21 @@
 		<version>0.0.1</version>
 	</parent>
 
+	<developers>
+		<developer>
+			<name>Holger Hopmann</name>
+			<email>h.hopmann@52north.org</email>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<timezone>GMT+1</timezone>
+		</developer>
+
+		<developer>
+			<name>Victoria Lush</name>
+		</developer>
+	</developers>
+
+
 	<build>
 		<plugins>
 
@@ -128,6 +143,12 @@
 
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
+			<artifactId>jsf</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${parent.groupId}</groupId>
 			<artifactId>commons</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
@@ -154,22 +175,25 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-			<!-- Not included in tomcat -->
 		</dependency>
 
 		<dependency>
-			<groupId>javax.servlet</groupId>
+			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
+			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -218,14 +242,19 @@
 			<version>${jersey.version}</version>
 		</dependency>
 
-		<!-- test scope -->
-
 		<dependency>
 			<groupId>${parent.groupId}</groupId>
 			<artifactId>client</artifactId>
 			<version>${parent.version}</version>
-			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+
+		<!-- test scope -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -241,13 +270,44 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<!-- Profile for compiling for application server, jsf provided -->
+			<id>appserver</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+					<version>${faces.version}</version>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+
+		</profile>
+
+		<profile>
+			<!-- Profile for compiling for webserver, not ee-applicationserver, needs additional jsf components -->
+			<id>webserver</id>
+			<dependencies>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+					<version>${faces.version}</version>
+				</dependency>
+
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+					<version>${faces.version}</version>
+					<scope>compile</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 </project>
