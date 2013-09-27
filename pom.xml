@@ -48,6 +48,7 @@
 		<junit.version>4.11</junit.version>
 		<commons-io.version>2.4</commons-io.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<faces.version>2.1.3</faces.version>
 	</properties>
 
 
