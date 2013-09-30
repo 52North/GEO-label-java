@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:glb="http://www.geolabel.net"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title><ui:insert name="title">
+		GEO Label Service
+		</ui:insert></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<h:outputStylesheet library="webjars/bootstrap/3.0.0/css"
+		name="bootstrap.min.css" />
+	<h:outputScript library="webjars/jquery/1.9.0" name="jquery.min.js" />
+	<h:outputScript library="webjars/bootstrap/3.0.0/js"
+		name="bootstrap.min.js" />
+
+	<style type="text/css">
+		<ui:insert name="styles"/>
+	</style>
+</h:head>
+
+<h:body>
+
+	<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">GEO Label Service</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.jsf">Examples</a></li>
+					<li><a href="editor.jsf">Editor</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="padding-top: 70px;">
+		<ui:insert name="content">
+
+		</ui:insert>
+	</div>
+</h:body>
+</html>

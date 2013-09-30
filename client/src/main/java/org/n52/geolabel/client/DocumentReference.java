@@ -40,7 +40,7 @@ public interface DocumentReference {
 
 	/**
 	 * Provides functionalities to wrap different kinds of data sources into a
-	 * common layout. Resources should be provided via URL, and has to be
+	 * common layout. Resources should be provided via URL, and have to be
 	 * accessible as {@link InputStream}
 	 */
 	public abstract class Base {

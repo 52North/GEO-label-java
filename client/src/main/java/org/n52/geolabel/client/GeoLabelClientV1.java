@@ -28,7 +28,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
@@ -45,10 +45,10 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 
 	protected static final String PARAM_DESIREDSIZE = Constants.PARAM_SIZE;
 
-	protected static String GEOLABEL_URL = "http://uncertgeo.aston.ac.uk/geolabel/silex/web/index.php/api/v1/geolabel";
-	// private static String GEOLABEL_URL =
+	protected static String GEOLABEL_URL = "http://www.geolabel.net/api/v1/geolabel";
+	// protected static String GEOLABEL_URL =
 	// "http://www.geolabel.net/api/v1/geolabel";
-	// private static String GEOLABEL_URL =
+	// protected static String GEOLABEL_URL =
 	// "http://www.geolabel.net/index.php/api/v1/geolabel";
 
 	static {
@@ -120,19 +120,16 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 				// POST request
 				MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-				// // Somehow required...
-				// multipartEntity.addPart("submit", new StringBody("Submit"));
-
 				if (labelRequestBuilder.feedbackDocument != null) {
 					multipartEntity.addPart(PARAM_FEEDBACK,
-							new InputStreamBody(labelRequestBuilder.feedbackDocument.getContent(), "text/xml",
-									"file1.xml"));
+							new ByteArrayBody(IOUtils.toByteArray(labelRequestBuilder.feedbackDocument.getContent()),
+									"text/xml", "file1.xml"));
 				}
 
 				if (labelRequestBuilder.metadataDocument != null) {
 					multipartEntity.addPart(PARAM_METADATA,
-							new InputStreamBody(labelRequestBuilder.metadataDocument.getContent(), "text/xml",
-									"file2.xml"));
+							new ByteArrayBody(IOUtils.toByteArray(labelRequestBuilder.metadataDocument.getContent()),
+									"text/xml", "file2.xml"));
 				}
 
 				if (labelRequestBuilder.getDesiredSize() != null) {
