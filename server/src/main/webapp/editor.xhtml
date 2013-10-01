@@ -1,0 +1,81 @@
+<ui:composition template="layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:glb="http://www.geolabel.net"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="styles">
+		.resizevertical { resize:vertical }
+
+	</ui:define>
+
+	<ui:define name="title">Editor</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">GEO Label</h3>
+						</div>
+						<div class="panel-body text-center">
+							<glb:geolabel id="label"
+								metadataContent="#{editorBean.metadataContent}"
+								feedbackContent="#{editorBean.feedbackContent}"
+								serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+								size="200"></glb:geolabel>
+
+							<!-- <p:ajaxStatus style="width:16px;height:16px;"
+								id="ajaxStatusPanel">
+								<f:facet name="start">
+									<h:outputText value="Updating..." />
+								</f:facet>
+
+								<f:facet name="complete">
+									<h:outputText value="" />
+								</f:facet>
+							</p:ajaxStatus> -->
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Source Metadata</h3>
+						</div>
+						<div class="panel-body">
+
+							<ul class="nav nav-tabs" id="myTab">
+								<li class="active"><a href="#metadata" data-toggle="tab">Metadata</a></li>
+								<li><a href="#feedback" data-toggle="tab">Feedback</a></li>
+							</ul>
+
+							<div class="tab-content">
+								<div class="tab-pane active" id="metadata">
+									<h:inputTextarea value="#{editorBean.metadataContent}"
+										style="width: 100%;" rows="20" autoResize="false"
+										styleClass="form-control resizevertical" />
+								</div>
+								<div class="tab-pane" id="feedback">
+									<h:inputTextarea value="#{editorBean.feedbackContent}"
+										style="width: 100%;" rows="20" autoResize="false"
+										styleClass="form-control resizevertical" />
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+					<h:commandButton value="Update" styleClass="btn btn-primary">
+						<f:ajax execute="@form" render="label" />
+					</h:commandButton>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
