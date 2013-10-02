@@ -7,8 +7,10 @@ Build Profiles
 This server project provides two build profiles
 
  * appserver
+
    Profile will not include JSF implementation dependencies as these are part of JEE application servers
  * webserver
+
    Includes basic JSF 2.0 implementation (mojarra) in output archive
    
    
