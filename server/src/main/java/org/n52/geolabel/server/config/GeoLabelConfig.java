@@ -57,6 +57,7 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
 
 				filter("/api/*").through(GuiceContainer.class, jerseyInitPrams);
+				filter("/application.wadl").through(GuiceContainer.class, jerseyInitPrams);
 			}
 		});
 	}
