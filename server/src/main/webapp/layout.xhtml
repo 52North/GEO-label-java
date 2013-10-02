@@ -12,6 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<h:outputStylesheet library="webjars/bootstrap/3.0.0/css"
 		name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="layout.css" />
 	<h:outputScript library="webjars/jquery/1.9.0" name="jquery.min.js" />
 	<h:outputScript library="webjars/bootstrap/3.0.0/js"
 		name="bootstrap.min.js" />
@@ -22,30 +23,63 @@
 </h:head>
 
 <h:body>
-
-	<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">GEO Label Service</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="index.jsf">Examples</a></li>
-					<li><a href="editor.jsf">Editor</a></li>
-				</ul>
+	<div id="wrap">
+		<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">GEO Label Service</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="index.jsf">Examples</a></li>
+						<li><a href="editor.jsf">Editor</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
+
+		<div class="container" style="padding-top: 70px;">
+			<ui:insert name="content">
+
+			</ui:insert>
+		</div>
+
+		<div id="push"></div>
 	</div>
 
-	<div class="container" style="padding-top: 70px;">
-		<ui:insert name="content">
-
-		</ui:insert>
+	<div id="footer">
+		<div class="container">
+			<div class="row" style="margin-top: 10px;">
+				<dl class="dl-horizontal col-md-6" style="margin: 0px;">
+					<dt>52°North</dt>
+					<dd>
+						<a href="http://www.52north.org/">http://www.52north.org</a>
+					</dd>
+					<dt>GitHub Project</dt>
+					<dd>
+						<a href="https://github.com/52North/GEO-label-java/">https://github.com/52North/GEO-label-java</a>
+					</dd>
+				</dl>
+				<dl class="dl-horizontal col-md-6" style="margin: 0px;">
+					<dt>GeoViQua</dt>
+					<dd>
+						<a href="http://www.geoviqua.org/">http://www.geoviqua.org/</a>
+					</dd>
+					<dt>GEO Label</dt>
+					<dd>
+						<a href="http://www.geolabel.info/">http://www.geolabel.info/</a>
+					</dd>
+				</dl>
+			</div>
+			<p class="text-center" style="margin-top: 10px;">Copyright © 2013
+				52°North Initiative for Geospatial Open Source Software GmbH. All
+				Rights Reserved.</p>
+		</div>
 	</div>
 </h:body>
 </html>
