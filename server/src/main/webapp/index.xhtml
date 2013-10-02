@@ -83,9 +83,10 @@
 												<h:outputText value="Metadata URL" />
 											</div>
 											<div class="col-md-10">
-												<h:outputLink value="#{example.metadataUrl}">
+												<h:outputLink value="#{example.metadataUrl}" rendered="#{not empty example.metadataUrl}">
 													<h:outputText value="#{example.metadataUrl}" />
 												</h:outputLink>
+												<h:outputText value="None" rendered="#{empty example.metadataUrl}" />
 											</div>
 										</div>
 										<div class="row">
@@ -93,9 +94,10 @@
 												<h:outputText value="Feedback URL" />
 											</div>
 											<div class="col-md-10">
-												<h:outputLink value="#{example.feedbackUrl}">
+												<h:outputLink value="#{example.feedbackUrl}" rendered="#{not empty example.feedbackUrl}">
 													<h:outputText value="#{example.feedbackUrl}" />
 												</h:outputLink>
+												<h:outputText value="None" rendered="#{empty example.feedbackUrl}" />
 											</div>
 										</div>
 									</div>
