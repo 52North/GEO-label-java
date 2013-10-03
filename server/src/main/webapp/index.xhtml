@@ -43,7 +43,8 @@
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
 									<h:commandButton value="Update" styleClass="btn btn-primary">
-										<f:ajax execute="testForm" render="label" />
+										<f:ajax execute="testForm" render="label"
+											onevent="function(data) { $(data.source).button(data.status == 'begin' ? 'loading' : 'reset'); }" />
 									</h:commandButton>
 								</div>
 							</div>
