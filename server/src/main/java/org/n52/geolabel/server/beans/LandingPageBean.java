@@ -38,7 +38,12 @@ public class LandingPageBean {
 		public Example(String title, String metadata) {
 			this.title = title;
 			this.metadata = metadata;
+		}
 
+		public Example(String title, String metadata, String feedback) {
+			this.title = title;
+			this.metadata = metadata;
+			this.feedback = feedback;
 		}
 
 		public String getFeedbackUrl() {
@@ -60,15 +65,11 @@ public class LandingPageBean {
 	private List<Example> examplesList = new ArrayList<LandingPageBean.Example>();
 
 	public LandingPageBean() {
-		examplesList
-				.add(new Example(
-						"Climate Atlas",
-						"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml"));
+		examplesList.add(new Example("Climate Atlas",
+				"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml"));
 
-		examplesList
-				.add(new Example(
-						"Feedback Use Case",
-						"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/FeedbackUseCase_7_7_metadata.xml"));
+		examplesList.add(new Example("Feedback Use Case", null,
+				"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/FeedbackUseCase_7_7_metadata.xml"));
 	}
 
 	public String getMetadataUrl() {
@@ -92,13 +93,10 @@ public class LandingPageBean {
 	}
 
 	public String getServiceEndpoint() throws MalformedURLException {
-		ExternalContext externalContext = FacesContext.getCurrentInstance()
-				.getExternalContext();
-		HttpServletRequest request = (HttpServletRequest) externalContext
-				.getRequest();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 		URL requesturl = new URL(request.getRequestURL().toString());
-		URL serviceUrl = new URL(requesturl.getProtocol(),
-				requesturl.getHost(), requesturl.getPort(),
+		URL serviceUrl = new URL(requesturl.getProtocol(), requesturl.getHost(), requesturl.getPort(),
 				request.getContextPath() + "/api/svg/");
 		return serviceUrl.toString();
 	}
