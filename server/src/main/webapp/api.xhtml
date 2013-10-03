@@ -1,0 +1,110 @@
+<ui:composition template="layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:glb="http://www.geolabel.net"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="title">API</ui:define>
+
+	<ui:define name="content">
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">XML to SVG</h3>
+			</div>
+
+			<div class="panel-body">
+				<p>Send XML metadata records to see the GEO label SVG
+					representation.</p>
+				<form action="api/v1/svg" method="post" enctype="multipart/form-data"
+					class="form-horizontal">
+					<div class="form-group">
+						<label for="metadata" class="col-md-2 control-label">Metadata
+							Document</label>
+						<div class="col-md-10">
+							<input type="file" name="metadata" id="metadata" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="feedback" class="col-md-2 control-label">Feedback
+							Document</label>
+						<div class="col-md-10">
+							<input type="file" name="feedback" id="feedback" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" name="submit" value="Submit"
+								class="btn btn-default" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">XML to LML</h3>
+			</div>
+
+			<div class="panel-body">
+				<p>Send XML metadata records to see the GEO label LML
+					representation.</p>
+				<form action="api/v1/lml" method="post" enctype="multipart/form-data"
+					class="form-horizontal">
+					<div class="form-group">
+						<label for="metadata2" class="col-md-2 control-label">Metadata
+							Document</label>
+						<div class="col-md-10">
+							<input type="file" name="metadata" id="metadata2" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="feedback2" class="col-md-2 control-label">Feedback
+							Document</label>
+						<div class="col-md-10">
+							<input type="file" name="feedback" id="feedback2" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" name="submit" value="Submit"
+								class="btn btn-default" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">LML to SVG</h3>
+			</div>
+
+			<div class="panel-body">
+				<p>Send LML records to see the GEO label SVG representation.</p>
+				<form action="api/v1/svg" method="post" enctype="multipart/form-data"
+					class="form-horizontal">
+					<div class="form-group">
+						<label for="lml" class="col-md-2 control-label">LML
+							Document</label>
+						<div class="col-md-10">
+							<input type="file" name="lml" id="lml" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" name="submit" value="Submit"
+								class="btn btn-default" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
