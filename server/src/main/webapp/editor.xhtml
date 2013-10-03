@@ -23,15 +23,16 @@
 						</div>
 						<div class="panel-body text-center">
 							<h:panelGroup id="panelLabel">
-								<h:panelGroup rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
-									<glb:geolabel 
-										metadataContent="#{editorBean.metadataContent}"
+								<h:panelGroup
+									rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
+									<glb:geolabel metadataContent="#{editorBean.metadataContent}"
 										feedbackContent="#{editorBean.feedbackContent}"
 										serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
 										size="200"></glb:geolabel>
-	
+
 								</h:panelGroup>
-								<h:panelGroup rendered="#{empty editorBean.metadataContent and empty editorBean.feedbackContent}">
+								<h:panelGroup
+									rendered="#{empty editorBean.metadataContent and empty editorBean.feedbackContent}">
 									Enter metadata and/or feedback document and click "Update" to view the corresponding GEO Label representation.
 								</h:panelGroup>
 							</h:panelGroup>
@@ -77,9 +78,13 @@
 
 						</div>
 					</div>
-					<h:commandButton value="Update" styleClass="btn btn-primary">
-						<f:ajax execute="@form" render="panelLabel" />
+					<h:commandButton value="Update" styleClass="btn btn-primary"
+						id="buttonUpdate">
+						<f:ajax execute="@form" render="panelLabel"
+							onevent="function(data) { $(data.source).button(data.status == 'begin' ? 'loading' : 'reset'); }" />
 					</h:commandButton>
+
+
 				</div>
 			</div>
 
