@@ -5,9 +5,53 @@
 	xmlns:glb="http://www.geolabel.net"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+	<!-- Endpoint for form actions -->
+	<ui:param name="apiEndpoint" value="api/v1" />
+
 	<ui:define name="title">API</ui:define>
 
 	<ui:define name="content">
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">API Status</h3>
+			</div>
+
+			<div class="panel-body form-horizontal">
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">GEO Label Endpoint</label>
+					<div class="col-md-10">
+						<p class="form-control-static">
+							<code>
+								<h:outputText value="#{landingPageBean.serviceEndpoint}" />
+							</code>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">API Description</label>
+					<div class="col-md-10">
+						<p class="form-control-static">
+							See <a href="application.wadl" target="_blank">WADL</a>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Cache</label>
+					<div class="col-md-10">
+						<p class="form-control-static">
+							Explore <a href="#{apiEndpoint}/cache" target="_blank">Currently
+								cached url/label mappings</a>
+						</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 		<div class="panel panel-default">
 
@@ -18,8 +62,9 @@
 			<div class="panel-body">
 				<p>Send XML metadata records to see the GEO label SVG
 					representation.</p>
-				<form action="api/v1/svg" method="post" enctype="multipart/form-data"
-					class="form-horizontal">
+				<form action="#{apiEndpoint}/svg" method="post"
+					enctype="multipart/form-data" class="form-horizontal"
+					target="_blank">
 					<div class="form-group">
 						<label for="metadata" class="col-md-2 control-label">Metadata
 							Document</label>
@@ -38,7 +83,8 @@
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-10">
 							<input type="submit" name="submit" value="Submit"
-								class="btn btn-default" />
+								class="btn btn-primary" /> <input class="btn" type="reset"
+								value="Reset" />
 						</div>
 					</div>
 				</form>
@@ -54,8 +100,9 @@
 			<div class="panel-body">
 				<p>Send XML metadata records to see the GEO label LML
 					representation.</p>
-				<form action="api/v1/lml" method="post" enctype="multipart/form-data"
-					class="form-horizontal">
+				<form action="#{apiEndpoint}/lml" method="post"
+					enctype="multipart/form-data" class="form-horizontal"
+					target="_blank">
 					<div class="form-group">
 						<label for="metadata2" class="col-md-2 control-label">Metadata
 							Document</label>
@@ -73,7 +120,8 @@
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-10">
 							<input type="submit" name="submit" value="Submit"
-								class="btn btn-default" />
+								class="btn btn-primary" /> <input class="btn" type="reset"
+								value="Reset" />
 						</div>
 					</div>
 				</form>
@@ -88,8 +136,9 @@
 
 			<div class="panel-body">
 				<p>Send LML records to see the GEO label SVG representation.</p>
-				<form action="api/v1/svg" method="post" enctype="multipart/form-data"
-					class="form-horizontal">
+				<form action="#{apiEndpoint}/svg" method="post"
+					enctype="multipart/form-data" class="form-horizontal"
+					target="_blank">
 					<div class="form-group">
 						<label for="lml" class="col-md-2 control-label">LML
 							Document</label>
@@ -100,7 +149,8 @@
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-10">
 							<input type="submit" name="submit" value="Submit"
-								class="btn btn-default" />
+								class="btn btn-primary" /> <input class="btn" type="reset"
+								value="Reset" />
 						</div>
 					</div>
 				</form>

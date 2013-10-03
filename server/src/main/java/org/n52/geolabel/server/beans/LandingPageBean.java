@@ -92,6 +92,14 @@ public class LandingPageBean {
 		return examplesList;
 	}
 
+	/**
+	 * Returns the absolute GEO label service API endpoint of this webapp
+	 * instance. For example required by JSF components as these work
+	 * Independent of this service.
+	 * 
+	 * @return
+	 * @throws MalformedURLException
+	 */
 	public String getServiceEndpoint() throws MalformedURLException {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
