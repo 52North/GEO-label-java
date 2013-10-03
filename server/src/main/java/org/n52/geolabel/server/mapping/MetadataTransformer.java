@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -51,13 +52,16 @@ import com.google.common.cache.LoadingCache;
 
 /**
  * Transforms metadata XML into {@link Label} representations
- *
+ * 
  */
 @Singleton
 public class MetadataTransformer {
 
 	private static final String TRANSFORMATIONS_RESOURCE = "transformations";
 	final static Logger log = LoggerFactory.getLogger(MetadataTransformer.class);
+
+	private static int CACHE_MAX_LABELS = 100;
+	private static int CACHE_MAX_HOURS = 48;
 
 	/**
 	 * Acts as key for caching {@link Label}s based on its metadata and/or
@@ -114,8 +118,8 @@ public class MetadataTransformer {
 		}
 	}
 
-	private LoadingCache<LabelUrlKey, Label> labelUrlCache = CacheBuilder.newBuilder().maximumSize(100)
-			.build(new CacheLoader<LabelUrlKey, Label>() {
+	private LoadingCache<LabelUrlKey, Label> labelUrlCache = CacheBuilder.newBuilder().maximumSize(CACHE_MAX_LABELS)
+			.expireAfterWrite(CACHE_MAX_HOURS, TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
 				@Override
 				public Label load(LabelUrlKey key) throws Exception {
 					log.info("Generating new GEO label for cache from urls {}", key);
