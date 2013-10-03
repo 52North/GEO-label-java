@@ -58,5 +58,19 @@
 				<type>boolean</type>
 			</deferred-value>
 		</attribute>
+			<attribute>
+			<name>useCache</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+			<attribute>
+			<name>forceDownload</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
 	</tag>
 </taglib>
