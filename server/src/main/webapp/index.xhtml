@@ -23,7 +23,7 @@
 								metadataUrl="#{landingPageBean.metadataUrl}"
 								feedbackUrl="#{landingPageBean.feedbackUrl}"
 								serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
-								size="100"></glb:geolabel>
+								useCache="false" size="100"></glb:geolabel>
 						</div>
 						<div class="col-md-10 form-horizontal">
 							<div class="form-group">
@@ -75,7 +75,7 @@
 										<glb:geolabel metadataUrl="#{example.metadataUrl}"
 											feedbackUrl="#{example.feedbackUrl}"
 											serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
-											size="100"></glb:geolabel>
+											size="100" useCache="false"></glb:geolabel>
 									</div>
 									<div class="col-md-10">
 										<div class="row">
@@ -83,10 +83,12 @@
 												<h:outputText value="Metadata URL" />
 											</div>
 											<div class="col-md-10">
-												<h:outputLink value="#{example.metadataUrl}" rendered="#{not empty example.metadataUrl}">
+												<h:outputLink value="#{example.metadataUrl}"
+													rendered="#{not empty example.metadataUrl}">
 													<h:outputText value="#{example.metadataUrl}" />
 												</h:outputLink>
-												<h:outputText value="None" rendered="#{empty example.metadataUrl}" />
+												<h:outputText value="None"
+													rendered="#{empty example.metadataUrl}" />
 											</div>
 										</div>
 										<div class="row">
@@ -94,10 +96,12 @@
 												<h:outputText value="Feedback URL" />
 											</div>
 											<div class="col-md-10">
-												<h:outputLink value="#{example.feedbackUrl}" rendered="#{not empty example.feedbackUrl}">
+												<h:outputLink value="#{example.feedbackUrl}"
+													rendered="#{not empty example.feedbackUrl}">
 													<h:outputText value="#{example.feedbackUrl}" />
 												</h:outputLink>
-												<h:outputText value="None" rendered="#{empty example.feedbackUrl}" />
+												<h:outputText value="None"
+													rendered="#{empty example.feedbackUrl}" />
 											</div>
 										</div>
 									</div>

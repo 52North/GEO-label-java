@@ -97,7 +97,7 @@ public class LandingPageBean {
 		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 		URL requesturl = new URL(request.getRequestURL().toString());
 		URL serviceUrl = new URL(requesturl.getProtocol(), requesturl.getHost(), requesturl.getPort(),
-				request.getContextPath() + "/api/svg/");
+				request.getContextPath() + "/api/v1/svg/");
 		return serviceUrl.toString();
 	}
 }

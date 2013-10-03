@@ -27,13 +27,13 @@
 									rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
 									<glb:geolabel metadataContent="#{editorBean.metadataContent}"
 										feedbackContent="#{editorBean.feedbackContent}"
-										serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+										serviceUrl="#{landingPageBean.serviceEndpoint}" async="true" useCache="false"
 										size="200"></glb:geolabel>
 
 								</h:panelGroup>
 								<h:panelGroup
 									rendered="#{empty editorBean.metadataContent and empty editorBean.feedbackContent}">
-									Enter metadata and/or feedback document and click "Update" to view the corresponding GEO Label representation.
+									Enter metadata and/or feedback document and click "Update" to view the corresponding GEO label representation.
 								</h:panelGroup>
 							</h:panelGroup>
 							<!-- <p:ajaxStatus style="width:16px;height:16px;"

@@ -24,7 +24,9 @@ import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
-import org.n52.geolabel.server.resources.GeoLabelResource;
+import org.n52.geolabel.server.resources.CacheResourceV1;
+import org.n52.geolabel.server.resources.LabelResourceV1;
+import org.n52.geolabel.server.resources.StaticLabelResourceV1;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -44,7 +46,9 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 		return Guice.createInjector(new ServletModule() {
 			@Override
 			protected void configureServlets() {
-				bind(GeoLabelResource.class);
+				bind(LabelResourceV1.class);
+				bind(StaticLabelResourceV1.class);
+				bind(CacheResourceV1.class);
 
 				bind(ParamExceptionMapper.class);
 				bind(IOExceptionMapper.class);

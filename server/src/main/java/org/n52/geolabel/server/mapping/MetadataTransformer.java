@@ -27,6 +27,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +36,8 @@ import javax.inject.Singleton;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPathExpressionException;
@@ -69,13 +72,27 @@ public class MetadataTransformer {
 	 * combinations of equal metadata/feedback source urls are identical.
 	 * 
 	 */
-	protected static class LabelUrlKey {
+	@XmlRootElement(name = "CacheMapping")
+	public static class LabelUrlKey {
 		protected URL metadataUrl;
 		protected URL feedbackUrl;
+
+		LabelUrlKey() {
+		}
 
 		public LabelUrlKey(URL metadataUrl, URL feedbackUrl) {
 			this.metadataUrl = metadataUrl;
 			this.feedbackUrl = feedbackUrl;
+		}
+
+		@XmlAttribute
+		public URL getFeedbackUrl() {
+			return feedbackUrl;
+		}
+
+		@XmlAttribute
+		public URL getMetadataUrl() {
+			return metadataUrl;
 		}
 
 		@Override
@@ -302,5 +319,9 @@ public class MetadataTransformer {
 		} catch (ExecutionException e) {
 			throw new IOException(e.getCause());
 		}
+	}
+
+	public Set<LabelUrlKey> getCacheContent() {
+		return labelUrlCache.asMap().keySet();
 	}
 }
