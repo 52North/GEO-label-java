@@ -29,6 +29,8 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 
 	private ValueExpression size;
 	private ValueExpression async;
+	private ValueExpression forceDownload;
+	private ValueExpression useCache;
 
 	@Override
 	public String getComponentType() {
@@ -67,6 +69,14 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 			component.setValueExpression(GeoLabelComponent.PropertyKeys.async.name(), async);
 		}
 
+		if (forceDownload != null) {
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.forceDownload.name(), forceDownload);
+		}
+
+		if (useCache != null) {
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.useCache.name(), useCache);
+		}
+
 	}
 
 	public void setMetadataUrl(ValueExpression metadataUrl) {
@@ -97,6 +107,14 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		return async;
 	}
 
+	public void setForceDownload(ValueExpression forceDownload) {
+		this.forceDownload = forceDownload;
+	}
+
+	public void setUseCache(ValueExpression useCache) {
+		this.useCache = useCache;
+	}
+
 	public ValueExpression getMetadataUrl() {
 		return metadataUrl;
 	}
@@ -115,6 +133,14 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 
 	public ValueExpression getFeedbackContent() {
 		return feedbackContent;
+	}
+
+	public ValueExpression getForceDownload() {
+		return forceDownload;
+	}
+
+	public ValueExpression getUseCache() {
+		return useCache;
 	}
 
 }
