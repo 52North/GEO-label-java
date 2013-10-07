@@ -28,7 +28,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.apache.commons.io.IOUtils;
-import org.n52.geolabel.client.DocumentReference.Base;
 import org.n52.geolabel.client.GeoLabelClientV1;
 import org.n52.geolabel.client.GeoLabelRequestBuilder;
 
@@ -37,7 +36,7 @@ import org.n52.geolabel.client.GeoLabelRequestBuilder;
 public class GeoLabelComponent extends UIComponentBase {
 
 	enum PropertyKeys {
-		metadataUrl, feedbackUrl, size, async, serviceUrl, metadataContent, feedbackContent;
+		metadataUrl, feedbackUrl, size, async, serviceUrl, metadataContent, feedbackContent, forceDownload, useCache;
 	}
 
 	public GeoLabelComponent() {
@@ -98,6 +97,22 @@ public class GeoLabelComponent extends UIComponentBase {
 
 	public void setAsync(boolean async) {
 		getStateHelper().put(PropertyKeys.async, async);
+	}
+
+	public Boolean isUseCache() {
+		return (Boolean) getStateHelper().eval(PropertyKeys.useCache);
+	}
+
+	public void setUseCache(boolean cache) {
+		getStateHelper().put(PropertyKeys.useCache, cache);
+	}
+
+	public Boolean isForceDownload() {
+		return (Boolean) getStateHelper().eval(PropertyKeys.forceDownload);
+	}
+
+	public void setForceDownload(boolean force) {
+		getStateHelper().put(PropertyKeys.forceDownload, force);
 	}
 
 	@Override
@@ -164,7 +179,11 @@ public class GeoLabelComponent extends UIComponentBase {
 			if (getSize() != null)
 				requestBuilder.setDesiredSize(getSize());
 
-			requestBuilder.setForceDownload(true).setUseCache(true);
+			if (isForceDownload() != null)
+				requestBuilder.setForceDownload(isForceDownload());
+
+			if (isUseCache() != null)
+				requestBuilder.setUseCache(isUseCache());
 
 			InputStream svg = requestBuilder.getSVG();
 			String svgString = IOUtils.toString(svg);
@@ -215,9 +234,7 @@ public class GeoLabelComponent extends UIComponentBase {
 
 		writer.writeAttribute("style", "width:" + size + "px;" + "height:" + size + "px;" + "background-image: url('"
 				+ createResource.getRequestPath() + "');" + "background-repeat:no-repeat;"
-				+ "background-position:center;",
-
-		null);
+				+ "background-position:center;", null);
 
 		writer.endElement("div");
 

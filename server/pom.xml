@@ -136,7 +136,7 @@
 
 		</plugins>
 
-		<finalName>GeoLabelServer</finalName>
+		<finalName>glbservice</finalName>
 	</build>
 
 	<dependencies>
