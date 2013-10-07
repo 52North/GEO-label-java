@@ -11,35 +11,35 @@
 
 		<attribute>
 			<name>metadataUrl</name>
-			<required>true</required>
+			<required>false</required>
 			<deferred-value>
 				<type>java.lang.String</type>
 			</deferred-value>
 		</attribute>
 		<attribute>
 			<name>serviceUrl</name>
-			<required>true</required>
+			<required>false</required>
 			<deferred-value>
 				<type>java.lang.String</type>
 			</deferred-value>
 		</attribute>
 		<attribute>
 			<name>feedbackUrl</name>
-			<required>true</required>
+			<required>false</required>
 			<deferred-value>
 				<type>java.lang.String</type>
 			</deferred-value>
 		</attribute>
 		<attribute>
 			<name>metadataContent</name>
-			<required>true</required>
+			<required>false</required>
 			<deferred-value>
 				<type>java.lang.String</type>
 			</deferred-value>
 		</attribute>
 		<attribute>
 			<name>feedbackContent</name>
-			<required>true</required>
+			<required>false</required>
 			<deferred-value>
 				<type>java.lang.String</type>
 			</deferred-value>
@@ -53,6 +53,20 @@
 		</attribute>
 		<attribute>
 			<name>async</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+			<attribute>
+			<name>useCache</name>
+			<required>false</required>
+			<deferred-value>
+				<type>boolean</type>
+			</deferred-value>
+		</attribute>
+			<attribute>
+			<name>forceDownload</name>
 			<required>false</required>
 			<deferred-value>
 				<type>boolean</type>

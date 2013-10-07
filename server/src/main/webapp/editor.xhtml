@@ -22,12 +22,20 @@
 							<h3 class="panel-title">GEO Label</h3>
 						</div>
 						<div class="panel-body text-center">
-							<glb:geolabel id="label"
-								metadataContent="#{editorBean.metadataContent}"
-								feedbackContent="#{editorBean.feedbackContent}"
-								serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
-								size="200"></glb:geolabel>
+							<h:panelGroup id="panelLabel">
+								<h:panelGroup
+									rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
+									<glb:geolabel metadataContent="#{editorBean.metadataContent}"
+										feedbackContent="#{editorBean.feedbackContent}"
+										serviceUrl="#{landingPageBean.serviceEndpoint}" async="true" useCache="false"
+										size="200"></glb:geolabel>
 
+								</h:panelGroup>
+								<h:panelGroup
+									rendered="#{empty editorBean.metadataContent and empty editorBean.feedbackContent}">
+									Enter metadata and/or feedback document and click "Update" to view the corresponding GEO label representation.
+								</h:panelGroup>
+							</h:panelGroup>
 							<!-- <p:ajaxStatus style="width:16px;height:16px;"
 								id="ajaxStatusPanel">
 								<f:facet name="start">
@@ -70,9 +78,13 @@
 
 						</div>
 					</div>
-					<h:commandButton value="Update" styleClass="btn btn-primary">
-						<f:ajax execute="@form" render="label" />
+					<h:commandButton value="Update" styleClass="btn btn-primary"
+						id="buttonUpdate">
+						<f:ajax execute="@form" render="panelLabel"
+							onevent="function(data) { $(data.source).button(data.status == 'begin' ? 'loading' : 'reset'); }" />
 					</h:commandButton>
+
+
 				</div>
 			</div>
 
