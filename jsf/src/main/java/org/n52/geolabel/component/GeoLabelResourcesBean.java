@@ -15,6 +15,9 @@
  */
 package org.n52.geolabel.component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -24,6 +27,7 @@ public class GeoLabelResourcesBean {
 
 	private boolean resourcesAdded = false;
 	private boolean geoLabelServiceFailed = false;
+	private Set<String> failedEndpoints = new HashSet<String>();
 
 	public boolean isResourcesAdded() {
 		return resourcesAdded;
@@ -39,5 +43,17 @@ public class GeoLabelResourcesBean {
 
 	public void setGeoLabelServiceFailed(boolean geoLabelServiceFailed) {
 		this.geoLabelServiceFailed = geoLabelServiceFailed;
+		if (!geoLabelServiceFailed) {
+			this.failedEndpoints.clear();
+		}
+	}
+
+	public void setGeoLabelServiceFailed(String endpoint) {
+		this.failedEndpoints.add(endpoint);
+		this.geoLabelServiceFailed = true;
+	}
+
+	public boolean isGeoLabelServiceFailed(String endpoint) {
+		return failedEndpoints.contains(endpoint);
 	}
 }
