@@ -13,42 +13,146 @@
 	<ui:define name="title">Editor</ui:define>
 
 	<ui:define name="content">
-		<h:form>
+		<h:form id="form">
+
+			<!-- The "Add Service Endpoint" modal -->
+			<div class="modal fade" id="addServiceModal" tabindex="-1"
+				role="dialog" aria-labelledby="addServiceModalLabel"
+				aria-hidden="true" style="top: 100px;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&#215;</button>
+							<h4 class="modal-title">Add GEO label service</h4>
+						</div>
+
+						<div class="modal-body">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<label class="control-label col-md-2">Service Endpoint</label>
+									<div class="col-md-10">
+										<h:inputText value="#{editorBean.newCustomService.url}"
+											styleClass="form-control" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-md-2">Service Name</label>
+									<div class="col-md-10">
+										<h:inputText value="#{editorBean.newCustomService.name}"
+											styleClass="form-control" />
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<h:commandButton value="OK"
+								action="#{editorBean.addCustomServiceEndpoint}"
+								styleClass="btn btn-primary">
+								<f:ajax execute="@form" render="panelLabel"
+									onevent="function(data) { $(data.source).button(data.status == 'begin' ? 'loading' : 'reset');
+									if(data.status=='complete') $('#addServiceModal').modal('hide')  }" />
+							</h:commandButton>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
 
 			<div class="row">
 				<div class="col-md-4">
-					<div class="panel panel-default">
+					<h:panelGroup id="panelLabel" styleClass="panel panel-default"
+						layout="block">
 						<div class="panel-heading">
 							<h3 class="panel-title">GEO Label</h3>
 						</div>
-						<div class="panel-body text-center">
-							<h:panelGroup id="panelLabel">
-								<h:panelGroup
-									rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
-									<glb:geolabel metadataContent="#{editorBean.metadataContent}"
-										feedbackContent="#{editorBean.feedbackContent}"
-										serviceUrl="#{landingPageBean.serviceEndpoint}" async="true" useCache="false"
-										size="200"></glb:geolabel>
 
-								</h:panelGroup>
-								<h:panelGroup
-									rendered="#{empty editorBean.metadataContent and empty editorBean.feedbackContent}">
-									Enter metadata and/or feedback document and click "Update" to view the corresponding GEO label representation.
-								</h:panelGroup>
-							</h:panelGroup>
-							<!-- <p:ajaxStatus style="width:16px;height:16px;"
-								id="ajaxStatusPanel">
-								<f:facet name="start">
-									<h:outputText value="Updating..." />
-								</f:facet>
+						<h:panelGroup
+							rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
 
-								<f:facet name="complete">
-									<h:outputText value="" />
-								</f:facet>
-							</p:ajaxStatus> -->
+							<ul class="list-group ">
+								<li class="list-group-item">
+									<h4 class="list-group-item-heading">This service</h4>
+									<div class="list-group-item-text">
+										<p>
+											<small><h:outputText
+													value="#{landingPageBean.serviceEndpoint}" /></small>
+										</p>
+										<div class="text-center">
+											<glb:geolabel id="label"
+												metadataContent="#{editorBean.metadataContent}"
+												feedbackContent="#{editorBean.feedbackContent}"
+												serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+												useCache="false" size="200"></glb:geolabel>
+										</div>
+										<h:message for="label" errorClass="alert alert-danger"
+											fatalClass="alert alert-danger" infoClass="alert alert-info"
+											warnClass="alert alert-warn" style="display:block;" />
+									</div>
+								</li>
 
-						</div>
-					</div>
+								<ui:repeat var="endpoint"
+									value="#{editorBean.comparisonServices}">
+
+									<li class="list-group-item">
+										<h4 class="list-group-item-heading">
+											<h:outputText value="#{endpoint.name}" />
+
+											<h:commandLink value="&#215;"
+												action="#{editorBean.removeCustomServiceEndpoint(endpoint)}"
+												styleClass="close">
+												<f:ajax execute="@form" render=":form:panelLabel" />
+											</h:commandLink>
+										</h4>
+										<div class="list-group-item-text">
+											<p>
+												<small><h:outputText value="#{endpoint.url}" /></small>
+											</p>
+											<div class="text-center">
+												<glb:geolabel id="label"
+													metadataContent="#{editorBean.metadataContent}"
+													feedbackContent="#{editorBean.feedbackContent}"
+													serviceUrl="#{endpoint.url}" async="true" useCache="false"
+													size="200"></glb:geolabel>
+
+											</div>
+											<h:message for="label" errorClass="alert alert-danger"
+												fatalClass="alert alert-danger" infoClass="alert alert-info"
+												warnClass="alert alert-warn" style="display:block;" />
+										</div>
+									</li>
+								</ui:repeat>
+
+								<li class="list-group-item">
+
+									<div class="list-group-item-text">
+										<a data-toggle="modal" href="#addServiceModal"
+											class="btn btn-primary">Add Service</a>
+										<button type="button" class="btn btn-default">Permalink</button>
+									</div>
+								</li>
+							</ul>
+
+
+
+						</h:panelGroup>
+						<h:panelGroup
+							rendered="#{empty editorBean.metadataContent and empty editorBean.feedbackContent}">
+							<div class="panel-body text-center">
+								<div class="alert alert-info">
+									<p>Enter metadata and/or feedback document and click
+										"Update" to view the corresponding GEO label representation.</p>
+								</div>
+							</div>
+						</h:panelGroup>
+					</h:panelGroup>
 				</div>
 				<div class="col-md-8">
 					<div class="panel panel-default">
@@ -87,7 +191,6 @@
 
 				</div>
 			</div>
-
 		</h:form>
 	</ui:define>
 </ui:composition>

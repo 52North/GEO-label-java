@@ -15,15 +15,58 @@
  */
 package org.n52.geolabel.server.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EditorBean {
+
+	public static class Endpoint {
+		String url;
+		String name;
+
+		public Endpoint() {
+		};
+
+		public Endpoint(String url, String name) {
+			this.url = url;
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (url != null && obj instanceof Endpoint) {
+				return url.equals(((Endpoint) obj).url);
+			}
+			return super.equals(obj);
+		}
+	}
 
 	private String metadataContent = "";
 	private String feedbackContent = "";
+
+	private List<Endpoint> comparisonServices = new ArrayList<Endpoint>();
+	private Endpoint newCustomService = new Endpoint();
 
 	public String getFeedbackContent() {
 		return feedbackContent;
@@ -39,5 +82,32 @@ public class EditorBean {
 
 	public void setMetadataContent(String metadataContent) {
 		this.metadataContent = metadataContent;
+	}
+
+	public List<Endpoint> getComparisonServices() {
+		return comparisonServices;
+	}
+
+	public void setComparisonServices(List<Endpoint> comparisonServices) {
+		this.comparisonServices = comparisonServices;
+	}
+
+	public Endpoint getNewCustomService() {
+		return newCustomService;
+	}
+
+	public void setNewCustomService(Endpoint newCustomService) {
+		this.newCustomService = newCustomService;
+	}
+
+	public void addCustomServiceEndpoint() {
+		if (newCustomService != null && newCustomService.url != null && !comparisonServices.contains(newCustomService)) {
+			comparisonServices.add(newCustomService);
+			newCustomService = new Endpoint();
+		}
+	}
+
+	public void removeCustomServiceEndpoint(Endpoint endpoint) {
+		comparisonServices.remove(endpoint);
 	}
 }
