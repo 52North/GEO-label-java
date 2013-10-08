@@ -18,12 +18,17 @@
 
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-2 text-center">
-							<glb:geolabel id="label"
-								metadataUrl="#{landingPageBean.metadataUrl}"
-								feedbackUrl="#{landingPageBean.feedbackUrl}"
-								serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
-								useCache="false" size="100"></glb:geolabel>
+						<div class="col-md-2 ">
+							<div class="text-center">
+								<glb:geolabel id="label"
+									metadataUrl="#{landingPageBean.metadataUrl}"
+									feedbackUrl="#{landingPageBean.feedbackUrl}"
+									serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+									useCache="false" size="100"></glb:geolabel>
+							</div>
+							<h:message for="label" errorClass="alert alert-danger"
+								fatalClass="alert alert-danger" infoClass="alert alert-info"
+								warnClass="alert alert-warn" style="display:block;" />
 						</div>
 						<div class="col-md-10 form-horizontal">
 							<div class="form-group">
@@ -78,12 +83,18 @@
 							</h4>
 							<div class="list-group-item-text">
 								<div class="row">
-									<div class="col-md-2 text-center">
-										<glb:geolabel metadataUrl="#{example.metadataUrl}"
-											feedbackUrl="#{example.feedbackUrl}"
-											serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
-											size="100" useCache="false"></glb:geolabel>
+									<div class="col-md-2">
+										<div class="text-center">
+											<glb:geolabel id="label" metadataUrl="#{example.metadataUrl}"
+												feedbackUrl="#{example.feedbackUrl}"
+												serviceUrl="#{landingPageBean.serviceEndpoint}" async="true"
+												size="100" useCache="false"></glb:geolabel>
+										</div>
+										<h:message for="label" errorClass="alert alert-danger"
+											fatalClass="alert alert-danger" infoClass="alert alert-info"
+											warnClass="alert alert-warn" style="display:block;" />
 									</div>
+
 									<div class="col-md-10">
 										<div class="row">
 											<div class="col-md-2">
