@@ -30,20 +30,26 @@
 								<label class="control-label col-md-2">Metadata URL</label>
 								<div class="col-md-10">
 									<h:inputText value="#{landingPageBean.metadataUrl}"
-										styleClass="form-control" />
+										styleClass="form-control" id="metadata" />
+									<h:message for="metadata" errorClass="alert alert-danger"
+										fatalClass="alert alert-danger" infoClass="alert alert-info"
+										warnClass="alert alert-warn" style="display:block;" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-2">Feedback URL</label>
 								<div class="col-md-10">
 									<h:inputText value="#{landingPageBean.feedbackUrl}"
-										styleClass="form-control" />
+										styleClass="form-control" id="feedback" />
+									<h:message for="feedback" errorClass="alert alert-danger"
+										fatalClass="alert alert-danger" infoClass="alert alert-info"
+										warnClass="alert alert-warn" style="display:block;" />
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
 									<h:commandButton value="Update" styleClass="btn btn-primary">
-										<f:ajax execute="testForm" render="label"
+										<f:ajax execute="@form" render="@form"
 											onevent="function(data) { $(data.source).button(data.status == 'begin' ? 'loading' : 'reset'); }" />
 									</h:commandButton>
 								</div>
@@ -54,7 +60,7 @@
 			</div>
 		</h:form>
 
-		<h:form>
+		<h:form id="examplesForm">
 
 			<div class="panel panel-default">
 

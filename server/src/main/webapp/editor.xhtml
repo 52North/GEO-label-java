@@ -13,14 +13,16 @@
 	<ui:define name="title">Editor</ui:define>
 
 	<ui:define name="content">
-		<h:form id="form">
+		<h:form id="newServiceForm">
 
 			<!-- The "Add Service Endpoint" modal -->
 			<div class="modal fade" id="addServiceModal" tabindex="-1"
 				role="dialog" aria-labelledby="addServiceModalLabel"
 				aria-hidden="true" style="top: 100px;">
 				<div class="modal-dialog">
-					<div class="modal-content">
+					<h:panelGroup id="modalContent" layout="block"
+						styleClass="modal-content">
+
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&#215;</button>
@@ -33,7 +35,11 @@
 									<label class="control-label col-md-2">Service Endpoint</label>
 									<div class="col-md-10">
 										<h:inputText value="#{editorBean.newCustomService.url}"
-											styleClass="form-control" />
+											styleClass="form-control" id="url">
+										</h:inputText>
+										<h:message for="url" errorClass="alert alert-danger"
+											fatalClass="alert alert-danger" infoClass="alert alert-info"
+											warnClass="alert alert-warn" style="display:block;" />
 									</div>
 								</div>
 
@@ -45,27 +51,27 @@
 									</div>
 								</div>
 							</div>
-
 						</div>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<h:commandButton value="OK"
+
+							<h:commandLink value="OK"
 								action="#{editorBean.addCustomServiceEndpoint}"
-								styleClass="btn btn-primary">
-								<f:ajax execute="@form" render="panelLabel"
+								styleClass="btn btn-primary" id="buttonOK">
+								<f:ajax execute="@form"
+									render=":editorForm:panelLabel modalContent"
 									onevent="function(data) { $(data.source).button(data.status == 'begin' ? 'loading' : 'reset');
-									if(data.status=='complete') $('#addServiceModal').modal('hide')  }" />
-							</h:commandButton>
+									if(data.status=='success' &amp;&amp; $('#addServiceModal .alert').length==0) $('#addServiceModal').modal('hide'); }" />
+							</h:commandLink>
+
 						</div>
-					</div>
-
+					</h:panelGroup>
 				</div>
-
 			</div>
-
-
+		</h:form>
+		<h:form id="editorForm">
 			<div class="row">
 				<div class="col-md-4">
 					<h:panelGroup id="panelLabel" styleClass="panel panel-default"
@@ -108,7 +114,7 @@
 											<h:commandLink value="&#215;"
 												action="#{editorBean.removeCustomServiceEndpoint(endpoint)}"
 												styleClass="close">
-												<f:ajax execute="@form" render=":form:panelLabel" />
+												<f:ajax execute="@form" render=":editorForm:panelLabel" />
 											</h:commandLink>
 										</h4>
 										<div class="list-group-item-text">
@@ -134,8 +140,18 @@
 
 									<div class="list-group-item-text">
 										<a data-toggle="modal" href="#addServiceModal"
-											class="btn btn-primary">Add Service</a>
-										<button type="button" class="btn btn-default">Permalink</button>
+											class="btn btn-primary" style="margin-right: 5px;">Add
+											Service</a>
+
+										<h:commandLink value="Reset"
+											action="#{editorBean.clearServiceEndpoints}"
+											styleClass="btn btn-default">
+											<f:ajax execute="@form" render="panelLabel" />
+										</h:commandLink>
+
+										<div class="pull-right">
+											<a href="#" target="_blank">Permalink</a>
+										</div>
 									</div>
 								</li>
 							</ul>

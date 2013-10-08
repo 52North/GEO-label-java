@@ -20,13 +20,21 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 @ManagedBean
 @SessionScoped
 public class EditorBean {
 
 	public static class Endpoint {
+		@NotNull
+		@NotEmpty
+		@URL
 		String url;
+
 		String name;
 
 		public Endpoint() {
@@ -109,5 +117,9 @@ public class EditorBean {
 
 	public void removeCustomServiceEndpoint(Endpoint endpoint) {
 		comparisonServices.remove(endpoint);
+	}
+
+	public void clearServiceEndpoints() {
+		comparisonServices.clear();
 	}
 }
