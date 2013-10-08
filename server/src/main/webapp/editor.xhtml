@@ -84,6 +84,7 @@
 							rendered="#{not empty editorBean.metadataContent or not empty editorBean.feedbackContent}">
 
 							<ul class="list-group ">
+								<!-- GEO label of the own service -->
 								<li class="list-group-item">
 									<h4 class="list-group-item-heading">This service</h4>
 									<div class="list-group-item-text">
@@ -104,6 +105,7 @@
 									</div>
 								</li>
 
+								<!-- GEO labels of all custom endpoints -->
 								<ui:repeat var="endpoint"
 									value="#{editorBean.comparisonServices}">
 
@@ -140,11 +142,26 @@
 								<li class="list-group-item">
 
 									<div class="list-group-item-text">
-										<a data-toggle="modal" href="#addServiceModal"
-											class="btn btn-primary" style="margin-right: 5px;">Add
-											Service</a>
+										<div class="btn-group">
+											<a data-toggle="modal" href="#addServiceModal"
+												class="btn btn-primary" id="buttonAddService">Add
+												Service</a>
+											<button type="button" class="btn btn-primary dropdown-toggle"
+												data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
 
-										<h:commandLink value="Reset"
+											<ul class="dropdown-menu" role="menu">
+												<li><h:commandLink
+														action="#{editorBean.addCustomServiceEndpoint('http://www.geolabel.net/api/v1/geolabel','')}"
+														value="Compare with geolabel.net">
+														<f:ajax render="panelLabel"
+															onevent="function(data) { $('#buttonAddService').button(data.status == 'begin' ? 'loading' : 'reset'); }" />
+													</h:commandLink></li>
+											</ul>
+										</div>
+
+										<h:commandLink value="Reset" style="margin-left: 5px;"
 											action="#{editorBean.clearServiceEndpoints}"
 											styleClass="btn btn-default">
 											<f:ajax execute="@form" render="panelLabel" />

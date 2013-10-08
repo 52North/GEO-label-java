@@ -66,7 +66,16 @@ public class EditorBean {
 			if (url != null && obj instanceof Endpoint) {
 				return url.equals(((Endpoint) obj).url);
 			}
+
 			return super.equals(obj);
+		}
+
+		@Override
+		public int hashCode() {
+			if (url == null) {
+				return super.hashCode();
+			}
+			return url.hashCode();
 		}
 	}
 
@@ -112,6 +121,22 @@ public class EditorBean {
 		if (newCustomService != null && newCustomService.url != null && !comparisonServices.contains(newCustomService)) {
 			comparisonServices.add(newCustomService);
 			newCustomService = new Endpoint();
+		}
+	}
+
+	/**
+	 * Allows to add a specific service endpoint to the list of custom geo label
+	 * apis to use
+	 * 
+	 * @param endpointUrl
+	 * @param endpointName
+	 */
+	public void addCustomServiceEndpoint(String endpointUrl, String endpointName) {
+		if (endpointUrl != null) {
+			Endpoint newEndpoint = new Endpoint(endpointUrl, endpointName);
+			if (!comparisonServices.contains(newEndpoint)) {
+				comparisonServices.add(new Endpoint(endpointUrl, endpointName));
+			}
 		}
 	}
 
