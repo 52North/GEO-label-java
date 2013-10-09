@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Singleton;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 
 import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
@@ -43,6 +45,17 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 
 	public static int CONNECT_TIMEOUT = 10000;
 	public static int READ_TIMEOUT = 20000;
+	public static String PUBLIC_URL_PARAM = "public.url"; // context-param name
+															// to be used to
+															// sepcify public
+															// url
+	private ServletContext servletContext;
+
+	@Override
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		this.servletContext = servletContextEvent.getServletContext();
+		super.contextInitialized(servletContextEvent);
+	}
 
 	@Override
 	protected Injector getInjector() {
@@ -59,7 +72,7 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				bind(ContainerExceptionMapper.class);
 
 				bind(MetadataTransformer.class);
-				
+
 				Map<String, String> jerseyInitPrams = new HashMap<String, String>();
 				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
 				jerseyInitPrams.put(PackagesResourceConfig.PROPERTY_PACKAGES, "com.wordnik.swagger.jersey.listing");
@@ -68,9 +81,14 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				serve("/api/*").with(GuiceContainer.class, jerseyInitPrams);
 
 				// swagger stuff
+				Map<String, String> swaggerInitPrams = new HashMap<String, String>();
+				swaggerInitPrams.put("swagger.api.basepath", servletContext.getInitParameter(PUBLIC_URL_PARAM) + "/api");
+
 				bind(com.wordnik.swagger.jersey.config.JerseyJaxrsConfig.class).in(Singleton.class);
-				serve("").with(com.wordnik.swagger.jersey.config.JerseyJaxrsConfig.class);
-				filter("/api/api-docs/*").through(CORSFilter.class);
+				serve("").with(com.wordnik.swagger.jersey.config.JerseyJaxrsConfig.class, swaggerInitPrams);
+
+				// Simple CORS filter
+				filter("/api/*").through(CORSFilter.class);
 			}
 		});
 	}
