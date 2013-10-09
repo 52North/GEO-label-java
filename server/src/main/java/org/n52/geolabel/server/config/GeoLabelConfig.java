@@ -18,6 +18,7 @@ package org.n52.geolabel.server.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Singleton;
 import javax.servlet.annotation.WebListener;
 
 import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
@@ -25,13 +26,15 @@ import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 import org.n52.geolabel.server.resources.CacheResourceV1;
-import org.n52.geolabel.server.resources.LabelResourceV1;
+import org.n52.geolabel.server.resources.LMLResourceV1;
+import org.n52.geolabel.server.resources.SVGResourceV1;
 import org.n52.geolabel.server.resources.StaticLabelResourceV1;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 
@@ -46,7 +49,8 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 		return Guice.createInjector(new ServletModule() {
 			@Override
 			protected void configureServlets() {
-				bind(LabelResourceV1.class);
+				bind(LMLResourceV1.class);
+				bind(SVGResourceV1.class);
 				bind(StaticLabelResourceV1.class);
 				bind(CacheResourceV1.class);
 
@@ -55,13 +59,18 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				bind(ContainerExceptionMapper.class);
 
 				bind(MetadataTransformer.class);
-
+				
 				Map<String, String> jerseyInitPrams = new HashMap<String, String>();
-				jerseyInitPrams.put(ServletContainer.JSP_TEMPLATES_BASE_PATH, "/WEB-INF/templates");
 				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
+				jerseyInitPrams.put(PackagesResourceConfig.PROPERTY_PACKAGES, "com.wordnik.swagger.jersey.listing");
 
-				filter("/api/*").through(GuiceContainer.class, jerseyInitPrams);
-				filter("/application.wadl").through(GuiceContainer.class, jerseyInitPrams);
+				// api endpoint served by jersey
+				serve("/api/*").with(GuiceContainer.class, jerseyInitPrams);
+
+				// swagger stuff
+				bind(com.wordnik.swagger.jersey.config.JerseyJaxrsConfig.class).in(Singleton.class);
+				serve("").with(com.wordnik.swagger.jersey.config.JerseyJaxrsConfig.class);
+				filter("/api/api-docs/*").through(CORSFilter.class);
 			}
 		});
 	}

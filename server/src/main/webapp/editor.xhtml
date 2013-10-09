@@ -16,9 +16,9 @@
 		<h:form id="newServiceForm">
 
 			<!-- The "Add Service Endpoint" modal -->
-			<div class="modal fade" id="addServiceModal" tabindex="-1"
-				role="dialog" aria-labelledby="addServiceModalLabel"
-				aria-hidden="true" style="top: 100px;">
+			<div class="modal" id="addServiceModal" tabindex="-1" role="dialog"
+				aria-labelledby="addServiceModalLabel" aria-hidden="true"
+				style="top: 100px;">
 				<div class="modal-dialog">
 					<h:panelGroup id="modalContent" layout="block"
 						styleClass="modal-content">
@@ -30,6 +30,9 @@
 						</div>
 
 						<div class="modal-body">
+							<p>Allows to specify an additional GEO label service endpoint
+								to use for generating the GEO label representation of the
+								supplied metadata and feedback documents.</p>
 							<div class="form-horizontal">
 								<div class="form-group">
 									<label class="control-label col-md-2">Service Endpoint</label>
