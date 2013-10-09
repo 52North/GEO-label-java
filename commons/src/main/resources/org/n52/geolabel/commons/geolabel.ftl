@@ -256,7 +256,10 @@
 			<g class="quality_information" id="quality_information">
 
 				<title>Quality Information. 
-				${label.qualityInformationFacet.scopeLevels?join(", ")}</title><#lt>
+				<#list label.qualityInformationFacet.scopeLevels as level>
+ 					Available at a ${level} level.<#lt>
+				</#list>  
+				</title><#lt>
 				<a xlink:href="${label.qualityInformationFacet.drilldownURL!""}" target="_blank">
 
 					<#assign higherFragment>
