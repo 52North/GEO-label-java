@@ -54,7 +54,7 @@ public class StaticLabelIT extends XMLTestCaseLabelBase {
 	}
 
 	private String getServerResourceAsString(String url) throws ClientProtocolException, IOException {
-		url = getTestServiceUrl() + url;
+		url = getTestServiceUrl() + "static/" + url;
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		HttpEntity responseEntity = httpClient.execute(new HttpGet(url)).getEntity();
 		return IOUtils.toString(responseEntity.getContent());

@@ -17,5 +17,5 @@ This server project provides two build profiles
 Metadata Transformation Mappings
 ----------------------
 
-Transformation Mappings specify xpath expressions to map from supplied metadata to GEO Label facet information. 
+Transformation Mappings specify xpath expressions to map from supplied metadata to GEO label facet information. 
 They are placed in `src/main/resources/transformations` directory. Find more information in the provided example mapping files.

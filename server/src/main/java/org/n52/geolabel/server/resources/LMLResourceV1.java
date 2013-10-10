@@ -17,11 +17,8 @@ package org.n52.geolabel.server.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PushbackInputStream;
 import java.net.URL;
-import java.net.URLConnection;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -34,30 +31,36 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 
 import org.n52.geolabel.commons.Constants;
 import org.n52.geolabel.commons.Label;
-import org.n52.geolabel.server.config.GeoLabelConfig;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 
 import com.sun.jersey.multipart.FormDataParam;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
 
-@Path("/api/v1")
-public class LabelResourceV1 {
+@Path("/v1/lml")
+@Api(value = "/v1/lml", description = "Operations to retrieve GEO label LML representations")
+public class LMLResourceV1 {
 
 	private Provider<MetadataTransformer> transformer;
 
 	@Inject
-	private LabelResourceV1(Provider<MetadataTransformer> transformer) {
+	private LMLResourceV1(Provider<MetadataTransformer> transformer) {
 		this.transformer = transformer;
 	}
 
 	@GET
-	@Path("/lml")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Label getLabelByURL(@QueryParam(Constants.PARAM_METADATA) URL metadataURL,
-			@QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL) throws IOException {
+	@ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as url", response = Label.class)
+	@ApiResponse(code = 400, message = "Error while reading metadata or feedback")
+	public Label getLabelByURL(
+			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
+			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL)
+			throws IOException {
 		if (metadataURL == null && feedbackURL == null) {
 			throw new WebApplicationException(Response.serverError().type(MediaType.TEXT_PLAIN)
 					.entity("No metadata or feedback URL specified").build());
@@ -69,11 +72,14 @@ public class LabelResourceV1 {
 	}
 
 	@POST
-	@Path("/lml")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Label getLabelByFile(@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
-			@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream) throws IOException {
+	@ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream", response = Label.class)
+	@ApiResponse(code = 400, message = "Error while reading metadata or feedback")
+	public Label getLabelByFile(
+			/*@ApiParam("Metadata document")*/ @FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
+			/*@ApiParam("Feedback document")*/ @FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream)
+			throws IOException {
 		MetadataTransformer metadataTransformer = transformer.get();
 
 		Label label = new Label();
@@ -108,50 +114,6 @@ public class LabelResourceV1 {
 		}
 
 		return label;
-	}
-
-	@GET
-	@Path("/svg")
-	@Produces("image/svg+xml")
-	public Response getLabelSVGByURL(@QueryParam(Constants.PARAM_LML) URL lmlURL,
-			@QueryParam(Constants.PARAM_METADATA) URL metadataURL,
-			@QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL, @QueryParam(Constants.PARAM_SIZE) Integer size,
-			@QueryParam(Constants.PARAM_ID) String id) throws IOException {
-
-		Label label = null;
-		if (lmlURL != null) {
-			URLConnection con = lmlURL.openConnection();
-			con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
-			con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
-			label = Label.fromXML(con.getInputStream());
-		} else {
-			label = getLabelByURL(metadataURL, feedbackURL);
-		}
-		return createLabelSVGResponse(size != null ? size : 200, id, label);
-	}
-
-	@POST
-	@Path("/svg")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces("image/svg+xml")
-	public Response getLabelSVGByFile(@FormDataParam(Constants.PARAM_LML) Label label,
-			@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
-			@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream,
-			@FormDataParam(Constants.PARAM_SIZE) Integer size, @FormDataParam(Constants.PARAM_ID) String id)
-			throws IOException {
-		if (label == null) {
-			label = getLabelByFile(metadataInputStream, feedbackInputStream);
-		}
-		return createLabelSVGResponse(size != null ? size : 200, id, label);
-	}
-
-	static Response createLabelSVGResponse(final int size, final String id, final Label label) {
-		return Response.ok().entity(new StreamingOutput() {
-			@Override
-			public void write(OutputStream stream) throws IOException, WebApplicationException {
-				label.toSVG(new OutputStreamWriter(stream), id, size);
-			}
-		}).type("image/svg+xml").build();
 	}
 
 }
