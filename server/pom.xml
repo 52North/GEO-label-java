@@ -171,7 +171,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>14.0</version>
+			<version>15.0</version> 
 		</dependency>
 
 		<dependency>
@@ -239,12 +239,6 @@
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
-			<version>${guice.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-multibindings</artifactId>
 			<version>${guice.version}</version>
 		</dependency>
 
