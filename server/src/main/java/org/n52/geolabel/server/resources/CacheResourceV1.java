@@ -23,6 +23,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -52,6 +53,9 @@ public class CacheResourceV1 {
 
 		@XmlElementRef
 		private Set<LabelUrlKey> cacheMappings;
+
+		@XmlAttribute(name = "keepAtLeastHours")
+		private int maxHours = MetadataTransformer.CACHE_MAX_HOURS;
 	}
 
 	@Inject
