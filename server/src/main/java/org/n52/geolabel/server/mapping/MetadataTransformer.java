@@ -97,7 +97,7 @@ public class MetadataTransformer {
 			return metadataUrl;
 		}
 
-		@XmlAttribute
+		@XmlAttribute(name = "cachedAt")
 		public Date getCacheWriteTime() {
 			return cacheWriteTime;
 		}
