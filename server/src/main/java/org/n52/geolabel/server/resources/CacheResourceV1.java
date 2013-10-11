@@ -54,7 +54,7 @@ public class CacheResourceV1 {
 		@XmlElementRef
 		private Set<LabelUrlKey> cacheMappings;
 
-		@XmlAttribute(name = "keepAtLeastHours")
+		@XmlAttribute(name = "maxCacheHours")
 		private int maxHours = MetadataTransformer.CACHE_MAX_HOURS;
 	}
 
