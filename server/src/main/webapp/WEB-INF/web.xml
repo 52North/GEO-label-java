@@ -24,8 +24,4 @@
 		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>
 
-	<context-param>
-		<param-name>public.url</param-name>
-		<param-value>http://localhost:8080/glbservice</param-value>
-	</context-param>
 </web-app>

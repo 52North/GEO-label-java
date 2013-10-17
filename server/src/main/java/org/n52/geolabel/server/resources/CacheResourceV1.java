@@ -32,7 +32,6 @@ import org.n52.geolabel.server.mapping.MetadataTransformer.LabelUrlKey;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
 
 @Path("/v1/cache")
 @Api(value = "/v1/cache", description = "Operations to explore the service cache")
@@ -65,8 +64,7 @@ public class CacheResourceV1 {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@ApiOperation(value = "Returns a list of currently cached metadata/feedback url mappings", response = CacheMappingsHolder.class)
-	@ApiResponse(code = 400, message = "Error while reading metadata or feedback")
+	@ApiOperation(value = "Returns a list of currently cached metadata/feedback url mappings")
 	public CacheMappingsHolder getCacheInfo() {
 		return new CacheMappingsHolder(transformer.get().getCacheContent());
 	}
