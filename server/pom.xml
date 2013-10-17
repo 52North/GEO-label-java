@@ -98,7 +98,7 @@
 							<basePath>${swagger.basepath}</basePath>
 							<outputTemplate>${project.basedir}/src/main/webapp/api-doc.xhtml</outputTemplate>
 							<outputPath>${webapp.swagger.dir}/api-doc.xhtml</outputPath>
-							<withFormatSuffix>true</withFormatSuffix>
+							<withFormatSuffix>false</withFormatSuffix>
 							<swaggerDirectory>${webapp.swagger.dir}/api-docs</swaggerDirectory>
 							<useOutputFlatStructure>false</useOutputFlatStructure>
 							<!--mustacheFileRoot>${basedir}/src/main/resources/</mustacheFileRoot -->
