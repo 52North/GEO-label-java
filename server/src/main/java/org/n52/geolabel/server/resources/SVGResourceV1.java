@@ -41,6 +41,7 @@ import org.n52.geolabel.server.config.GeoLabelConfig;
 
 import com.sun.jersey.multipart.FormDataParam;
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiError;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
@@ -58,6 +59,7 @@ public class SVGResourceV1 {
 	@GET
 	@Produces("image/svg+xml")
 	@ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as url")
+	@ApiError(code = 400, reason = "Error in feedback/metadata document")
 	public Response getLabelSVGByURL(@ApiParam("Url to LML document") @QueryParam(Constants.PARAM_LML) URL lmlURL,
 			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
 			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL,
@@ -81,7 +83,9 @@ public class SVGResourceV1 {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces("image/svg+xml")
 	@ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
-	public Response getLabelSVGByFile(/*@ApiParam("LML representation")*/ @FormDataParam(Constants.PARAM_LML) Label label,
+	@ApiError(code = 400, reason = "Error in feedback/metadata document")
+	public Response getLabelSVGByFile(
+	/* @ApiParam("LML representation") */@FormDataParam(Constants.PARAM_LML) Label label,
 	/* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
 	/* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream,
 	/* @ApiParam("Desired size of returned SVG") */@FormDataParam(Constants.PARAM_SIZE) Integer size,

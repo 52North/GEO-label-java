@@ -1,9 +1,5 @@
-<ui:composition template="layout.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:glb="http://www.geolabel.net"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:glb="http://www.geolabel.net" xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<!-- Endpoint for form actions -->
 	<ui:param name="apiEndpoint" value="api/v1" />
@@ -60,9 +56,8 @@
 							<label class="col-md-2 control-label">API Description</label>
 							<div class="col-md-10">
 								<p class="form-control-static">
-									See <a href="api/application.wadl" target="_blank">WADL</a><br />
-									See <a href="api-docs/service.json" target="_blank">Swagger
-										Resource Listing</a>
+									See <a href="api/application.wadl" target="_blank">WADL</a><br /> See <a href="api-docs/service.json"
+										target="_blank">Swagger Resource Listing</a>
 								</p>
 							</div>
 						</div>
@@ -71,8 +66,7 @@
 							<label class="col-md-2 control-label">Cache</label>
 							<div class="col-md-10">
 								<p class="form-control-static">
-									Explore <a href="#{apiEndpoint}/cache" target="_blank">Currently
-										cached url/label mappings</a>
+									Explore <a href="#{apiEndpoint}/cache" target="_blank">Currently cached url/label mappings</a>
 								</p>
 							</div>
 						</div>
@@ -95,21 +89,17 @@
 						</div>
 
 						<div class="panel-body">
-							<p>Send XML metadata records to see the GEO label SVG
-								representation.</p>
-							<form action="#{apiEndpoint}/svg" method="post"
-								enctype="multipart/form-data" class="form-horizontal"
+							<p>Send XML metadata records to see the GEO label SVG representation.</p>
+							<form action="#{apiEndpoint}/svg" method="post" enctype="multipart/form-data" class="form-horizontal"
 								target="_blank">
 								<div class="form-group">
-									<label for="metadata" class="col-md-2 control-label">Metadata
-										Document</label>
+									<label for="metadata" class="col-md-2 control-label">Metadata Document</label>
 									<div class="col-md-10">
 										<input type="file" name="metadata" id="metadata" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="feedback" class="col-md-2 control-label">Feedback
-										Document</label>
+									<label for="feedback" class="col-md-2 control-label">Feedback Document</label>
 									<div class="col-md-10">
 										<input type="file" name="feedback" id="feedback" />
 									</div>
@@ -117,8 +107,7 @@
 
 								<div class="form-group">
 									<div class="col-md-offset-2 col-md-10">
-										<input type="submit" name="submit" value="Submit"
-											class="btn btn-primary" /> <input class="btn" type="reset"
+										<input type="submit" name="submit" value="Submit" class="btn btn-primary" /> <input class="btn" type="reset"
 											value="Reset" />
 									</div>
 								</div>
@@ -133,29 +122,24 @@
 						</div>
 
 						<div class="panel-body">
-							<p>Send XML metadata records to see the GEO label LML
-								representation.</p>
-							<form action="#{apiEndpoint}/lml" method="post"
-								enctype="multipart/form-data" class="form-horizontal"
+							<p>Send XML metadata records to see the GEO label LML representation.</p>
+							<form action="#{apiEndpoint}/lml" method="post" enctype="multipart/form-data" class="form-horizontal"
 								target="_blank">
 								<div class="form-group">
-									<label for="metadata2" class="col-md-2 control-label">Metadata
-										Document</label>
+									<label for="metadata2" class="col-md-2 control-label">Metadata Document</label>
 									<div class="col-md-10">
 										<input type="file" name="metadata" id="metadata2" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="feedback2" class="col-md-2 control-label">Feedback
-										Document</label>
+									<label for="feedback2" class="col-md-2 control-label">Feedback Document</label>
 									<div class="col-md-10">
 										<input type="file" name="feedback" id="feedback2" />
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-2 col-md-10">
-										<input type="submit" name="submit" value="Submit"
-											class="btn btn-primary" /> <input class="btn" type="reset"
+										<input type="submit" name="submit" value="Submit" class="btn btn-primary" /> <input class="btn" type="reset"
 											value="Reset" />
 									</div>
 								</div>
@@ -171,20 +155,17 @@
 
 						<div class="panel-body">
 							<p>Send LML records to see the GEO label SVG representation.</p>
-							<form action="#{apiEndpoint}/svg" method="post"
-								enctype="multipart/form-data" class="form-horizontal"
+							<form action="#{apiEndpoint}/svg" method="post" enctype="multipart/form-data" class="form-horizontal"
 								target="_blank">
 								<div class="form-group">
-									<label for="lml" class="col-md-2 control-label">LML
-										Document</label>
+									<label for="lml" class="col-md-2 control-label">LML Document</label>
 									<div class="col-md-10">
 										<input type="file" name="lml" id="lml" />
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-2 col-md-10">
-										<input type="submit" name="submit" value="Submit"
-											class="btn btn-primary" /> <input class="btn" type="reset"
+										<input type="submit" name="submit" value="Submit" class="btn btn-primary" /> <input class="btn" type="reset"
 											value="Reset" />
 									</div>
 								</div>
@@ -255,18 +236,15 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse"
-										data-parent="#accordion"
-										href="#collapse{{index}}_{{apiIndex}}_{{opIndex}}"> <span
-										style="font-weight: bold;">{{httpMethod}} </span><span>{{{path}}}</span>
-										<span class="pull-right"><small>{{summary}}</small></span>
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+										href="#collapse{{index}}_{{apiIndex}}_{{opIndex}}"> <span style="font-weight: bold;">{{httpMethod}}
+									</span><span>{{{path}}}</span> <span class="pull-right"><small>{{summary}}</small></span>
 									</a>
 								</h4>
 							</div>
 
 
-							<div id="collapse{{index}}_{{apiIndex}}_{{opIndex}}"
-								class="panel-collapse collapse">
+							<div id="collapse{{index}}_{{apiIndex}}_{{opIndex}}" class="panel-collapse collapse">
 								<div class="panel-body">
 
 									<dl>
@@ -280,21 +258,17 @@
 									</dl>
 
 									<ul class="nav nav-tabs">
-										<li class="active"><a
-											href="#tabs{{index}}{{apiIndex}}{{opIndex}}-1"
-											data-toggle="tab">Request Parameters</a></li>
-										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-2"
-											data-toggle="tab">Response Body</a></li>
-										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-3"
-											data-toggle="tab">Response Status Codes</a></li>
+										<li class="active"><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-1" data-toggle="tab">Request
+												Parameters</a></li>
+										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-2" data-toggle="tab">Response Body</a></li>
+										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-3" data-toggle="tab">Response Status Codes</a></li>
 									</ul>
 
 
 									<div class="tab-content tab-content-border">
 
 										<!-- Request parameters -->
-										<div class="tab-pane active"
-											id="tabs{{index}}{{apiIndex}}{{opIndex}}-1">
+										<div class="tab-pane active" id="tabs{{index}}{{apiIndex}}{{opIndex}}-1">
 
 											{{#parameters}}
 											<div class="panel panel-default">
@@ -311,8 +285,7 @@
 													{{#paras}}
 													<tr>
 														<th>{{name}}</th>
-														<td>{{#required}}required{{/required}}
-															{{^required}}optional{{/required}}</td>
+														<td>{{#required}}required{{/required}} {{^required}}optional{{/required}}</td>
 														<td>{{type}}</td>
 														<td>{{description}}</td>
 													</tr>
@@ -324,17 +297,15 @@
 										</div>
 
 										<!-- Response body -->
-										<div class="tab-pane"
-											id="tabs{{index}}{{apiIndex}}{{opIndex}}-2">
+										<div class="tab-pane" id="tabs{{index}}{{apiIndex}}{{opIndex}}-2">
 											<p>
-												{{#responseClass}}<a href="#{{{classLinkName}}}">{{className}}</a>{{/responseClass}}
-												{{^responseClass}}No Content{{/responseClass}}
+												{{#responseClass}}<a href="#{{classLinkName}}">{{className}}</a>{{/responseClass}} {{^responseClass}}No
+												Content{{/responseClass}}
 											</p>
 										</div>
 
 										<!--  Response status code -->
-										<div class="tab-pane"
-											id="tabs{{index}}{{apiIndex}}{{opIndex}}-3">
+										<div class="tab-pane" id="tabs{{index}}{{apiIndex}}{{opIndex}}-3">
 											<table class="table">
 												<tr>
 													<th>Status Code</th>
@@ -373,15 +344,18 @@
 
 					<div>
 						<table class="table">
-							<th>Name</th>
-							<th>Type</th>
-							<th>Required</th>
-							<th>Access</th>
-							<th>Schema</th>
-							<th>Notes</th> {{#items}}
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Required</th>
+								<th>Access</th>
+								<th>Schema</th>
+								<th>Notes</th>
+							</tr>
+							{{#items}}
 							<tr>
 								<th>{{name}}</th>
-								<td>{{#linkType}}<a href="#{{{linkType}}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}}
+								<td>{{#linkType}}<a href="#{{linkType}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}}
 								</td>
 								<td>{{required}}</td>
 								<td>{{access}}</td>
@@ -392,7 +366,7 @@
 						</table>
 					</div>
 					{{/dataTypes}}
-				
+
 				</div>
 
 			</div>
