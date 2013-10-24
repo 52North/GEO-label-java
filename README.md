@@ -43,6 +43,8 @@ For more details see `jsf/Readme.md`
 
 ###Server
 
+An instance is currently deployed at http://geoviqua.dev.52north.org/glbservice
+
 For more details see `server/Readme.md`
 
 ###Commons
