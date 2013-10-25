@@ -38,9 +38,10 @@ import org.n52.geolabel.server.mapping.MetadataTransformer;
 
 import com.sun.jersey.multipart.FormDataParam;
 import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiError;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/v1/lml")
 @Api(value = "/v1/lml", description = "Operations to retrieve GEO label LML representations")
@@ -56,7 +57,7 @@ public class LMLResourceV1 {
 	@GET
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as url")
-	@ApiError(code = 400, reason = "Error in feedback/metadata document")
+	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
 	public Label getLabelByURL(
 			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
 			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL)
@@ -75,13 +76,15 @@ public class LMLResourceV1 {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream")
-	@ApiError(code = 400, reason = "Error in feedback/metadata document")
+	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
+	// TODO Find a way to use Document as Type for FormDataParams, seems to be
+	// unsupported
 	public Label getLabelByFile(
 	/* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
 	/* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream)
 			throws IOException {
 		MetadataTransformer metadataTransformer = transformer.get();
-
+ 
 		Label label = new Label();
 		PushbackInputStream tempStream;
 		boolean hasData = false;

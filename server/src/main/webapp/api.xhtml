@@ -260,7 +260,7 @@
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-1" data-toggle="tab">Request
 												Parameters</a></li>
-										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-2" data-toggle="tab">Response Body</a></li>
+										<!-- <li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-2" data-toggle="tab">Response Body</a></li> -->
 										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-3" data-toggle="tab">Response Status Codes</a></li>
 									</ul>
 
@@ -296,13 +296,13 @@
 
 										</div>
 
-										<!-- Response body -->
+										<!-- Response body 
 										<div class="tab-pane" id="tabs{{index}}{{apiIndex}}{{opIndex}}-2">
 											<p>
 												{{#responseClass}}<a href="#{{classLinkName}}">{{className}}</a>{{/responseClass}} {{^responseClass}}No
 												Content{{/responseClass}}
 											</p>
-										</div>
+										</div>-->
 
 										<!--  Response status code -->
 										<div class="tab-pane" id="tabs{{index}}{{apiIndex}}{{opIndex}}-3">
@@ -332,40 +332,43 @@
 
 					{{/apiDocuments}}
 
-
+					<!-- 
 					<div class="page-header">
 						<h3>Data Types</h3>
 					</div>
+
+
 
 					{{#dataTypes}}
 					<h4>
 						<a name="{{name}}">{{name}}</a>
 					</h4>
 
-					<div>
-						<table class="table">
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Required</th>
-								<th>Access</th>
-								<th>Schema</th>
-								<th>Notes</th>
-							</tr>
-							{{#items}}
-							<tr>
-								<th>{{name}}</th>
-								<td>{{#linkType}}<a href="#{{linkType}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}}
-								</td>
-								<td>{{required}}</td>
-								<td>{{access}}</td>
-								<td>{{{description}}}</td>
-								<td>{{{notes}}}</td>
-							</tr>
-							{{/items}}
-						</table>
-					</div>
+
+					<table class="table">
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Access</th>
+							<th>Schema</th>
+							<th>Notes</th>
+						</tr>
+						{{#items}}
+						<tr>
+							<th>{{name}}</th>
+							<td>{{#linkType}}<a href="#{{linkType}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}}
+							</td>
+							<td>{{required}}</td>
+							<td>{{access}}</td>
+							<td>{{{description}}}</td>
+							<td>{{{notes}}}</td>
+						</tr>
+						{{/items}}
+					</table>
+
 					{{/dataTypes}}
+ -->
 
 				</div>
 
