@@ -157,4 +157,19 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		return serviceUrl;
 	}
 
+	@Override
+	public void release() {
+		this.async = null;
+		this.feedbackContent = null;
+		this.feedbackUrl = null;
+		this.forceDownload = null;
+		this.metadataContent = null;
+		this.metadataUrl = null;
+		this.serviceUrl = null;
+		this.size = null;
+		this.useCache = null;
+
+		super.release();
+	}
+
 }
