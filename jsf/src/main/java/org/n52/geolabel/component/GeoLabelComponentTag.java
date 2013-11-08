@@ -109,10 +109,6 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		this.async = async;
 	}
 
-	public ValueExpression getAsync() {
-		return async;
-	}
-
 	public void setForceDownload(ValueExpression forceDownload) {
 		this.forceDownload = forceDownload;
 	}
@@ -125,37 +121,7 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		this.serviceUrl = serviceUrl;
 	}
 
-	public ValueExpression getMetadataUrl() {
-		return metadataUrl;
-	}
 
-	public ValueExpression getFeedbackUrl() {
-		return feedbackUrl;
-	}
-
-	public ValueExpression getSize() {
-		return size;
-	}
-
-	public ValueExpression getMetadataContent() {
-		return metadataContent;
-	}
-
-	public ValueExpression getFeedbackContent() {
-		return feedbackContent;
-	}
-
-	public ValueExpression getForceDownload() {
-		return forceDownload;
-	}
-
-	public ValueExpression getUseCache() {
-		return useCache;
-	}
-
-	public ValueExpression getServiceUrl() {
-		return serviceUrl;
-	}
 
 	@Override
 	public void release() {
