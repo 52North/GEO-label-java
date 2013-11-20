@@ -44,6 +44,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/v1/svg")
 @Api(value = "/v1/svg", description = "Operations to retrieve GEO label SVG representations")
@@ -59,7 +60,7 @@ public class SVGResourceV1 {
 	@GET
 	@Produces("image/svg+xml")
 	@ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as url")
-	@ApiResponse(code = 400, message = "Error while reading metadata or feedback")
+	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
 	public Response getLabelSVGByURL(@ApiParam("Url to LML document") @QueryParam(Constants.PARAM_LML) URL lmlURL,
 			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
 			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL,
@@ -83,8 +84,11 @@ public class SVGResourceV1 {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces("image/svg+xml")
 	@ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
-	@ApiResponse(code = 400, message = "Error while reading metadata or feedback")
-	public Response getLabelSVGByFile(/*@ApiParam("LML representation")*/ @FormDataParam(Constants.PARAM_LML) Label label,
+	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
+	// TODO Find a way to use Document as Type for FormDataParams, instead of
+	// Streams, seems to be unsupported
+	public Response getLabelSVGByFile(
+	/* @ApiParam("LML representation") */@FormDataParam(Constants.PARAM_LML) Label label,
 	/* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
 	/* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream,
 	/* @ApiParam("Desired size of returned SVG") */@FormDataParam(Constants.PARAM_SIZE) Integer size,

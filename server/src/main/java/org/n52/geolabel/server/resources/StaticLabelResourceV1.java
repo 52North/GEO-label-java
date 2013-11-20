@@ -29,6 +29,7 @@ import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
 @Path("/v1/static")
@@ -36,11 +37,12 @@ import com.wordnik.swagger.annotations.ApiParam;
 public class StaticLabelResourceV1 {
 
 	@Inject
-	StaticLabelResourceV1(Provider<MetadataTransformer> transformer) {
+	private StaticLabelResourceV1(Provider<MetadataTransformer> transformer) {
 	}
 
 	@GET
 	@Path("/{pp:[0-2]}{pc:[0-2]}{li:[0-2]}{sc:[0-2]}{qi:[0-2]}{uf:[0-2]}{ef:[0-2]}{ci:[0-2]}.svg")
+	@ApiOperation(value = "Returns a GEO label based on facet availability")
 	public Response getStaticLabelSVG(
 			//
 			@ApiParam("Producer Profile availability") @PathParam("pp") Availability producerProfileAvailability,
