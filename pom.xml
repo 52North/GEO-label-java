@@ -12,6 +12,7 @@
 		<module>client</module>
 		<module>commons</module>
 		<module>jsf</module>
+		<module>integration-test</module>
 	</modules>
 
 	<organization>
@@ -22,6 +23,13 @@
 		<developer>
 			<name>Holger Hopmann</name>
 			<email>h.hopmann@52north.org</email>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<timezone>GMT+1</timezone>
+		</developer>
+		<developer>
+			<name>Daniel Nüst</name>
+			<email>d.nuest@52north.org</email>
 			<organization>${project.organization.name}</organization>
 			<organizationUrl>${project.organization.url}</organizationUrl>
 			<timezone>GMT+1</timezone>
@@ -57,6 +65,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>

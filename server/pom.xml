@@ -248,15 +248,15 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>jsf</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>commons</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>
@@ -361,9 +361,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>client</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>
