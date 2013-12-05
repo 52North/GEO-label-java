@@ -35,6 +35,8 @@
 		<!-- Directory where swagger-maven-plugin generates its output, relative to pom location -->
 		<webapp.swagger.dir>swagger-generated</webapp.swagger.dir>
 		<swagger.basepath>http://geoviqua.dev.52north.org/glbservice/api</swagger.basepath>
+		
+		<geolabel.logger.filepath>${catalina.base:-.}/logs/geolabel</geolabel.logger.filepath>
 	</properties>
 
 	<build>
