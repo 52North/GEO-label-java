@@ -40,7 +40,8 @@
 
 			<!-- Producer Profile -->
 			<g class="producer_profile" id="producer_profile">
-				<title>${label.producerProfileFacet.organizationNames?join(", ")}</title>
+				<title>Producer Profile.
+				${label.producerProfileFacet.organizationNames?join(", ")}</title><#lt>
 				<a xlink:href="${label.producerProfileFacet.drilldownURL!""}" target="_blank">
 
 					<#assign higherFragment>
