@@ -8,7 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>server</artifactId>
 	<packaging>war</packaging>
-	
+
 	<name>GEO label Java Server</name>
 
 	<parent>
@@ -35,11 +35,13 @@
 		<!-- Directory where swagger-maven-plugin generates its output, relative to pom location -->
 		<webapp.swagger.dir>swagger-generated</webapp.swagger.dir>
 		<swagger.basepath>http://geoviqua.dev.52north.org/glbservice/api</swagger.basepath>
-		
+
 		<geolabel.logger.filepath>${catalina.base:-.}/logs/geolabel</geolabel.logger.filepath>
 	</properties>
 
 	<build>
+		<finalName>glbservice</finalName>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -72,16 +74,13 @@
 		</pluginManagement>
 
 		<plugins>
-
-			<!-- License headers -->
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
-						<exclude>
-							src/test/resources/testfiles/**
-						</exclude>
+						<exclude>**/logback.xml</exclude>
+						<exclude>src/test/resources/testfiles/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -90,7 +89,7 @@
 			<plugin>
 				<groupId>com.github.kongchen</groupId>
 				<artifactId>swagger-maven-plugin</artifactId>
-				<version>1.1.2-SNAPSHOT</version>
+				<version>1.1.2-20130731.134723-5</version>
 				<configuration>
 					<apiSources>
 						<apiSource>
@@ -141,6 +140,11 @@
 					<webResources>
 						<resource>
 							<directory>${webapp.swagger.dir}</directory>
+						</resource>
+						<resource>
+							<directory>src/main/webapp</directory>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
 						</resource>
 					</webResources>
 				</configuration>
@@ -206,7 +210,6 @@
 						<port>${jetty.port}</port>
 					</httpConnector>
 				</configuration>
-
 				<executions>
 					<execution>
 						<id>start-jetty</id>
@@ -226,14 +229,9 @@
 							<goal>stop</goal>
 						</goals>
 					</execution>
-
 				</executions>
 			</plugin>
-
-
 		</plugins>
-
-		<finalName>glbservice</finalName>
 	</build>
 
 	<pluginRepositories>
