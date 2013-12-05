@@ -32,6 +32,8 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 	private ValueExpression forceDownload;
 	private ValueExpression useCache;
 
+	private ValueExpression serviceUrl;
+
 	@Override
 	public String getComponentType() {
 		return "geolabelcomponent";
@@ -77,6 +79,10 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 			component.setValueExpression(GeoLabelComponent.PropertyKeys.useCache.name(), useCache);
 		}
 
+		if (serviceUrl != null) {
+			component.setValueExpression(GeoLabelComponent.PropertyKeys.serviceUrl.name(), serviceUrl);
+		}
+
 	}
 
 	public void setMetadataUrl(ValueExpression metadataUrl) {
@@ -103,10 +109,6 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		this.async = async;
 	}
 
-	public ValueExpression getAsync() {
-		return async;
-	}
-
 	public void setForceDownload(ValueExpression forceDownload) {
 		this.forceDownload = forceDownload;
 	}
@@ -115,32 +117,25 @@ public class GeoLabelComponentTag extends UIComponentELTag {
 		this.useCache = useCache;
 	}
 
-	public ValueExpression getMetadataUrl() {
-		return metadataUrl;
+	public void setServiceUrl(ValueExpression serviceUrl) {
+		this.serviceUrl = serviceUrl;
 	}
 
-	public ValueExpression getFeedbackUrl() {
-		return feedbackUrl;
-	}
 
-	public ValueExpression getSize() {
-		return size;
-	}
 
-	public ValueExpression getMetadataContent() {
-		return metadataContent;
-	}
+	@Override
+	public void release() {
+		this.async = null;
+		this.feedbackContent = null;
+		this.feedbackUrl = null;
+		this.forceDownload = null;
+		this.metadataContent = null;
+		this.metadataUrl = null;
+		this.serviceUrl = null;
+		this.size = null;
+		this.useCache = null;
 
-	public ValueExpression getFeedbackContent() {
-		return feedbackContent;
-	}
-
-	public ValueExpression getForceDownload() {
-		return forceDownload;
-	}
-
-	public ValueExpression getUseCache() {
-		return useCache;
+		super.release();
 	}
 
 }

@@ -94,7 +94,7 @@ public class GeoLabelClientV1Test {
 	}
 
 	@Test
-	public void testCreateGeoLabelNoContent() throws IOException {
+	public void testCreateGeoLabelNoContent() {
 		try {
 			GeoLabelClientV1.createGeoLabelRequest().getSVG();
 			fail("Server should send error code");

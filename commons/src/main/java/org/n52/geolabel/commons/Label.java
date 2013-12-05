@@ -36,6 +36,7 @@ import freemarker.template.SimpleHash;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+
 @XmlRootElement(name = "geoLabel")
 public class Label {
 
@@ -123,7 +124,8 @@ public class Label {
 	}
 
 	/**
-	 * Obtains freemarker template for geolabel from classpath and caches result.
+	 * Obtains freemarker template for geolabel from classpath and caches
+	 * result.
 	 * 
 	 * @return
 	 * @throws IOException

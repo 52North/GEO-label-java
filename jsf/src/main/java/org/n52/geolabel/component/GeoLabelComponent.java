@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import javax.el.ValueExpression;
+import javax.faces.application.FacesMessage;
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
@@ -123,9 +124,13 @@ public class GeoLabelComponent extends UIComponentBase {
 	public void encodeBegin(FacesContext context) throws IOException {
 		if (Boolean.TRUE.equals(isAsync())) {
 			if (context.getPartialViewContext().isPartialRequest()) {
-				if (!isServiceFailed(context)) {
+				String endpoint = getServiceUrl() != null && !getServiceUrl().isEmpty() ? getServiceUrl() : "default";
+				if (!isServiceFailed(endpoint, context)) {
 					writeLocalLabel(context);
-
+				} else {
+					FacesMessage message = new FacesMessage("Previous request failed");
+					message.setSeverity(FacesMessage.SEVERITY_WARN);
+					context.addMessage(getClientId(), message);
 				}
 			} else {
 				writeClientLabel(context);
@@ -145,7 +150,8 @@ public class GeoLabelComponent extends UIComponentBase {
 	 */
 	private void writeLocalLabel(FacesContext context) throws IOException {
 		ResponseWriter writer = context.getResponseWriter();
-
+		writer.startElement("div", this);
+		writer.writeAttribute("id", getClientId(context), null);
 		try {
 			GeoLabelRequestBuilder requestBuilder;
 
@@ -173,6 +179,7 @@ public class GeoLabelComponent extends UIComponentBase {
 				requestBuilder
 						.setFeedbackDocument(IOUtils.toInputStream(getFeedbackContent(), Charset.forName("utf-8"))); // TODO
 																														// charset
+
 			}
 
 			// Further params
@@ -192,26 +199,30 @@ public class GeoLabelComponent extends UIComponentBase {
 				throw new IOException("No valid SVG");
 			}
 
-			writer.startElement("div", this);
-			writer.writeAttribute("id", getClientId(context), null);
 			if (context.getPartialViewContext().isPartialRequest()) {
 				// Mask nested CDATA ends in partial response as geolabel svg
 				// may contain CDATA blocks
 				svgString = svgString.replace("]]>", "<![CDATA[]]]]><![CDATA[>");
 			}
 			writer.append(svgString.substring(svgStartIndex));
-			writer.endElement("div");
+
 		} catch (IOException e) {
-			setServiceFailed(context);
+			if (getServiceUrl() != null && !getServiceUrl().isEmpty()) {
+				setServiceFailed(getServiceUrl(), context);
+			} else {
+				setServiceFailed("default", context);
+			}
 
-			writer.startElement("div", this);
-			writer.writeAttribute("id", getClientId(context), null);
-
-			writer.append("Service failed: " + e.getMessage());
-			writer.endElement("div");
-
-			throw e;
+			FacesMessage message = new FacesMessage("Service Failed: " + e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(getClientId(), message);
+		} catch (Exception e) {
+			FacesMessage message = new FacesMessage("Unknown Error: " + e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_FATAL);
+			context.addMessage(getClientId(), message);
 		}
+
+		writer.endElement("div");
 	}
 
 	/**
@@ -246,34 +257,33 @@ public class GeoLabelComponent extends UIComponentBase {
 		writer.append("jsf.ajax.request('" + getClientId(context) + "', null, {'render': '@this'});");
 
 		writer.endElement("script");
-
 	}
 
 	/**
-	 * Marks the GeoLabel service for the current request as broken. Important
-	 * to not send any further GeoLabel requests in case of an error.
+	 * Marks a specific GEO label service for the current request as broken.
+	 * Important to not send any further GeoLabel requests in case of an error.
 	 * 
 	 * @param context
 	 */
-	private static void setServiceFailed(FacesContext context) {
+	private static void setServiceFailed(String endpoint, FacesContext context) {
 		ValueExpression expression = context.getApplication().getExpressionFactory()
 				.createValueExpression(context.getELContext(), "#{geoLabelResourcesBean}", GeoLabelResourcesBean.class);
 		GeoLabelResourcesBean resourcesBean = (GeoLabelResourcesBean) expression.getValue(context.getELContext());
-		resourcesBean.setGeoLabelServiceFailed(true);
+		resourcesBean.setGeoLabelServiceFailed(endpoint);
 	}
 
 	/**
-	 * Check whether the GeoLabel service is known to be broken for the current
-	 * request
+	 * Check whether a specific GEO label service is known to be broken for the
+	 * current request
 	 * 
 	 * @param context
 	 * @return
 	 */
-	private static boolean isServiceFailed(FacesContext context) {
+	private static boolean isServiceFailed(String endpoint, FacesContext context) {
 		ValueExpression expression = context.getApplication().getExpressionFactory()
 				.createValueExpression(context.getELContext(), "#{geoLabelResourcesBean}", GeoLabelResourcesBean.class);
 		GeoLabelResourcesBean resourcesBean = (GeoLabelResourcesBean) expression.getValue(context.getELContext());
-		return resourcesBean.isGeoLabelServiceFailed();
+		return resourcesBean.isGeoLabelServiceFailed(endpoint);
 	}
 
 }

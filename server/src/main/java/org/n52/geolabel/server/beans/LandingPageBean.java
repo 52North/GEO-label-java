@@ -59,7 +59,9 @@ public class LandingPageBean {
 		}
 	}
 
+	@org.hibernate.validator.constraints.URL
 	private String metadataUrl = "http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml";
+	@org.hibernate.validator.constraints.URL
 	private String feedbackUrl = "";
 
 	private List<Example> examplesList = new ArrayList<LandingPageBean.Example>();

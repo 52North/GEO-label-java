@@ -15,15 +15,75 @@
  */
 package org.n52.geolabel.server.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EditorBean {
+
+	public static class Endpoint {
+		@NotNull
+		@NotEmpty
+		@URL
+		String url;
+
+		String name;
+
+		public Endpoint() {
+		};
+
+		public Endpoint(String url, String name) {
+			this.url = url;
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (url != null && obj instanceof Endpoint) {
+				return url.equals(((Endpoint) obj).url);
+			}
+
+			return super.equals(obj);
+		}
+
+		@Override
+		public int hashCode() {
+			if (url == null) {
+				return super.hashCode();
+			}
+			return url.hashCode();
+		}
+	}
 
 	private String metadataContent = "";
 	private String feedbackContent = "";
+
+	private List<Endpoint> comparisonServices = new ArrayList<Endpoint>();
+	private Endpoint newCustomService = new Endpoint();
 
 	public String getFeedbackContent() {
 		return feedbackContent;
@@ -39,5 +99,52 @@ public class EditorBean {
 
 	public void setMetadataContent(String metadataContent) {
 		this.metadataContent = metadataContent;
+	}
+
+	public List<Endpoint> getComparisonServices() {
+		return comparisonServices;
+	}
+
+	public void setComparisonServices(List<Endpoint> comparisonServices) {
+		this.comparisonServices = comparisonServices;
+	}
+
+	public Endpoint getNewCustomService() {
+		return newCustomService;
+	}
+
+	public void setNewCustomService(Endpoint newCustomService) {
+		this.newCustomService = newCustomService;
+	}
+
+	public void addCustomServiceEndpoint() {
+		if (newCustomService != null && newCustomService.url != null && !comparisonServices.contains(newCustomService)) {
+			comparisonServices.add(newCustomService);
+			newCustomService = new Endpoint();
+		}
+	}
+
+	/**
+	 * Allows to add a specific service endpoint to the list of custom geo label
+	 * apis to use
+	 * 
+	 * @param endpointUrl
+	 * @param endpointName
+	 */
+	public void addCustomServiceEndpoint(String endpointUrl, String endpointName) {
+		if (endpointUrl != null) {
+			Endpoint newEndpoint = new Endpoint(endpointUrl, endpointName);
+			if (!comparisonServices.contains(newEndpoint)) {
+				comparisonServices.add(new Endpoint(endpointUrl, endpointName));
+			}
+		}
+	}
+
+	public void removeCustomServiceEndpoint(Endpoint endpoint) {
+		comparisonServices.remove(endpoint);
+	}
+
+	public void clearServiceEndpoints() {
+		comparisonServices.clear();
 	}
 }

@@ -104,16 +104,16 @@ public class GeoLabelRequestBuilder {
 	 * @return
 	 */
 	public GeoLabelRequestBuilder setDesiredSize(int desiredSize) {
-		this.desiredSize = desiredSize;
+		this.desiredSize = Integer.valueOf(desiredSize);
 		return this;
 	}
 
 	public Integer getDesiredSize() {
-		return desiredSize;
+		return this.desiredSize;
 	}
 
 	public InputStream getSVG() throws IOException {
-		return requestHandler.getLabel(this);
+		return this.requestHandler.getLabel(this);
 	}
 
 	public GeoLabelRequestBuilder setForceDownload(boolean enabled) {

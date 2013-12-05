@@ -25,7 +25,8 @@ import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 import org.n52.geolabel.server.resources.CacheResourceV1;
-import org.n52.geolabel.server.resources.LabelResourceV1;
+import org.n52.geolabel.server.resources.LMLResourceV1;
+import org.n52.geolabel.server.resources.SVGResourceV1;
 import org.n52.geolabel.server.resources.StaticLabelResourceV1;
 
 import com.google.inject.Guice;
@@ -46,7 +47,8 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 		return Guice.createInjector(new ServletModule() {
 			@Override
 			protected void configureServlets() {
-				bind(LabelResourceV1.class);
+				bind(LMLResourceV1.class);
+				bind(SVGResourceV1.class);
 				bind(StaticLabelResourceV1.class);
 				bind(CacheResourceV1.class);
 
@@ -57,11 +59,13 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				bind(MetadataTransformer.class);
 
 				Map<String, String> jerseyInitPrams = new HashMap<String, String>();
-				jerseyInitPrams.put(ServletContainer.JSP_TEMPLATES_BASE_PATH, "/WEB-INF/templates");
 				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
 
-				filter("/api/*").through(GuiceContainer.class, jerseyInitPrams);
-				filter("/application.wadl").through(GuiceContainer.class, jerseyInitPrams);
+				// Simple CORS filter
+				filter("/api/*").through(CORSFilter.class);
+
+				// api endpoint served by jersey
+				serve("/api/*", "/api-docs/*").with(GuiceContainer.class, jerseyInitPrams);
 			}
 		});
 	}

@@ -28,7 +28,12 @@ import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 
-@Path("/api/v1/static")
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+
+@Path("/v1/static")
+@Api(value = "/v1/static", description = "Operations to retrieve GEO labels based on facet availability")
 public class StaticLabelResourceV1 {
 
 	@Inject
@@ -37,18 +42,20 @@ public class StaticLabelResourceV1 {
 
 	@GET
 	@Path("/{pp:[0-2]}{pc:[0-2]}{li:[0-2]}{sc:[0-2]}{qi:[0-2]}{uf:[0-2]}{ef:[0-2]}{ci:[0-2]}.svg")
+	@ApiOperation(value = "Returns a GEO label based on facet availability")
 	public Response getStaticLabelSVG(
 			//
-			@PathParam("pp") Availability producerProfileAvailability,
-			@PathParam("pc") Availability producerCommentsAvailability,
-			@PathParam("li") Availability lineageAvailability,
-			@PathParam("sc") Availability standardsComplianceAvailability,
-			@PathParam("qi") Availability qualityInformationAvailability,
-			@PathParam("uf") Availability userFeedbackAvailability,
-			@PathParam("ef") Availability expertFeedbackAvailability,
-			@PathParam("ci") Availability citationsAvailability,
+			@ApiParam("Producer Profile availability") @PathParam("pp") Availability producerProfileAvailability,
+			@ApiParam("Producer Comments availability") @PathParam("pc") Availability producerCommentsAvailability,
+			@ApiParam("Lineage availability") @PathParam("li") Availability lineageAvailability,
+			@ApiParam("Standards Compliance availability") @PathParam("sc") Availability standardsComplianceAvailability,
+			@ApiParam("Quality Information availability") @PathParam("qi") Availability qualityInformationAvailability,
+			@ApiParam("User Feedback availability") @PathParam("uf") Availability userFeedbackAvailability,
+			@ApiParam("Expert Feedback availability") @PathParam("ef") Availability expertFeedbackAvailability,
+			@ApiParam("Citations availability") @PathParam("ci") Availability citationsAvailability,
 			//
-			@QueryParam(Constants.PARAM_SIZE) Integer size, @QueryParam(Constants.PARAM_ID) String id) {
+			@ApiParam("Desired size of returned SVG") @QueryParam(Constants.PARAM_SIZE) Integer size,
+			@ApiParam("Desired id of returned SVG root element") @QueryParam(Constants.PARAM_ID) String id) {
 
 		Label label = new Label();
 
@@ -61,7 +68,7 @@ public class StaticLabelResourceV1 {
 		label.getExpertFeedbackFacet().updateAvailability(expertFeedbackAvailability);
 		label.getCitationsFacet().updateAvailability(citationsAvailability);
 
-		return LabelResourceV1.createLabelSVGResponse(size != null ? size : 200, id, label);
+		return SVGResourceV1.createLabelSVGResponse(size != null ? size : 200, id, label);
 	}
 
 }

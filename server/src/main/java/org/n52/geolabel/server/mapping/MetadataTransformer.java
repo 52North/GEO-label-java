@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
@@ -63,8 +64,8 @@ public class MetadataTransformer {
 	private static final String TRANSFORMATIONS_RESOURCE = "transformations";
 	final static Logger log = LoggerFactory.getLogger(MetadataTransformer.class);
 
-	private static int CACHE_MAX_LABELS = 100;
-	private static int CACHE_MAX_HOURS = 48;
+	public static int CACHE_MAX_LABELS = 100; // TODO make available as property
+	public static int CACHE_MAX_HOURS = 48;// TODO make available as property
 
 	/**
 	 * Acts as key for caching {@link Label}s based on its metadata and/or
@@ -76,6 +77,7 @@ public class MetadataTransformer {
 	public static class LabelUrlKey {
 		protected URL metadataUrl;
 		protected URL feedbackUrl;
+		private Date cacheWriteTime;
 
 		LabelUrlKey() {
 		}
@@ -93,6 +95,11 @@ public class MetadataTransformer {
 		@XmlAttribute
 		public URL getMetadataUrl() {
 			return metadataUrl;
+		}
+
+		@XmlAttribute(name = "cachedAt")
+		public Date getCacheWriteTime() {
+			return cacheWriteTime;
 		}
 
 		@Override
@@ -139,7 +146,9 @@ public class MetadataTransformer {
 			.expireAfterWrite(CACHE_MAX_HOURS, TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
 				@Override
 				public Label load(LabelUrlKey key) throws Exception {
+					key.cacheWriteTime = new Date();
 					log.info("Generating new GEO label for cache from urls {}", key);
+
 					Label label = new Label();
 
 					if (key.feedbackUrl != null) {
