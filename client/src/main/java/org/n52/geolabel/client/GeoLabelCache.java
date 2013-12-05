@@ -26,9 +26,10 @@ public class GeoLabelCache {
 
 		private static final long serialVersionUID = 1L;
 
-		protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+		@Override
+        protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
 			return size() > 50;
-		};
+		}
 	};
 
 	public static boolean hasSVG(String identifier) {

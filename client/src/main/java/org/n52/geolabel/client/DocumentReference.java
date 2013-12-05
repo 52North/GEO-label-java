@@ -45,7 +45,8 @@ public interface DocumentReference {
 	 */
 	public abstract class Base {
 
-		public InputStream getContent() throws IOException {
+		@SuppressWarnings("unused")
+        public InputStream getContent() throws IOException {
 			return null;
 		}
 
@@ -102,7 +103,7 @@ public interface DocumentReference {
 		}
 
 		@Override
-		public InputStream getContent() throws IOException {
+		public InputStream getContent() {
 			if (documentStream != null) {
 				return documentStream;
 			}

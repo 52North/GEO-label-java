@@ -1,7 +1,9 @@
 GEO-label-java
 ==============
 
-A Java implementation of the GEO label server API. 
+A Java implementation of the GEO label server API.
+
+[![Build Status](https://travis-ci.org/nuest/GEO-label-java.png?branch=master)](https://travis-ci.org/nuest/GEO-label-java)
    
 Modules
 --------------

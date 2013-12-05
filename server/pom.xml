@@ -8,11 +8,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>server</artifactId>
 	<packaging>war</packaging>
+	
+	<name>GEO label Java Server</name>
 
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<developers>
@@ -34,8 +36,6 @@
 		<webapp.swagger.dir>swagger-generated</webapp.swagger.dir>
 		<swagger.basepath>http://geoviqua.dev.52north.org/glbservice/api</swagger.basepath>
 	</properties>
-
-
 
 	<build>
 		<pluginManagement>
@@ -115,14 +115,16 @@
 
 					<dependency>
 						<groupId>com.wordnik</groupId>
-						<artifactId>swagger-jersey-jaxrs_2.9.1</artifactId>
-						<version>1.3.0</version>
+						<artifactId>swagger-jersey-jaxrs_2.10.0</artifactId>
+						<version>1.2.5</version>
+						<scope>compile</scope>
 					</dependency>
 
 					<dependency>
 						<groupId>com.wordnik</groupId>
-						<artifactId>swagger-codegen_2.9.1</artifactId>
-						<version>2.0.8</version>
+						<artifactId>swagger-codegen_2.10</artifactId>
+						<version>2.0.11</version>
+						<scope>compile</scope>
 					</dependency>
 
 				</dependencies>
@@ -132,6 +134,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
 					<webResources>
 						<resource>
@@ -191,7 +194,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-
+				<version>9.0.5.v20130815</version>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopPort>${jetty.stopPort}</stopPort>
@@ -203,7 +206,6 @@
 				</configuration>
 
 				<executions>
-
 					<execution>
 						<id>start-jetty</id>
 						<phase>pre-integration-test</phase>
@@ -248,15 +250,15 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>jsf</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>commons</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>
@@ -361,9 +363,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>client</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>
@@ -374,8 +376,8 @@
 
 		<dependency>
 			<groupId>com.wordnik</groupId>
-			<artifactId>swagger-annotations_2.9.1</artifactId>
-			<version>1.3.0</version>
+			<artifactId>swagger-annotations_2.10.0</artifactId>
+			<version>1.2.5</version>
 		</dependency>
 
 		<!-- test scope -->

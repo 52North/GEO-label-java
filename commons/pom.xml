@@ -3,11 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>commons</artifactId>
+	<name>GEO label Java commons</name>
 
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<dependencies>
