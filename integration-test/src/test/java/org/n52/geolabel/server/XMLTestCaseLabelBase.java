@@ -26,6 +26,7 @@ import org.custommonkey.xmlunit.SimpleNamespaceContext;
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.custommonkey.xmlunit.exceptions.XpathException;
+import org.n52.geolabel.commons.test.Facet;
 import org.xml.sax.SAXException;
 
 public class XMLTestCaseLabelBase extends XMLTestCase {

@@ -33,7 +33,7 @@
 
 	<properties>
 		<!-- Directory where swagger-maven-plugin generates its output, relative to pom location -->
-		<webapp.swagger.dir>swagger-generated</webapp.swagger.dir>
+		<webapp.swagger.dir>${project.build.directory}/swagger-generated</webapp.swagger.dir>
 		<swagger.basepath>http://geoviqua.dev.52north.org/glbservice/api</swagger.basepath>
 
 		<geolabel.logger.filepath>${catalina.base:-.}/logs/geolabel</geolabel.logger.filepath>
@@ -96,9 +96,9 @@
 							<apiVersion>v1</apiVersion>
 							<basePath>${swagger.basepath}</basePath>
 							<outputTemplate>${project.basedir}/src/main/webapp/api.xhtml</outputTemplate>
-							<outputPath>${project.basedir}/${webapp.swagger.dir}/api.xhtml</outputPath>
+							<outputPath>${webapp.swagger.dir}/api.xhtml</outputPath>
 							<withFormatSuffix>false</withFormatSuffix>
-							<swaggerDirectory>${project.basedir}/${webapp.swagger.dir}/api-docs</swaggerDirectory>
+							<swaggerDirectory>${webapp.swagger.dir}/api-docs</swaggerDirectory>
 							<useOutputFlatStructure>false</useOutputFlatStructure>
 							<!--mustacheFileRoot>${basedir}/src/main/resources/</mustacheFileRoot -->
 						</apiSource>
@@ -148,88 +148,6 @@
 						</resource>
 					</webResources>
 				</configuration>
-			</plugin>
-
-			<!-- Integration Test -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.11</version>
-				<configuration>
-					<systemPropertyVariables>
-						<jettyPort>${jetty.port}</jettyPort>
-					</systemPropertyVariables>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>reserve-network-port</id>
-						<goals>
-							<goal>reserve-network-port</goal>
-						</goals>
-						<phase>pre-integration-test</phase>
-						<configuration>
-							<portNames>
-								<portName>jetty.stopPort</portName>
-								<portName>jetty.port</portName>
-							</portNames>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.0.5.v20130815</version>
-				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopPort>${jetty.stopPort}</stopPort>
-					<stopKey>STOP</stopKey>
-					<contextPath>/</contextPath>
-					<httpConnector>
-						<port>${jetty.port}</port>
-					</httpConnector>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run-exploded</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

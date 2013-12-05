@@ -24,6 +24,7 @@ import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.junit.Test;
 import org.n52.geolabel.client.GeoLabelClientV1;
 import org.n52.geolabel.client.GeoLabelRequestBuilder;
+import org.n52.geolabel.commons.test.Facet;
 import org.xml.sax.SAXException;
 
 /**

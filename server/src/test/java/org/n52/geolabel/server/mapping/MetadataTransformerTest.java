@@ -31,7 +31,7 @@ import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.junit.Test;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet.Availability;
-import org.n52.geolabel.server.Facet;
+import org.n52.geolabel.commons.test.Facet;
 import org.xml.sax.SAXException;
 
 public class MetadataTransformerTest {
@@ -104,13 +104,13 @@ public class MetadataTransformerTest {
 	public void testFAO_GEONETWORK() throws IOException {
 		testMetadataExample("FAO_GEO_Network_iso19139.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.LINEAGE,
+				this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.LINEAGE,
 						Facet.QUALITY_INFORMATION, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "FAO - NRL" };
-				producerCommentsStart = new String[] { "The EPSMO Project was initiated" };
-				processStepCount = 0;
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-				scopeLevels = new String[] { "dataset" };
+				this.organizationsNames = new String[] { "FAO - NRL" };
+				this.producerCommentsStart = new String[] { "The EPSMO Project was initiated" };
+				this.processStepCount = 0;
+				this.standards = new String[] { "ISO 19115:2003/19139, 1.0" };
+				this.scopeLevels = new String[] { "dataset" };
 			}
 		});
 	}
@@ -119,9 +119,9 @@ public class MetadataTransformerTest {
 	public void testFGDC_Producer() throws IOException {
 		testMetadataExample("FGDC_Producer.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "Esri" };
-				standards = new String[] { "FGDC-STD-001-1998" };
+				this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.STANDARDS_COMPLIANCE);
+				this.organizationsNames = new String[] { "Esri" };
+				this.standards = new String[] { "FGDC-STD-001-1998" };
 			}
 		});
 	}
@@ -130,16 +130,16 @@ public class MetadataTransformerTest {
 	public void testGVQ_Aggregated_All() throws IOException {
 		testMetadataExample("GVQ_Aggregated_All_Available.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK));
-				organizationsNames = new String[] { "JRC" };
-				producerCommentsStart = new String[] { "The GVM unit" };
-				processStepCount = 3;
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-				scopeLevels = new String[] { "dataset" };
-				citationCount = 7;
-				expertReviewCount = 2;
-				expertRating = 2.5;
-				expertRatingCount = 2;
+				this.availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK));
+				this.organizationsNames = new String[] { "JRC" };
+				this.producerCommentsStart = new String[] { "The GVM unit" };
+				this.processStepCount = 3;
+				this.standards = new String[] { "ISO 19115:2003/19139, 1.0" };
+				this.scopeLevels = new String[] { "dataset" };
+				this.citationCount = 7;
+				this.expertReviewCount = 2;
+				this.expertRating = 2.5;
+				this.expertRatingCount = 2;
 			}
 		});
 	}
@@ -148,16 +148,16 @@ public class MetadataTransformerTest {
 	public void testGVQ_Feedback_All() throws MalformedURLException, IOException, XpathException, SAXException {
 		testMetadataExample("GVQ_Feedback_All_Available.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.EXPERT_REVIEW, Facet.USER_FEEDBACK);
-				citationCount = 4;
+				this.availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.EXPERT_REVIEW, Facet.USER_FEEDBACK);
+				this.citationCount = 4;
 
-				expertReviewCount = 1;
-				expertRating = 3d;
-				expertRatingCount = 1;
+				this.expertReviewCount = 1;
+				this.expertRating = 3d;
+				this.expertRatingCount = 1;
 
-				userReviewCount = 3;
-				userRating = 3d;
-				userRatingCount = 2;
+				this.userReviewCount = 3;
+				this.userRating = 3d;
+				this.userRatingCount = 2;
 			}
 		});
 	}
@@ -166,12 +166,12 @@ public class MetadataTransformerTest {
 	public void testGVQ_Feedback_No_Expert() throws MalformedURLException, IOException, XpathException, SAXException {
 		testMetadataExample("GVQ_Feedback_No_Expert_Review.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.USER_FEEDBACK);
-				citationCount = 2;
+				this.availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.USER_FEEDBACK);
+				this.citationCount = 2;
 
-				userReviewCount = 2;
-				userRating = 3d;
-				userRatingCount = 2;
+				this.userReviewCount = 2;
+				this.userRating = 3d;
+				this.userRatingCount = 2;
 			}
 		});
 	}
@@ -180,37 +180,37 @@ public class MetadataTransformerTest {
 	public void testGVQ_Producer_All() throws IOException {
 		testMetadataExample("GVQ_Producer_All_Available.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK, Facet.EXPERT_REVIEW));
-				organizationsNames = new String[] { "JRC" };
-				producerCommentsStart = new String[] { "The GVM unit" };
-				processStepCount = 3;
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-				scopeLevels = new String[] { "dataset" };
-				citationCount = 5;
+				this.availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK, Facet.EXPERT_REVIEW));
+				this.organizationsNames = new String[] { "JRC" };
+				this.producerCommentsStart = new String[] { "The GVM unit" };
+				this.processStepCount = 3;
+				this.standards = new String[] { "ISO 19115:2003/19139, 1.0" };
+				this.scopeLevels = new String[] { "dataset" };
+				this.citationCount = 5;
 			}
 		});
 	}
-	
+
 	@Test
 	public void testIndia19139() throws IOException {
 		testMetadataExample("india19139.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "FAO - UN AGL Documentation Center" };
-				producerCommentsStart = new String[] { "ISIS Identifier" };
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
+				this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.STANDARDS_COMPLIANCE);
+				this.organizationsNames = new String[] { "FAO - UN AGL Documentation Center" };
+				this.producerCommentsStart = new String[] { "ISIS Identifier" };
+				this.standards = new String[] { "ISO 19115:2003/19139, 1.0" };
 			}
 		});
 	}
-	
+
 	@Test
 	public void testIndiaGVQ() throws IOException {
 		testMetadataExample("indiaGVQ.xml", new LabelControlHolder() {
 			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "FAO - UN AGL Documentation Center" };
-				producerCommentsStart = new String[] { "ISIS Identifier" };
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
+				this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.STANDARDS_COMPLIANCE);
+				this.organizationsNames = new String[] { "FAO - UN AGL Documentation Center" };
+				this.producerCommentsStart = new String[] { "ISIS Identifier" };
+				this.standards = new String[] { "ISO 19115:2003/19139, 1.0" };
 			}
 		});
 	}
@@ -222,18 +222,15 @@ public class MetadataTransformerTest {
 		Label label = metadataTransformer.createGeoLabel(metadataStream);
 
 		// Check facet availability
-		if (control.availableFacets != null) {
-			for (Facet facet : EnumSet.allOf(Facet.class)) {
-				assertEquals("Facet " + facet.name() + " availability",
+		if (control.availableFacets != null)
+            for (Facet facet : EnumSet.allOf(Facet.class))
+                assertEquals("Facet " + facet.name() + " availability",
 						control.availableFacets.contains(facet) ? Availability.AVAILABLE : Availability.NOT_AVAILABLE,
 						facet.getFacet(label).getAvailability());
-			}
-		}
 
-		if (control.organizationsNames != null) {
-			label.getProducerProfileFacet().getOrganizationNames()
+		if (control.organizationsNames != null)
+            label.getProducerProfileFacet().getOrganizationNames()
 					.containsAll(Arrays.asList(control.organizationsNames));
-		}
 
 		if (control.producerCommentsStart != null) {
 			// Original service only includes first comment
@@ -246,57 +243,45 @@ public class MetadataTransformerTest {
 			String commentStartRef;
 			for (int i = 0; i < control.producerCommentsStart.length; i++) {
 				commentStartRef = control.producerCommentsStart[i];
-				for (String commentTest : label.getProducerCommentsFacet().getProducerComments()) {
-					if (commentTest.startsWith(commentStartRef)) {
-						commentsToBeFound.set(i, false);
-					}
-				}
+				for (String commentTest : label.getProducerCommentsFacet().getProducerComments())
+                    if (commentTest.startsWith(commentStartRef))
+                        commentsToBeFound.set(i, false);
 			}
 			assertTrue("Comments", commentsToBeFound.isEmpty());
 		}
 
-		if (control.processStepCount != null) {
-			assertEquals("Lineage processing steps", control.processStepCount.intValue(), label.getLineageFacet()
+		if (control.processStepCount != null)
+            assertEquals("Lineage processing steps", control.processStepCount.intValue(), label.getLineageFacet()
 					.getProcessStepCount());
-		}
 
-		if (control.standards != null) {
-			assertTrue("Standards",
+		if (control.standards != null)
+            assertTrue("Standards",
 					label.getStandardsComplianceFacet().getStandards().containsAll(Arrays.asList(control.standards)));
-		}
 
-		if (control.scopeLevels != null) {
-			assertTrue("Scope Levels",
+		if (control.scopeLevels != null)
+            assertTrue("Scope Levels",
 					label.getQualityInformationFacet().getScopeLevels().containsAll(Arrays.asList(control.scopeLevels)));
-		}
 
-		if (control.expertRating != null) {
-			assertEquals("Expert rating", control.expertRating, label.getExpertFeedbackFacet().getAverageRating(), 0.05);
-		}
-		if (control.expertRatingCount != null) {
-			assertEquals("Expert rating count", control.expertRatingCount.intValue(), label.getExpertFeedbackFacet()
+		if (control.expertRating != null)
+            assertEquals("Expert rating", control.expertRating, label.getExpertFeedbackFacet().getAverageRating(), 0.05);
+		if (control.expertRatingCount != null)
+            assertEquals("Expert rating count", control.expertRatingCount.intValue(), label.getExpertFeedbackFacet()
 					.getTotalRatings());
-		}
-		if (control.expertReviewCount != null) {
-			assertEquals("Expert review count", control.expertReviewCount.intValue(), label.getExpertFeedbackFacet()
+		if (control.expertReviewCount != null)
+            assertEquals("Expert review count", control.expertReviewCount.intValue(), label.getExpertFeedbackFacet()
 					.getTotalFeedbacks());
-		}
 
-		if (control.userRating != null) {
-			assertEquals("User rating", control.userRating, label.getUserFeedbackFacet().getAverageRating(), 0.05);
-		}
-		if (control.userRatingCount != null) {
-			assertEquals("User rating count", control.userRatingCount.intValue(), label.getUserFeedbackFacet()
+		if (control.userRating != null)
+            assertEquals("User rating", control.userRating, label.getUserFeedbackFacet().getAverageRating(), 0.05);
+		if (control.userRatingCount != null)
+            assertEquals("User rating count", control.userRatingCount.intValue(), label.getUserFeedbackFacet()
 					.getTotalRatings());
-		}
-		if (control.userReviewCount != null) {
-			assertEquals("User review count", control.userReviewCount.intValue(), label.getUserFeedbackFacet()
+		if (control.userReviewCount != null)
+            assertEquals("User review count", control.userReviewCount.intValue(), label.getUserFeedbackFacet()
 					.getTotalFeedbacks());
-		}
 
-		if (control.citationCount != null) {
-			assertEquals("citations", control.citationCount.intValue(), label.getCitationsFacet().getTotalCitations());
-		}
+		if (control.citationCount != null)
+            assertEquals("citations", control.citationCount.intValue(), label.getCitationsFacet().getTotalCitations());
 	}
 
 	@Test

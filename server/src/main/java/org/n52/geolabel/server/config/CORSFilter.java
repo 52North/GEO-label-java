@@ -18,6 +18,7 @@ package org.n52.geolabel.server.config;
 import java.io.IOException;
 
 import javax.inject.Singleton;
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 @Singleton
-public class CORSFilter implements javax.servlet.Filter {
+public class CORSFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
 			ServletException {
@@ -39,9 +40,11 @@ public class CORSFilter implements javax.servlet.Filter {
 
 	@Override
 	public void destroy() {
+        //
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+        //
 	}
 }
