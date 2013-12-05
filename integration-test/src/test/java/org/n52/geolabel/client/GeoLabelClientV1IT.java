@@ -26,7 +26,7 @@ import org.junit.Test;
 import org.n52.geolabel.client.GeoLabelCache;
 import org.n52.geolabel.client.GeoLabelClientV1;
 
-public class GeoLabelClientV1Test {
+public class GeoLabelClientV1IT {
 
 	@Test
 	public void testCreateGeoLabelMetadataStream() throws IOException {

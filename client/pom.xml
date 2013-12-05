@@ -6,12 +6,12 @@
 	<artifactId>client</artifactId>
 	<packaging>jar</packaging>
 
-	<name>GeoLabel Client Library</name>
+	<name>GEO label Java Client Library</name>
 
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<build>

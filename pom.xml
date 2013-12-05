@@ -3,9 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.geolabel</groupId>
 	<artifactId>geolabel</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 	<inceptionYear>2013</inceptionYear>
+	<name>GEO label Java</name>
 
 	<modules>
 		<module>server</module>
@@ -69,6 +70,8 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
 
