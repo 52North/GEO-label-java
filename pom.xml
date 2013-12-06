@@ -25,6 +25,7 @@
 		<name>52°North Initiative for Geospatial Open Source Software GmbH</name>
 		<url>http://52north.org</url>
 	</organization>
+	
 	<developers>
 		<developer>
 			<name>Holger Hopmann</name>
@@ -62,6 +63,8 @@
 		<commons-io.version>2.4</commons-io.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<faces.version>2.1.3</faces.version>
+		
+		<geolabel.logger.filepath>${catalina.base:-.}/logs/geolabel</geolabel.logger.filepath>
 	</properties>
 
 	<profiles>
@@ -112,6 +115,14 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.kongchen</groupId>
+			<artifactId>swagger-maven-plugin</artifactId>
+			<version>1.1.2-20130731.134723-5</version>
+		</dependency>
+	</dependencies>
 
 	<repositories>
 		<repository>
