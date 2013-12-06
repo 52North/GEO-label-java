@@ -43,9 +43,14 @@ public class MetadataTransformerTest {
     public void testParseMetadata() throws IOException {
 
         MetadataTransformer metadataTransformer = newMetadataTransformer();
-        metadataTransformer.readTransformationDescription(getClass().getResourceAsStream("transformer.xml"));
+        InputStream input = getClass().getResourceAsStream("transformer.xml");
+        metadataTransformer.readTransformationDescription(input);
 
         InputStream metadataStream = getClass().getResourceAsStream("metadata.xml");
+        // StringWriter writer = new StringWriter();
+        // IOUtils.copy(metadataStream, writer, "utf-8");
+        // String theString = writer.toString();
+        // System.out.println(theString);
 
         Label geoLabel = metadataTransformer.createGeoLabel(metadataStream);
 
@@ -234,12 +239,12 @@ public class MetadataTransformerTest {
 
         // Check facet availability
         if (control.availableFacets != null)
-            for (Facet facet : EnumSet.allOf(Facet.class))
-                assertEquals("Facet " + facet.name() + " availability",
-                             control.availableFacets.contains(facet) ? Availability.AVAILABLE
-                                                                    : Availability.NOT_AVAILABLE,
-                             facet.getFacet(label).getAvailability());
-
+            for (Facet facet : EnumSet.allOf(Facet.class)) {
+                boolean contained = control.availableFacets.contains(facet);
+                Availability expected = contained ? Availability.AVAILABLE : Availability.NOT_AVAILABLE;
+                Availability actual = facet.getFacet(label).getAvailability();
+                assertEquals("Facet " + facet.name() + " availability", expected, actual);
+            }
         if (control.organizationsNames != null)
             label.getProducerProfileFacet().getOrganizationNames().containsAll(Arrays.asList(control.organizationsNames));
 

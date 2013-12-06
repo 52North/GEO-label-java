@@ -15,6 +15,7 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -48,6 +49,24 @@ public class LabelTransformationDescription {
 			this.prefix = prefix;
 			this.namespace = namespace;
 		}
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("NamespaceMapping [");
+            if (this.prefix != null) {
+                builder.append("prefix=");
+                builder.append(this.prefix);
+                builder.append(", ");
+            }
+            if (this.namespace != null) {
+                builder.append("namespace=");
+                builder.append(this.namespace);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
+
 	}
 
 	@XmlElementWrapper
@@ -94,5 +113,22 @@ public class LabelTransformationDescription {
         for (FacetTransformationDescription< ? > facetDescription : this.facetDescriptions)
             facetDescription.updateLabel(label, metadataXml);
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("LabelTransformationDescription [");
+        if (this.namespaceMappings != null) {
+            builder.append("namespaceMappings=");
+            builder.append(Arrays.toString(this.namespaceMappings));
+            builder.append(", ");
+        }
+        if (this.facetDescriptions != null) {
+            builder.append("facetDescriptions=");
+            builder.append(Arrays.toString(this.facetDescriptions));
+        }
+        builder.append("]");
+        return builder.toString();
+    }
 
 }

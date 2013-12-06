@@ -29,6 +29,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -38,6 +40,8 @@ import org.w3c.dom.NodeList;
 		QualityInformationFacetDescription.class,
 		FeedbackFacetDescription.class, CitationsFacetDescription.class })
 public abstract class FacetTransformationDescription<T extends LabelFacet> {
+
+    Logger log = LoggerFactory.getLogger(FacetTransformationDescription.class);
 
 	protected interface ExpressionResultFunction {
 		boolean eval(String value);
@@ -92,6 +96,8 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 			return facet;
 
 		final AtomicBoolean hasTextNodes = new AtomicBoolean(false);
+        this.log.debug("Checking availability using {} in document {}", this.availabilityPath, metadataXml);
+
 		visitExpressionResultStrings(this.availabilityExpression, metadataXml,
 				new ExpressionResultFunction() {
 					@Override
@@ -104,15 +110,18 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 					}
 				});
 
-		facet.updateAvailability(hasTextNodes.get() ? Availability.AVAILABLE
-				: Availability.NOT_AVAILABLE);
+        boolean hasTextNodesB = hasTextNodes.get();
+        Availability availability = hasTextNodesB ? Availability.AVAILABLE : Availability.NOT_AVAILABLE;
+        facet.updateAvailability(availability);
 
 		return facet;
 	}
 
 	public Label updateLabel(Label label, Document metadataXml) {
 		try {
-			updateFacet(getAffectedFacet(label), metadataXml);
+            T affectedF = getAffectedFacet(label);
+            T updatedFacet = updateFacet(affectedF, metadataXml);
+            this.log.debug("Updated facet: {} \nfor label: {}", updatedFacet, label);
 			return label;
 		} catch (XPathExpressionException e) {
 			throw new RuntimeException(
@@ -120,4 +129,22 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 		}
 
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("FacetTransformationDescription [");
+        if (this.availabilityPath != null) {
+            builder.append("availabilityPath=");
+            builder.append(this.availabilityPath);
+            builder.append(", ");
+        }
+        if (this.availabilityExpression != null) {
+            builder.append("availabilityExpression=");
+            builder.append(this.availabilityExpression);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
+
 }
