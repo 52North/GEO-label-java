@@ -31,31 +31,31 @@ public class FeedbackFacet extends LabelFacet {
 	private Double avgRating = null;
 
 	public int getTotalFeedbacks() {
-		return totalFeedbacks;
+        return this.totalFeedbacks;
 	}
 
 	@XmlElement
 	public Double getAverageRating() {
-		if (avgRating == null && !ratings.isEmpty()) {
-			avgRating = 0d;
-			for (Double rating : ratings)
-				avgRating += rating;
-			avgRating /= ratings.size();
+        if (this.avgRating == null && !this.ratings.isEmpty()) {
+            this.avgRating = Double.valueOf(0d);
+            for (Double rating : this.ratings)
+                this.avgRating = Double.valueOf(this.avgRating.doubleValue() + rating.doubleValue());
+            this.avgRating = Double.valueOf(this.avgRating.doubleValue() / this.ratings.size());
 		}
 
-		return avgRating;
+        return this.avgRating;
 	}
 
 	public int getTotalRatings() {
-		return ratings.size();
+        return this.ratings.size();
 	}
 
 	public void addRating(double rating) {
-		ratings.add(rating);
-		avgRating = null;
+        this.ratings.add(Double.valueOf(rating));
+        this.avgRating = null;
 	}
 
 	public void addFeedbacks(int feedbackCount) {
-		totalFeedbacks += feedbackCount;
+        this.totalFeedbacks += feedbackCount;
 	}
 }

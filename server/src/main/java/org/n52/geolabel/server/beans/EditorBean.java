@@ -38,7 +38,8 @@ public class EditorBean {
 		String name;
 
 		public Endpoint() {
-		};
+            //
+        }
 
 		public Endpoint(String url, String name) {
 			this.url = url;
@@ -46,11 +47,11 @@ public class EditorBean {
 		}
 
 		public String getName() {
-			return name;
+            return this.name;
 		}
 
 		public String getUrl() {
-			return url;
+            return this.url;
 		}
 
 		public void setName(String name) {
@@ -63,19 +64,17 @@ public class EditorBean {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (url != null && obj instanceof Endpoint) {
-				return url.equals(((Endpoint) obj).url);
-			}
+            if (this.url != null && obj instanceof Endpoint)
+                return this.url.equals(((Endpoint) obj).url);
 
 			return super.equals(obj);
 		}
 
 		@Override
 		public int hashCode() {
-			if (url == null) {
-				return super.hashCode();
-			}
-			return url.hashCode();
+            if (this.url == null)
+                return super.hashCode();
+            return this.url.hashCode();
 		}
 	}
 
@@ -86,7 +85,7 @@ public class EditorBean {
 	private Endpoint newCustomService = new Endpoint();
 
 	public String getFeedbackContent() {
-		return feedbackContent;
+        return this.feedbackContent;
 	}
 
 	public void setFeedbackContent(String feedbackContent) {
@@ -94,7 +93,7 @@ public class EditorBean {
 	}
 
 	public String getMetadataContent() {
-		return metadataContent;
+        return this.metadataContent;
 	}
 
 	public void setMetadataContent(String metadataContent) {
@@ -102,7 +101,7 @@ public class EditorBean {
 	}
 
 	public List<Endpoint> getComparisonServices() {
-		return comparisonServices;
+        return this.comparisonServices;
 	}
 
 	public void setComparisonServices(List<Endpoint> comparisonServices) {
@@ -110,7 +109,7 @@ public class EditorBean {
 	}
 
 	public Endpoint getNewCustomService() {
-		return newCustomService;
+        return this.newCustomService;
 	}
 
 	public void setNewCustomService(Endpoint newCustomService) {
@@ -118,33 +117,33 @@ public class EditorBean {
 	}
 
 	public void addCustomServiceEndpoint() {
-		if (newCustomService != null && newCustomService.url != null && !comparisonServices.contains(newCustomService)) {
-			comparisonServices.add(newCustomService);
-			newCustomService = new Endpoint();
+        if (this.newCustomService != null && this.newCustomService.url != null
+                && !this.comparisonServices.contains(this.newCustomService)) {
+            this.comparisonServices.add(this.newCustomService);
+            this.newCustomService = new Endpoint();
 		}
 	}
 
 	/**
 	 * Allows to add a specific service endpoint to the list of custom geo label
 	 * apis to use
-	 * 
+	 *
 	 * @param endpointUrl
 	 * @param endpointName
 	 */
 	public void addCustomServiceEndpoint(String endpointUrl, String endpointName) {
 		if (endpointUrl != null) {
 			Endpoint newEndpoint = new Endpoint(endpointUrl, endpointName);
-			if (!comparisonServices.contains(newEndpoint)) {
-				comparisonServices.add(new Endpoint(endpointUrl, endpointName));
-			}
+            if ( !this.comparisonServices.contains(newEndpoint))
+                this.comparisonServices.add(new Endpoint(endpointUrl, endpointName));
 		}
 	}
 
 	public void removeCustomServiceEndpoint(Endpoint endpoint) {
-		comparisonServices.remove(endpoint);
+        this.comparisonServices.remove(endpoint);
 	}
 
 	public void clearServiceEndpoints() {
-		comparisonServices.clear();
+        this.comparisonServices.clear();
 	}
 }

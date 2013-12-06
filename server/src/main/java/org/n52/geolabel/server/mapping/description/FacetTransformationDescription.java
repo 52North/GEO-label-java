@@ -47,34 +47,31 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 			XPathExpression expression, Document xml,
 			ExpressionResultFunction resultFunction)
 			throws XPathExpressionException {
-		if (expression == null) {
-			return;
-		}
+		if (expression == null)
+            return;
 
 		Object evaluationResult = expression.evaluate(xml,
 				XPathConstants.NODESET);
 		if (evaluationResult instanceof NodeList) {
 			NodeList nodeList = (NodeList) evaluationResult;
 			for (int i = 0, len = nodeList.getLength(); i < len; i++) {
-				String textContent = nodeList.item(i).getTextContent();
+                String textContent = nodeList.item(i).getFirstChild().getNodeValue(); // getTextContent();
 				if (textContent != null
-						&& !resultFunction.eval(textContent.trim())) {
-					break;
-				}
+						&& !resultFunction.eval(textContent.trim()))
+                    break;
 			}
 		} else if (evaluationResult instanceof Collection<?>) {
 			ArrayList<?> resultList = (ArrayList<?>) evaluationResult;
 			for (int i = 0, len = resultList.size(); i < len; i++) {
 				String textContent = resultList.get(i).toString();
-				if (!resultFunction.eval(textContent.trim())) {
-					break;
-				}
+				if (!resultFunction.eval(textContent.trim()))
+                    break;
 			}
-		} else {
-			throw new IllegalStateException(
+		}
+        else
+            throw new IllegalStateException(
 					"XPath generated unexpected result type of "
 							+ evaluationResult.getClass().getSimpleName());
-		}
 	}
 
 	@XmlElement
@@ -85,17 +82,17 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 	public abstract T getAffectedFacet(Label label);
 
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (availabilityPath != null)
-			availabilityExpression = xPath.compile(availabilityPath);
+		if (this.availabilityPath != null)
+			this.availabilityExpression = xPath.compile(this.availabilityPath);
 	}
 
 	public T updateFacet(final T facet, Document metadataXml)
 			throws XPathExpressionException {
-		if (availabilityExpression == null)
+		if (this.availabilityExpression == null)
 			return facet;
 
 		final AtomicBoolean hasTextNodes = new AtomicBoolean(false);
-		visitExpressionResultStrings(availabilityExpression, metadataXml,
+		visitExpressionResultStrings(this.availabilityExpression, metadataXml,
 				new ExpressionResultFunction() {
 					@Override
 					public boolean eval(String value) {

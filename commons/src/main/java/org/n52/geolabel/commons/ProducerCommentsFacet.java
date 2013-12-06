@@ -29,16 +29,15 @@ public class ProducerCommentsFacet extends LabelFacet {
 	private Set<String> producerComments;
 
 	public Collection<String> getProducerComments() {
-		if (producerComments == null)
+        if (this.producerComments == null)
 			return Collections.emptySet();
 
-		return producerComments;
+        return this.producerComments;
 	}
 
 	public void addProducerComment(String producerComment) {
-		if (producerComments == null) {
-			producerComments = new HashSet<String>();
-		}
+        if (this.producerComments == null)
+            this.producerComments = new HashSet<String>();
 		this.producerComments.add(producerComment);
 	}
 }

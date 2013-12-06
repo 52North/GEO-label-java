@@ -56,7 +56,7 @@ import com.google.common.cache.LoadingCache;
 
 /**
  * Transforms metadata XML into {@link Label} representations
- * 
+ *
  */
 @Singleton
 public class MetadataTransformer {
@@ -71,13 +71,13 @@ public class MetadataTransformer {
 	 * Acts as key for caching {@link Label}s based on its metadata and/or
 	 * feedback source. Since metadata/feedback sources are handled equally, all
 	 * combinations of equal metadata/feedback source urls are identical.
-	 * 
+	 *
 	 */
 	@XmlRootElement(name = "CacheMapping")
 	public static class LabelUrlKey {
 		protected URL metadataUrl;
 		protected URL feedbackUrl;
-		private Date cacheWriteTime;
+        protected Date cacheWriteTime;
 
 		LabelUrlKey() {
 		}
@@ -89,17 +89,17 @@ public class MetadataTransformer {
 
 		@XmlAttribute
 		public URL getFeedbackUrl() {
-			return feedbackUrl;
+            return this.feedbackUrl;
 		}
 
 		@XmlAttribute
 		public URL getMetadataUrl() {
-			return metadataUrl;
+            return this.metadataUrl;
 		}
 
 		@XmlAttribute(name = "cachedAt")
 		public Date getCacheWriteTime() {
-			return cacheWriteTime;
+            return this.cacheWriteTime;
 		}
 
 		@Override
@@ -151,12 +151,10 @@ public class MetadataTransformer {
 
 					Label label = new Label();
 
-					if (key.feedbackUrl != null) {
-						updateGeoLabel(key.feedbackUrl, label);
-					}
-					if (key.metadataUrl != null) {
-						updateGeoLabel(key.metadataUrl, label);
-					}
+					if (key.feedbackUrl != null)
+                        updateGeoLabel(key.feedbackUrl, label);
+					if (key.metadataUrl != null)
+                        updateGeoLabel(key.metadataUrl, label);
 
 					return label;
 				}
@@ -170,15 +168,14 @@ public class MetadataTransformer {
 	private List<LabelTransformationDescription> transformationDescriptions;
 
 	public List<LabelTransformationDescription> getTransformationDescriptions() {
-		if (this.transformationDescriptions == null) {
-			this.transformationDescriptions = new ArrayList<LabelTransformationDescription>();
-		}
+		if (this.transformationDescriptions == null)
+            this.transformationDescriptions = new ArrayList<LabelTransformationDescription>();
 		return this.transformationDescriptions;
 	}
 
 	/**
 	 * Reads {@link LabelTransformationDescription} from passed XML stream.
-	 * 
+	 *
 	 * @param input
 	 * @throws IOException
 	 */
@@ -204,7 +201,7 @@ public class MetadataTransformer {
 	/**
 	 * Reads {@link LabelTransformationDescription} from passed XML {@link File}
 	 * .
-	 * 
+	 *
 	 * @param descriptionFile
 	 * @throws FileNotFoundException
 	 * @throws IOException
@@ -215,33 +212,31 @@ public class MetadataTransformer {
 
 	/**
 	 * Reads {@link LabelTransformationDescription}s from resources.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	private void readTransformationDescriptions() throws IOException {
 		Enumeration<URL> descriptionResources = getClass().getClassLoader().getResources(TRANSFORMATIONS_RESOURCE);
-		while (descriptionResources.hasMoreElements()) {
-			try {
+		while (descriptionResources.hasMoreElements())
+            try {
 				URI descriptionResourceURI = descriptionResources.nextElement().toURI();
 				File descriptionResourceFile = new File(descriptionResourceURI);
-				for (File descriptionFile : descriptionResourceFile.listFiles()) {
-					try {
+				for (File descriptionFile : descriptionResourceFile.listFiles())
+                    try {
 						readTransformationDescription(descriptionFile);
 					} catch (IOException e) {
 						log.error("Could not read transformation description " + descriptionFile.getName() + ".", e);
 					}
-				}
 
 			} catch (URISyntaxException e) {
 				log.error("Could not read transformation description.", e);
 			}
-		}
 	}
 
 	/**
 	 * Reads the supplied metadata XML stream and applies all loaded
 	 * transformation descriptions to update a {@link Label} instance
-	 * 
+	 *
 	 * @param xml
 	 * @param label
 	 * @return
@@ -250,9 +245,8 @@ public class MetadataTransformer {
 	 *             descriptions fails
 	 */
 	public Label updateGeoLabel(InputStream xml, Label label) throws IOException {
-		if (this.transformationDescriptions == null) {
-			readTransformationDescriptions();
-		}
+		if (this.transformationDescriptions == null)
+            readTransformationDescriptions();
 
 		Document doc;
 		try {
@@ -265,9 +259,8 @@ public class MetadataTransformer {
 			throw new IOException("Could not parse supplied metadata xml", e);
 		}
 
-		for (LabelTransformationDescription transformer : getTransformationDescriptions()) {
-			transformer.updateGeoLabel(label, doc);
-		}
+		for (LabelTransformationDescription transformer : getTransformationDescriptions())
+            transformer.updateGeoLabel(label, doc);
 
 		return label;
 	}
@@ -275,7 +268,7 @@ public class MetadataTransformer {
 	/**
 	 * See {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}.Loads
 	 * metadata stream from {@link URL}.
-	 * 
+	 *
 	 * @param metadataUrl
 	 * @param label
 	 * @return
@@ -291,7 +284,7 @@ public class MetadataTransformer {
 	/**
 	 * Returns new {@link Label} instance from supplied metadata XML stream. See
 	 * {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}
-	 * 
+	 *
 	 * @param xml
 	 * @return
 	 * @throws IOException
@@ -304,7 +297,7 @@ public class MetadataTransformer {
 	 * Returns new {@link Label} instance from supplied metadata XML {@link URL}
 	 * reference. See
 	 * {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}
-	 * 
+	 *
 	 * @param metadataUrl
 	 * @return
 	 * @throws IOException
@@ -316,7 +309,7 @@ public class MetadataTransformer {
 	/**
 	 * Returns a {@link Label} from metadata and/or feedback {@link URL}.
 	 * Results are cached.
-	 * 
+	 *
 	 * @param metadataURL
 	 * @param feedbackURL
 	 * @return
@@ -331,6 +324,6 @@ public class MetadataTransformer {
 	}
 
 	public Set<LabelUrlKey> getCacheContent() {
-		return labelUrlCache.asMap().keySet();
+        return this.labelUrlCache.asMap().keySet();
 	}
 }

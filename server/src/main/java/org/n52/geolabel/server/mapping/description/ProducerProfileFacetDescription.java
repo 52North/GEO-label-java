@@ -38,16 +38,15 @@ public class ProducerProfileFacetDescription extends
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (organizationNamePath != null) {
-			organizationNameExpression = xPath.compile(organizationNamePath);
-		}
+        if (this.organizationNamePath != null)
+            this.organizationNameExpression = xPath.compile(this.organizationNamePath);
 		super.initXPaths(xPath);
 	}
 
 	@Override
 	public ProducerProfileFacet updateFacet(final ProducerProfileFacet facet,
 			Document metadataXml) throws XPathExpressionException {
-		visitExpressionResultStrings(organizationNameExpression, metadataXml,
+        visitExpressionResultStrings(this.organizationNameExpression, metadataXml,
 				new ExpressionResultFunction() {
 					@Override
 					public boolean eval(String value) {

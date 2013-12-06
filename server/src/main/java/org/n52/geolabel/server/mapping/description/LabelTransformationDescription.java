@@ -34,7 +34,7 @@ import org.w3c.dom.Document;
 
 @XmlRootElement(name = "transformationDescription")
 public class LabelTransformationDescription {
-	
+
 	static class NamespaceMapping {
 		@XmlAttribute
 		public String prefix;
@@ -64,9 +64,8 @@ public class LabelTransformationDescription {
 		XPath xPath = factory.newXPath();
 
 		final Map<String, String> namespaceMap = new HashMap<String, String>();
-		for (NamespaceMapping mapping : namespaceMappings) {
-			namespaceMap.put(mapping.prefix, mapping.namespace);
-		}
+        for (NamespaceMapping mapping : this.namespaceMappings)
+            namespaceMap.put(mapping.prefix, mapping.namespace);
 
 		xPath.setNamespaceContext(new NamespaceContext() {
 
@@ -87,15 +86,13 @@ public class LabelTransformationDescription {
 			}
 		});
 
-		for (FacetTransformationDescription<?> facetDescription : facetDescriptions) {
-			facetDescription.initXPaths(xPath);
-		}
+        for (FacetTransformationDescription< ? > facetDescription : this.facetDescriptions)
+            facetDescription.initXPaths(xPath);
 	}
 
 	public void updateGeoLabel(Label label, Document metadataXml) {
-		for (FacetTransformationDescription<?> facetDescription : facetDescriptions) {
-			facetDescription.updateLabel(label, metadataXml);
-		}
+        for (FacetTransformationDescription< ? > facetDescription : this.facetDescriptions)
+            facetDescription.updateLabel(label, metadataXml);
 	}
 
 }

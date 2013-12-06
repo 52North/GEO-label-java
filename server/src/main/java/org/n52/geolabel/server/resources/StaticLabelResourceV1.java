@@ -38,6 +38,7 @@ public class StaticLabelResourceV1 {
 
 	@Inject
 	private StaticLabelResourceV1(Provider<MetadataTransformer> transformer) {
+        //
 	}
 
 	@GET
@@ -68,7 +69,7 @@ public class StaticLabelResourceV1 {
 		label.getExpertFeedbackFacet().updateAvailability(expertFeedbackAvailability);
 		label.getCitationsFacet().updateAvailability(citationsAvailability);
 
-		return SVGResourceV1.createLabelSVGResponse(size != null ? size : 200, id, label);
+        return SVGResourceV1.createLabelSVGResponse(size != null ? size.intValue() : 200, id, label);
 	}
 
 }

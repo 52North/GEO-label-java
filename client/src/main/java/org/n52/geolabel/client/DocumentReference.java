@@ -76,18 +76,18 @@ public interface DocumentReference {
 
 		@Override
 		public boolean hasUrl() {
-			return documentUrl != null;
+            return this.documentUrl != null;
 		}
 
 		@Override
 		public URL getUrl() {
-			return documentUrl;
+            return this.documentUrl;
 		}
 
 		@Override
 		public InputStream getContent() throws IOException {
 			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpEntity responseEntity = httpClient.execute(new HttpGet(documentUrl.toString())).getEntity();
+            HttpEntity responseEntity = httpClient.execute(new HttpGet(this.documentUrl.toString())).getEntity();
 			return responseEntity.getContent();
 		}
 	}
@@ -104,9 +104,8 @@ public interface DocumentReference {
 
 		@Override
 		public InputStream getContent() {
-			if (documentStream != null) {
-				return documentStream;
-			}
+            if (this.documentStream != null)
+                return this.documentStream;
 			return null;
 		}
 
@@ -124,9 +123,9 @@ public interface DocumentReference {
 
 		@Override
 		public InputStream getContent() throws IOException {
-			if (documentXml != null) {
+            if (this.documentXml != null) {
 				ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
-				Source xmlSource = new DOMSource(documentXml);
+                Source xmlSource = new DOMSource(this.documentXml);
 				Result outputTarget = new StreamResult(resultStream);
 				try {
 					TransformerFactory.newInstance().newTransformer().transform(xmlSource, outputTarget);
