@@ -19,11 +19,9 @@ import java.io.InputStream;
 
 public abstract class GeoLabelClient {
 
-	
 	public interface GeoLabelRequestHandler {
 		InputStream getLabel(GeoLabelRequestBuilder lmlRequestBuilder)
 				throws IOException;
 	}
-
 
 }
