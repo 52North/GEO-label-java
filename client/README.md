@@ -48,7 +48,6 @@ GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(metadataUrl).setUse
 
 InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(metadataUrl)
 				.setFeedbackDocument(feedbackStream).getSVG();
-// org.apache.commons.io.IOUtils
 String svgString = IOUtils.toString(svg);
 		
 ```
