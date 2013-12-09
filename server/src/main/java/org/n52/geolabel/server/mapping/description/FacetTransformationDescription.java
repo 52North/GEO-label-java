@@ -33,6 +33,7 @@ import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 @XmlSeeAlso({ProducerProfileFacetDescription.class,
@@ -63,7 +64,8 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                 log.debug("Evaluation returned no results for expression '{}' and xml '{}'", expression, xml);
             else
                 for (int i = 0, len = nodeList.getLength(); i < len; i++) {
-                    String textContent = nodeList.item(i).getFirstChild().getNodeValue(); // getTextContent();
+                    Node n = nodeList.item(i);
+                    String textContent = n.getTextContent();
                     if (textContent != null && !resultFunction.eval(textContent.trim()))
                         break;
                 }
