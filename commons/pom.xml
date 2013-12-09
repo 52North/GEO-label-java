@@ -29,12 +29,5 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.wordnik</groupId>
-			<artifactId>swagger-annotations_2.9.1</artifactId>
-			<version>1.3.0</version>
-		</dependency>
-
 	</dependencies>
 </project>

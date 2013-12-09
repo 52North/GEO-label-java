@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.component;
 
 import java.util.HashSet;
@@ -25,35 +26,35 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class GeoLabelResourcesBean {
 
-	private boolean resourcesAdded = false;
-	private boolean geoLabelServiceFailed = false;
-	private Set<String> failedEndpoints = new HashSet<String>();
+    private boolean resourcesAdded = false;
+    private boolean geoLabelServiceFailed = false;
+    private Set<String> failedEndpoints = new HashSet<String>();
 
-	public boolean isResourcesAdded() {
-		return resourcesAdded;
-	}
+    public boolean isResourcesAdded() {
+        return resourcesAdded;
+    }
 
-	public void setResourcesAdded(boolean resourcesAdded) {
-		this.resourcesAdded = resourcesAdded;
-	}
+    public void setResourcesAdded(boolean resourcesAdded) {
+        this.resourcesAdded = resourcesAdded;
+    }
 
-	public boolean isGeoLabelServiceFailed() {
-		return geoLabelServiceFailed;
-	}
+    public boolean isGeoLabelServiceFailed() {
+        return geoLabelServiceFailed;
+    }
 
-	public void setGeoLabelServiceFailed(boolean geoLabelServiceFailed) {
-		this.geoLabelServiceFailed = geoLabelServiceFailed;
-		if (!geoLabelServiceFailed) {
-			this.failedEndpoints.clear();
-		}
-	}
+    public void setGeoLabelServiceFailed(boolean geoLabelServiceFailed) {
+        this.geoLabelServiceFailed = geoLabelServiceFailed;
+        if ( !geoLabelServiceFailed) {
+            this.failedEndpoints.clear();
+        }
+    }
 
-	public void setGeoLabelServiceFailed(String endpoint) {
-		this.failedEndpoints.add(endpoint);
-		this.geoLabelServiceFailed = true;
-	}
+    public void setGeoLabelServiceFailed(String endpoint) {
+        this.failedEndpoints.add(endpoint);
+        this.geoLabelServiceFailed = true;
+    }
 
-	public boolean isGeoLabelServiceFailed(String endpoint) {
-		return failedEndpoints.contains(endpoint);
-	}
+    public boolean isGeoLabelServiceFailed(String endpoint) {
+        return failedEndpoints.contains(endpoint);
+    }
 }

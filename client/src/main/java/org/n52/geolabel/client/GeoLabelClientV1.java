@@ -33,24 +33,12 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.n52.geolabel.commons.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GeoLabelClientV1 extends GeoLabelClient {
 
-	protected final static DefaultHttpClient HTTPCLIENT;
-
-	protected static final String PARAM_METADATA = Constants.PARAM_METADATA;
-	protected static final String PARAM_METADATA_DRILL = Constants.PARAM_METADATA_DRILL;
-	protected static final String PARAM_FEEDBACK = Constants.PARAM_FEEDBACK;
-	protected static final String PARAM_FEEDBACK_DRILL = Constants.PARAM_FEEDBACK_DRILL;
-
-	protected static final String PARAM_DESIREDSIZE = Constants.PARAM_SIZE;
-
-	protected static String GEOLABEL_URL = "http://www.geolabel.net/api/v1/geolabel";
-
-	static {
-		PoolingClientConnectionManager connectionManager = new PoolingClientConnectionManager();
-		HTTPCLIENT = new DefaultHttpClient(connectionManager);
-	}
+    protected static final String DEFAULT_GEO_LABEL_SERVER = "http://www.geolabel.net/api/v1/geolabel";
 
 	/**
 	 * Handles requests for LML
@@ -64,75 +52,63 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 			// use get lml from xml (post) if any supplied document is not
 			// referenced
 			// by url
-			if (labelRequestBuilder.metadataDocument != null && !labelRequestBuilder.metadataDocument.hasUrl()) {
-				useUrlRequest = false;
-			} else if (labelRequestBuilder.feedbackDocument != null && !labelRequestBuilder.feedbackDocument.hasUrl()) {
-				useUrlRequest = false;
-			}
+			if (labelRequestBuilder.metadataDocument != null && !labelRequestBuilder.metadataDocument.hasUrl())
+                useUrlRequest = false;
+            else if (labelRequestBuilder.feedbackDocument != null && !labelRequestBuilder.feedbackDocument.hasUrl())
+                useUrlRequest = false;
 
 			String cacheIdentifier = null;
 			if (useUrlRequest && labelRequestBuilder.useCache) {
 				// Caching
 				cacheIdentifier = "";
-				if (labelRequestBuilder.metadataDocument != null) {
-					cacheIdentifier += labelRequestBuilder.metadataDocument.getUrl().toString();
-				}
-				if (labelRequestBuilder.feedbackDocument != null) {
-					cacheIdentifier += labelRequestBuilder.feedbackDocument.getUrl().toString();
-				}
+				if (labelRequestBuilder.metadataDocument != null)
+                    cacheIdentifier += labelRequestBuilder.metadataDocument.getUrl().toString();
+				if (labelRequestBuilder.feedbackDocument != null)
+                    cacheIdentifier += labelRequestBuilder.feedbackDocument.getUrl().toString();
 
-				if (GeoLabelCache.hasSVG(cacheIdentifier)) {
-					return IOUtils.toInputStream(GeoLabelCache.getSVG(cacheIdentifier));
-				}
+				if (GeoLabelCache.hasSVG(cacheIdentifier))
+                    return IOUtils.toInputStream(GeoLabelCache.getSVG(cacheIdentifier));
 			}
 
-			if (labelRequestBuilder.forceDownload) {
-				// force downloading url references if requested
+			if (labelRequestBuilder.forceDownload)
+                // force downloading url references if requested
 				useUrlRequest = false;
-			}
 
 			HttpUriRequest request = null;
-			if (useUrlRequest) {
-				// GET request
+			if (useUrlRequest)
+                // GET request
 				try {
 					URIBuilder builder = new URIBuilder(labelRequestBuilder.serviceUrl);
 
-					if (labelRequestBuilder.feedbackDocument != null) {
-						builder.setParameter(PARAM_FEEDBACK, labelRequestBuilder.feedbackDocument.getUrl().toString());
-					}
-					if (labelRequestBuilder.metadataDocument != null) {
-						builder.setParameter(PARAM_METADATA, labelRequestBuilder.metadataDocument.getUrl().toString());
-					}
+					if (labelRequestBuilder.feedbackDocument != null)
+                        builder.setParameter(PARAM_FEEDBACK, labelRequestBuilder.feedbackDocument.getUrl().toString());
+					if (labelRequestBuilder.metadataDocument != null)
+                        builder.setParameter(PARAM_METADATA, labelRequestBuilder.metadataDocument.getUrl().toString());
 
-					if (labelRequestBuilder.getDesiredSize() != null) {
-						builder.setParameter(PARAM_DESIREDSIZE, "" + labelRequestBuilder.getDesiredSize());
-					}
+					if (labelRequestBuilder.getDesiredSize() != null)
+                        builder.setParameter(PARAM_DESIREDSIZE, "" + labelRequestBuilder.getDesiredSize());
 
 					request = new HttpGet(builder.build());
 				} catch (URISyntaxException e) {
 					throw new IOException(e);
 				}
-			} else {
+            else {
 				// POST request
 				MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-				if (labelRequestBuilder.feedbackDocument != null) {
-					multipartEntity.addPart(PARAM_FEEDBACK,
+				if (labelRequestBuilder.feedbackDocument != null)
+                    multipartEntity.addPart(PARAM_FEEDBACK,
 							new ByteArrayBody(IOUtils.toByteArray(labelRequestBuilder.feedbackDocument.getContent()),
 									"text/xml", "file1.xml"));
-				}
 
-				if (labelRequestBuilder.metadataDocument != null) {
-					multipartEntity.addPart(PARAM_METADATA,
+				if (labelRequestBuilder.metadataDocument != null)
+                    multipartEntity.addPart(PARAM_METADATA,
 							new ByteArrayBody(IOUtils.toByteArray(labelRequestBuilder.metadataDocument.getContent()),
 									"text/xml", "file2.xml"));
-				}
 
-				if (labelRequestBuilder.getDesiredSize() != null) {
-					multipartEntity.addPart(PARAM_DESIREDSIZE,
+				if (labelRequestBuilder.getDesiredSize() != null)
+                    multipartEntity.addPart(PARAM_DESIREDSIZE,
 							new StringBody("" + labelRequestBuilder.getDesiredSize()));
-
-				}
 
 				HttpPost httpPost = new HttpPost(labelRequestBuilder.serviceUrl);
 				httpPost.setEntity(multipartEntity);
@@ -162,15 +138,46 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 
 	};
 
-	public static GeoLabelRequestBuilder createGeoLabelRequest() {
-		return new GeoLabelRequestBuilder(geolabelRequestHandler, GEOLABEL_URL);
+    protected final static DefaultHttpClient HTTPCLIENT;
+    private static Logger log = LoggerFactory.getLogger(GeoLabelClientV1.class);
+    protected static final String PARAM_DESIREDSIZE = Constants.PARAM_SIZE;
+    protected static final String PARAM_FEEDBACK = Constants.PARAM_FEEDBACK;
+
+    protected static final String PARAM_FEEDBACK_DRILL = Constants.PARAM_FEEDBACK_DRILL;
+
+    protected static final String PARAM_METADATA = Constants.PARAM_METADATA;
+
+    protected static final String PARAM_METADATA_DRILL = Constants.PARAM_METADATA_DRILL;
+
+    static {
+        PoolingClientConnectionManager connectionManager = new PoolingClientConnectionManager();
+        HTTPCLIENT = new DefaultHttpClient(connectionManager);
+    }
+
+    public String createGeoLabelGetUrl(String metadataUrl) {
+        return DEFAULT_GEO_LABEL_SERVER + "?" + PARAM_METADATA + "=" + metadataUrl;
+    }
+
+    private GeoLabelClientV1() {
+        log.debug("NEW {}", this);
+    }
+
+    public static GeoLabelRequestBuilder createGeoLabelRequest() {
+        return new GeoLabelRequestBuilder(geolabelRequestHandler, DEFAULT_GEO_LABEL_SERVER);
 	}
 
-	public static GeoLabelRequestBuilder createGeoLabelRequest(String serviceUrl) {
-		return new GeoLabelRequestBuilder(geolabelRequestHandler, serviceUrl);
+    public static GeoLabelRequestBuilder createGeoLabelRequest(String serviceUrl) {
+        return new GeoLabelRequestBuilder(geolabelRequestHandler, DEFAULT_GEO_LABEL_SERVER);
 	}
 
-	public static String createGeoLabelGetUrl(String metadataUrl) {
-		return GEOLABEL_URL + "?" + PARAM_METADATA + "=" + metadataUrl;
-	}
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("GeoLabelClientV1 [");
+        builder.append("default=");
+        builder.append(DEFAULT_GEO_LABEL_SERVER);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

@@ -52,3 +52,7 @@ InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(m
 String svgString = IOUtils.toString(svg);
 		
 ```
+
+## Example Project
+
+A minimal example Maven project can be found at https://github.com/52North/GEO-label-java/tree/master/client-example

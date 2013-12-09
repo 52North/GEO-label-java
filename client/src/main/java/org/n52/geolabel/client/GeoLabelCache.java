@@ -18,8 +18,18 @@ package org.n52.geolabel.client;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class GeoLabelCache {
+
+    private static Logger log = LoggerFactory.getLogger(GeoLabelCache.class);
+
 	protected static int MAXSIZE = 50;
+
+    public GeoLabelCache() {
+        log.info("NEW {}", this);
+    }
 
 	private static LinkedHashMap<String, String> svgMap = new LinkedHashMap<String, String>(
 			16, 0.75f, true) {
@@ -43,4 +53,5 @@ public class GeoLabelCache {
 	public static void putSVG(String identifier, String svg) {
 		svgMap.put(identifier, svg);
 	}
+
 }
