@@ -66,6 +66,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                 for (int i = 0, len = nodeList.getLength(); i < len; i++) {
                     Node n = nodeList.item(i);
                     String textContent = n.getTextContent();
+                    log.debug("Found content in evaluation of path: {}", textContent);
                     if (textContent != null && !resultFunction.eval(textContent.trim()))
                         break;
                 }
