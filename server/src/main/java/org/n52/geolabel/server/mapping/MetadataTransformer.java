@@ -258,7 +258,7 @@ public class MetadataTransformer {
             DocumentBuilder builder = domFactory.newDocumentBuilder();
             doc = builder.parse(xmlInputStream);
 
-            log.debug("Loaded metadata XML: {}", doc);
+            log.debug("Loaded metadata XML: {}, first child name: {}", doc, doc.getFirstChild().getNodeName());
         }
         catch (Exception e) {
             throw new IOException("Could not parse supplied metadata xml", e);

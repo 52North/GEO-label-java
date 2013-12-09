@@ -87,7 +87,7 @@ public abstract class LabelFacet {
 
 	    /**
      * Updating availability status. AVAILABLE beats all, NOT_AVAILABLE beats NA
-     * 
+     *
      * @param availabilityP
      */
     public void updateAvailability(Availability availabilityP) {
@@ -107,6 +107,10 @@ public abstract class LabelFacet {
         if (this.drilldownURL != null) {
             builder.append("drilldownURL=");
             builder.append(this.drilldownURL);
+        }
+        if (getClass().getCanonicalName() != null) {
+            builder.append("class=");
+            builder.append(getClass().getCanonicalName());
         }
         builder.append("]");
         return builder.toString();
