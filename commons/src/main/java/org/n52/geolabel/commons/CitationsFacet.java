@@ -24,10 +24,10 @@ public class CitationsFacet extends LabelFacet {
 	private int totalCitations;
 
 	public int getTotalCitations() {
-		return totalCitations;
+        return this.totalCitations;
 	}
 
 	public void addCitations(int citationCount) {
-		totalCitations += citationCount;
+        this.totalCitations += citationCount;
 	}
 }

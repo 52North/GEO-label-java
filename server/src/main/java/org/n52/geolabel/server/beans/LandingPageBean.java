@@ -47,15 +47,15 @@ public class LandingPageBean {
 		}
 
 		public String getFeedbackUrl() {
-			return feedback;
+            return this.feedback;
 		}
 
 		public String getMetadataUrl() {
-			return metadata;
+            return this.metadata;
 		}
 
 		public String getTitle() {
-			return title;
+            return this.title;
 		}
 	}
 
@@ -67,19 +67,20 @@ public class LandingPageBean {
 	private List<Example> examplesList = new ArrayList<LandingPageBean.Example>();
 
 	public LandingPageBean() {
-		examplesList.add(new Example("Climate Atlas",
+        this.examplesList.add(new Example("Climate Atlas",
 				"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml"));
 
-		examplesList.add(new Example("Feedback Use Case", null,
+        this.examplesList.add(new Example("Feedback Use Case",
+                                          null,
 				"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/FeedbackUseCase_7_7_metadata.xml"));
 	}
 
 	public String getMetadataUrl() {
-		return metadataUrl;
+        return this.metadataUrl;
 	}
 
 	public String getFeedbackUrl() {
-		return feedbackUrl;
+        return this.feedbackUrl;
 	}
 
 	public void setMetadataUrl(String metadataUrl) {
@@ -91,14 +92,14 @@ public class LandingPageBean {
 	}
 
 	public List<Example> getExamplesList() {
-		return examplesList;
+        return this.examplesList;
 	}
 
 	/**
 	 * Returns the absolute GEO label service API endpoint of this webapp
 	 * instance. For example required by JSF components as these work
 	 * Independent of this service.
-	 * 
+	 *
 	 * @return
 	 * @throws MalformedURLException
 	 */

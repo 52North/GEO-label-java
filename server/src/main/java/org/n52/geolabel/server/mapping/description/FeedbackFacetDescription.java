@@ -43,18 +43,16 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (ratingsPath != null) {
-			ratingsExpression = xPath.compile(ratingsPath);
-		}
-		if (feedbacksCountPath != null) {
-			feedbacksCountExpression = xPath.compile(feedbacksCountPath);
-		}
+        if (this.ratingsPath != null)
+            this.ratingsExpression = xPath.compile(this.ratingsPath);
+        if (this.feedbacksCountPath != null)
+            this.feedbacksCountExpression = xPath.compile(this.feedbacksCountPath);
 		super.initXPaths(xPath);
 	}
 
 	@Override
 	public FeedbackFacet updateFacet(final FeedbackFacet facet, Document metadataXml) throws XPathExpressionException {
-		visitExpressionResultStrings(ratingsExpression, metadataXml, new ExpressionResultFunction() {
+        visitExpressionResultStrings(this.ratingsExpression, metadataXml, new ExpressionResultFunction() {
 			@Override
 			public boolean eval(String value) {
 				facet.addRating(Double.parseDouble(value));
@@ -62,7 +60,7 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
 			}
 		});
 
-		visitExpressionResultStrings(feedbacksCountExpression, metadataXml, new ExpressionResultFunction() {
+        visitExpressionResultStrings(this.feedbacksCountExpression, metadataXml, new ExpressionResultFunction() {
 			@Override
 			public boolean eval(String value) {
 				facet.addFeedbacks(Integer.parseInt(value));
@@ -75,7 +73,7 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
 
 	/**
 	 * * Checks availability of user feedback
-	 * 
+	 *
 	 */
 	@XmlRootElement(name = "userFeedback")
 	public static class UserFeedbackFacetDescription extends FeedbackFacetDescription {
@@ -87,7 +85,7 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
 
 	/**
 	 * @ Checks availability of expert reviews information
-	 * 
+	 *
 	 */
 	@XmlRootElement(name = "expertFeedback")
 	public static class ExpertFeedbackFacetDescription extends FeedbackFacetDescription {

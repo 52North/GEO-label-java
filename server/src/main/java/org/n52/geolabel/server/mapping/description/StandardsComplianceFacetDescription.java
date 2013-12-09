@@ -37,16 +37,15 @@ public class StandardsComplianceFacetDescription extends FacetTransformationDesc
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (standardsPath != null) {
-			standardsExpression = xPath.compile(standardsPath);
-		}
+        if (this.standardsPath != null)
+            this.standardsExpression = xPath.compile(this.standardsPath);
 		super.initXPaths(xPath);
 	}
 
 	@Override
 	public StandardsComplianceFacet updateFacet(final StandardsComplianceFacet facet, Document metadataXml)
 			throws XPathExpressionException {
-		visitExpressionResultStrings(standardsExpression, metadataXml, new ExpressionResultFunction() {
+        visitExpressionResultStrings(this.standardsExpression, metadataXml, new ExpressionResultFunction() {
 			@Override
 			public boolean eval(String value) {
 				facet.addStandard(value);

@@ -29,16 +29,15 @@ public class ProducerProfileFacet extends LabelFacet {
 	private Set<String> organizationNames;
 
 	public Collection<String> getOrganizationNames() {
-		if (organizationNames == null)
+        if (this.organizationNames == null)
 			return Collections.emptySet();
 
-		return organizationNames;
+        return this.organizationNames;
 	}
 
 	public void addOrganizationNames(String organizationName) {
-		if (organizationNames == null) {
-			organizationNames = new HashSet<String>();
-		}
+        if (this.organizationNames == null)
+            this.organizationNames = new HashSet<String>();
 		this.organizationNames.add(organizationName);
 	}
 }

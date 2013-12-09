@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.mapping;
 
 import static org.junit.Assert.assertEquals;
@@ -27,299 +28,310 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.EnumSet;
 
-import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.junit.Test;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet.Availability;
-import org.n52.geolabel.server.Facet;
-import org.xml.sax.SAXException;
+import org.n52.geolabel.commons.test.Facet;
 
 public class MetadataTransformerTest {
 
-	public static MetadataTransformer newMetadataTransformer() {
-		return new MetadataTransformer();
-	}
+    public static MetadataTransformer newMetadataTransformer() {
+        return new MetadataTransformer();
+    }
 
-	@Test
-	public void testParseMetadata() throws IOException {
+    @Test
+    public void testParseMetadata() throws IOException {
 
-		MetadataTransformer metadataTransformer = newMetadataTransformer();
-		metadataTransformer.readTransformationDescription(getClass().getResourceAsStream("transformer.xml"));
+        MetadataTransformer metadataTransformer = newMetadataTransformer();
+        InputStream input = getClass().getResourceAsStream("transformer.xml");
+        metadataTransformer.readTransformationDescription(input);
 
-		InputStream metadataStream = getClass().getResourceAsStream("metadata.xml");
+        InputStream metadataStream = getClass().getResourceAsStream("metadata.xml");
+        // StringWriter writer = new StringWriter();
+        // IOUtils.copy(metadataStream, writer, "utf-8");
+        // String theString = writer.toString();
+        // System.out.println(theString);
 
-		Label geoLabel = metadataTransformer.createGeoLabel(metadataStream);
+        Label geoLabel = metadataTransformer.createGeoLabel(metadataStream);
 
-		assertTrue(geoLabel.getProducerProfileFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getProducerProfileFacet().getOrganizationNames().contains("JRC"));
+        assertTrue(geoLabel.getProducerProfileFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getProducerProfileFacet().getOrganizationNames().contains("JRC"));
 
-		assertTrue(geoLabel.getLineageFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getLineageFacet().getProcessStepCount() == 3);
+        assertTrue(geoLabel.getLineageFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getLineageFacet().getProcessStepCount() == 3);
 
-		assertTrue(geoLabel.getProducerCommentsFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getProducerCommentsFacet().getProducerComments().size() == 2);
+        assertTrue(geoLabel.getProducerCommentsFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getProducerCommentsFacet().getProducerComments().size() == 2);
 
-		assertTrue(geoLabel.getStandardsComplianceFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getStandardsComplianceFacet().getStandards().size() == 1);
+        assertTrue(geoLabel.getStandardsComplianceFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getStandardsComplianceFacet().getStandards().size() == 1);
 
-		assertTrue(geoLabel.getQualityInformationFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getQualityInformationFacet().getScopeLevels().size() == 1);
+        assertTrue(geoLabel.getQualityInformationFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getQualityInformationFacet().getScopeLevels().size() == 1);
 
-		assertTrue(geoLabel.getUserFeedbackFacet().getAvailability() == Availability.NOT_AVAILABLE);
-		assertTrue(geoLabel.getUserFeedbackFacet().getAverageRating() == null);
-		assertTrue(geoLabel.getUserFeedbackFacet().getTotalFeedbacks() == 0);
-		assertTrue(geoLabel.getUserFeedbackFacet().getTotalRatings() == 0);
+        assertTrue(geoLabel.getUserFeedbackFacet().getAvailability() == Availability.NOT_AVAILABLE);
+        assertTrue(geoLabel.getUserFeedbackFacet().getAverageRating() == null);
+        assertTrue(geoLabel.getUserFeedbackFacet().getTotalFeedbacks() == 0);
+        assertTrue(geoLabel.getUserFeedbackFacet().getTotalRatings() == 0);
 
-		assertTrue(geoLabel.getExpertFeedbackFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getExpertFeedbackFacet().getAverageRating().doubleValue() == 2.5);
-		assertTrue(geoLabel.getExpertFeedbackFacet().getTotalFeedbacks() == 2);
-		assertTrue(geoLabel.getExpertFeedbackFacet().getTotalRatings() == 2);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getAverageRating().doubleValue() == 2.5);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getTotalFeedbacks() == 2);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getTotalRatings() == 2);
 
-		assertTrue(geoLabel.getCitationsFacet().getAvailability() == Availability.AVAILABLE);
-		assertTrue(geoLabel.getCitationsFacet().getTotalCitations() == 7);
-	}
+        assertTrue(geoLabel.getCitationsFacet().getAvailability() == Availability.AVAILABLE);
+        assertTrue(geoLabel.getCitationsFacet().getTotalCitations() == 7);
+    }
 
-	private class LabelControlHolder {
-		protected EnumSet<Facet> availableFacets;
+    private class LabelControlHolder {
 
-		protected String[] standards;
-		protected String[] scopeLevels;
-		protected String[] organizationsNames;
-		protected String[] producerCommentsStart;
+        protected EnumSet<Facet> availableFacets;
 
-		protected Integer processStepCount;
+        protected String[] standards;
+        protected String[] scopeLevels;
+        protected String[] organizationsNames;
+        protected String[] producerCommentsStart;
 
-		protected Integer citationCount;
+        protected Integer processStepCount;
 
-		protected Integer expertReviewCount;
-		protected Double expertRating;
-		protected Integer expertRatingCount;
+        protected Integer citationCount;
 
-		protected Integer userReviewCount;
-		protected Double userRating;
-		protected Integer userRatingCount;
-	}
+        protected Integer expertReviewCount;
+        protected Double expertRating;
+        protected Integer expertRatingCount;
 
-	@Test
-	public void testFAO_GEONETWORK() throws IOException {
-		testMetadataExample("FAO_GEO_Network_iso19139.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.LINEAGE,
-						Facet.QUALITY_INFORMATION, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "FAO - NRL" };
-				producerCommentsStart = new String[] { "The EPSMO Project was initiated" };
-				processStepCount = 0;
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-				scopeLevels = new String[] { "dataset" };
-			}
-		});
-	}
+        protected Integer userReviewCount;
+        protected Double userRating;
+        protected Integer userRatingCount;
 
-	@Test
-	public void testFGDC_Producer() throws IOException {
-		testMetadataExample("FGDC_Producer.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "Esri" };
-				standards = new String[] { "FGDC-STD-001-1998" };
-			}
-		});
-	}
+        public LabelControlHolder() {
+            //
+        }
+    }
 
-	@Test
-	public void testGVQ_Aggregated_All() throws IOException {
-		testMetadataExample("GVQ_Aggregated_All_Available.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK));
-				organizationsNames = new String[] { "JRC" };
-				producerCommentsStart = new String[] { "The GVM unit" };
-				processStepCount = 3;
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-				scopeLevels = new String[] { "dataset" };
-				citationCount = 7;
-				expertReviewCount = 2;
-				expertRating = 2.5;
-				expertRatingCount = 2;
-			}
-		});
-	}
+    @Test
+    public void testFAO_GEONETWORK() throws IOException {
+        testMetadataExample("FAO_GEO_Network_iso19139.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE,
+                                                  Facet.PRODUCER_COMMENTS,
+                                                  Facet.LINEAGE,
+                                                  Facet.QUALITY_INFORMATION,
+                                                  Facet.STANDARDS_COMPLIANCE);
+                this.organizationsNames = new String[] {"FAO - NRL"};
+                this.producerCommentsStart = new String[] {"The EPSMO Project was initiated"};
+                this.processStepCount = Integer.valueOf(0);
+                this.standards = new String[] {"ISO 19115:2003/19139, 1.0"};
+                this.scopeLevels = new String[] {"dataset"};
+            }
+        });
+    }
 
-	@Test
-	public void testGVQ_Feedback_All() throws MalformedURLException, IOException, XpathException, SAXException {
-		testMetadataExample("GVQ_Feedback_All_Available.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.EXPERT_REVIEW, Facet.USER_FEEDBACK);
-				citationCount = 4;
+    @Test
+    public void testFGDC_Producer() throws IOException {
+        testMetadataExample("FGDC_Producer.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.STANDARDS_COMPLIANCE);
+                this.organizationsNames = new String[] {"Esri"};
+                this.standards = new String[] {"FGDC-STD-001-1998"};
+            }
+        });
+    }
 
-				expertReviewCount = 1;
-				expertRating = 3d;
-				expertRatingCount = 1;
+    @Test
+    public void testGVQ_Aggregated_All() throws IOException {
+        testMetadataExample("GVQ_Aggregated_All_Available.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK));
+                this.organizationsNames = new String[] {"JRC"};
+                this.producerCommentsStart = new String[] {"The GVM unit"};
+                this.processStepCount = Integer.valueOf(3);
+                this.standards = new String[] {"ISO 19115:2003/19139, 1.0"};
+                this.scopeLevels = new String[] {"dataset"};
+                this.citationCount = Integer.valueOf(7);
+                this.expertReviewCount = Integer.valueOf(2);
+                this.expertRating = Double.valueOf(2.5);
+                this.expertRatingCount = Integer.valueOf(2);
+            }
+        });
+    }
 
-				userReviewCount = 3;
-				userRating = 3d;
-				userRatingCount = 2;
-			}
-		});
-	}
+    @Test
+    public void testGVQ_Feedback_All() throws MalformedURLException, IOException {
+        testMetadataExample("GVQ_Feedback_All_Available.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.EXPERT_REVIEW, Facet.USER_FEEDBACK);
+                this.citationCount = Integer.valueOf(4);
 
-	@Test
-	public void testGVQ_Feedback_No_Expert() throws MalformedURLException, IOException, XpathException, SAXException {
-		testMetadataExample("GVQ_Feedback_No_Expert_Review.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.USER_FEEDBACK);
-				citationCount = 2;
+                this.expertReviewCount = Integer.valueOf(1);
+                this.expertRating = Double.valueOf(3d);
+                this.expertRatingCount = Integer.valueOf(1);
 
-				userReviewCount = 2;
-				userRating = 3d;
-				userRatingCount = 2;
-			}
-		});
-	}
+                this.userReviewCount = Integer.valueOf(3);
+                this.userRating = Double.valueOf(3d);
+                this.userRatingCount = Integer.valueOf(2);
+            }
+        });
+    }
 
-	@Test
-	public void testGVQ_Producer_All() throws IOException {
-		testMetadataExample("GVQ_Producer_All_Available.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK, Facet.EXPERT_REVIEW));
-				organizationsNames = new String[] { "JRC" };
-				producerCommentsStart = new String[] { "The GVM unit" };
-				processStepCount = 3;
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-				scopeLevels = new String[] { "dataset" };
-				citationCount = 5;
-			}
-		});
-	}
-	
-	@Test
-	public void testIndia19139() throws IOException {
-		testMetadataExample("india19139.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "FAO - UN AGL Documentation Center" };
-				producerCommentsStart = new String[] { "ISIS Identifier" };
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-			}
-		});
-	}
-	
-	@Test
-	public void testIndiaGVQ() throws IOException {
-		testMetadataExample("indiaGVQ.xml", new LabelControlHolder() {
-			{
-				availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE, Facet.PRODUCER_COMMENTS, Facet.STANDARDS_COMPLIANCE);
-				organizationsNames = new String[] { "FAO - UN AGL Documentation Center" };
-				producerCommentsStart = new String[] { "ISIS Identifier" };
-				standards = new String[] { "ISO 19115:2003/19139, 1.0" };
-			}
-		});
-	}
+    @Test
+    public void testGVQ_Feedback_No_Expert() throws MalformedURLException, IOException {
+        testMetadataExample("GVQ_Feedback_No_Expert_Review.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.of(Facet.CITATIONS_INFORMATION, Facet.USER_FEEDBACK);
+                this.citationCount = Integer.valueOf(2);
 
-	private void testMetadataExample(String exampleFile, LabelControlHolder control) throws IOException {
-		MetadataTransformer metadataTransformer = newMetadataTransformer();
-		InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(
-				"testfiles/metadata/" + exampleFile);
-		Label label = metadataTransformer.createGeoLabel(metadataStream);
+                this.userReviewCount = Integer.valueOf(2);
+                this.userRating = Double.valueOf(3d);
+                this.userRatingCount = Integer.valueOf(2);
+            }
+        });
+    }
 
-		// Check facet availability
-		if (control.availableFacets != null) {
-			for (Facet facet : EnumSet.allOf(Facet.class)) {
-				assertEquals("Facet " + facet.name() + " availability",
-						control.availableFacets.contains(facet) ? Availability.AVAILABLE : Availability.NOT_AVAILABLE,
-						facet.getFacet(label).getAvailability());
-			}
-		}
+    @Test
+    public void testGVQ_Producer_All() throws IOException {
+        testMetadataExample("GVQ_Producer_All_Available.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK, Facet.EXPERT_REVIEW));
+                this.organizationsNames = new String[] {"JRC"};
+                this.producerCommentsStart = new String[] {"The GVM unit"};
+                this.processStepCount = Integer.valueOf(3);
+                this.standards = new String[] {"ISO 19115:2003/19139, 1.0"};
+                this.scopeLevels = new String[] {"dataset"};
+                this.citationCount = Integer.valueOf(5);
+            }
+        });
+    }
 
-		if (control.organizationsNames != null) {
-			label.getProducerProfileFacet().getOrganizationNames()
-					.containsAll(Arrays.asList(control.organizationsNames));
-		}
+    @Test
+    public void testIndia19139() throws IOException {
+        testMetadataExample("india19139.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE,
+                                                  Facet.PRODUCER_COMMENTS,
+                                                  Facet.STANDARDS_COMPLIANCE);
+                this.organizationsNames = new String[] {"FAO - UN AGL Documentation Center"};
+                this.producerCommentsStart = new String[] {"ISIS Identifier"};
+                this.standards = new String[] {"ISO 19115:2003/19139, 1.0"};
+            }
+        });
+    }
 
-		if (control.producerCommentsStart != null) {
-			// Original service only includes first comment
-			// assertEquals("Number comments",
-			// control.producerCommentsStart.length,
-			// label.getProducerCommentsFacet()
-			// .getProducerComments().size());
-			BitSet commentsToBeFound = new BitSet();
-			commentsToBeFound.set(0, control.producerCommentsStart.length, true);
-			String commentStartRef;
-			for (int i = 0; i < control.producerCommentsStart.length; i++) {
-				commentStartRef = control.producerCommentsStart[i];
-				for (String commentTest : label.getProducerCommentsFacet().getProducerComments()) {
-					if (commentTest.startsWith(commentStartRef)) {
-						commentsToBeFound.set(i, false);
-					}
-				}
-			}
-			assertTrue("Comments", commentsToBeFound.isEmpty());
-		}
+    @Test
+    public void testIndiaGVQ() throws IOException {
+        testMetadataExample("indiaGVQ.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.of(Facet.PRODUCER_PROFILE,
+                                                  Facet.PRODUCER_COMMENTS,
+                                                  Facet.STANDARDS_COMPLIANCE);
+                this.organizationsNames = new String[] {"FAO - UN AGL Documentation Center"};
+                this.producerCommentsStart = new String[] {"ISIS Identifier"};
+                this.standards = new String[] {"ISO 19115:2003/19139, 1.0"};
+            }
+        });
+    }
 
-		if (control.processStepCount != null) {
-			assertEquals("Lineage processing steps", control.processStepCount.intValue(), label.getLineageFacet()
-					.getProcessStepCount());
-		}
+    private void testMetadataExample(String exampleFile, LabelControlHolder control) throws IOException {
+        MetadataTransformer metadataTransformer = newMetadataTransformer();
+        InputStream metadataStream = getClass().getClassLoader().getResourceAsStream("testfiles/metadata/"
+                + exampleFile);
+        Label label = metadataTransformer.createGeoLabel(metadataStream);
 
-		if (control.standards != null) {
-			assertTrue("Standards",
-					label.getStandardsComplianceFacet().getStandards().containsAll(Arrays.asList(control.standards)));
-		}
+        // Check facet availability
+        if (control.availableFacets != null)
+            for (Facet facet : EnumSet.allOf(Facet.class)) {
+                boolean contained = control.availableFacets.contains(facet);
+                Availability expected = contained ? Availability.AVAILABLE : Availability.NOT_AVAILABLE;
+                Availability actual = facet.getFacet(label).getAvailability();
+                assertEquals("Facet " + facet.name() + " availability", expected, actual);
+            }
+        if (control.organizationsNames != null)
+            label.getProducerProfileFacet().getOrganizationNames().containsAll(Arrays.asList(control.organizationsNames));
 
-		if (control.scopeLevels != null) {
-			assertTrue("Scope Levels",
-					label.getQualityInformationFacet().getScopeLevels().containsAll(Arrays.asList(control.scopeLevels)));
-		}
+        if (control.producerCommentsStart != null) {
+            // Original service only includes first comment
+            // assertEquals("Number comments",
+            // control.producerCommentsStart.length,
+            // label.getProducerCommentsFacet()
+            // .getProducerComments().size());
+            BitSet commentsToBeFound = new BitSet();
+            commentsToBeFound.set(0, control.producerCommentsStart.length, true);
+            String commentStartRef;
+            for (int i = 0; i < control.producerCommentsStart.length; i++) {
+                commentStartRef = control.producerCommentsStart[i];
+                for (String commentTest : label.getProducerCommentsFacet().getProducerComments())
+                    if (commentTest.startsWith(commentStartRef))
+                        commentsToBeFound.set(i, false);
+            }
+            assertTrue("Comments", commentsToBeFound.isEmpty());
+        }
 
-		if (control.expertRating != null) {
-			assertEquals("Expert rating", control.expertRating, label.getExpertFeedbackFacet().getAverageRating(), 0.05);
-		}
-		if (control.expertRatingCount != null) {
-			assertEquals("Expert rating count", control.expertRatingCount.intValue(), label.getExpertFeedbackFacet()
-					.getTotalRatings());
-		}
-		if (control.expertReviewCount != null) {
-			assertEquals("Expert review count", control.expertReviewCount.intValue(), label.getExpertFeedbackFacet()
-					.getTotalFeedbacks());
-		}
+        if (control.processStepCount != null)
+            assertEquals("Lineage processing steps",
+                         control.processStepCount.intValue(),
+                         label.getLineageFacet().getProcessStepCount());
 
-		if (control.userRating != null) {
-			assertEquals("User rating", control.userRating, label.getUserFeedbackFacet().getAverageRating(), 0.05);
-		}
-		if (control.userRatingCount != null) {
-			assertEquals("User rating count", control.userRatingCount.intValue(), label.getUserFeedbackFacet()
-					.getTotalRatings());
-		}
-		if (control.userReviewCount != null) {
-			assertEquals("User review count", control.userReviewCount.intValue(), label.getUserFeedbackFacet()
-					.getTotalFeedbacks());
-		}
+        if (control.standards != null)
+            assertTrue("Standards",
+                       label.getStandardsComplianceFacet().getStandards().containsAll(Arrays.asList(control.standards)));
 
-		if (control.citationCount != null) {
-			assertEquals("citations", control.citationCount.intValue(), label.getCitationsFacet().getTotalCitations());
-		}
-	}
+        if (control.scopeLevels != null)
+            assertTrue("Scope Levels",
+                       label.getQualityInformationFacet().getScopeLevels().containsAll(Arrays.asList(control.scopeLevels)));
 
-	@Test
-	public void testLabelUrlKey() throws MalformedURLException {
-		new MetadataTransformer() {
-			{
-				URL testURL1 = new URL("http://test1.resource1");
-				URL testURL2 = new URL("http://test2.resource2");
+        if (control.expertRating != null)
+            assertEquals("Expert rating",
+                         control.expertRating.doubleValue(),
+                         label.getExpertFeedbackFacet().getAverageRating().doubleValue(),
+                         0.05);
+        if (control.expertRatingCount != null)
+            assertEquals("Expert rating count",
+                         control.expertRatingCount.intValue(),
+                         label.getExpertFeedbackFacet().getTotalRatings());
+        if (control.expertReviewCount != null)
+            assertEquals("Expert review count",
+                         control.expertReviewCount.intValue(),
+                         label.getExpertFeedbackFacet().getTotalFeedbacks());
 
-				assertEquals(new LabelUrlKey(testURL1, testURL2), new LabelUrlKey(testURL1, testURL2));
-				assertEquals(new LabelUrlKey(testURL2, testURL1), new LabelUrlKey(testURL1, testURL2));
+        if (control.userRating != null)
+            assertEquals("User rating",
+                         control.userRating.doubleValue(),
+                         label.getUserFeedbackFacet().getAverageRating().doubleValue(),
+                         0.05);
+        if (control.userRatingCount != null)
+            assertEquals("User rating count",
+                         control.userRatingCount.intValue(),
+                         label.getUserFeedbackFacet().getTotalRatings());
+        if (control.userReviewCount != null)
+            assertEquals("User review count",
+                         control.userReviewCount.intValue(),
+                         label.getUserFeedbackFacet().getTotalFeedbacks());
 
-				assertEquals(new LabelUrlKey(null, testURL1), new LabelUrlKey(testURL1, null));
-				assertEquals(new LabelUrlKey(testURL1, null), new LabelUrlKey(null, testURL1));
+        if (control.citationCount != null)
+            assertEquals("citations", control.citationCount.intValue(), label.getCitationsFacet().getTotalCitations());
+    }
 
-				assertNotEquals(new LabelUrlKey(testURL1, testURL2), new LabelUrlKey(testURL1, null));
-				assertNotEquals(new LabelUrlKey(testURL1, testURL2), new LabelUrlKey(null, testURL2));
+    @SuppressWarnings("unused")
+    @Test
+    public void testLabelUrlKey() throws MalformedURLException {
+        new MetadataTransformer() {
+            {
+                URL testURL1 = new URL("http://test1.resource1");
+                URL testURL2 = new URL("http://test2.resource2");
 
-				assertTrue(new LabelUrlKey(testURL1, testURL2).hashCode() == new LabelUrlKey(testURL2, testURL1)
-						.hashCode());
-			}
-		};
+                assertEquals(new LabelUrlKey(testURL1, testURL2), new LabelUrlKey(testURL1, testURL2));
+                assertEquals(new LabelUrlKey(testURL2, testURL1), new LabelUrlKey(testURL1, testURL2));
 
-	}
+                assertEquals(new LabelUrlKey(null, testURL1), new LabelUrlKey(testURL1, null));
+                assertEquals(new LabelUrlKey(testURL1, null), new LabelUrlKey(null, testURL1));
+
+                assertNotEquals(new LabelUrlKey(testURL1, testURL2), new LabelUrlKey(testURL1, null));
+                assertNotEquals(new LabelUrlKey(testURL1, testURL2), new LabelUrlKey(null, testURL2));
+
+                assertTrue(new LabelUrlKey(testURL1, testURL2).hashCode() == new LabelUrlKey(testURL2, testURL1).hashCode());
+            }
+        };
+
+    }
 
 }

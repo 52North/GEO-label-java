@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.geolabel.server;
+package org.n52.geolabel.commons.test;
 
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 
 /**
  * Structure to specify facets for tests against SVG fill color and availability
- * 
+ *
  */
 public enum Facet {
 	PRODUCER_PROFILE("#ED1E7F") {
@@ -85,11 +85,11 @@ public enum Facet {
 	}
 
 	public String getColorAvailable() {
-		return colorAvailable;
+        return this.colorAvailable;
 	}
 
 	public String getColorNotAvailable() {
-		return colorNotAvailable;
+        return this.colorNotAvailable;
 	}
 
 	public abstract LabelFacet getFacet(Label label);

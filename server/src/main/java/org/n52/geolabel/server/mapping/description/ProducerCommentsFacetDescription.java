@@ -27,10 +27,11 @@ import org.w3c.dom.Document;
 
 /**
  * Checks availability of producer comments information
- * 
+ *
  */
 @XmlRootElement(name = "producerComments")
 public class ProducerCommentsFacetDescription extends FacetTransformationDescription<ProducerCommentsFacet> {
+
 	@XmlElement
 	private String producerCommentsPath;
 
@@ -38,16 +39,15 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (producerCommentsPath != null) {
-			producerCommentsExpression = xPath.compile(producerCommentsPath);
-		}
+        if (this.producerCommentsPath != null)
+            this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);
 		super.initXPaths(xPath);
 	}
 
 	@Override
 	public ProducerCommentsFacet updateFacet(final ProducerCommentsFacet facet, Document metadataXml)
 			throws XPathExpressionException {
-		visitExpressionResultStrings(producerCommentsExpression, metadataXml, new ExpressionResultFunction() {
+        visitExpressionResultStrings(this.producerCommentsExpression, metadataXml, new ExpressionResultFunction() {
 			@Override
 			public boolean eval(String value) {
 				facet.addProducerComment(value);

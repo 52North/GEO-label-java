@@ -37,15 +37,14 @@ public class CitationsFacetDescription extends FacetTransformationDescription<Ci
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (citationsCountPath != null) {
-			citationsCountExpression = xPath.compile(citationsCountPath);
-		}
+        if (this.citationsCountPath != null)
+            this.citationsCountExpression = xPath.compile(this.citationsCountPath);
 		super.initXPaths(xPath);
 	}
 
 	@Override
 	public CitationsFacet updateFacet(final CitationsFacet facet, Document metadataXml) throws XPathExpressionException {
-		visitExpressionResultStrings(citationsCountExpression, metadataXml, new ExpressionResultFunction() {
+        visitExpressionResultStrings(this.citationsCountExpression, metadataXml, new ExpressionResultFunction() {
 			@Override
 			public boolean eval(String value) {
 				facet.addCitations(Integer.parseInt(value));

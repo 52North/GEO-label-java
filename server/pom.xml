@@ -8,7 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>server</artifactId>
 	<packaging>war</packaging>
-	
+
 	<name>GEO label Java Server</name>
 
 	<parent>
@@ -33,11 +33,15 @@
 
 	<properties>
 		<!-- Directory where swagger-maven-plugin generates its output, relative to pom location -->
-		<webapp.swagger.dir>swagger-generated</webapp.swagger.dir>
+		<webapp.swagger.dir>${project.build.directory}/swagger-generated</webapp.swagger.dir>
 		<swagger.basepath>http://geoviqua.dev.52north.org/glbservice/api</swagger.basepath>
+
+		<geolabel.logger.filepath>${catalina.base:-.}/logs/geolabel</geolabel.logger.filepath>
 	</properties>
 
 	<build>
+		<finalName>glbservice</finalName>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -70,67 +74,18 @@
 		</pluginManagement>
 
 		<plugins>
-
-			<!-- License headers -->
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
-						<exclude>
-							src/test/resources/testfiles/**
-						</exclude>
+						<exclude>**/logback.xml</exclude>
+						<exclude>**/logback-test.xml</exclude>
+						<exclude>src/test/resources/testfiles/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
 
-			<!-- Generate swagger json listing and documentation pages -->
-			<plugin>
-				<groupId>com.github.kongchen</groupId>
-				<artifactId>swagger-maven-plugin</artifactId>
-				<version>1.1.2-SNAPSHOT</version>
-				<configuration>
-					<apiSources>
-						<apiSource>
-							<apiVersion>v1</apiVersion>
-							<basePath>${swagger.basepath}</basePath>
-							<outputTemplate>${project.basedir}/src/main/webapp/api.xhtml</outputTemplate>
-							<outputPath>${project.basedir}/${webapp.swagger.dir}/api.xhtml</outputPath>
-							<withFormatSuffix>false</withFormatSuffix>
-							<swaggerDirectory>${project.basedir}/${webapp.swagger.dir}/api-docs</swaggerDirectory>
-							<useOutputFlatStructure>false</useOutputFlatStructure>
-							<!--mustacheFileRoot>${basedir}/src/main/resources/</mustacheFileRoot -->
-						</apiSource>
-					</apiSources>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-
-					<dependency>
-						<groupId>com.wordnik</groupId>
-						<artifactId>swagger-jersey-jaxrs_2.10.0</artifactId>
-						<version>1.2.5</version>
-						<scope>compile</scope>
-					</dependency>
-
-					<dependency>
-						<groupId>com.wordnik</groupId>
-						<artifactId>swagger-codegen_2.10</artifactId>
-						<version>2.0.11</version>
-						<scope>compile</scope>
-					</dependency>
-
-				</dependencies>
-			</plugin>
-
-			<!-- Generate war, including swagged data -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -138,100 +93,14 @@
 				<configuration>
 					<webResources>
 						<resource>
-							<directory>${webapp.swagger.dir}</directory>
+							<directory>src/main/webapp</directory>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
 						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
-
-			<!-- Integration Test -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.11</version>
-				<configuration>
-					<systemPropertyVariables>
-						<jettyPort>${jetty.port}</jettyPort>
-					</systemPropertyVariables>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>reserve-network-port</id>
-						<goals>
-							<goal>reserve-network-port</goal>
-						</goals>
-						<phase>pre-integration-test</phase>
-						<configuration>
-							<portNames>
-								<portName>jetty.stopPort</portName>
-								<portName>jetty.port</portName>
-							</portNames>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.0.5.v20130815</version>
-				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopPort>${jetty.stopPort}</stopPort>
-					<stopKey>STOP</stopKey>
-					<contextPath>/</contextPath>
-					<httpConnector>
-						<port>${jetty.port}</port>
-					</httpConnector>
-				</configuration>
-
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run-exploded</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-
-				</executions>
-			</plugin>
-
-
 		</plugins>
-
-		<finalName>glbservice</finalName>
 	</build>
 
 	<pluginRepositories>
@@ -402,9 +271,6 @@
 		<profile>
 			<!-- Profile for compiling for application server, jsf provided -->
 			<id>appserver</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<dependencies>
 				<dependency>
 					<groupId>com.sun.faces</groupId>
@@ -419,6 +285,11 @@
 		<profile>
 			<!-- Profile for compiling for webserver, not ee-applicationserver, needs additional jsf components -->
 			<id>webserver</id>
+			<activation>
+				<property>
+					<name>!foo.bar</name>
+				</property>
+			</activation>
 			<dependencies>
 				<dependency>
 					<groupId>com.sun.faces</groupId>
@@ -433,6 +304,76 @@
 					<scope>compile</scope>
 				</dependency>
 			</dependencies>
+		</profile>
+
+		<profile>
+			<!-- profile for generating api information with swagger, not active by default because it is still buggy -->
+			<id>swagger</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<resource>
+									<directory>${webapp.swagger.dir}</directory>
+								</resource>
+								<resource>
+									<directory>src/main/webapp</directory>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				
+					<!-- Generate swagger json listing and documentation pages -->
+					<plugin>
+						<groupId>com.github.kongchen</groupId>
+						<artifactId>swagger-maven-plugin</artifactId>
+						<configuration>
+							<apiSources>
+								<apiSource>
+									<apiVersion>v1</apiVersion>
+									<basePath>${swagger.basepath}</basePath>
+									<outputTemplate>${project.basedir}/src/main/webapp/api.xhtml</outputTemplate>
+									<outputPath>${webapp.swagger.dir}/api.xhtml</outputPath>
+									<withFormatSuffix>false</withFormatSuffix>
+									<swaggerDirectory>${webapp.swagger.dir}/api-docs</swaggerDirectory>
+									<!-- <useOutputFlatStructure>false</useOutputFlatStructure> -->
+									<!--mustacheFileRoot>${basedir}/src/main/resources/</mustacheFileRoot -->
+								</apiSource>
+							</apiSources>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+
+							<dependency>
+								<groupId>com.wordnik</groupId>
+								<artifactId>swagger-jersey-jaxrs_2.10.0</artifactId>
+								<version>1.2.5</version>
+								<scope>compile</scope>
+							</dependency>
+
+							<dependency>
+								<groupId>com.wordnik</groupId>
+								<artifactId>swagger-codegen_2.10</artifactId>
+								<version>2.0.11</version>
+								<scope>compile</scope>
+							</dependency>
+
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>

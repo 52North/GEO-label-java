@@ -74,10 +74,10 @@ public class SVGResourceV1 {
 			con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
 			con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
 			label = Label.fromXML(con.getInputStream());
-		} else {
-			label = lmlResource.get().getLabelByURL(metadataURL, feedbackURL);
 		}
-		return createLabelSVGResponse(size != null ? size : 200, id, label);
+        else
+            label = this.lmlResource.get().getLabelByURL(metadataURL, feedbackURL);
+        return createLabelSVGResponse(size != null ? size.intValue() : 200, id, label);
 	}
 
 	@POST
@@ -94,10 +94,10 @@ public class SVGResourceV1 {
 	/* @ApiParam("Desired size of returned SVG") */@FormDataParam(Constants.PARAM_SIZE) Integer size,
 	/* @ApiParam("Desired id of returned SVG root element") */@FormDataParam(Constants.PARAM_ID) String id)
 			throws IOException {
-		if (label == null) {
-			label = lmlResource.get().getLabelByFile(metadataInputStream, feedbackInputStream);
-		}
-		return createLabelSVGResponse(size != null ? size : 200, id, label);
+        Label l = label;
+        if (l == null)
+            l = this.lmlResource.get().getLabelByFile(metadataInputStream, feedbackInputStream);
+        return createLabelSVGResponse(size != null ? size.intValue() : 200, id, l);
 	}
 
 	static Response createLabelSVGResponse(final int size, final String id, final Label label) {

@@ -29,16 +29,15 @@ public class QualityInformationFacet extends LabelFacet {
 	private Set<String> scopeLevels;
 
 	public Collection<String> getScopeLevels() {
-		if (scopeLevels == null)
+        if (this.scopeLevels == null)
 			return Collections.emptySet();
 
-		return scopeLevels;
+        return this.scopeLevels;
 	}
 
 	public void addScopeLevel(String level) {
-		if (scopeLevels == null) {
-			scopeLevels = new HashSet<String>();
-		}
+        if (this.scopeLevels == null)
+            this.scopeLevels = new HashSet<String>();
 		this.scopeLevels.add(level);
 	}
 }

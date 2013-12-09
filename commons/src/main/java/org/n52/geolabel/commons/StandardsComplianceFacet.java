@@ -29,16 +29,15 @@ public class StandardsComplianceFacet extends LabelFacet {
 	private Set<String> standards;
 
 	public Collection<String> getStandards() {
-		if (standards == null)
+        if (this.standards == null)
 			return Collections.emptySet();
-		
-		return standards;
+
+        return this.standards;
 	}
 
 	public void addStandard(String standard) {
-		if (standards == null) {
-			standards = new HashSet<String>();
-		}
+        if (this.standards == null)
+            this.standards = new HashSet<String>();
 		this.standards.add(standard);
 	}
 }

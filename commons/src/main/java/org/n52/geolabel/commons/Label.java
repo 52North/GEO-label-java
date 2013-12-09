@@ -57,6 +57,57 @@ public class Label {
 		protected ExpertFeedbackFacet expertFeedbackFacet = new ExpertFeedbackFacet();
 		@XmlElementRef
 		protected CitationsFacet citationsFacet = new CitationsFacet();
+
+        public FacetHolder() {
+            //
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("FacetHolder [");
+            if (this.producerProfileFacet != null) {
+                builder.append("producerProfileFacet=");
+                builder.append(this.producerProfileFacet);
+                builder.append(", ");
+            }
+            if (this.producerCommentsFacet != null) {
+                builder.append("producerCommentsFacet=");
+                builder.append(this.producerCommentsFacet);
+                builder.append(", ");
+            }
+            if (this.lineageFacet != null) {
+                builder.append("lineageFacet=");
+                builder.append(this.lineageFacet);
+                builder.append(", ");
+            }
+            if (this.standardsComplianceFacet != null) {
+                builder.append("standardsComplianceFacet=");
+                builder.append(this.standardsComplianceFacet);
+                builder.append(", ");
+            }
+            if (this.qualityInformationFacet != null) {
+                builder.append("qualityInformationFacet=");
+                builder.append(this.qualityInformationFacet);
+                builder.append(", ");
+            }
+            if (this.userFeedbackFacet != null) {
+                builder.append("userFeedbackFacet=");
+                builder.append(this.userFeedbackFacet);
+                builder.append(", ");
+            }
+            if (this.expertFeedbackFacet != null) {
+                builder.append("expertFeedbackFacet=");
+                builder.append(this.expertFeedbackFacet);
+                builder.append(", ");
+            }
+            if (this.citationsFacet != null) {
+                builder.append("citationsFacet=");
+                builder.append(this.citationsFacet);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
 	}
 
 	final static Logger log = LoggerFactory.getLogger(Label.class);
@@ -69,35 +120,35 @@ public class Label {
 	private static Template svgTemplate;
 
 	public ProducerProfileFacet getProducerProfileFacet() {
-		return facetHolder.producerProfileFacet;
+        return this.facetHolder.producerProfileFacet;
 	}
 
 	public LineageFacet getLineageFacet() {
-		return facetHolder.lineageFacet;
+        return this.facetHolder.lineageFacet;
 	}
 
 	public ProducerCommentsFacet getProducerCommentsFacet() {
-		return facetHolder.producerCommentsFacet;
+        return this.facetHolder.producerCommentsFacet;
 	}
 
 	public StandardsComplianceFacet getStandardsComplianceFacet() {
-		return facetHolder.standardsComplianceFacet;
+        return this.facetHolder.standardsComplianceFacet;
 	}
 
 	public QualityInformationFacet getQualityInformationFacet() {
-		return facetHolder.qualityInformationFacet;
+        return this.facetHolder.qualityInformationFacet;
 	}
 
 	public FeedbackFacet getUserFeedbackFacet() {
-		return facetHolder.userFeedbackFacet;
+        return this.facetHolder.userFeedbackFacet;
 	}
 
 	public FeedbackFacet getExpertFeedbackFacet() {
-		return facetHolder.expertFeedbackFacet;
+        return this.facetHolder.expertFeedbackFacet;
 	}
 
 	public CitationsFacet getCitationsFacet() {
-		return facetHolder.citationsFacet;
+        return this.facetHolder.citationsFacet;
 	}
 
 	public static Label fromXML(InputStream input) throws IOException {
@@ -126,7 +177,7 @@ public class Label {
 	/**
 	 * Obtains freemarker template for geolabel from classpath and caches
 	 * result.
-	 * 
+	 *
 	 * @return
 	 * @throws IOException
 	 */
@@ -142,7 +193,7 @@ public class Label {
 	public void toSVG(Writer writer, final String id, final int size) throws IOException {
 		try {
 			SimpleHash model = new SimpleHash();
-			model.put("size", size);
+            model.put("size", Integer.valueOf(size));
 			model.put("id", id);
 			model.put("label", this);
 
@@ -152,5 +203,17 @@ public class Label {
 			throw new IOException("Unable to process SVG template");
 		}
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Label [");
+        if (this.facetHolder != null) {
+            builder.append("facetHolder=");
+            builder.append(this.facetHolder);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
 
 }

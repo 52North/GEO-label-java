@@ -24,7 +24,7 @@ public class LineageFacet extends LabelFacet {
 	private int totalProcessSteps;
 
 	public int getProcessStepCount() {
-		return totalProcessSteps;
+        return this.totalProcessSteps;
 	}
 
 	public void addProcessSteps(int processStepCount) {

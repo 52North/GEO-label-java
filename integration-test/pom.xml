@@ -48,14 +48,121 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>2.11</version>
+						<artifactId>maven-dependency-plugin</artifactId>
 						<executions>
 							<execution>
+								<id>unpack</id>
+								<phase>test</phase>
+								<goals>
+									<goal>unpack</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>org.n52.geolabel</groupId>
+											<artifactId>server</artifactId>
+											<version>${project.version}</version>
+											<type>war</type>
+											<overWrite>true</overWrite>
+											<outputDirectory>${project.build.directory}/${targetWebappName}</outputDirectory>
+											<excludes>**/logback.xml</excludes>
+										</artifactItem>
+									</artifactItems>
+									<overWriteReleases>true</overWriteReleases>
+									<overWriteSnapshots>true</overWriteSnapshots>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.11</version>
+						<configuration>
+							<systemPropertyVariables>
+								<jettyPort>${jetty.port}</jettyPort>
+							</systemPropertyVariables>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
 								<goals>
 									<goal>integration-test</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>verify</id>
+								<goals>
 									<goal>verify</goal>
 								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<id>reserve-network-port</id>
+								<goals>
+									<goal>reserve-network-port</goal>
+								</goals>
+								<phase>pre-integration-test</phase>
+								<configuration>
+									<portNames>
+										<portName>jetty.stopPort</portName>
+										<portName>jetty.port</portName>
+									</portNames>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>9.0.5.v20130815</version>
+						<configuration>
+							<scanIntervalSeconds>10</scanIntervalSeconds>
+							<stopPort>${jetty.stopPort}</stopPort>
+							<stopKey>STOP</stopKey>
+							<contextPath>/</contextPath>
+							<httpConnector>
+								<port>${jetty.port}</port>
+							</httpConnector>
+						</configuration>
+						<executions>
+							<execution>
+								<id>start-jetty</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>run-exploded</goal>
+								</goals>
+								<configuration>
+									<scanIntervalSeconds>1</scanIntervalSeconds>
+									<daemon>true</daemon>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stop-jetty</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+					<!-- disable swagger during integration-tests -->
+					<plugin>
+						<groupId>com.github.kongchen</groupId>
+						<artifactId>swagger-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>none</phase>
 							</execution>
 						</executions>
 					</plugin>
@@ -95,6 +202,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.4</version>
 			<scope>test</scope>
 		</dependency>
 

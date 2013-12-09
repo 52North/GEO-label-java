@@ -27,7 +27,7 @@ import org.w3c.dom.Document;
 
 /**
  * Checks availability of quality information
- * 
+ *
  */
 @XmlRootElement(name = "qualityInformation")
 public class QualityInformationFacetDescription extends
@@ -39,9 +39,8 @@ public class QualityInformationFacetDescription extends
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (scopeLevelPath != null) {
-			scopeLevelExpression = xPath.compile(scopeLevelPath);
-		}
+        if (this.scopeLevelPath != null)
+            this.scopeLevelExpression = xPath.compile(this.scopeLevelPath);
 		super.initXPaths(xPath);
 	}
 
@@ -49,7 +48,7 @@ public class QualityInformationFacetDescription extends
 	public QualityInformationFacet updateFacet(
 			final QualityInformationFacet facet, Document metadataXml)
 			throws XPathExpressionException {
-		visitExpressionResultStrings(scopeLevelExpression, metadataXml,
+        visitExpressionResultStrings(this.scopeLevelExpression, metadataXml,
 				new ExpressionResultFunction() {
 					@Override
 					public boolean eval(String value) {

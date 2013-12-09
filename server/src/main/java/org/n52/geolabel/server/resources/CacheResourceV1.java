@@ -43,7 +43,7 @@ public class CacheResourceV1 {
 
 		@SuppressWarnings("unused")
 		CacheMappingsHolder() {
-
+            //
 		}
 
 		public CacheMappingsHolder(Set<LabelUrlKey> cacheMappings) {
@@ -66,6 +66,6 @@ public class CacheResourceV1 {
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@ApiOperation(value = "Returns a list of currently cached metadata/feedback url mappings")
 	public CacheMappingsHolder getCacheInfo() {
-		return new CacheMappingsHolder(transformer.get().getCacheContent());
+        return new CacheMappingsHolder(this.transformer.get().getCacheContent());
 	}
 }

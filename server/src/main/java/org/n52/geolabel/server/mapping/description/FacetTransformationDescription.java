@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.mapping.description;
 
 import java.util.ArrayList;
@@ -29,98 +30,131 @@ import javax.xml.xpath.XPathExpressionException;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-@XmlSeeAlso({ ProducerProfileFacetDescription.class,
-		LineageFacetDescription.class, ProducerCommentsFacetDescription.class,
-		StandardsComplianceFacetDescription.class,
-		QualityInformationFacetDescription.class,
-		FeedbackFacetDescription.class, CitationsFacetDescription.class })
+@XmlSeeAlso({ProducerProfileFacetDescription.class,
+             LineageFacetDescription.class,
+             ProducerCommentsFacetDescription.class,
+             StandardsComplianceFacetDescription.class,
+             QualityInformationFacetDescription.class,
+             FeedbackFacetDescription.class,
+             CitationsFacetDescription.class})
 public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
-	protected interface ExpressionResultFunction {
-		boolean eval(String value);
-	}
+    private static Logger log = LoggerFactory.getLogger(FacetTransformationDescription.class);
 
-	protected static void visitExpressionResultStrings(
-			XPathExpression expression, Document xml,
-			ExpressionResultFunction resultFunction)
-			throws XPathExpressionException {
-		if (expression == null) {
-			return;
-		}
+    protected interface ExpressionResultFunction {
+        boolean eval(String value);
+    }
 
-		Object evaluationResult = expression.evaluate(xml,
-				XPathConstants.NODESET);
-		if (evaluationResult instanceof NodeList) {
-			NodeList nodeList = (NodeList) evaluationResult;
-			for (int i = 0, len = nodeList.getLength(); i < len; i++) {
-				String textContent = nodeList.item(i).getTextContent();
-				if (textContent != null
-						&& !resultFunction.eval(textContent.trim())) {
-					break;
-				}
-			}
-		} else if (evaluationResult instanceof Collection<?>) {
-			ArrayList<?> resultList = (ArrayList<?>) evaluationResult;
-			for (int i = 0, len = resultList.size(); i < len; i++) {
-				String textContent = resultList.get(i).toString();
-				if (!resultFunction.eval(textContent.trim())) {
-					break;
-				}
-			}
-		} else {
-			throw new IllegalStateException(
-					"XPath generated unexpected result type of "
-							+ evaluationResult.getClass().getSimpleName());
-		}
-	}
+    protected static void visitExpressionResultStrings(XPathExpression expression,
+                                                       Document xml,
+                                                       ExpressionResultFunction resultFunction) throws XPathExpressionException {
+        if (expression == null)
+            return;
 
-	@XmlElement
-	private String availabilityPath;
+        Object evaluationResult = expression.evaluate(xml, XPathConstants.NODESET);
+        if (evaluationResult instanceof NodeList) {
+            NodeList nodeList = (NodeList) evaluationResult;
+            if (nodeList.getLength() < 1)
+                log.debug("Evaluation returned no results for expression '{}' and xml '{}'", expression, xml);
+            else
+                for (int i = 0, len = nodeList.getLength(); i < len; i++) {
+                    Node n = nodeList.item(i);
+                    String textContent = n.getTextContent();
+                    log.debug("Found content in evaluation of path: {}", textContent);
+                    if (textContent != null && !resultFunction.eval(textContent.trim()))
+                        break;
+                }
+        }
+        else if (evaluationResult instanceof Collection< ? >) {
+            ArrayList< ? > resultList = (ArrayList< ? >) evaluationResult;
+            if (resultList.size() < 1)
+                log.debug("Evaluation returned no results for expression '{}' and xml '{}'", expression, xml);
 
-	private XPathExpression availabilityExpression;
+            for (int i = 0, len = resultList.size(); i < len; i++) {
+                String textContent = resultList.get(i).toString();
+                if ( !resultFunction.eval(textContent.trim()))
+                    break;
+            }
+        }
+        else
+            throw new IllegalStateException("XPath generated unexpected result type of "
+                    + evaluationResult.getClass().getSimpleName());
+    }
 
-	public abstract T getAffectedFacet(Label label);
+    @XmlElement
+    private String availabilityPath;
 
-	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (availabilityPath != null)
-			availabilityExpression = xPath.compile(availabilityPath);
-	}
+    private XPathExpression availabilityExpression;
 
-	public T updateFacet(final T facet, Document metadataXml)
-			throws XPathExpressionException {
-		if (availabilityExpression == null)
-			return facet;
+    public abstract T getAffectedFacet(Label label);
 
-		final AtomicBoolean hasTextNodes = new AtomicBoolean(false);
-		visitExpressionResultStrings(availabilityExpression, metadataXml,
-				new ExpressionResultFunction() {
-					@Override
-					public boolean eval(String value) {
-						if (!value.isEmpty()) {
-							hasTextNodes.set(true);
-							return false;
-						}
-						return true;
-					}
-				});
+    public void initXPaths(XPath xPath) throws XPathExpressionException {
+        if (this.availabilityPath != null)
+            this.availabilityExpression = xPath.compile(this.availabilityPath);
+    }
 
-		facet.updateAvailability(hasTextNodes.get() ? Availability.AVAILABLE
-				: Availability.NOT_AVAILABLE);
+    public T updateFacet(final T facet, Document metadataXml) throws XPathExpressionException {
+        if (this.availabilityExpression == null)
+            return facet;
 
-		return facet;
-	}
+        final AtomicBoolean hasTextNodes = new AtomicBoolean(false);
+        log.debug("Checking availability of facet {} using {} in document {}",
+                  facet.getClass().getSimpleName(),
+                  this.availabilityPath,
+                  metadataXml);
 
-	public Label updateLabel(Label label, Document metadataXml) {
-		try {
-			updateFacet(getAffectedFacet(label), metadataXml);
-			return label;
-		} catch (XPathExpressionException e) {
-			throw new RuntimeException(
-					"Error while executing XPath expression", e);
-		}
+        visitExpressionResultStrings(this.availabilityExpression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                if ( !value.isEmpty()) {
+                    hasTextNodes.set(true);
+                    return false;
+                }
+                return true;
+            }
+        });
 
-	}
+        boolean hasTextNodesB = hasTextNodes.get();
+        Availability availability = hasTextNodesB ? Availability.AVAILABLE : Availability.NOT_AVAILABLE;
+        facet.updateAvailability(availability);
+
+        return facet;
+    }
+
+    public Label updateLabel(Label label, Document metadataXml) {
+        try {
+            T affectedF = getAffectedFacet(label);
+            T updatedFacet = updateFacet(affectedF, metadataXml);
+            log.debug("Updated facet: {} \n\t\tfor label: {}", updatedFacet, label);
+            return label;
+        }
+        catch (XPathExpressionException e) {
+            throw new RuntimeException("Error while executing XPath expression", e);
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("FacetTransformationDescription [");
+        if (this.availabilityPath != null) {
+            builder.append("availabilityPath=");
+            builder.append(this.availabilityPath);
+            builder.append(", ");
+        }
+        if (this.availabilityExpression != null) {
+            builder.append("availabilityExpression=");
+            builder.append(this.availabilityExpression);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

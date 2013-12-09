@@ -26,6 +26,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.junit.Test;
+import org.n52.geolabel.commons.test.Facet;
 import org.xml.sax.SAXException;
 
 public class StaticLabelIT extends XMLTestCaseLabelBase {
@@ -54,9 +55,9 @@ public class StaticLabelIT extends XMLTestCaseLabelBase {
 	}
 
 	private String getServerResourceAsString(String url) throws ClientProtocolException, IOException {
-		url = getTestServiceUrl() + "static/" + url;
+        String testUrl = getTestServiceUrl() + "static/" + url;
 		DefaultHttpClient httpClient = new DefaultHttpClient();
-		HttpEntity responseEntity = httpClient.execute(new HttpGet(url)).getEntity();
+        HttpEntity responseEntity = httpClient.execute(new HttpGet(testUrl)).getEntity();
 		return IOUtils.toString(responseEntity.getContent());
 	}
 }

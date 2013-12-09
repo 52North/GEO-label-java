@@ -28,7 +28,7 @@ import org.w3c.dom.Document;
 
 /**
  * Checks availability of lineage information
- * 
+ *
  */
 @XmlRootElement(name = "lineage")
 public class LineageFacetDescription extends FacetTransformationDescription<LineageFacet> {
@@ -39,18 +39,17 @@ public class LineageFacetDescription extends FacetTransformationDescription<Line
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-		if (processStepCountPath != null)
-			processStepCountExpression = xPath.compile(processStepCountPath);
+        if (this.processStepCountPath != null)
+            this.processStepCountExpression = xPath.compile(this.processStepCountPath);
 		super.initXPaths(xPath);
 	}
 
 	@Override
 	public LineageFacet updateFacet(LineageFacet facet, Document metadataXml) throws XPathExpressionException {
-		if (processStepCountExpression != null) {
-			Double result = (Double) processStepCountExpression.evaluate(metadataXml, XPathConstants.NUMBER);
-			if (result != null) {
-				facet.addProcessSteps(result.intValue());
-			}
+        if (this.processStepCountExpression != null) {
+            Double result = (Double) this.processStepCountExpression.evaluate(metadataXml, XPathConstants.NUMBER);
+			if (result != null)
+                facet.addProcessSteps(result.intValue());
 		}
 
 		return super.updateFacet(facet, metadataXml);

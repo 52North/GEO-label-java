@@ -62,12 +62,11 @@ public class LMLResourceV1 {
 			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
 			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL)
 			throws IOException {
-		if (metadataURL == null && feedbackURL == null) {
-			throw new WebApplicationException(Response.serverError().type(MediaType.TEXT_PLAIN)
+		if (metadataURL == null && feedbackURL == null)
+            throw new WebApplicationException(Response.serverError().type(MediaType.TEXT_PLAIN)
 					.entity("No metadata or feedback URL specified").build());
-		}
 
-		MetadataTransformer metadataTransformer = transformer.get();
+        MetadataTransformer metadataTransformer = this.transformer.get();
 
 		return metadataTransformer.getLabel(metadataURL, feedbackURL);
 	}
@@ -83,8 +82,8 @@ public class LMLResourceV1 {
 	/* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
 	/* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream)
 			throws IOException {
-		MetadataTransformer metadataTransformer = transformer.get();
- 
+        MetadataTransformer metadataTransformer = this.transformer.get();
+
 		Label label = new Label();
 		PushbackInputStream tempStream;
 		boolean hasData = false;
@@ -95,9 +94,9 @@ public class LMLResourceV1 {
 				tempStream.unread(t);
 				metadataTransformer.updateGeoLabel(tempStream, label);
 				hasData = true;
-			} else {
-				tempStream.close();
 			}
+            else
+                tempStream.close();
 		}
 		if (feedbackInputStream != null) {
 			tempStream = new PushbackInputStream(feedbackInputStream);
@@ -106,15 +105,14 @@ public class LMLResourceV1 {
 				tempStream.unread(t);
 				metadataTransformer.updateGeoLabel(tempStream, label);
 				hasData = true;
-			} else {
-				tempStream.close();
 			}
+            else
+                tempStream.close();
 		}
 
-		if (!hasData) {
-			throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN)
+		if (!hasData)
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN)
 					.entity("No metadata or feedback file specified").build());
-		}
 
 		return label;
 	}
