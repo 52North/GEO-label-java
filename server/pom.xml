@@ -85,16 +85,12 @@
 				</configuration>
 			</plugin>
 
-			<!-- Generate war, including swagged data -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
 					<webResources>
-						<resource>
-							<directory>${webapp.swagger.dir}</directory>
-						</resource>
 						<resource>
 							<directory>src/main/webapp</directory>
 							<directory>src/main/resources</directory>
