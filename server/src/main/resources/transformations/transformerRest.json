@@ -1,0 +1,101 @@
+{"transformerRest": {
+
+	"transformationDescription": {
+		
+		"namespaceMappings": {
+			"mapping": [
+				{"prefix": "gmd", "namespace": "http://www.isotc211.org/2005/gmd"}
+			]
+		},
+
+		"facetDescriptions": {
+		
+			"producerProfile": {
+				"availabilityPath": "boolean(normalize-space(string(//*[local-name()='contact']/*[local-name()='CI_ResponsibleParty'] | //*[local-name()='ptcontac']/*[local-name()='cntinfo'] | //*[local-name()='pointOfContact']/*[local-name()='CI_ResponsibleParty'])))",
+				"hoverover": {
+					"facetName": "Producer Profile",
+					"template": "Organisation name: %s.",
+					"text": {
+						"organizationNamePath": "normalize-space(string(//*[local-name()='contact']/*[local-name()='CI_ResponsibleParty']/*[local-name()='organisationName'] | //*[local-name()='ptcontac']/*[local-name()='cntinfo']//*[local-name()='cntorg'] | //*[local-name()='pointOfContact']/*[local-name()='CI_ResponsibleParty']/*[local-name()='organisationName']))"
+					}
+				},
+				"drilldown": {
+					"url": "http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=producer_profile"
+				}
+		
+		},
+			
+			"producerComments": {
+				"availabilityPath": "boolean(normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation'])))",
+				"hoverover": {
+					"facetName": "Producer Comments",
+					"template": "Supplemental information: %s. %sKnown problems: %s.",
+					"text": {
+						"supplementalInformation": "normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation']))",
+						"knownProblemsPath": ""
+					}
+				},
+				"drilldown": {
+					"url": "http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=producer_comments"
+				}
+			},
+			
+			"lineage": {
+				"availabilityPath": "boolean(normalize-space(string(//*[local-name()='trace']/*[local-name()='LI_Lineage']/*[local-name()='processStep'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='statement'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='processStep'])))",
+				"hoverover": {
+					"facetName": "Lineage Information",
+					"template": "Number of process steps: %d.",
+					"text": {
+						"processStepCountPath": "count(//*[local-name()='lineage']//*[local-name()='processStep'] | //*[local-name()='LI_Lineage']//*[local-name()='processStep'] | //*[local-name()='LI_Lineage']//*[local-name()='LE_ProcessStep'])"
+					}
+				},
+				"drilldown": {
+					"url": "http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=lineage"
+				}
+			},
+			
+			"standardsCompliance": {
+				"availabilityPath": "boolean(normalize-space(string(//*[local-name()='metadataStandardName'] | //*[local-name()='metstdv'])))",
+				"hoverover": {
+					"facetName": "Standards Compliance",
+					"template": "Standard name: %s, version %s.",
+					"text": {
+						"standardNamePath": "normalize-space(string(//*[local-name()='metadataStandardName'] | //*[local-name()='metstdv']))",
+						"standardVersion": "normalize-space(string(//*[local-name()='metadataStandardVersion']))"
+					}
+				},
+				"drilldown": {
+					"url": "http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=standards_complaince"
+				}
+			},
+			
+			"qualityInformation": {
+				"availabilityPath": "boolean(normalize-space(string(//*[local-name()='dataQualityInfo']/*[local-name()='report'])))",
+				"hoverover": {
+					"facetName": "Quality Information",
+					"template": "Quality information scope: %s",
+					"text": {
+						"scopeLevelPath": "concat(substring(concat(substring('pixel level', 1 div boolean(//*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report']//*[local-name()='result']/*[local-name()='DQ_QuantitativeResult']/*[local-name()='value']/*[local-name()='Record']//@href)), substring('dataset level', 1 div not(//*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report']//*[local-name()='result']/*[local-name()='DQ_QuantitativeResult']/*[local-name()='value']/*[local-name()='Record']//@href))), 1 div boolean(normalize-space(string(//*[local-name()='dataQualityInfo']/*[local-name()='report'])))), substring('', 1 div not(boolean(normalize-space(string(//*[local-name()='dataQualityInfo']/*[local-name()='report']))))))"
+					}
+				},
+				"drilldown": {
+					"url": "http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=quality_information"
+				}
+			},
+
+			"citations": {
+				"availabilityPath": "boolean(count(//*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation']))",
+				"hoverover": {
+					"facetName": "Citations Information",
+					"template": "Number of citations: %d.",
+					"text": {
+						"citationsCountPath": "count(//*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'])"
+					}
+				},
+				"drilldown": {
+					"url": "http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=citations"
+				}
+			}
+		}
+	}}
+}
