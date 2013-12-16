@@ -32,14 +32,20 @@ import javax.faces.context.ResponseWriter;
 import org.apache.commons.io.IOUtils;
 import org.n52.geolabel.client.GeoLabelClientV1;
 import org.n52.geolabel.client.GeoLabelRequestBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @FacesComponent("geolabelcomponent")
 @ResourceDependency(library = "javax.faces", name = "jsf.js")
 public class GeoLabelComponent extends UIComponentBase {
 
+    private static Logger log = LoggerFactory.getLogger(GeoLabelComponent.class);
+
     enum PropertyKeys {
         metadataUrl, feedbackUrl, size, async, serviceUrl, metadataContent, feedbackContent, forceDownload, useCache;
     }
+
+    private static final String INPUTSTREAM_CHARSET = "utf-8";
 
     public GeoLabelComponent() {
         super();
@@ -54,7 +60,8 @@ public class GeoLabelComponent extends UIComponentBase {
     }
 
     public String getServiceUrl() {
-        return (String) getStateHelper().eval(PropertyKeys.serviceUrl);
+        Object url = getStateHelper().eval(PropertyKeys.serviceUrl);
+        return (String) url;
     }
 
     public void setServiceUrl(String mServiceUrl) {
@@ -98,7 +105,7 @@ public class GeoLabelComponent extends UIComponentBase {
     }
 
     public void setAsync(boolean async) {
-        getStateHelper().put(PropertyKeys.async, async);
+        getStateHelper().put(PropertyKeys.async, Boolean.valueOf(async));
     }
 
     public Boolean isUseCache() {
@@ -106,7 +113,7 @@ public class GeoLabelComponent extends UIComponentBase {
     }
 
     public void setUseCache(boolean cache) {
-        getStateHelper().put(PropertyKeys.useCache, cache);
+        getStateHelper().put(PropertyKeys.useCache, Boolean.valueOf(cache));
     }
 
     public Boolean isForceDownload() {
@@ -114,7 +121,7 @@ public class GeoLabelComponent extends UIComponentBase {
     }
 
     public void setForceDownload(boolean force) {
-        getStateHelper().put(PropertyKeys.forceDownload, force);
+        getStateHelper().put(PropertyKeys.forceDownload, Boolean.valueOf(force));
     }
 
     @Override
@@ -145,7 +152,7 @@ public class GeoLabelComponent extends UIComponentBase {
 
     /**
      * Requests a GeoLabel and writes it to the component
-     * 
+     *
      * @param context
      * @throws IOException
      */
@@ -153,38 +160,48 @@ public class GeoLabelComponent extends UIComponentBase {
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("div", this);
         writer.writeAttribute("id", getClientId(context), null);
+
         try {
             GeoLabelRequestBuilder requestBuilder;
 
-            if (getServiceUrl() != null && !getServiceUrl().isEmpty())
+            String serviceUrl = getServiceUrl();
+            if (serviceUrl != null && !serviceUrl.isEmpty())
                 // Custom service url
-                requestBuilder = GeoLabelClientV1.createGeoLabelRequest(getServiceUrl());
+                requestBuilder = GeoLabelClientV1.createGeoLabelRequest(serviceUrl);
             else
                 // Default service url
                 requestBuilder = GeoLabelClientV1.createGeoLabelRequest();
 
             // Set metadata
-            if (getMetadataUrl() != null && !getMetadataUrl().isEmpty())
-                requestBuilder.setMetadataDocument(getMetadataUrl());
-            else if (getMetadataContent() != null && !getMetadataContent().isEmpty())
-                requestBuilder.setMetadataDocument(IOUtils.toInputStream(getMetadataContent(), Charset.forName("utf-8"))); // TODO
-                                                                                                                           // charset
+            if (getMetadataUrl() != null && !getMetadataUrl().isEmpty()) {
+                String url = getMetadataUrl();
+                requestBuilder.setMetadataDocument(url);
+            }
+            else if (getMetadataContent() != null && !getMetadataContent().isEmpty()) {
+                String content = getMetadataContent();
+                requestBuilder.setMetadataDocument(IOUtils.toInputStream(content, Charset.forName(INPUTSTREAM_CHARSET)));
+            }
+
             // Set feedback
-            if (getFeedbackUrl() != null && !getFeedbackUrl().isEmpty())
-                requestBuilder.setFeedbackDocument(getFeedbackUrl());
+            if (getFeedbackUrl() != null && !getFeedbackUrl().isEmpty()) {
+                String url = getFeedbackUrl();
+                requestBuilder.setFeedbackDocument(url);
+            }
             else if (getFeedbackContent() != null && !getFeedbackContent().isEmpty())
-                requestBuilder.setFeedbackDocument(IOUtils.toInputStream(getFeedbackContent(), Charset.forName("utf-8"))); // TODO
-                                                                                                                           // charset
+                requestBuilder.setFeedbackDocument(IOUtils.toInputStream(getFeedbackContent(),
+                                                                         Charset.forName(INPUTSTREAM_CHARSET)));
 
             // Further params
             if (getSize() != null)
-                requestBuilder.setDesiredSize(getSize());
+                requestBuilder.setDesiredSize(getSize().intValue());
 
             if (isForceDownload() != null)
-                requestBuilder.setForceDownload(isForceDownload());
+                requestBuilder.setForceDownload(isForceDownload().booleanValue());
 
             if (isUseCache() != null)
-                requestBuilder.setUseCache(isUseCache());
+                requestBuilder.setUseCache(isUseCache().booleanValue());
+
+            log.debug("Requesting label with {}", requestBuilder);
 
             InputStream svg = requestBuilder.getSVG();
             String svgString = IOUtils.toString(svg);
@@ -220,7 +237,7 @@ public class GeoLabelComponent extends UIComponentBase {
 
     /**
      * Writes a script call for the client to request the GeoLabel in an upcoming call (PPR)
-     * 
+     *
      * @param context
      * @throws IOException
      */
@@ -233,7 +250,7 @@ public class GeoLabelComponent extends UIComponentBase {
         writer.startElement("div", this);
         Resource createResource = context.getApplication().getResourceHandler().createResource("spinner.gif");
 
-        int size = getSize() == null ? 16 : getSize();
+        int size = getSize() == null ? 16 : getSize().intValue();
 
         writer.writeAttribute("style", "width:" + size + "px;" + "height:" + size + "px;" + "background-image: url('"
                 + createResource.getRequestPath() + "');" + "background-repeat:no-repeat;"
@@ -254,7 +271,7 @@ public class GeoLabelComponent extends UIComponentBase {
     /**
      * Marks a specific GEO label service for the current request as broken. Important to not send any further
      * GeoLabel requests in case of an error.
-     * 
+     *
      * @param context
      */
     private static void setServiceFailed(String endpoint, FacesContext context) {
@@ -267,7 +284,7 @@ public class GeoLabelComponent extends UIComponentBase {
 
     /**
      * Check whether a specific GEO label service is known to be broken for the current request
-     * 
+     *
      * @param context
      * @return
      */

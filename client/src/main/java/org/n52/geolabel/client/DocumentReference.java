@@ -90,6 +90,19 @@ public interface DocumentReference {
             HttpEntity responseEntity = httpClient.execute(new HttpGet(this.documentUrl.toString())).getEntity();
 			return responseEntity.getContent();
 		}
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("URLDocument [");
+            if (this.documentUrl != null) {
+                builder.append("documentUrl=");
+                builder.append(this.documentUrl);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
+
 	}
 
 	/**
@@ -108,6 +121,18 @@ public interface DocumentReference {
                 return this.documentStream;
 			return null;
 		}
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("InputStreamDocument [");
+            if (this.documentStream != null) {
+                builder.append("documentStream=");
+                builder.append(this.documentStream);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
 
 	}
 
@@ -137,6 +162,18 @@ public interface DocumentReference {
 			}
 			return null;
 		}
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("XMLDocument [");
+            if (this.documentXml != null) {
+                builder.append("documentXml=");
+                builder.append(this.documentXml);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
 
 	}
 

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.beans;
 
 import java.net.MalformedURLException;
@@ -30,85 +31,91 @@ import javax.servlet.http.HttpServletRequest;
 @RequestScoped
 public class LandingPageBean {
 
-	public static class Example {
-		String metadata;
-		String feedback;
-		String title;
+    public static class Example {
+        String metadata;
+        String feedback;
+        String title;
 
-		public Example(String title, String metadata) {
-			this.title = title;
-			this.metadata = metadata;
-		}
+        public Example(String title, String metadata) {
+            this.title = title;
+            this.metadata = metadata;
+        }
 
-		public Example(String title, String metadata, String feedback) {
-			this.title = title;
-			this.metadata = metadata;
-			this.feedback = feedback;
-		}
+        public Example(String title, String metadata, String feedback) {
+            this.title = title;
+            this.metadata = metadata;
+            this.feedback = feedback;
+        }
 
-		public String getFeedbackUrl() {
+        public String getFeedbackUrl() {
             return this.feedback;
-		}
+        }
 
-		public String getMetadataUrl() {
+        public String getMetadataUrl() {
             return this.metadata;
-		}
+        }
 
-		public String getTitle() {
+        public String getTitle() {
             return this.title;
-		}
-	}
+        }
+    }
 
-	@org.hibernate.validator.constraints.URL
-	private String metadataUrl = "http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml";
-	@org.hibernate.validator.constraints.URL
-	private String feedbackUrl = "";
+    @org.hibernate.validator.constraints.URL
+    private String metadataUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml";
+    @org.hibernate.validator.constraints.URL
+    private String feedbackUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/DigitalClimaticAtlas_UserFeedback_v1.xml";
 
-	private List<Example> examplesList = new ArrayList<LandingPageBean.Example>();
+    private List<Example> examplesList = new ArrayList<>();
 
-	public LandingPageBean() {
-        this.examplesList.add(new Example("Climate Atlas",
-				"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_v10.xml"));
-
+    public LandingPageBean() {
+        this.examplesList.add(new Example("GLC 2000",
+                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/GLC_2000_GVQ_raw.xml"));
         this.examplesList.add(new Example("Feedback Use Case",
                                           null,
-				"http://schemas.geoviqua.org/GVQ/3.1.0/example_documents/FeedbackUseCase_7_7_metadata.xml"));
-	}
+                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/FeedbackUseCase_7_7_metadata.xml"));
+        this.examplesList.add(new Example("Rice Fields User Feedback",
+                                          null,
+                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/RiceFields_UserFeedback_v3.xml"));
+        this.examplesList.add(new Example("Combinded Producer and User Data",
+                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQM_UQM_combined/DigitalClimaticAtlas_mt_an_v10.xml",
+                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQM_UQM_combined/DigitalClimaticAtlas_mt_an_v10.xml"));
+    }
 
-	public String getMetadataUrl() {
+    public String getMetadataUrl() {
         return this.metadataUrl;
-	}
+    }
 
-	public String getFeedbackUrl() {
+    public String getFeedbackUrl() {
         return this.feedbackUrl;
-	}
+    }
 
-	public void setMetadataUrl(String metadataUrl) {
-		this.metadataUrl = metadataUrl;
-	}
+    public void setMetadataUrl(String metadataUrl) {
+        this.metadataUrl = metadataUrl;
+    }
 
-	public void setFeedbackUrl(String feedbackUrl) {
-		this.feedbackUrl = feedbackUrl;
-	}
+    public void setFeedbackUrl(String feedbackUrl) {
+        this.feedbackUrl = feedbackUrl;
+    }
 
-	public List<Example> getExamplesList() {
+    public List<Example> getExamplesList() {
         return this.examplesList;
-	}
+    }
 
-	/**
-	 * Returns the absolute GEO label service API endpoint of this webapp
-	 * instance. For example required by JSF components as these work
-	 * Independent of this service.
-	 *
-	 * @return
-	 * @throws MalformedURLException
-	 */
-	public String getServiceEndpoint() throws MalformedURLException {
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-		URL requesturl = new URL(request.getRequestURL().toString());
-		URL serviceUrl = new URL(requesturl.getProtocol(), requesturl.getHost(), requesturl.getPort(),
-				request.getContextPath() + "/api/v1/svg/");
-		return serviceUrl.toString();
-	}
+    /**
+     * Returns the absolute GEO label service API endpoint of this webapp instance. For example required by
+     * JSF components as these work Independent of this service.
+     *
+     * @return
+     * @throws MalformedURLException
+     */
+    public String getServiceEndpoint() throws MalformedURLException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        URL requesturl = new URL(request.getRequestURL().toString());
+        URL serviceUrl = new URL(requesturl.getProtocol(),
+                                 requesturl.getHost(),
+                                 requesturl.getPort(),
+                                 request.getContextPath() + "/api/v1/svg/");
+        return serviceUrl.toString();
+    }
 }

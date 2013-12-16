@@ -17,6 +17,7 @@ package org.n52.geolabel.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.commons.io.IOUtils;
@@ -86,9 +87,11 @@ public class GeoLabelClientV1 extends GeoLabelClient {
                         builder.setParameter(PARAM_METADATA, labelRequestBuilder.metadataDocument.getUrl().toString());
 
 					if (labelRequestBuilder.getDesiredSize() != null)
-                        builder.setParameter(PARAM_DESIREDSIZE, "" + labelRequestBuilder.getDesiredSize());
+                        builder.setParameter(PARAM_DESIREDSIZE, labelRequestBuilder.getDesiredSize().toString());
 
-					request = new HttpGet(builder.build());
+                    URI requestUri = builder.build();
+
+                    request = new HttpGet(requestUri);
 				} catch (URISyntaxException e) {
 					throw new IOException(e);
 				}
@@ -116,6 +119,7 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 			}
 
 			// Issue request
+            log.debug("Issuing request {}", request);
 
 			HttpResponse response = HTTPCLIENT.execute(request);
 			if (response.getStatusLine().getStatusCode() != 200) {
@@ -139,8 +143,11 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 	};
 
     protected final static DefaultHttpClient HTTPCLIENT;
-    private static Logger log = LoggerFactory.getLogger(GeoLabelClientV1.class);
+
+    static Logger log = LoggerFactory.getLogger(GeoLabelClientV1.class);
+
     protected static final String PARAM_DESIREDSIZE = Constants.PARAM_SIZE;
+
     protected static final String PARAM_FEEDBACK = Constants.PARAM_FEEDBACK;
 
     protected static final String PARAM_FEEDBACK_DRILL = Constants.PARAM_FEEDBACK_DRILL;
@@ -167,7 +174,7 @@ public class GeoLabelClientV1 extends GeoLabelClient {
 	}
 
     public static GeoLabelRequestBuilder createGeoLabelRequest(String serviceUrl) {
-        return new GeoLabelRequestBuilder(geolabelRequestHandler, DEFAULT_GEO_LABEL_SERVER);
+        return new GeoLabelRequestBuilder(geolabelRequestHandler, serviceUrl);
 	}
 
     @Override

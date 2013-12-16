@@ -18,10 +18,12 @@ package org.n52.geolabel.server.mapping;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -29,6 +31,7 @@ import java.util.BitSet;
 import java.util.EnumSet;
 
 import org.junit.Test;
+import org.n52.geolabel.commons.ErrorFacet;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.n52.geolabel.commons.test.Facet;
@@ -331,7 +334,24 @@ public class MetadataTransformerTest {
                 assertTrue(new LabelUrlKey(testURL1, testURL2).hashCode() == new LabelUrlKey(testURL2, testURL1).hashCode());
             }
         };
+    }
 
+    @Test
+    public void testResourceNotFoundErrorMessage() throws IOException {
+        MetadataTransformer metadataTransformer = newMetadataTransformer();
+        Label label = metadataTransformer.createGeoLabel(new URL("http://does.not/exist.xml"));
+
+        ErrorFacet ef = label.getErrorFacet();
+        assertEquals("error facet availability", Availability.AVAILABLE, ef.getAvailability());
+        assertNotNull("error message null", ef.getErrorMessage());
+
+        StringWriter sw = new StringWriter();
+        label.toSVG(sw, "testid", 100);
+        String svgString = sw.toString();
+
+        assertTrue("error string is given", svgString.contains("does.not"));
+        assertTrue("error string is given", svgString.contains("Error:"));
+        assertTrue("error string is given", svgString.contains("Message:"));
     }
 
 }

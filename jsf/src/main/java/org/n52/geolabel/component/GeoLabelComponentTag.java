@@ -48,41 +48,32 @@ public class GeoLabelComponentTag extends UIComponentELTag {
     @Override
     protected void setProperties(UIComponent component) {
         super.setProperties(component);
-        if (metadataUrl != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.metadataUrl.name(), metadataUrl);
-        }
+        if (this.metadataUrl != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.metadataUrl.name(), this.metadataUrl);
 
-        if (feedbackUrl != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.feedbackUrl.name(), feedbackUrl);
-        }
+        if (this.feedbackUrl != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.feedbackUrl.name(), this.feedbackUrl);
 
-        if (metadataContent != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.metadataContent.name(), metadataContent);
-        }
+        if (this.metadataContent != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.metadataContent.name(), this.metadataContent);
 
-        if (feedbackContent != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.feedbackContent.name(), feedbackContent);
-        }
+        if (this.feedbackContent != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.feedbackContent.name(), this.feedbackContent);
 
-        if (size != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.size.name(), size);
-        }
+        if (this.size != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.size.name(), this.size);
 
-        if (async != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.async.name(), async);
-        }
+        if (this.async != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.async.name(), this.async);
 
-        if (forceDownload != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.forceDownload.name(), forceDownload);
-        }
+        if (this.forceDownload != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.forceDownload.name(), this.forceDownload);
 
-        if (useCache != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.useCache.name(), useCache);
-        }
+        if (this.useCache != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.useCache.name(), this.useCache);
 
-        if (serviceUrl != null) {
-            component.setValueExpression(GeoLabelComponent.PropertyKeys.serviceUrl.name(), serviceUrl);
-        }
+        if (this.serviceUrl != null)
+            component.setValueExpression(GeoLabelComponent.PropertyKeys.serviceUrl.name(), this.serviceUrl);
 
     }
 

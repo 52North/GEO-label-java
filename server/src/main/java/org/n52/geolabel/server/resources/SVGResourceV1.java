@@ -75,8 +75,10 @@ public class SVGResourceV1 {
 			con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
 			label = Label.fromXML(con.getInputStream());
 		}
-        else
-            label = this.lmlResource.get().getLabelByURL(metadataURL, feedbackURL);
+        else {
+            LMLResourceV1 lmlR = this.lmlResource.get();
+            label = lmlR.getLabelByURL(metadataURL, feedbackURL);
+        }
         return createLabelSVGResponse(size != null ? size.intValue() : 200, id, label);
 	}
 

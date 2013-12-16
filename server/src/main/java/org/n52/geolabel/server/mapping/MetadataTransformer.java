@@ -133,14 +133,25 @@ public class MetadataTransformer {
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();
-            builder.append("metadata url: ");
-            if (this.metadataUrl != null)
+            builder.append("LabelUrlKey [");
+            if (this.metadataUrl != null) {
+                builder.append("metadataUrl=");
                 builder.append(this.metadataUrl);
-            builder.append("feedback url: ");
-            if (this.feedbackUrl != null)
+                builder.append(", ");
+            }
+            if (this.feedbackUrl != null) {
+                builder.append("feedbackUrl=");
                 builder.append(this.feedbackUrl);
+                builder.append(", ");
+            }
+            if (this.cacheWriteTime != null) {
+                builder.append("cacheWriteTime=");
+                builder.append(this.cacheWriteTime);
+            }
+            builder.append("]");
             return builder.toString();
         }
+
     }
 
     private LoadingCache<LabelUrlKey, Label> labelUrlCache = CacheBuilder.newBuilder().maximumSize(CACHE_MAX_LABELS).expireAfterWrite(CACHE_MAX_HOURS,
@@ -153,9 +164,9 @@ public class MetadataTransformer {
             Label label = new Label();
 
             if (key.feedbackUrl != null)
-                updateGeoLabel(key.feedbackUrl, label);
+                label = updateGeoLabel(key.feedbackUrl, label);
             if (key.metadataUrl != null)
-                updateGeoLabel(key.metadataUrl, label);
+                label = updateGeoLabel(key.metadataUrl, label);
 
             return label;
         }
@@ -170,7 +181,7 @@ public class MetadataTransformer {
 
     public List<LabelTransformationDescription> getTransformationDescriptions() {
         if (this.transformationDescriptions == null)
-            this.transformationDescriptions = new ArrayList<LabelTransformationDescription>();
+            this.transformationDescriptions = new ArrayList<>();
         return this.transformationDescriptions;
     }
 
@@ -281,10 +292,19 @@ public class MetadataTransformer {
      * @throws IOException
      */
     public Label updateGeoLabel(URL metadataUrl, Label label) throws IOException {
-        URLConnection con = metadataUrl.openConnection();
-        con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
-        con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
-        return updateGeoLabel(con.getInputStream(), label);
+        try {
+            URLConnection con = metadataUrl.openConnection();
+            con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
+            con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
+            InputStream is = con.getInputStream();
+
+            return updateGeoLabel(is, label);
+        }
+        catch (Exception e) {
+            log.debug("Could not update label with URL {}", metadataUrl, e);
+            label.setError(e);
+            return label;
+        }
     }
 
     /**
@@ -320,8 +340,11 @@ public class MetadataTransformer {
      * @throws IOException
      */
     public Label getLabel(URL metadataURL, URL feedbackURL) throws IOException {
+        log.debug("Creating label for metadata {} and feedback {}", metadataURL, feedbackURL);
+
         try {
-            return this.labelUrlCache.get(new LabelUrlKey(metadataURL, feedbackURL));
+            LabelUrlKey labelUrlKey = new LabelUrlKey(metadataURL, feedbackURL);
+            return this.labelUrlCache.get(labelUrlKey);
         }
         catch (ExecutionException e) {
             throw new IOException(e.getCause());
