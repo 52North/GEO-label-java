@@ -25,7 +25,7 @@ import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 import org.n52.geolabel.server.resources.LMLResourceV1;
-import org.n52.geolabel.server.resources.MappingsResourceV1;
+import org.n52.geolabel.server.resources.TransformationsResourceV1;
 import org.n52.geolabel.server.resources.SVGResourceV1;
 import org.n52.geolabel.server.resources.StaticLabelResourceV1;
 
@@ -51,7 +51,7 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				bind(LMLResourceV1.class);
 				bind(SVGResourceV1.class);
 				bind(StaticLabelResourceV1.class);
-				bind(MappingsResourceV1.class);
+				bind(TransformationsResourceV1.class);
 
 				bind(ParamExceptionMapper.class);
 				bind(IOExceptionMapper.class);

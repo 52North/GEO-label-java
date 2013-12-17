@@ -14,6 +14,10 @@ public class TransformationDescriptionResources {
 
     private static final String TRANSFORMATIONS_RESOURCE = "transformations";
 
+    public static enum Source {
+        ONLINE, FALLBACK, NA;
+    }
+
     /**
      * map between normative URL and fallback
      */

@@ -32,6 +32,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
+import org.n52.geolabel.server.config.TransformationDescriptionLoader;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
 import org.n52.geolabel.server.mapping.description.CitationsFacetDescription;
 import org.n52.geolabel.server.mapping.description.FacetTransformationDescription;

@@ -1,5 +1,5 @@
 
-package org.n52.geolabel.server.mapping;
+package org.n52.geolabel.server.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,15 +10,18 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.n52.geolabel.server.config.TransformationDescriptionResources.Source;
 import org.n52.geolabel.server.mapping.description.TransformationDescription;
 import org.n52.geolabel.server.mapping.description.TransformationDescription.TransformationDescriptionWrapper;
 import org.slf4j.Logger;
@@ -28,11 +31,16 @@ import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 
+@Singleton
 public class TransformationDescriptionLoader {
 
     protected static final Logger log = LoggerFactory.getLogger(TransformationDescriptionLoader.class);
 
     private TransformationDescriptionResources resources;
+
+    private static Set<TransformationDescription> descriptions;
+
+    private static Map<URL, Source> transformationDescriptionUsedSource = new HashMap<>();
 
     @Inject
     public TransformationDescriptionLoader(TransformationDescriptionResources resources) {
@@ -80,6 +88,7 @@ public class TransformationDescriptionLoader {
      * Reads {@link TransformationDescription}s from resources based on all files in a specified folder.
      *
      */
+    @Deprecated
     public void loadLocal(String folder) throws IOException {
         Enumeration<URL> descriptionResources = getClass().getClassLoader().getResources(folder);
 
@@ -107,7 +116,16 @@ public class TransformationDescriptionLoader {
     }
 
     public Set<TransformationDescription> load() {
-        Set<TransformationDescription> descriptions = new HashSet<>();
+        if (this.descriptions == null)
+            this.descriptions = internalLoad(this.resources);
+
+        return this.descriptions;
+    }
+
+    private Set<TransformationDescription> internalLoad(final TransformationDescriptionResources res) {
+        log.info("Loading resources from {}", res);
+
+        final Set<TransformationDescription> ds = new HashSet<>();
 
         // load from server with fallback
         Set<Entry<URL, String>> entrySet = this.resources.getTransformationDescriptionResources().entrySet();
@@ -124,6 +142,7 @@ public class TransformationDescriptionLoader {
 
                 td = readTransformationDescription(temp);
                 log.debug("Loaded transformation description from {} ", entry.getKey());
+                setUsedSource(entry.getKey(), Source.ONLINE);
             }
             catch (Exception e) {
                 log.warn("There was a problem loading transformation description from {}", entry.getKey(), e);
@@ -136,6 +155,7 @@ public class TransformationDescriptionLoader {
                 try {
                     td = readTransformationDescription(stream);
                     log.debug("Loaded transformation description from {} ", entry.getValue());
+                    setUsedSource(entry.getKey(), Source.FALLBACK);
                 }
                 catch (IOException e) {
                     log.error("There was a problem loading transformation description from {}", entry.getValue(), e);
@@ -143,7 +163,7 @@ public class TransformationDescriptionLoader {
             }
 
             if (td != null) {
-                descriptions.add(td);
+                ds.add(td);
                 log.debug("Read transformation description: {}", td);
             }
             else
@@ -151,7 +171,7 @@ public class TransformationDescriptionLoader {
         }
 
         // init desriptions
-        for (TransformationDescription td : descriptions)
+        for (TransformationDescription td : ds)
             try {
                 td.initXPaths();
                 log.debug("Added description: {}", td);
@@ -160,21 +180,27 @@ public class TransformationDescriptionLoader {
                 log.error("Error while compiling XPaths in tranformation description {}", td, e);
             }
 
-        log.debug("Loaded {} transformation descriptions with the names {}",
-                  Integer.valueOf(descriptions.size()),
-                  getNames(descriptions));
+        log.debug("Loaded {} transformation descriptions with the names {}", Integer.valueOf(ds.size()), getNames(ds));
 
-        return descriptions;
+        return ds;
     }
 
-    private String getNames(Set<TransformationDescription> descriptions) {
+    private String getNames(Set<TransformationDescription> ds) {
         StringBuilder sb = new StringBuilder();
 
-        for (TransformationDescription td : descriptions) {
+        for (TransformationDescription td : ds) {
             sb.append(td.name);
             sb.append(" ");
         }
         return sb.toString();
+    }
+
+    public void setUsedSource(URL url, Source online) {
+        this.transformationDescriptionUsedSource.put(url, online);
+    }
+
+    public Map<URL, Source> getUsedSources() {
+        return this.transformationDescriptionUsedSource;
     }
 
 }

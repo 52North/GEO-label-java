@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.server.config.GeoLabelConfig;
+import org.n52.geolabel.server.config.TransformationDescriptionLoader;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
 import org.n52.geolabel.server.mapping.description.TransformationDescription;
 import org.slf4j.Logger;
@@ -324,8 +325,4 @@ public class MetadataTransformer {
         return this.labelUrlCache.asMap().keySet();
     }
 
-    public Set<RemoteTransformationDescription> getMappings() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }
