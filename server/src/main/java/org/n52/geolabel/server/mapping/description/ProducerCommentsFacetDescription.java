@@ -15,8 +15,6 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -29,10 +27,8 @@ import org.w3c.dom.Document;
  * Checks availability of producer comments information
  *
  */
-@XmlRootElement(name = "producerComments")
 public class ProducerCommentsFacetDescription extends FacetTransformationDescription<ProducerCommentsFacet> {
 
-	@XmlElement
 	private String producerCommentsPath;
 
 	private XPathExpression producerCommentsExpression;

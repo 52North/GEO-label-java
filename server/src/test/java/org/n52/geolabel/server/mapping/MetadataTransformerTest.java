@@ -35,21 +35,20 @@ import org.n52.geolabel.commons.ErrorFacet;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.n52.geolabel.commons.test.Facet;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
 
 public class MetadataTransformerTest {
 
     public static MetadataTransformer newMetadataTransformer() {
-        return new MetadataTransformer();
+        return new MetadataTransformer(new TransformationDescriptionResources());
     }
 
     @Test
     public void testParseMetadata() throws IOException {
 
         MetadataTransformer metadataTransformer = newMetadataTransformer();
-        InputStream input = getClass().getResourceAsStream("transformer.xml");
-        metadataTransformer.readTransformationDescription(input);
 
-        InputStream metadataStream = getClass().getResourceAsStream("metadata.xml");
+        InputStream metadataStream = getClass().getResourceAsStream("/testfiles/metadata/GLC2000.xml");
         // StringWriter writer = new StringWriter();
         // IOUtils.copy(metadataStream, writer, "utf-8");
         // String theString = writer.toString();
@@ -234,6 +233,21 @@ public class MetadataTransformerTest {
         });
     }
 
+    @Test
+    public void testMtri2an1ib() throws IOException {
+        testMetadataExample("DigitalClimaticAtlas_mt_an_GEOlabel.xml", new LabelControlHolder() {
+            {
+                this.availableFacets = EnumSet.complementOf(EnumSet.of(Facet.USER_FEEDBACK, Facet.EXPERT_REVIEW));
+                this.organizationsNames = new String[] {"JRC"};
+                this.producerCommentsStart = new String[] {"The GVM unit"};
+                this.processStepCount = Integer.valueOf(3);
+                this.standards = new String[] {"ISO 19115:2003/19139, 1.0"};
+                this.scopeLevels = new String[] {"dataset"};
+                this.citationCount = Integer.valueOf(5);
+            }
+        });
+    }
+
     private void testMetadataExample(String exampleFile, LabelControlHolder control) throws IOException {
         MetadataTransformer metadataTransformer = newMetadataTransformer();
         InputStream metadataStream = getClass().getClassLoader().getResourceAsStream("testfiles/metadata/"
@@ -316,8 +330,8 @@ public class MetadataTransformerTest {
 
     @SuppressWarnings("unused")
     @Test
-    public void testLabelUrlKey() throws MalformedURLException {
-        new MetadataTransformer() {
+    public void testLabelUrlKey() throws IOException {
+        new MetadataTransformer(new TransformationDescriptionResources()) {
             {
                 URL testURL1 = new URL("http://test1.resource1");
                 URL testURL2 = new URL("http://test2.resource2");

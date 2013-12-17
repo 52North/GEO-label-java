@@ -16,37 +16,26 @@
 
 package org.n52.geolabel.server.mapping;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPathExpressionException;
 
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.server.config.GeoLabelConfig;
-import org.n52.geolabel.server.mapping.description.LabelTransformationDescription;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.n52.geolabel.server.mapping.description.TransformationDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -62,8 +51,7 @@ import com.google.common.cache.LoadingCache;
 @Singleton
 public class MetadataTransformer {
 
-    private static final String TRANSFORMATIONS_RESOURCE = "transformations";
-    final static Logger log = LoggerFactory.getLogger(MetadataTransformer.class);
+    protected static final Logger log = LoggerFactory.getLogger(MetadataTransformer.class);
 
     public static int CACHE_MAX_LABELS = 100; // TODO make available as property
     public static int CACHE_MAX_HOURS = 48;// TODO make available as property
@@ -154,6 +142,49 @@ public class MetadataTransformer {
 
     }
 
+    public class RemoteTransformationDescription {
+
+        protected URL online;
+
+        protected String fallbackFile;
+
+        protected RemoteTransformationDescription description;
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ( (this.fallbackFile == null) ? 0 : this.fallbackFile.hashCode());
+            result = prime * result + ( (this.online == null) ? 0 : this.online.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            RemoteTransformationDescription other = (RemoteTransformationDescription) obj;
+            if (this.fallbackFile == null) {
+                if (other.fallbackFile != null)
+                    return false;
+            }
+            else if ( !this.fallbackFile.equals(other.fallbackFile))
+                return false;
+            if (this.online == null) {
+                if (other.online != null)
+                    return false;
+            }
+            else if ( !this.online.equals(other.online))
+                return false;
+            return true;
+        }
+
+    }
+
     private LoadingCache<LabelUrlKey, Label> labelUrlCache = CacheBuilder.newBuilder().maximumSize(CACHE_MAX_LABELS).expireAfterWrite(CACHE_MAX_HOURS,
                                                                                                                                       TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
         @Override
@@ -172,79 +203,14 @@ public class MetadataTransformer {
         }
     });
 
+    private Set<TransformationDescription> transformationDescriptions;
+
+    private TransformationDescriptionLoader loader;
+
     @Inject
-    MetadataTransformer() {
-
-    }
-
-    private List<LabelTransformationDescription> transformationDescriptions;
-
-    public List<LabelTransformationDescription> getTransformationDescriptions() {
-        if (this.transformationDescriptions == null)
-            this.transformationDescriptions = new ArrayList<>();
-        return this.transformationDescriptions;
-    }
-
-    /**
-     * Reads {@link LabelTransformationDescription} from passed XML stream.
-     *
-     * @param input
-     * @throws IOException
-     */
-    public void readTransformationDescription(InputStream input) throws IOException {
-        try {
-            Unmarshaller unmarshaller = JAXBContext.newInstance(LabelTransformationDescription.class).createUnmarshaller();
-            LabelTransformationDescription transformationDescription = (LabelTransformationDescription) unmarshaller.unmarshal(input);
-
-            transformationDescription.initXPaths();
-            getTransformationDescriptions().add(transformationDescription);
-        }
-        catch (JAXBException e) {
-            throw new IOException("Error while parsing transformation description stream", e);
-        }
-        catch (XPathExpressionException e) {
-            throw new IOException("Error while compiling XPaths in tranformation description", e);
-        }
-        finally {
-            input.close();
-        }
-
-    }
-
-    /**
-     * Reads {@link LabelTransformationDescription} from passed XML {@link File} .
-     *
-     * @param descriptionFile
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
-    private void readTransformationDescription(File descriptionFile) throws FileNotFoundException, IOException {
-        readTransformationDescription(new FileInputStream(descriptionFile));
-    }
-
-    /**
-     * Reads {@link LabelTransformationDescription}s from resources.
-     *
-     * @throws IOException
-     */
-    private void readTransformationDescriptions() throws IOException {
-        Enumeration<URL> descriptionResources = getClass().getClassLoader().getResources(TRANSFORMATIONS_RESOURCE);
-        while (descriptionResources.hasMoreElements())
-            try {
-                URI descriptionResourceURI = descriptionResources.nextElement().toURI();
-                File descriptionResourceFile = new File(descriptionResourceURI);
-                for (File descriptionFile : descriptionResourceFile.listFiles())
-                    try {
-                        log.debug("Loading transformation description: {}", descriptionFile);
-                        readTransformationDescription(descriptionFile);
-                    }
-                    catch (IOException e) {
-                        log.error("Could not read transformation description " + descriptionFile.getName() + ".", e);
-                    }
-            }
-            catch (URISyntaxException e) {
-                log.error("Could not read transformation description.", e);
-            }
+    public MetadataTransformer(TransformationDescriptionResources resources) {
+        this.loader = new TransformationDescriptionLoader(resources);
+        log.debug("NEW {}", this);
     }
 
     /**
@@ -275,11 +241,14 @@ public class MetadataTransformer {
             throw new IOException("Could not parse supplied metadata xml", e);
         }
 
-        List<LabelTransformationDescription> tds = getTransformationDescriptions();
-        for (LabelTransformationDescription transformer : tds)
+        for (TransformationDescription transformer : this.transformationDescriptions)
             transformer.updateGeoLabel(label, doc);
 
         return label;
+    }
+
+    private void readTransformationDescriptions() {
+        this.transformationDescriptions = this.loader.load();
     }
 
     /**
@@ -353,5 +322,10 @@ public class MetadataTransformer {
 
     public Set<LabelUrlKey> getCacheContent() {
         return this.labelUrlCache.asMap().keySet();
+    }
+
+    public Set<RemoteTransformationDescription> getMappings() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

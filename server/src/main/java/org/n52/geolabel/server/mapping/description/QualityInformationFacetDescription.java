@@ -15,8 +15,6 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -29,11 +27,10 @@ import org.w3c.dom.Document;
  * Checks availability of quality information
  *
  */
-@XmlRootElement(name = "qualityInformation")
 public class QualityInformationFacetDescription extends
 		FacetTransformationDescription<QualityInformationFacet> {
-	@XmlElement
-	private String scopeLevelPath;
+
+    private String scopeLevelPath;
 
 	private XPathExpression scopeLevelExpression;
 

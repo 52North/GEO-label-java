@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.n52.geolabel.server.mapping.MetadataTransformer;
-import org.n52.geolabel.server.mapping.MetadataTransformer.TransformationDescription;
+import org.n52.geolabel.server.mapping.MetadataTransformer.RemoteTransformationDescription;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -47,14 +47,14 @@ public class MappingsResourceV1 {
             //
 		}
 
-        public MappingsHolder(Set<TransformationDescription> descriptions) {
+        public MappingsHolder(Set<RemoteTransformationDescription> descriptions) {
             this.descriptions = descriptions;
 		}
 
 		@XmlAttribute(name = "maxCacheHours")
 		private int maxHours = MetadataTransformer.CACHE_MAX_HOURS;
         @XmlElementRef
-        private Set<TransformationDescription> descriptions;
+        private Set<RemoteTransformationDescription> descriptions;
 	}
 
 	@Inject

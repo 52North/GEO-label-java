@@ -15,8 +15,6 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -30,10 +28,9 @@ import org.w3c.dom.Document;
  * Checks availability of lineage information
  *
  */
-@XmlRootElement(name = "lineage")
 public class LineageFacetDescription extends FacetTransformationDescription<LineageFacet> {
-	@XmlElement
-	private String processStepCountPath;
+
+    private String processStepCountPath;
 
 	private XPathExpression processStepCountExpression;
 

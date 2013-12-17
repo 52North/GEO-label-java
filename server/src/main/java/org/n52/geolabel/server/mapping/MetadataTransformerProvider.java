@@ -15,13 +15,23 @@
  */
 package org.n52.geolabel.server.mapping;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
+
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
 
 public class MetadataTransformerProvider implements Provider<MetadataTransformer> {
 
+    private TransformationDescriptionResources resources;
+
+    @Inject
+    public MetadataTransformerProvider(TransformationDescriptionResources resources) {
+        this.resources = resources;
+    }
+
 	@Override
 	public MetadataTransformer get() {
-		return new MetadataTransformer();
+        return new MetadataTransformer(this.resources);
 	}
 
 }

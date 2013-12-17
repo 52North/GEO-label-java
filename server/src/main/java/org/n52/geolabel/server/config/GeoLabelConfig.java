@@ -24,8 +24,8 @@ import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
-import org.n52.geolabel.server.resources.CacheResourceV1;
 import org.n52.geolabel.server.resources.LMLResourceV1;
+import org.n52.geolabel.server.resources.MappingsResourceV1;
 import org.n52.geolabel.server.resources.SVGResourceV1;
 import org.n52.geolabel.server.resources.StaticLabelResourceV1;
 
@@ -40,6 +40,7 @@ import com.sun.jersey.spi.container.servlet.ServletContainer;
 public class GeoLabelConfig extends GuiceServletContextListener {
 
 	public static int CONNECT_TIMEOUT = 10000;
+
 	public static int READ_TIMEOUT = 20000;
 
 	@Override
@@ -50,15 +51,17 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 				bind(LMLResourceV1.class);
 				bind(SVGResourceV1.class);
 				bind(StaticLabelResourceV1.class);
-				bind(CacheResourceV1.class);
+				bind(MappingsResourceV1.class);
 
 				bind(ParamExceptionMapper.class);
 				bind(IOExceptionMapper.class);
 				bind(ContainerExceptionMapper.class);
 
+                bind(TransformationDescriptionResources.class);
+
 				bind(MetadataTransformer.class);
 
-				Map<String, String> jerseyInitPrams = new HashMap<String, String>();
+                Map<String, String> jerseyInitPrams = new HashMap<>();
 				jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");
 
 				// Simple CORS filter
