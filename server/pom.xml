@@ -28,6 +28,17 @@
 	<build>
 		<finalName>glbservice</finalName>
 
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+            	    <!-- Exclude those since they are copied from the profile folder for the build -->
+					<exclude>**/logback.xml</exclude>
+					<exclude>**/logback-test.xml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -80,8 +91,12 @@
 					<webResources>
 						<resource>
 							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+						</resource>
+						<resource>
 							<directory>src/main/resources</directory>
 							<filtering>true</filtering>
+							<targetPath>WEB-INF/classes</targetPath>
 						</resource>
 					</webResources>
 				</configuration>
