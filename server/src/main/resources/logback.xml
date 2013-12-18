@@ -22,7 +22,7 @@
 		</encoder>
 	</appender>
 	
-	<logger name="org.n52.geolabel" level="DEBUG" />
+	<logger name="org.n52.geolabel" level="INFO" />
 	<logger name="org.apache.http" level="WARN" />
 	
 	<root level="INFO">
