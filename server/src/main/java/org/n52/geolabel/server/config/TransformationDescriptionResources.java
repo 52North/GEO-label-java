@@ -21,11 +21,11 @@ public class TransformationDescriptionResources {
     /**
      * map between normative URL and fallback
      */
-    private Map<URL, String> transformationDescriptionResources = new HashMap<>();
+    private Map<URL, String> resources = new HashMap<>();
 
     public TransformationDescriptionResources() {
         try {
-            this.transformationDescriptionResources.put(new URL("http://geoviqua.github.io/geolabel/mappings/transformerGVQ.json"),
+            this.resources.put(new URL("http://geoviqua.github.io/geolabel/mappings/transformer.json"),
                                                         "/" + TRANSFORMATIONS_RESOURCE + "/transformer.json");
         }
         catch (MalformedURLException e) {
@@ -34,16 +34,27 @@ public class TransformationDescriptionResources {
     }
 
     public TransformationDescriptionResources(Map<URL, String> resources) {
-        this();
-        this.transformationDescriptionResources.putAll(resources);
+        this.resources.putAll(resources);
     }
 
-    public Map<URL, String> getTransformationDescriptionResources() {
-        return this.transformationDescriptionResources;
+    public Map<URL, String> getResources() {
+        return this.resources;
     }
 
-    public void setTransformationDescriptionResources(Map<URL, String> transformationDescriptionResources) {
-        this.transformationDescriptionResources = transformationDescriptionResources;
+    public void setResources(Map<URL, String> transformationDescriptionResources) {
+        this.resources = transformationDescriptionResources;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("TransformationDescriptionResources [");
+        if (this.resources != null) {
+            builder.append("resources=");
+            builder.append(this.resources);
+        }
+        builder.append("]");
+        return builder.toString();
     }
 
 }
