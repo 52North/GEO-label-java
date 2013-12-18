@@ -27,7 +27,7 @@ public class FeedbackFacet extends LabelFacet {
 
 	private int totalFeedbacks;
 
-	private List<Double> ratings = new ArrayList<Double>(1);
+    private List<Double> ratings = new ArrayList<>(1);
 	private Double avgRating = null;
 
 	public int getTotalFeedbacks() {

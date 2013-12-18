@@ -70,7 +70,7 @@ public class CitationsFacetDescription extends FacetTransformationDescription<Ci
                                                 this.drilldownEndpoint,
                                                 this.originalMetadataUrl,
                                                 this.originalFeedbackUrl);
-            facet.setDrilldownURL(drilldownURL);
+            facet.setHref(drilldownURL);
         }
 
 		return super.updateFacet(facet, metadataXml);

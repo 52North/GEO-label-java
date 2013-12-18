@@ -37,7 +37,7 @@ public class ProducerCommentsFacet extends LabelFacet {
 
 	public void addProducerComment(String producerComment) {
         if (this.producerComments == null)
-            this.producerComments = new HashSet<String>();
+            this.producerComments = new HashSet<>();
 		this.producerComments.add(producerComment);
 	}
 }

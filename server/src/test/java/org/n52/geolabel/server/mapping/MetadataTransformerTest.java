@@ -344,10 +344,10 @@ public class MetadataTransformerTest {
 
     private void checkDrilldownUrl(LabelFacet facet) {
         assertThat("drilldown does not contain string placeholders in " + facet.getClass().getSimpleName(),
-                   facet.getDrilldownURL(),
+                   facet.getHref(),
                    not(containsString("%s")));
         assertThat("drilldown contains URLs to geolabel.net" + facet.getClass().getSimpleName(),
-                   facet.getDrilldownURL(),
+                   facet.getHref(),
                    containsString("geolabel.net"));
     }
 

@@ -82,18 +82,21 @@ public abstract class LabelFacet {
     private Availability availability = Availability.NA;
 
     @XmlElement
-    private String drilldownURL;
+    private String href;
+
+    @XmlElement
+    private String title;
 
     public Availability getAvailability() {
         return this.availability;
     }
 
-    public String getDrilldownURL() {
-        return this.drilldownURL;
+    public String getHref() {
+        return this.href;
     }
 
-    public void setDrilldownURL(String drilldownURL) {
-        this.drilldownURL = drilldownURL;
+    public void setHref(String drilldownURL) {
+        this.href = drilldownURL;
     }
 
     /**
@@ -106,6 +109,14 @@ public abstract class LabelFacet {
             this.availability = availabilityP;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String hoveroverText) {
+        this.title = hoveroverText;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -115,9 +126,9 @@ public abstract class LabelFacet {
             builder.append(this.availability);
             builder.append(", ");
         }
-        if (this.drilldownURL != null) {
+        if (this.href != null) {
             builder.append("drilldownURL=");
-            builder.append(this.drilldownURL);
+            builder.append(this.href);
         }
         if (getClass().getCanonicalName() != null) {
             builder.append("class=");

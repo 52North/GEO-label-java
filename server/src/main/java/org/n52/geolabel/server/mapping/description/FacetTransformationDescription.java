@@ -231,7 +231,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     private T updateDrilldownUrl(T facet, URL metadataOrFeedbackUrl) {
         if (this.drilldown.url != null && this.drilldownEndpoint != null && metadataOrFeedbackUrl != null) {
             String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, metadataOrFeedbackUrl);
-            facet.setDrilldownURL(drilldownURL);
+            facet.setHref(drilldownURL);
         }
         else
             log.debug("Could not update drilldown URL with the information provided: {} {} {}",
@@ -253,6 +253,19 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
      */
     public T updateDrilldownUrlWithFeedback(final T facet) {
         return updateDrilldownUrl(facet, this.originalFeedbackUrl);
+    }
+
+    /**
+     * set the hoverover text based on hover information
+     */
+    public T updateHoverover(final T facet) {
+        if (this.hoverover.getTemplate() != null) {
+            Collection<String> strings = this.hoverover.getText().values();
+            String template = this.hoverover.getTemplate();
+            String hoveroverString = this.hoverover.getFacetName() + "\n" + String.format(template, strings);
+            facet.setTitle(hoveroverString);
+        }
+        return facet;
     }
 
     /**
@@ -291,6 +304,8 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         boolean hasTextNodesB = hasTextNodes.get();
         Availability availability = hasTextNodesB ? Availability.AVAILABLE : Availability.NOT_AVAILABLE;
         facet.updateAvailability(availability);
+
+        updateHoverover(facet);
 
         return facet;
     }

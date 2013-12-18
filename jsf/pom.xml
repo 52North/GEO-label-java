@@ -37,6 +37,17 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/logback.xml</exclude>
+						<exclude>**/logback-test.xml</exclude>
+						<exclude>src/test/resources/testfiles/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
