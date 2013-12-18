@@ -190,18 +190,25 @@ public class MetadataTransformer {
         @Override
         public Label load(LabelUrlKey key) throws Exception {
             key.cacheWriteTime = new Date();
-            log.info("Generating new GEO label for cache from urls {}", key);
+            log.info("Generating new GEO label for cache...");
 
-            Label label = new Label();
-
-            if (key.feedbackUrl != null)
-                label = updateGeoLabel(key.feedbackUrl, label);
-            if (key.metadataUrl != null)
-                label = updateGeoLabel(key.metadataUrl, label);
-
+            Label label = getLabel(key);
             return label;
         }
+
     });
+
+    protected Label getLabel(LabelUrlKey key) throws IOException {
+        log.info("Generating new GEO label from urls {}", key);
+        Label label = new Label();
+
+        if (key.feedbackUrl != null)
+            label = updateGeoLabel(key.feedbackUrl, label);
+        if (key.metadataUrl != null)
+            label = updateGeoLabel(key.metadataUrl, label);
+
+        return label;
+    }
 
     private Set<TransformationDescription> transformationDescriptions;
 
@@ -261,6 +268,9 @@ public class MetadataTransformer {
      * @throws IOException
      */
     public Label updateGeoLabel(URL metadataUrl, Label label) throws IOException {
+        // set the metadata URL which is needed for drilldown link generation
+        label.setMetadataUrl(metadataUrl);
+
         try {
             URLConnection con = metadataUrl.openConnection();
             con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
@@ -303,21 +313,28 @@ public class MetadataTransformer {
     /**
      * Returns a {@link Label} from metadata and/or feedback {@link URL}. Results are cached.
      *
-     * @param metadataURL
-     * @param feedbackURL
-     * @return
-     * @throws IOException
      */
     public Label getLabel(URL metadataURL, URL feedbackURL) throws IOException {
+        return getLabel(metadataURL, feedbackURL, true);
+    }
+
+    /**
+     * Returns a {@link Label} from metadata and/or feedback {@link URL}.
+     */
+    public Label getLabel(URL metadataURL, URL feedbackURL, boolean useCache) throws IOException {
         log.debug("Creating label for metadata {} and feedback {}", metadataURL, feedbackURL);
 
-        try {
-            LabelUrlKey labelUrlKey = new LabelUrlKey(metadataURL, feedbackURL);
-            return this.labelUrlCache.get(labelUrlKey);
-        }
-        catch (ExecutionException e) {
-            throw new IOException(e.getCause());
-        }
+        LabelUrlKey labelUrlKey = new LabelUrlKey(metadataURL, feedbackURL);
+
+        if (useCache)
+            try {
+                return this.labelUrlCache.get(labelUrlKey);
+            }
+            catch (ExecutionException e) {
+                throw new IOException(e.getCause());
+            }
+
+        return getLabel(labelUrlKey);
     }
 
     public Set<LabelUrlKey> getCacheContent() {

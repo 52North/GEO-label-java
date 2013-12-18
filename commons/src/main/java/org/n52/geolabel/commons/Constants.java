@@ -26,4 +26,7 @@ public class Constants {
 	public static final String PARAM_SIZE = "size";
 	public static final String PARAM_ID = "id";
 
+    public static final String PARAM_USECACHE = "useCache";
+    public static final String PARAM_USECACHE_DEFAULT = "true";
+
 }

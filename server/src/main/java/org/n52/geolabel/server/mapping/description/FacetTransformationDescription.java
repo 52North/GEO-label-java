@@ -16,6 +16,7 @@
 
 package org.n52.geolabel.server.mapping.description;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -216,6 +217,8 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     protected Drilldown drilldown;
 
+    private URL originalMetadataUrl;
+
     public abstract T getAffectedFacet(Label label);
 
     public void initXPaths(XPath xPath) throws XPathExpressionException {
@@ -228,8 +231,15 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
      * feedback)
      */
     public T updateDrilldownUrl(final T facet) {
-        String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, "fullmetadataurl");
+        if (this.drilldown.url != null && this.drilldownEndpoint != null && this.originalMetadataUrl != null) {
+            String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, this.originalMetadataUrl);
         facet.setDrilldownURL(drilldownURL);
+        }
+        else
+            log.debug("Could not update drilldown URL with the information provided: {} {} {}",
+                      this.drilldown,
+                      this.drilldownEndpoint,
+                      this.originalMetadataUrl);
         return facet;
     }
 
@@ -274,6 +284,8 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     }
 
     public Label updateLabel(Label label, Document metadataXml) {
+        this.originalMetadataUrl = label.getMetadataUrl();
+
         try {
             T affectedF = getAffectedFacet(label);
             T updatedFacet = updateFacet(affectedF, metadataXml);

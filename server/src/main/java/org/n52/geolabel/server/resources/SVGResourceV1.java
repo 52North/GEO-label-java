@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.resources;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.net.URLConnection;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -50,65 +52,77 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(value = "/v1/svg", description = "Operations to retrieve GEO label SVG representations")
 public class SVGResourceV1 {
 
-	private Provider<LMLResourceV1> lmlResource;
+    private Provider<LMLResourceV1> lmlResource;
 
-	@Inject
-	private SVGResourceV1(Provider<LMLResourceV1> lmlResource) {
-		this.lmlResource = lmlResource;
-	}
+    @Inject
+    private SVGResourceV1(Provider<LMLResourceV1> lmlResource) {
+        this.lmlResource = lmlResource;
+    }
 
-	@GET
-	@Produces("image/svg+xml")
-	@ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as url")
-	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
-	public Response getLabelSVGByURL(@ApiParam("Url to LML document") @QueryParam(Constants.PARAM_LML) URL lmlURL,
-			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
-			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL,
-			@ApiParam("Desired size of returned SVG") @QueryParam(Constants.PARAM_SIZE) Integer size,
-			@ApiParam("Desired id of returned SVG root element") @QueryParam(Constants.PARAM_ID) String id)
-			throws IOException {
+    @GET
+    @Produces("image/svg+xml")
+    @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as url")
+    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+    public Response getLabelSVGByURL(@ApiParam("Url to LML document")
+    @QueryParam(Constants.PARAM_LML)
+    URL lmlURL, @ApiParam("Url to metadata document")
+    @QueryParam(Constants.PARAM_METADATA)
+    URL metadataURL, @ApiParam("Url to feedback document")
+    @QueryParam(Constants.PARAM_FEEDBACK)
+    URL feedbackURL, @ApiParam("Desired size of returned SVG")
+    @QueryParam(Constants.PARAM_SIZE)
+    Integer size, @ApiParam("Desired id of returned SVG root element")
+    @QueryParam(Constants.PARAM_ID)
+    String id, @ApiParam("use cached labels")
+    @QueryParam(Constants.PARAM_USECACHE)
+    @DefaultValue(Constants.PARAM_USECACHE_DEFAULT)
+    boolean useCache) throws IOException {
 
-		Label label = null;
-		if (lmlURL != null) {
-			URLConnection con = lmlURL.openConnection();
-			con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
-			con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
-			label = Label.fromXML(con.getInputStream());
-		}
+        Label label = null;
+        if (lmlURL != null) {
+            URLConnection con = lmlURL.openConnection();
+            con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
+            con.setReadTimeout(GeoLabelConfig.READ_TIMEOUT);
+            label = Label.fromXML(con.getInputStream());
+        }
         else {
             LMLResourceV1 lmlR = this.lmlResource.get();
-            label = lmlR.getLabelByURL(metadataURL, feedbackURL);
+            label = lmlR.getLabelByURL(metadataURL, feedbackURL, useCache);
         }
         return createLabelSVGResponse(size != null ? size.intValue() : 200, id, label);
-	}
+    }
 
-	@POST
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces("image/svg+xml")
-	@ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
-	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
-	// TODO Find a way to use Document as Type for FormDataParams, instead of
-	// Streams, seems to be unsupported
-	public Response getLabelSVGByFile(
-	/* @ApiParam("LML representation") */@FormDataParam(Constants.PARAM_LML) Label label,
-	/* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
-	/* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream,
-	/* @ApiParam("Desired size of returned SVG") */@FormDataParam(Constants.PARAM_SIZE) Integer size,
-	/* @ApiParam("Desired id of returned SVG root element") */@FormDataParam(Constants.PARAM_ID) String id)
-			throws IOException {
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces("image/svg+xml")
+    @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
+    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+    // TODO Find a way to use Document as Type for FormDataParams, instead of
+    // Streams, seems to be unsupported
+    public Response getLabelSVGByFile(
+    /* @ApiParam("LML representation") */@FormDataParam(Constants.PARAM_LML)
+    Label label,
+    /* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA)
+    InputStream metadataInputStream,
+    /* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK)
+    InputStream feedbackInputStream,
+    /* @ApiParam("Desired size of returned SVG") */@FormDataParam(Constants.PARAM_SIZE)
+    Integer size,
+    /* @ApiParam("Desired id of returned SVG root element") */@FormDataParam(Constants.PARAM_ID)
+    String id) throws IOException {
         Label l = label;
         if (l == null)
-            l = this.lmlResource.get().getLabelByFile(metadataInputStream, feedbackInputStream);
+            l = this.lmlResource.get().getLabelByStream(metadataInputStream, feedbackInputStream);
         return createLabelSVGResponse(size != null ? size.intValue() : 200, id, l);
-	}
+    }
 
-	static Response createLabelSVGResponse(final int size, final String id, final Label label) {
-		return Response.ok().entity(new StreamingOutput() {
-			@Override
-			public void write(OutputStream stream) throws IOException, WebApplicationException {
-				label.toSVG(new OutputStreamWriter(stream), id, size);
-			}
-		}).type("image/svg+xml").build();
-	}
+    static Response createLabelSVGResponse(final int size, final String id, final Label label) {
+        return Response.ok().entity(new StreamingOutput() {
+            @Override
+            public void write(OutputStream stream) throws IOException, WebApplicationException {
+                label.toSVG(new OutputStreamWriter(stream), id, size);
+            }
+        }).type("image/svg+xml").build();
+    }
 
 }

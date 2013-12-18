@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.resources;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.net.URL;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -36,6 +38,8 @@ import javax.ws.rs.core.Response.Status;
 import org.n52.geolabel.commons.Constants;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.multipart.FormDataParam;
 import com.wordnik.swagger.annotations.Api;
@@ -48,74 +52,81 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(value = "/v1/lml", description = "Operations to retrieve GEO label LML representations")
 public class LMLResourceV1 {
 
-	private Provider<MetadataTransformer> transformer;
+    private static Logger log = LoggerFactory.getLogger(LMLResourceV1.class);
 
-	@Inject
-	private LMLResourceV1(Provider<MetadataTransformer> transformer) {
-		this.transformer = transformer;
-	}
+    private Provider<MetadataTransformer> transformer;
 
-	@GET
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as url")
-	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
-	public Label getLabelByURL(
-			@ApiParam("Url to metadata document") @QueryParam(Constants.PARAM_METADATA) URL metadataURL,
-			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL)
-			throws IOException {
-		if (metadataURL == null && feedbackURL == null)
-            throw new WebApplicationException(Response.ok().status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN)
-					.entity("No metadata or feedback URL specified").build());
+    @Inject
+    private LMLResourceV1(Provider<MetadataTransformer> transformer) {
+        this.transformer = transformer;
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as url")
+    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+    public Label getLabelByURL(@ApiParam("Url to metadata document")
+    @QueryParam(Constants.PARAM_METADATA)
+    URL metadataURL, @ApiParam("Url to feedback document")
+    @QueryParam(Constants.PARAM_FEEDBACK)
+    URL feedbackURL, @ApiParam("use cached labels")
+    @QueryParam(Constants.PARAM_USECACHE)
+    @DefaultValue(Constants.PARAM_USECACHE_DEFAULT)
+    boolean useCache) throws IOException {
+        if (metadataURL == null && feedbackURL == null)
+            throw new WebApplicationException(Response.ok().status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("No metadata or feedback URL specified").build());
 
         MetadataTransformer metadataTransformer = this.transformer.get();
 
-		return metadataTransformer.getLabel(metadataURL, feedbackURL);
-	}
+        return metadataTransformer.getLabel(metadataURL, feedbackURL, useCache);
+    }
 
-	@POST
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream")
-	@ApiResponses({ @ApiResponse(code = 400, message = "Error in feedback/metadata document") })
-	// TODO Find a way to use Document as Type for FormDataParams, seems to be
-	// unsupported
-	public Label getLabelByFile(
-	/* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
-	/* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream)
-			throws IOException {
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream")
+    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+    // TODO Find a way to use Document as Type for FormDataParams, seems to be
+    // unsupported
+    public Label getLabelByStream(
+    /* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA)
+    InputStream metadataInputStream,
+    /* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK)
+    InputStream feedbackInputStream) throws IOException {
         MetadataTransformer metadataTransformer = this.transformer.get();
 
-		Label label = new Label();
-		PushbackInputStream tempStream;
-		boolean hasData = false;
-		if (metadataInputStream != null) {
-			tempStream = new PushbackInputStream(metadataInputStream);
-			int t = tempStream.read();
-			if (t != -1) {
-				tempStream.unread(t);
-				metadataTransformer.updateGeoLabel(tempStream, label);
-				hasData = true;
-			}
+        Label label = new Label();
+        PushbackInputStream tempStream;
+        boolean hasData = false;
+        if (metadataInputStream != null) {
+            tempStream = new PushbackInputStream(metadataInputStream);
+            int t = tempStream.read();
+            if (t != -1) {
+                tempStream.unread(t);
+                log.debug("Reading from metadata stream...");
+                metadataTransformer.updateGeoLabel(tempStream, label);
+                hasData = true;
+            }
             else
                 tempStream.close();
-		}
-		if (feedbackInputStream != null) {
-			tempStream = new PushbackInputStream(feedbackInputStream);
-			int t = tempStream.read();
-			if (t != -1) {
-				tempStream.unread(t);
-				metadataTransformer.updateGeoLabel(tempStream, label);
-				hasData = true;
-			}
+        }
+        if (feedbackInputStream != null) {
+            tempStream = new PushbackInputStream(feedbackInputStream);
+            int t = tempStream.read();
+            if (t != -1) {
+                tempStream.unread(t);
+                log.debug("Reading from feedback stream...");
+                metadataTransformer.updateGeoLabel(tempStream, label);
+                hasData = true;
+            }
             else
                 tempStream.close();
-		}
+        }
 
-		if (!hasData)
-            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN)
-					.entity("No metadata or feedback file specified").build());
+        if ( !hasData)
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("No metadata or feedback file specified").build());
 
-		return label;
-	}
+        return label;
+    }
 
 }

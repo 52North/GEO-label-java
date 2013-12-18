@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.net.URL;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -123,8 +124,12 @@ public class Label {
     private FacetHolder facetHolder = new FacetHolder();
 
     private static Unmarshaller unmarshaller;
+
     private static Marshaller marshaller;
+
     private static Template svgTemplate;
+
+    private URL metadataUrl;
 
     public ProducerProfileFacet getProducerProfileFacet() {
         return this.facetHolder.producerProfileFacet;
@@ -223,6 +228,14 @@ public class Label {
             log.error("Error in geolabel template", e);
             throw new IOException("Unable to process SVG template");
         }
+    }
+
+    public URL getMetadataUrl() {
+        return this.metadataUrl;
+    }
+
+    public void setMetadataUrl(URL metadataUrl) {
+        this.metadataUrl = metadataUrl;
     }
 
     @Override
