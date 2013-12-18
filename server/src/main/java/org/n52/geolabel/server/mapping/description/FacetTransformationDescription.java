@@ -99,7 +99,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             StringBuilder builder = new StringBuilder();
             builder.append("HoveroverInformation [");
             if (this.facetName != null) {
-                builder.append("factName=");
+                builder.append("facetName=");
                 builder.append(this.facetName);
                 builder.append(", ");
             }
@@ -126,6 +126,18 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     public static class Drilldown {
         public String url;
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("Drilldown [");
+            if (this.url != null) {
+                builder.append("url=");
+                builder.append(this.url);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
     }
 
     protected interface ExpressionResultFunction {
@@ -176,9 +188,9 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     private XPathExpression availabilityExpression;
 
-    private HoveroverInformation hoverover;
+    protected HoveroverInformation hoverover;
 
-    private Drilldown drilldown;
+    protected Drilldown drilldown;
 
     public abstract T getAffectedFacet(Label label);
 
@@ -227,7 +239,10 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             return label;
         }
         catch (XPathExpressionException e) {
-            throw new RuntimeException("Error while executing XPath expression for label " + label.toString(), e);
+            log.error("Error while executing XPath expression for facet {} in label {}", getClass().getName(), label);
+            throw new RuntimeException(String.format("Error while executing XPath expression for facet %s in label %s",
+                                                     getClass().getName(),
+                                                     label), e);
         }
     }
 

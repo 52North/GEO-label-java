@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "producerProfile")
 public class ProducerProfileFacet extends LabelFacet {
+
 	@XmlElement(name = "producerOrganisationName")
 	private Set<String> organizationNames;
 
@@ -37,7 +38,7 @@ public class ProducerProfileFacet extends LabelFacet {
 
 	public void addOrganizationNames(String organizationName) {
         if (this.organizationNames == null)
-            this.organizationNames = new HashSet<String>();
+            this.organizationNames = new HashSet<>();
 		this.organizationNames.add(organizationName);
 	}
 }

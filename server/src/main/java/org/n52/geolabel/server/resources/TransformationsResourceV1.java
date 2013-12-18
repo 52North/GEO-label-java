@@ -121,7 +121,7 @@ public class TransformationsResourceV1 {
     @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Returns a list of used transformations")
     public TransformationsHolder getTransformationsInfo() {
-        TransformationsHolder holder = new TransformationsHolder(this.resources.getTransformationDescriptionResources(),
+        TransformationsHolder holder = new TransformationsHolder(this.resources.getResources(),
                                                                  this.loader.getUsedSources());
 
         return holder;

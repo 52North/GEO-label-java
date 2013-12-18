@@ -17,6 +17,7 @@
 package org.n52.geolabel.server.mapping;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -40,6 +41,43 @@ import org.n52.geolabel.server.mapping.description.ProducerCommentsFacetDescript
 import org.n52.geolabel.server.mapping.description.TransformationDescription;
 import org.n52.geolabel.server.mapping.description.TransformationDescription.NamespaceMapping;
 
+/**
+ * transformer file structure: <code>
+ {
+     "transformationDescription":{
+     "name":"transformer",
+     "namespaceMappings":[],
+     "facetDescriptions":
+        [
+             {
+             "producerProfile":{}
+             },
+             {
+             "producerComments":{}
+             },
+             {
+             "lineage":{}
+             },
+             {
+             "standardsCompliance":{}
+             },
+             {
+             "qualityInformation":{}
+             },
+             {
+             "userFeedback":{}
+             },
+             {
+             "expertReview":{}
+             },
+             {
+             "citations":{}
+             }
+         ]
+     }
+ }
+ </code>
+ */
 public class TransformationDescriptionTest {
 
     @SuppressWarnings("boxing")
@@ -67,6 +105,38 @@ public class TransformationDescriptionTest {
                    is(equalTo("boolean(normalize-space(string(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem'])))")));
         assertThat("drilldown is correct",
                    description.facetDescriptions[0].getDrilldown().url,
+                   is(equalTo("http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=producer_comments")));
+    }
+
+    @SuppressWarnings("boxing")
+    @Test
+    public void loadJsonTransformationDescription() throws MalformedURLException {
+
+        Map<URL, String> resources = new HashMap<>();
+        resources.put(new URL("http://do.not.even.look/for/it"), "/transformations/transformer.json");
+        TransformationDescriptionLoader loader = new TransformationDescriptionLoader(new TransformationDescriptionResources(resources));
+
+        Set<TransformationDescription> tds = loader.load();
+        TransformationDescription description = tds.iterator().next();
+
+        assertThat("name", description.name, is(equalTo("transformer")));
+        assertThat("mappings read", description.namespaceMappings.length, is(equalTo(3)));
+        assertTrue(description.namespaceMappings[0].prefix.equals("gmd"));
+        assertTrue(description.namespaceMappings[0].namespace.equals("http://www.isotc211.org/2005/gmd"));
+
+        assertThat("all facets read", description.facetDescriptions.length, is(equalTo(8)));
+
+        assertThat("class is correct umarshalled",
+                   description.facetDescriptions[1].getClass().getName(),
+                   is(equalTo(ProducerCommentsFacetDescription.class.getName())));
+        assertThat("availability path is correct",
+                   description.facetDescriptions[1].getAvailabilityPath(),
+                   containsString("knownProblem"));
+        assertThat("availability path is correct",
+                   description.facetDescriptions[1].getAvailabilityPath(),
+                   containsString("GVQ_DiscoveredIssue"));
+        assertThat("drilldown is correct",
+                   description.facetDescriptions[1].getDrilldown().url,
                    is(equalTo("http://www.geolabel.net/api/v1/drilldown?metadata=%s&facet=producer_comments")));
     }
 

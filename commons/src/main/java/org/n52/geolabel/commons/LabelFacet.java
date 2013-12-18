@@ -92,6 +92,10 @@ public abstract class LabelFacet {
         return this.drilldownURL;
     }
 
+    public void setDrilldownURL(String drilldownURL) {
+        this.drilldownURL = drilldownURL;
+    }
+
     /**
      * Updating availability status. AVAILABLE beats all, NOT_AVAILABLE beats NA
      *

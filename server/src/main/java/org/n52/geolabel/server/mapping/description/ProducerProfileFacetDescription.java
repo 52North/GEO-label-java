@@ -35,6 +35,8 @@ public class ProducerProfileFacetDescription extends
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
+        this.organizationNamePath = this.hoverover.getText().get("organizationNamePath");
+
         if (this.organizationNamePath != null)
             this.organizationNameExpression = xPath.compile(this.organizationNamePath);
 		super.initXPaths(xPath);
@@ -51,6 +53,11 @@ public class ProducerProfileFacetDescription extends
 						return true;
 					}
 				});
+
+        String drilldownURL = String.format(this.drilldown.url,
+                                            "http://www.geolabel.net/api/v1/drilldown",
+                                            "fullmetadataurl");
+        facet.setDrilldownURL(drilldownURL);
 
 		return super.updateFacet(facet, metadataXml);
 	}

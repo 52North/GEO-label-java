@@ -116,10 +116,10 @@ public class TransformationDescriptionLoader {
     }
 
     public Set<TransformationDescription> load() {
-        if (this.descriptions == null)
-            this.descriptions = internalLoad(this.resources);
+        if (descriptions == null)
+            descriptions = internalLoad(this.resources);
 
-        return this.descriptions;
+        return descriptions;
     }
 
     private Set<TransformationDescription> internalLoad(final TransformationDescriptionResources res) {
@@ -128,7 +128,7 @@ public class TransformationDescriptionLoader {
         final Set<TransformationDescription> ds = new HashSet<>();
 
         // load from server with fallback
-        Set<Entry<URL, String>> entrySet = this.resources.getTransformationDescriptionResources().entrySet();
+        Set<Entry<URL, String>> entrySet = this.resources.getResources().entrySet();
         for (Entry<URL, String> entry : entrySet) {
             log.debug("Loading transformation description from URL {} with fallback {}",
                       entry.getKey(),
@@ -145,7 +145,10 @@ public class TransformationDescriptionLoader {
                 setUsedSource(entry.getKey(), Source.ONLINE);
             }
             catch (Exception e) {
-                log.warn("There was a problem loading transformation description from {}", entry.getKey(), e);
+                log.warn("There was a problem loading transformation description from {}: {} : {}",
+                         entry.getValue(),
+                         e.getClass(),
+                         e.getMessage());
             }
 
             if (td == null) {
@@ -158,7 +161,10 @@ public class TransformationDescriptionLoader {
                     setUsedSource(entry.getKey(), Source.FALLBACK);
                 }
                 catch (IOException e) {
-                    log.error("There was a problem loading transformation description from {}", entry.getValue(), e);
+                    log.error("There was a problem loading transformation description from {}: {} : {}",
+                              entry.getValue(),
+                              e.getClass(),
+                              e.getMessage());
                 }
             }
 
@@ -196,11 +202,24 @@ public class TransformationDescriptionLoader {
     }
 
     public void setUsedSource(URL url, Source online) {
-        this.transformationDescriptionUsedSource.put(url, online);
+        transformationDescriptionUsedSource.put(url, online);
     }
 
     public Map<URL, Source> getUsedSources() {
-        return this.transformationDescriptionUsedSource;
+        return transformationDescriptionUsedSource;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("TransformationDescriptionLoader [");
+        if (this.resources != null) {
+            builder.append("resources=");
+            builder.append(this.resources);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
+
 
 }
