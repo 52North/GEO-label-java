@@ -131,6 +131,8 @@ public class Label {
 
     private URL metadataUrl;
 
+    private URL feedbackUrl;
+
     public ProducerProfileFacet getProducerProfileFacet() {
         return this.facetHolder.producerProfileFacet;
     }
@@ -236,6 +238,14 @@ public class Label {
 
     public void setMetadataUrl(URL metadataUrl) {
         this.metadataUrl = metadataUrl;
+    }
+
+    public URL getFeedbackUrl() {
+        return this.feedbackUrl;
+    }
+
+    public void setFeedbackUrl(URL feedbackUrl) {
+        this.feedbackUrl = feedbackUrl;
     }
 
     @Override

@@ -33,7 +33,7 @@ import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
-import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.ExpertFeedbackFacetDescription;
+import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.ExpertReviewFacetDescription;
 import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.UserFeedbackFacetDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ import org.w3c.dom.NodeList;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
 @JsonSubTypes({@JsonSubTypes.Type(value = ProducerProfileFacetDescription.class, name = "producerProfile"),
                @JsonSubTypes.Type(value = LineageFacetDescription.class, name = "lineage"),
-               @JsonSubTypes.Type(value = ExpertFeedbackFacetDescription.class, name = "expertReview"),
+               @JsonSubTypes.Type(value = ExpertReviewFacetDescription.class, name = "expertReview"),
                @JsonSubTypes.Type(value = UserFeedbackFacetDescription.class, name = "userFeedback"),
                @JsonSubTypes.Type(value = ProducerCommentsFacetDescription.class, name = "producerComments"),
                @JsonSubTypes.Type(value = StandardsComplianceFacetDescription.class, name = "standardsCompliance"),
@@ -217,7 +217,9 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     protected Drilldown drilldown;
 
-    private URL originalMetadataUrl;
+    protected URL originalMetadataUrl;
+
+    protected URL originalFeedbackUrl;
 
     public abstract T getAffectedFacet(Label label);
 
@@ -226,14 +228,10 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             this.availabilityExpression = xPath.compile(this.availabilityPath);
     }
 
-    /**
-     * replaces two strings in the URL, first the drilldown endpoint and second the metadata URL (metadata or
-     * feedback)
-     */
-    public T updateDrilldownUrl(final T facet) {
-        if (this.drilldown.url != null && this.drilldownEndpoint != null && this.originalMetadataUrl != null) {
-            String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, this.originalMetadataUrl);
-        facet.setDrilldownURL(drilldownURL);
+    private T updateDrilldownUrl(T facet, URL metadataOrFeedbackUrl) {
+        if (this.drilldown.url != null && this.drilldownEndpoint != null && metadataOrFeedbackUrl != null) {
+            String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, metadataOrFeedbackUrl);
+            facet.setDrilldownURL(drilldownURL);
         }
         else
             log.debug("Could not update drilldown URL with the information provided: {} {} {}",
@@ -241,6 +239,20 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                       this.drilldownEndpoint,
                       this.originalMetadataUrl);
         return facet;
+    }
+
+    /**
+     * replaces two strings in the URL, first the drilldown endpoint and second the metadata URL
+     */
+    public T updateDrilldownUrlWithMetadata(final T facet) {
+        return updateDrilldownUrl(facet, this.originalMetadataUrl);
+    }
+
+    /**
+     * replaces two strings in the URL, first the drilldown endpoint and second the feedback URL
+     */
+    public T updateDrilldownUrlWithFeedback(final T facet) {
+        return updateDrilldownUrl(facet, this.originalFeedbackUrl);
     }
 
     /**
@@ -284,7 +296,9 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     }
 
     public Label updateLabel(Label label, Document metadataXml) {
+        // must be set for the subclasses to use:
         this.originalMetadataUrl = label.getMetadataUrl();
+        this.originalFeedbackUrl = label.getFeedbackUrl();
 
         try {
             T affectedF = getAffectedFacet(label);

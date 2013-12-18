@@ -202,6 +202,10 @@ public class MetadataTransformer {
         log.info("Generating new GEO label from urls {}", key);
         Label label = new Label();
 
+        // set the metadata URL which is needed for drilldown link generation
+        label.setMetadataUrl(key.metadataUrl);
+        label.setFeedbackUrl(key.feedbackUrl);
+
         if (key.feedbackUrl != null)
             label = updateGeoLabel(key.feedbackUrl, label);
         if (key.metadataUrl != null)
@@ -268,9 +272,6 @@ public class MetadataTransformer {
      * @throws IOException
      */
     public Label updateGeoLabel(URL metadataUrl, Label label) throws IOException {
-        // set the metadata URL which is needed for drilldown link generation
-        label.setMetadataUrl(metadataUrl);
-
         try {
             URLConnection con = metadataUrl.openConnection();
             con.setConnectTimeout(GeoLabelConfig.CONNECT_TIMEOUT);
@@ -287,32 +288,7 @@ public class MetadataTransformer {
     }
 
     /**
-     * Returns new {@link Label} instance from supplied metadata XML stream. See
-     * {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}
-     *
-     * @param xml
-     * @return
-     * @throws IOException
-     */
-    public Label createGeoLabel(InputStream xml) throws IOException {
-        return updateGeoLabel(xml, new Label());
-    }
-
-    /**
-     * Returns new {@link Label} instance from supplied metadata XML {@link URL} reference. See
-     * {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}
-     *
-     * @param metadataUrl
-     * @return
-     * @throws IOException
-     */
-    public Label createGeoLabel(URL metadataUrl) throws IOException {
-        return updateGeoLabel(metadataUrl, new Label());
-    }
-
-    /**
      * Returns a {@link Label} from metadata and/or feedback {@link URL}. Results are cached.
-     *
      */
     public Label getLabel(URL metadataURL, URL feedbackURL) throws IOException {
         return getLabel(metadataURL, feedbackURL, true);

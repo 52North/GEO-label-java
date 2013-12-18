@@ -63,7 +63,7 @@ public class LineageFacetDescription extends FacetTransformationDescription<Line
                 facet.addProcessSteps(result.intValue());
 		}
 
-        LineageFacet f = super.updateDrilldownUrl(facet);
+        LineageFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);
 	}
 

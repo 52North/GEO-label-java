@@ -20,13 +20,11 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -34,7 +32,6 @@ import java.util.BitSet;
 import java.util.EnumSet;
 
 import org.junit.Test;
-import org.n52.geolabel.commons.ErrorFacet;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
@@ -61,7 +58,7 @@ public class MetadataTransformerTest {
         // String theString = writer.toString();
         // System.out.println(theString);
 
-        Label geoLabel = metadataTransformer.createGeoLabel(metadataStream);
+        Label geoLabel = metadataTransformer.updateGeoLabel(metadataStream, new Label());
 
         assertTrue(geoLabel.getProducerProfileFacet().getAvailability() == Availability.AVAILABLE);
         assertTrue(geoLabel.getProducerProfileFacet().getOrganizationNames().contains("JRC"));
@@ -259,7 +256,7 @@ public class MetadataTransformerTest {
         MetadataTransformer metadataTransformer = newMetadataTransformer();
         InputStream metadataStream = getClass().getClassLoader().getResourceAsStream("testfiles/metadata/"
                 + exampleFile);
-        Label label = metadataTransformer.createGeoLabel(metadataStream);
+        Label label = metadataTransformer.updateGeoLabel(metadataStream, new Label());
 
         // Check facet availability
         if (control.availableFacets != null)
@@ -377,22 +374,23 @@ public class MetadataTransformerTest {
         };
     }
 
-    @Test
-    public void testResourceNotFoundErrorMessage() throws IOException {
-        MetadataTransformer metadataTransformer = newMetadataTransformer();
-        Label label = metadataTransformer.createGeoLabel(new URL("http://does.not/exist.xml"));
-
-        ErrorFacet ef = label.getErrorFacet();
-        assertEquals("error facet availability", Availability.AVAILABLE, ef.getAvailability());
-        assertNotNull("error message null", ef.getErrorMessage());
-
-        StringWriter sw = new StringWriter();
-        label.toSVG(sw, "testid", 100);
-        String svgString = sw.toString();
-
-        assertTrue("error string is given", svgString.contains("does.not"));
-        assertTrue("error string is given", svgString.contains("Error:"));
-        assertTrue("error string is given", svgString.contains("Message:"));
-    }
+    // TODO make this an integration test:
+    // @Test
+    // public void testResourceNotFoundErrorMessage() throws IOException {
+    // MetadataTransformer metadataTransformer = newMetadataTransformer();
+    // Label label = metadataTransformer.createGeoLabel(new URL("http://does.not/exist.xml"));
+    //
+    // ErrorFacet ef = label.getErrorFacet();
+    // assertEquals("error facet availability", Availability.AVAILABLE, ef.getAvailability());
+    // assertNotNull("error message null", ef.getErrorMessage());
+    //
+    // StringWriter sw = new StringWriter();
+    // label.toSVG(sw, "testid", 100);
+    // String svgString = sw.toString();
+    //
+    // assertTrue("error string is given", svgString.contains("does.not"));
+    // assertTrue("error string is given", svgString.contains("Error:"));
+    // assertTrue("error string is given", svgString.contains("Message:"));
+    // }
 
 }

@@ -68,7 +68,7 @@ public class ProducerProfileFacetDescription extends
 					}
 				});
 
-        ProducerProfileFacet f = super.updateDrilldownUrl(facet);
+        ProducerProfileFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);
 	}
 

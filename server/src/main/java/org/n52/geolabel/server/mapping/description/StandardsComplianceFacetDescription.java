@@ -64,7 +64,7 @@ public class StandardsComplianceFacetDescription extends FacetTransformationDesc
 			}
 		});
 
-        StandardsComplianceFacet f = super.updateDrilldownUrl(facet);
+        StandardsComplianceFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);
 	}
 

@@ -68,7 +68,7 @@ public class QualityInformationFacetDescription extends
 					}
 				});
 
-        QualityInformationFacet f = super.updateDrilldownUrl(facet);
+        QualityInformationFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);
 	}
 

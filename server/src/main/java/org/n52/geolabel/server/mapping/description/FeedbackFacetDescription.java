@@ -74,7 +74,7 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
             }
         });
 
-        FeedbackFacet f = super.updateDrilldownUrl(facet);
+        FeedbackFacet f = super.updateDrilldownUrlWithFeedback(facet);
         return super.updateFacet(f, metadataXml);
     }
 
@@ -99,10 +99,10 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
     /**
      * Checks availability of expert reviews information
      */
-    public static class ExpertFeedbackFacetDescription extends FeedbackFacetDescription {
+    public static class ExpertReviewFacetDescription extends FeedbackFacetDescription {
 
         @JsonCreator
-        public ExpertFeedbackFacetDescription(@JacksonInject
+        public ExpertReviewFacetDescription(@JacksonInject
         TransformationDescriptionResources resources) {
             super(resources);
             log.debug("NEW {}", this);
