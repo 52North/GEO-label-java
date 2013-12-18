@@ -165,7 +165,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                                                        Document xml,
                                                        ExpressionResultFunction resultFunction) throws XPathExpressionException {
         if (expression == null) {
-            log.error("Expression is null, not evaluating anything!");
+            log.debug("Expression is null, not evaluating anything!");
             return;
         }
 
