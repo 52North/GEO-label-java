@@ -19,6 +19,13 @@ import javax.servlet.annotation.WebFilter;
 
 import com.google.inject.servlet.GuiceFilter;
 
+/**
+ *
+ * Configure WebFilter instead of adding GuiceFilter in the web.xml file
+ *
+ * @author Holger
+ * 
+ */
 @WebFilter("/*")
 public class GeoLabelGuiceFilter extends GuiceFilter {
     //
