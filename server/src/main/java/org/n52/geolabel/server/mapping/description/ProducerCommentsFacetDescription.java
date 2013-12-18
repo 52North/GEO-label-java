@@ -19,8 +19,13 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.ProducerCommentsFacet;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -29,11 +34,20 @@ import org.w3c.dom.Document;
  */
 public class ProducerCommentsFacetDescription extends FacetTransformationDescription<ProducerCommentsFacet> {
 
+    private static Logger log = LoggerFactory.getLogger(ProducerCommentsFacetDescription.class);
+
 	private String producerCommentsPath;
 
 	private XPathExpression producerCommentsExpression;
 
-	@Override
+    @JsonCreator
+    public ProducerCommentsFacetDescription(@JacksonInject
+    TransformationDescriptionResources resources) {
+        super(resources);
+        log.debug("NEW {}", this);
+    }
+
+    @Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
         if (this.producerCommentsPath != null)
             this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);

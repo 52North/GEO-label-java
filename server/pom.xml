@@ -192,18 +192,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.sf.saxon</groupId>
-			<artifactId>saxon-xpath</artifactId>
-			<version>${saxon.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sf.saxon</groupId>
-			<artifactId>saxon-dom</artifactId>
-			<version>${saxon.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
 			<version>${guice.version}</version>

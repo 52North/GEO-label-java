@@ -16,9 +16,12 @@
 
 package org.n52.geolabel.server.mapping;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -33,14 +36,18 @@ import java.util.EnumSet;
 import org.junit.Test;
 import org.n52.geolabel.commons.ErrorFacet;
 import org.n52.geolabel.commons.Label;
+import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
 import org.n52.geolabel.commons.test.Facet;
+import org.n52.geolabel.server.config.GeoLabelObjectMapper;
+import org.n52.geolabel.server.config.TransformationDescriptionLoader;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
 
 public class MetadataTransformerTest {
 
     public static MetadataTransformer newMetadataTransformer() {
-        return new MetadataTransformer(new TransformationDescriptionResources());
+        TransformationDescriptionResources res = new TransformationDescriptionResources();
+        return new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res)));
     }
 
     @Test
@@ -326,12 +333,32 @@ public class MetadataTransformerTest {
 
         if (control.citationCount != null)
             assertEquals("citations", control.citationCount.intValue(), label.getCitationsFacet().getTotalCitations());
+
+        // check drilldown urls
+        checkDrilldownUrl(label.getCitationsFacet());
+        checkDrilldownUrl(label.getExpertFeedbackFacet());
+        checkDrilldownUrl(label.getLineageFacet());
+        checkDrilldownUrl(label.getProducerCommentsFacet());
+        checkDrilldownUrl(label.getProducerProfileFacet());
+        checkDrilldownUrl(label.getQualityInformationFacet());
+        checkDrilldownUrl(label.getStandardsComplianceFacet());
+        checkDrilldownUrl(label.getUserFeedbackFacet());
+    }
+
+    private void checkDrilldownUrl(LabelFacet facet) {
+        assertThat("drilldown does not contain string placeholders in " + facet.getClass().getSimpleName(),
+                   facet.getDrilldownURL(),
+                   not(containsString("%s")));
+        assertThat("drilldown contains URLs to geolabel.net" + facet.getClass().getSimpleName(),
+                   facet.getDrilldownURL(),
+                   containsString("geolabel.net"));
     }
 
     @SuppressWarnings("unused")
     @Test
     public void testLabelUrlKey() throws IOException {
-        new MetadataTransformer(new TransformationDescriptionResources()) {
+        TransformationDescriptionResources res = new TransformationDescriptionResources();
+        new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res))) {
             {
                 URL testURL1 = new URL("http://test1.resource1");
                 URL testURL2 = new URL("http://test2.resource2");

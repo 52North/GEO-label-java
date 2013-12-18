@@ -32,7 +32,9 @@ import java.util.Set;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
+import org.n52.geolabel.server.config.GeoLabelObjectMapper;
 import org.n52.geolabel.server.config.TransformationDescriptionLoader;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
 import org.n52.geolabel.server.mapping.description.CitationsFacetDescription;
@@ -80,15 +82,23 @@ import org.n52.geolabel.server.mapping.description.TransformationDescription.Nam
  */
 public class TransformationDescriptionTest {
 
+    private TransformationDescriptionLoader loader;
+
+    @Before
+    public void instantiateLoader() {
+        TransformationDescriptionResources res = new TransformationDescriptionResources();
+        this.loader = new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res));
+    }
+
     @SuppressWarnings("boxing")
     @Test
     public void loadGvqJsonTransformationDescription() throws MalformedURLException {
 
         Map<URL, String> resources = new HashMap<>();
         resources.put(new URL("http://do.not.even.look/for/it"), "transformations/transformerGVQ.json");
-        TransformationDescriptionLoader loader = new TransformationDescriptionLoader(new TransformationDescriptionResources());
 
-        Set<TransformationDescription> tds = loader.load();
+
+        Set<TransformationDescription> tds = this.loader.load();
         TransformationDescription description = tds.iterator().next();
 
         assertThat("mappings read", description.namespaceMappings.length, is(equalTo(3)));
@@ -114,9 +124,8 @@ public class TransformationDescriptionTest {
 
         Map<URL, String> resources = new HashMap<>();
         resources.put(new URL("http://do.not.even.look/for/it"), "/transformations/transformer.json");
-        TransformationDescriptionLoader loader = new TransformationDescriptionLoader(new TransformationDescriptionResources(resources));
 
-        Set<TransformationDescription> tds = loader.load();
+        Set<TransformationDescription> tds = this.loader.load();
         TransformationDescription description = tds.iterator().next();
 
         assertThat("name", description.name, is(equalTo("transformer")));
@@ -145,7 +154,7 @@ public class TransformationDescriptionTest {
         d.name = "testname";
 
         d.facetDescriptions = new FacetTransformationDescription< ? >[2];
-        CitationsFacetDescription cfd = new CitationsFacetDescription();
+        CitationsFacetDescription cfd = new CitationsFacetDescription(new TransformationDescriptionResources());
         cfd.setCitationsCountPath("/test/path");
         d.facetDescriptions[0] = cfd;
 

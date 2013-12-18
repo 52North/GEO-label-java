@@ -20,8 +20,13 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.FeedbackFacet;
 import org.n52.geolabel.commons.Label;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -29,12 +34,18 @@ import org.w3c.dom.Document;
  */
 public abstract class FeedbackFacetDescription extends FacetTransformationDescription<FeedbackFacet> {
 
+    protected static Logger log = LoggerFactory.getLogger(FeedbackFacetDescription.class);
+
     private String feedbacksCountPath;
 
     private String ratingsPath;
 
     private XPathExpression ratingsExpression;
     private XPathExpression feedbacksCountExpression;
+
+    public FeedbackFacetDescription(TransformationDescriptionResources resources) {
+        super(resources);
+    }
 
     @Override
     public void initXPaths(XPath xPath) throws XPathExpressionException {
@@ -63,13 +74,22 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
             }
         });
 
-        return super.updateFacet(facet, metadataXml);
+        FeedbackFacet f = super.updateDrilldownUrl(facet);
+        return super.updateFacet(f, metadataXml);
     }
 
     /**
      * Checks availability of user feedback
      */
     public static class UserFeedbackFacetDescription extends FeedbackFacetDescription {
+
+        @JsonCreator
+        public UserFeedbackFacetDescription(@JacksonInject
+        TransformationDescriptionResources resources) {
+            super(resources);
+            log.debug("NEW {}", this);
+        }
+
         @Override
         public FeedbackFacet getAffectedFacet(Label label) {
             return label.getUserFeedbackFacet();
@@ -80,6 +100,14 @@ public abstract class FeedbackFacetDescription extends FacetTransformationDescri
      * Checks availability of expert reviews information
      */
     public static class ExpertFeedbackFacetDescription extends FeedbackFacetDescription {
+
+        @JsonCreator
+        public ExpertFeedbackFacetDescription(@JacksonInject
+        TransformationDescriptionResources resources) {
+            super(resources);
+            log.debug("NEW {}", this);
+        }
+
         @Override
         public FeedbackFacet getAffectedFacet(Label label) {
             return label.getExpertFeedbackFacet();

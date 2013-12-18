@@ -20,8 +20,13 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LineageFacet;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -30,11 +35,20 @@ import org.w3c.dom.Document;
  */
 public class LineageFacetDescription extends FacetTransformationDescription<LineageFacet> {
 
+    private static Logger log = LoggerFactory.getLogger(LineageFacetDescription.class);
+
     private String processStepCountPath;
 
 	private XPathExpression processStepCountExpression;
 
-	@Override
+    @JsonCreator
+    public LineageFacetDescription(@JacksonInject
+    TransformationDescriptionResources resources) {
+        super(resources);
+        log.debug("NEW {}", this);
+    }
+
+    @Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
         if (this.processStepCountPath != null)
             this.processStepCountExpression = xPath.compile(this.processStepCountPath);
@@ -49,7 +63,8 @@ public class LineageFacetDescription extends FacetTransformationDescription<Line
                 facet.addProcessSteps(result.intValue());
 		}
 
-		return super.updateFacet(facet, metadataXml);
+        LineageFacet f = super.updateDrilldownUrl(facet);
+        return super.updateFacet(f, metadataXml);
 	}
 
 	@Override

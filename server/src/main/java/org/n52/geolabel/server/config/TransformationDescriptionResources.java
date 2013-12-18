@@ -20,9 +20,12 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Singleton;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Singleton
 public class TransformationDescriptionResources {
 
     protected static final Logger log = LoggerFactory.getLogger(TransformationDescriptionResources.class);
@@ -30,8 +33,10 @@ public class TransformationDescriptionResources {
     private static final String TRANSFORMATIONS_RESOURCE = "transformations";
 
     public static enum Source {
-        ONLINE, FALLBACK, NA;
+        URL, FALLBACK, NA;
     }
+
+    private String drilldownEndpoint = "http://geolabel.net/api/v1/drilldown";
 
     /**
      * map between normative URL and fallback
@@ -70,6 +75,10 @@ public class TransformationDescriptionResources {
         }
         builder.append("]");
         return builder.toString();
+    }
+
+    public String getDrilldownEndpoint() {
+        return this.drilldownEndpoint;
     }
 
 }

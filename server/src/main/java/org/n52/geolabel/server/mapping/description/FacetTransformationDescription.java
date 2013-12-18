@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -32,6 +31,7 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
 import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.ExpertFeedbackFacetDescription;
 import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.UserFeedbackFacetDescription;
 import org.slf4j.Logger;
@@ -140,18 +140,42 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         }
     }
 
+    /**
+     * functional interface to process the result of an xpath expression in the calling class.
+     */
     protected interface ExpressionResultFunction {
+        /**
+         *
+         * @param value
+         * @return try if the value was successfully used to create a result
+         */
         boolean eval(String value);
     }
 
+    protected String drilldownEndpoint;
+
+    public FacetTransformationDescription(TransformationDescriptionResources resources) {
+        this.drilldownEndpoint = resources.getDrilldownEndpoint();
+    }
+
+    /**
+     * if method throws no exception, evaluation was successful
+     */
     protected static void visitExpressionResultStrings(XPathExpression expression,
                                                        Document xml,
                                                        ExpressionResultFunction resultFunction) throws XPathExpressionException {
-        if (expression == null)
+        if (expression == null) {
+            log.error("Expression is null, not evaluating anything!");
             return;
+        }
 
-        Object evaluationResult = expression.evaluate(xml, XPathConstants.NODESET);
-        if (evaluationResult instanceof NodeList) {
+        Object evaluationResult = expression.evaluate(xml); // for use with saxon: , XPathConstants.NODESET);
+        if (evaluationResult instanceof String) {
+            String textContent = (String) evaluationResult;
+            if ( !resultFunction.eval(textContent.trim()))
+                return;
+        }
+        else if (evaluationResult instanceof NodeList) {
             NodeList nodeList = (NodeList) evaluationResult;
             if (nodeList.getLength() < 1)
                 log.debug("Evaluation returned no results for expression '{}' and xml '{}'", expression, xml);
@@ -199,6 +223,20 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             this.availabilityExpression = xPath.compile(this.availabilityPath);
     }
 
+    /**
+     * replaces two strings in the URL, first the drilldown endpoint and second the metadata URL (metadata or
+     * feedback)
+     */
+    public T updateDrilldownUrl(final T facet) {
+        String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, "fullmetadataurl");
+        facet.setDrilldownURL(drilldownURL);
+        return facet;
+    }
+
+    /**
+     * method does availability test, both the drilldown url and hoverover are set in subclasses since they
+     * can vary.
+     */
     public T updateFacet(final T facet, Document metadataXml) throws XPathExpressionException {
         if (this.availabilityExpression == null) {
             log.warn("Availability expression is null, returning faced unchanged: {} for document {}",
@@ -216,9 +254,13 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         visitExpressionResultStrings(this.availabilityExpression, metadataXml, new ExpressionResultFunction() {
             @Override
             public boolean eval(String value) {
-                if ( !value.isEmpty()) {
+                if ( !value.isEmpty() && Boolean.parseBoolean(value)) {
                     hasTextNodes.set(true);
                     return false;
+                }
+                if ( !value.isEmpty() && !Boolean.parseBoolean(value)) {
+                    hasTextNodes.set(false);
+                    return true;
                 }
                 return true;
             }
@@ -239,7 +281,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             return label;
         }
         catch (XPathExpressionException e) {
-            log.error("Error while executing XPath expression for facet {} in label {}", getClass().getName(), label);
+            log.error("Error while executing XPath expression for facet {} in label {}", getClass().getName(), label, e);
             throw new RuntimeException(String.format("Error while executing XPath expression for facet %s in label %s",
                                                      getClass().getName(),
                                                      label), e);
@@ -273,7 +315,9 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("FacetTransformationDescription [");
+        builder.append("FacetTransformationDescription [class=");
+        builder.append(getClass().getSimpleName());
+        builder.append(", ");
         if (this.availabilityPath != null) {
             builder.append("availabilityPath=");
             builder.append(this.availabilityPath);

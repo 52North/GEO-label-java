@@ -79,8 +79,6 @@ public class TransformationDescription {
 
     public NamespaceMapping[] namespaceMappings;
 
-    // @XmlElementWrapper
-    // @XmlElementRef
     public FacetTransformationDescription< ? >[] facetDescriptions;
 
     public void initXPaths() throws XPathExpressionException {
