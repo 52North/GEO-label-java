@@ -15,8 +15,6 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -28,10 +26,9 @@ import org.w3c.dom.Document;
 /**
  * Checks availability of citations information
  */
-@XmlRootElement(name = "citations")
 public class CitationsFacetDescription extends FacetTransformationDescription<CitationsFacet> {
-	@XmlElement
-	private String citationsCountPath;
+
+    private String citationsCountPath;
 
 	private XPathExpression citationsCountExpression;
 
@@ -59,5 +56,13 @@ public class CitationsFacetDescription extends FacetTransformationDescription<Ci
 	public CitationsFacet getAffectedFacet(Label label) {
 		return label.getCitationsFacet();
 	}
+
+    public String getCitationsCountPath() {
+        return this.citationsCountPath;
+    }
+
+    public void setCitationsCountPath(String citationsCountPath) {
+        this.citationsCountPath = citationsCountPath;
+    }
 
 }

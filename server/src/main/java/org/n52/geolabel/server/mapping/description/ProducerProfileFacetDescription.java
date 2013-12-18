@@ -15,8 +15,6 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -28,16 +26,17 @@ import org.w3c.dom.Document;
 /**
  * Checks availability of producer profile information
  */
-@XmlRootElement(name = "producerProfile")
 public class ProducerProfileFacetDescription extends
 		FacetTransformationDescription<ProducerProfileFacet> {
-	@XmlElement
-	private String organizationNamePath;
+
+    private String organizationNamePath;
 
 	private XPathExpression organizationNameExpression;
 
 	@Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
+        this.organizationNamePath = this.hoverover.getText().get("organizationNamePath");
+
         if (this.organizationNamePath != null)
             this.organizationNameExpression = xPath.compile(this.organizationNamePath);
 		super.initXPaths(xPath);
@@ -54,6 +53,11 @@ public class ProducerProfileFacetDescription extends
 						return true;
 					}
 				});
+
+        String drilldownURL = String.format(this.drilldown.url,
+                                            "http://www.geolabel.net/api/v1/drilldown",
+                                            "fullmetadataurl");
+        facet.setDrilldownURL(drilldownURL);
 
 		return super.updateFacet(facet, metadataXml);
 	}

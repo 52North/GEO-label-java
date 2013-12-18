@@ -139,4 +139,41 @@ public class GeoLabelRequestBuilder {
         return this;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("GeoLabelRequestBuilder [");
+        if (this.metadataDocument != null) {
+            builder.append("metadataDocument=");
+            builder.append(this.metadataDocument);
+            builder.append(", ");
+        }
+        if (this.feedbackDocument != null) {
+            builder.append("feedbackDocument=");
+            builder.append(this.feedbackDocument);
+            builder.append(", ");
+        }
+        if (this.requestHandler != null) {
+            builder.append("requestHandler=");
+            builder.append(this.requestHandler);
+            builder.append(", ");
+        }
+        if (this.desiredSize != null) {
+            builder.append("desiredSize=");
+            builder.append(this.desiredSize);
+            builder.append(", ");
+        }
+        builder.append("forceDownload=");
+        builder.append(this.forceDownload);
+        builder.append(", useCache=");
+        builder.append(this.useCache);
+        builder.append(", ");
+        if (this.serviceUrl != null) {
+            builder.append("serviceUrl=");
+            builder.append(this.serviceUrl);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

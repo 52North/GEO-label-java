@@ -1,0 +1,147 @@
+{
+   "transformationDescription":{
+      "name":"transformer",
+      "namespaceMappings":[
+         {
+            "prefix":"gmd",
+            "namespace":"http://www.isotc211.org/2005/gmd"
+         },
+         {
+            "prefix":"gvq",
+            "namespace":"http://www.geoviqua.org/QualityInformationModel/3.1"
+         },
+         {
+            "prefix":"gmd19157",
+            "namespace":"http://www.geoviqua.org/gmd19157"
+         }
+      ],
+      "facetDescriptions":[
+         {
+            "producerProfile":{
+               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='contact']/*[local-name()='CI_ResponsibleParty'] | //*[local-name()='ptcontac']/*[local-name()='cntinfo'] | //*[local-name()='pointOfContact']/*[local-name()='CI_ResponsibleParty'])))",
+               "hoverover":{
+                  "facetName":"Producer Profile",
+                  "template":"Organisation name: %s.",
+                  "text":{
+						"organizationNamePath": "normalize-space(string(//*[local-name()='contact']/*[local-name()='CI_ResponsibleParty']/*[local-name()='organisationName'] | //*[local-name()='ptcontac']/*[local-name()='cntinfo']//*[local-name()='cntorg'] | //*[local-name()='pointOfContact']/*[local-name()='CI_ResponsibleParty']/*[local-name()='organisationName']))"
+					}
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=producer_profile"
+               }
+            }
+         },
+         {
+            "producerComments":{
+               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation'] | //*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem'])))",
+               "hoverover":{
+                  "facetName":"Producer Comments",
+                  "template":"Supplemental information: %s. Known problems: %s.",
+                  "text":{
+                     "supplementalInformation":"normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation']))",
+                     "knownProblemsPath":"normalize-space(string(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem']))"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=producer_comments"
+               }
+            }
+         },
+         {
+            "lineage":{
+               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='trace']/*[local-name()='LI_Lineage']/*[local-name()='processStep'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='statement'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='processStep'])))",
+               "hoverover":{
+                  "facetName":"Lineage Information",
+                  "template":"Number of process steps: %d.",
+                  "text":{
+                     "processStepCountPath":"count(//*[local-name()='lineage']//*[local-name()='processStep'] | //*[local-name()='LI_Lineage']//*[local-name()='processStep'] | //*[local-name()='LI_Lineage']//*[local-name()='LE_ProcessStep'])"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=lineage"
+               }
+            }
+         },
+         {
+            "standardsCompliance":{
+               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='metadataStandardName'] | //*[local-name()='metstdv'])))",
+               "hoverover":{
+                  "facetName":"Standards Compliance",
+                  "template":"Standard name: %s, version %s.",
+                  "text":{
+                     "standardNamePath":"normalize-space(string(//*[local-name()='metadataStandardName'] | //*[local-name()='metstdv']))",
+                     "standardVersion":"normalize-space(string(//*[local-name()='metadataStandardVersion']))"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=standards_complaince"
+               }
+            }
+         },
+         {
+            "qualityInformation":{
+               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='dataQualityInfo']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']//*[local-name()='GVQ_DiscoveredIssue'])))",
+               "hoverover":{
+                  "facetName":"Quality Information",
+                  "template":"Quality information scope: %s",
+                  "text":{
+                     "scopeLevelPath":"concat(substring(concat(substring('pixel level', 1 div boolean(//*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report']//*[local-name()='result']/*[local-name()='DQ_QuantitativeResult']/*[local-name()='value']/*[local-name()='Record']//@href | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='result']/*[local-name()='DQ_QuantitativeResult']/*[local-name()='value']/*[local-name()='Record']//@href)), substring('dataset level', 1 div not(//*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report']//*[local-name()='result']/*[local-name()='DQ_QuantitativeResult']/*[local-name()='value']/*[local-name()='Record']//@href | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='result']/*[local-name()='DQ_QuantitativeResult']/*[local-name()='value']/*[local-name()='Record']//@href))), 1 div boolean(normalize-space(string(//*[local-name()='dataQualityInfo']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']//*[local-name()='GVQ_DiscoveredIssue'])))), substring('', 1 div not(boolean(normalize-space(string(//*[local-name()='dataQualityInfo']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='DQ_DataQuality']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']//*[local-name()='GVQ_DiscoveredIssue']))))))"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=quality_information"
+               }
+            }
+         },
+         {
+            "userFeedback":{
+               "availabilityPath":"boolean(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='feedbackItemsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count']))",
+               "hoverover":{
+                  "facetName":"User Feedback",
+                  "template":"Number of feedbacks: %d. Average rating: %d (%d ratings).",
+                  "text":{
+                     "feedbacksCountPath":"sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='feedbackItemsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count'])",
+                     "averageRatingPath":"number((number(concat(substring(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='1']]/*[local-name()='average']), 1 div boolean(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='1']]/*[local-name()='average']))), substring('0', 1 div not(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='1']]/*[local-name()='average']))))) + number(concat(substring(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='2']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='2']]/*[local-name()='average']), 1 div boolean(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='2']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='2']]/*[local-name()='average']))), substring('0', 1 div not(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='2']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='2']]/*[local-name()='average']))))) + number(concat(substring(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='3']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='3']]/*[local-name()='average']), 1 div boolean(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='3']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='3']]/*[local-name()='average']))), substring('0', 1 div not(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='3']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='3']]/*[local-name()='average'])))))) div number(concat(substring(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count']), 1 div boolean(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count']))), substring(1, 1 div not(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count']))))))",
+                     "ratingsCountPath":"sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count'])"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?feedback=%s&facet=user_feedback"
+               }
+            }
+         },
+         {
+            "expertReview":{
+               "availabilityPath":"boolean(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='feedbackItemsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4' or text()='5']]/*[local-name()='count']))",
+               "hoverover":{
+                  "facetName":"Expert Review",
+                  "template":"Number of reviews: %d. Average rating: %d (%d ratings).",
+                  "text":{
+                     "reviewsCountPath":"sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='feedbackItemsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4' or text()='5']]/*[local-name()='count'])",
+                     "averageRatingPath":"number((number(concat(substring(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='4']]/*[local-name()='average']), 1 div boolean(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='4']]/*[local-name()='average']))), substring(0, 1 div not(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='4']]/*[local-name()='average']))))) + number(concat(substring(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='5']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='5']]/*[local-name()='average']), 1 div boolean(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='5']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='5']]/*[local-name()='average']))), substring(0, 1 div not(number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='5']]/*[local-name()='count'] * //../../*[local-name()='category'][*[local-name()='value'][text()='5']]/*[local-name()='average'])))))) div concat(substring(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4' or text()='5']]/*[local-name()='count']), 1 div boolean(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4' or text()='5']]/*[local-name()='count']))), substring(1, 1 div not(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4' or text()='5']]/*[local-name()='count'])))))",
+                     "ratingsCountPath":"sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='userRatingsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='4' or text()='5']]/*[local-name()='count'])"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?feedback=%s&facet=expert_review"
+               }
+            }
+         },
+         {
+            "citations":{
+               "availabilityPath":"boolean(number(count(//*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'] | //*[local-name()='identificationInfo']/*[local-name()='GVQ_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='discoveredIssue']/*[local-name()='GVQ_DiscoveredIssue']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'])) + number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']))",
+               "hoverover":{
+                  "facetName":"Citations Information",
+                  "template":"Number of citations: %d.",
+                  "text":{
+                     "citationsCountPath":"number(number(count(//*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'] | //*[local-name()='identificationInfo']/*[local-name()='GVQ_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='discoveredIssue']/*[local-name()='GVQ_DiscoveredIssue']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication']))  + number(concat(substring(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']/text(), 1 div boolean(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']/text())), substring('0', 1 div not(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']/text())))))"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&feedback=%s&facet=citations_information"
+               }
+            }
+         }
+      ]
+   }
+}

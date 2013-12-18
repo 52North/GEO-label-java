@@ -13,9 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@XmlAccessorType(XmlAccessType.NONE)
-package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+package org.n52.geolabel.commons;
 
+//@XmlRootElement(name = "errorInformation")
+public class ErrorFacet extends LabelFacet {
+    // @XmlElement
+    private String errorMessage;
+
+    public String getErrorMessage() {
+        return this.errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+        updateAvailability(Availability.AVAILABLE);
+    }
+
+}

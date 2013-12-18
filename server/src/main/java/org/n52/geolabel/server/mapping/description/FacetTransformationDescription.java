@@ -18,34 +18,127 @@ package org.n52.geolabel.server.mapping.description;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LabelFacet;
 import org.n52.geolabel.commons.LabelFacet.Availability;
+import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.ExpertFeedbackFacetDescription;
+import org.n52.geolabel.server.mapping.description.FeedbackFacetDescription.UserFeedbackFacetDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-@XmlSeeAlso({ProducerProfileFacetDescription.class,
-             LineageFacetDescription.class,
-             ProducerCommentsFacetDescription.class,
-             StandardsComplianceFacetDescription.class,
-             QualityInformationFacetDescription.class,
-             FeedbackFacetDescription.class,
-             CitationsFacetDescription.class})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
+@JsonSubTypes({@JsonSubTypes.Type(value = ProducerProfileFacetDescription.class, name = "producerProfile"),
+               @JsonSubTypes.Type(value = LineageFacetDescription.class, name = "lineage"),
+               @JsonSubTypes.Type(value = ExpertFeedbackFacetDescription.class, name = "expertReview"),
+               @JsonSubTypes.Type(value = UserFeedbackFacetDescription.class, name = "userFeedback"),
+               @JsonSubTypes.Type(value = ProducerCommentsFacetDescription.class, name = "producerComments"),
+               @JsonSubTypes.Type(value = StandardsComplianceFacetDescription.class, name = "standardsCompliance"),
+               @JsonSubTypes.Type(value = QualityInformationFacetDescription.class, name = "qualityInformation"),
+               @JsonSubTypes.Type(value = CitationsFacetDescription.class, name = "citations")})
 public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     private static Logger log = LoggerFactory.getLogger(FacetTransformationDescription.class);
+
+    @JsonRootName("hoverover")
+    public static class HoveroverWrapper {
+        public HoveroverInformation hoverover;
+    }
+
+    public static class HoveroverInformation {
+
+        private String facetName;
+
+        private String template;
+
+        private Map<String, String> text;
+
+        public HoveroverInformation() {
+            //
+        }
+
+        public String getFacetName() {
+            return this.facetName;
+        }
+
+        public void setFacetName(String factName) {
+            this.facetName = factName;
+        }
+
+        public String getTemplate() {
+            return this.template;
+        }
+
+        public void setTemplate(String template) {
+            this.template = template;
+        }
+
+        public Map<String, String> getText() {
+            return this.text;
+        }
+
+        public void setText(Map<String, String> text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("HoveroverInformation [");
+            if (this.facetName != null) {
+                builder.append("facetName=");
+                builder.append(this.facetName);
+                builder.append(", ");
+            }
+            if (this.template != null) {
+                builder.append("template=");
+                builder.append(this.template);
+                builder.append(", ");
+            }
+            if (this.text != null) {
+                builder.append("text=");
+                builder.append(this.text);
+                builder.append(", ");
+            }
+            builder.append("]");
+            return builder.toString();
+        }
+
+    }
+
+    @JsonRootName("drilldown")
+    public static class DrilldownWrapper {
+        public Drilldown url;
+    }
+
+    public static class Drilldown {
+        public String url;
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("Drilldown [");
+            if (this.url != null) {
+                builder.append("url=");
+                builder.append(this.url);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
+    }
 
     protected interface ExpressionResultFunction {
         boolean eval(String value);
@@ -91,10 +184,13 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                     + evaluationResult.getClass().getSimpleName());
     }
 
-    @XmlElement
     private String availabilityPath;
 
     private XPathExpression availabilityExpression;
+
+    protected HoveroverInformation hoverover;
+
+    protected Drilldown drilldown;
 
     public abstract T getAffectedFacet(Label label);
 
@@ -104,8 +200,12 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     }
 
     public T updateFacet(final T facet, Document metadataXml) throws XPathExpressionException {
-        if (this.availabilityExpression == null)
+        if (this.availabilityExpression == null) {
+            log.warn("Availability expression is null, returning faced unchanged: {} for document {}",
+                     facet,
+                     metadataXml);
             return facet;
+        }
 
         final AtomicBoolean hasTextNodes = new AtomicBoolean(false);
         log.debug("Checking availability of facet {} using {} in document {}",
@@ -139,9 +239,35 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             return label;
         }
         catch (XPathExpressionException e) {
-            throw new RuntimeException("Error while executing XPath expression", e);
+            log.error("Error while executing XPath expression for facet {} in label {}", getClass().getName(), label);
+            throw new RuntimeException(String.format("Error while executing XPath expression for facet %s in label %s",
+                                                     getClass().getName(),
+                                                     label), e);
         }
+    }
 
+    public String getAvailabilityPath() {
+        return this.availabilityPath;
+    }
+
+    public void setAvailabilityPath(String availabilityPath) {
+        this.availabilityPath = availabilityPath;
+    }
+
+    public HoveroverInformation getHoverover() {
+        return this.hoverover;
+    }
+
+    public void setHoverover(HoveroverInformation hoverover) {
+        this.hoverover = hoverover;
+    }
+
+    public Drilldown getDrilldown() {
+        return this.drilldown;
+    }
+
+    public void setDrilldown(Drilldown drilldown) {
+        this.drilldown = drilldown;
     }
 
     @Override
@@ -156,6 +282,16 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         if (this.availabilityExpression != null) {
             builder.append("availabilityExpression=");
             builder.append(this.availabilityExpression);
+            builder.append(", ");
+        }
+        if (this.hoverover != null) {
+            builder.append("hoverover=");
+            builder.append(this.hoverover);
+            builder.append(", ");
+        }
+        if (this.drilldown != null) {
+            builder.append("drilldown=");
+            builder.append(this.drilldown);
         }
         builder.append("]");
         return builder.toString();
