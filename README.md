@@ -5,8 +5,8 @@ A Java implementation of the GEO label server API.
 
 [![Build Status](https://travis-ci.org/52North/GEO-label-java.png?branch=master)](https://travis-ci.org/52North/GEO-label-java)
    
-Modules
---------------
+## Modules
+
 This project consists of a service implementation generating GEO label 
 SVG representations from supplied metadata, a client API to access such a service as well as a client JSF 
 component to directly render GEO labels into JSF 1/2 and JSP based webpages.
@@ -54,3 +54,11 @@ For more details see `server/Readme.md`
 Resources required by server and client modules.
 
 For more details see `commons/Readme.md`
+
+## Transformation Rules
+
+The GEO label basically uses a set of XPath expressions to determine if the required information is available so that a facet can be marked as available. For interoperability reasons (using the same configuration file as the PHP implementation, and PHP only supports XPath 1.0) this Java implementation uses ``XPath 1.0``.
+
+The transformation rules are be downloaded on startup from http://geoviqua.github.io/geolabel/ and the service has a local fallback if the online file cannot be found.
+
+For future work, using XPath 2.0 using Saxon would be an advantage because wildcards can be used for namespaces. A commit that still contains a Saxon-based implementation is https://github.com/52North/GEO-label-java/commit/def538a4966201970a397963328664c70b2de788
