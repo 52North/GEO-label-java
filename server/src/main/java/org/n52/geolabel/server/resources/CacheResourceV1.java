@@ -30,11 +30,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
 import org.n52.geolabel.server.mapping.MetadataTransformer.LabelUrlKey;
 
+import com.sun.jersey.spi.resource.Singleton;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("/v1/cache")
 @Api(value = "/v1/cache", description = "Operations to explore the service cache")
+@Singleton
 public class CacheResourceV1 {
 	private Provider<MetadataTransformer> transformer;
 

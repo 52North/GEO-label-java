@@ -31,6 +31,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.n52.geolabel.commons.Constants;
 import org.n52.geolabel.commons.Label;
@@ -63,7 +64,7 @@ public class LMLResourceV1 {
 			@ApiParam("Url to feedback document") @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL)
 			throws IOException {
 		if (metadataURL == null && feedbackURL == null)
-            throw new WebApplicationException(Response.serverError().type(MediaType.TEXT_PLAIN)
+            throw new WebApplicationException(Response.ok().status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN)
 					.entity("No metadata or feedback URL specified").build());
 
         MetadataTransformer metadataTransformer = this.transformer.get();
