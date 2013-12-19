@@ -24,7 +24,11 @@ import com.google.inject.servlet.GuiceServletContextListener;
 @WebListener
 public class GeoLabelConfig extends GuiceServletContextListener {
 
-	public static int CONNECT_TIMEOUT = 10000;
+    public static final String EXPRESSION_HAD_NO_RESULT_TEXT = "unavailable";
+
+    public static final Object EXPRESSION_HAD_NO_RESULT_NUMBER = Integer.valueOf(0);
+
+    public static int CONNECT_TIMEOUT = 10000;
 
 	public static int READ_TIMEOUT = 20000;
 

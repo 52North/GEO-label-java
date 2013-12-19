@@ -40,14 +40,6 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
 
 	private XPathExpression producerCommentsExpression;
 
-    private String supplementalInformationPath;
-
-    private String knownProblemsPath;
-
-    private XPathExpression knownProblemsExpression;
-
-    private XPathExpression supplementalInformationExpression;
-
     @JsonCreator
     public ProducerCommentsFacetDescription(@JacksonInject
     TransformationDescriptionResources resources) {
@@ -57,15 +49,8 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
 
     @Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
-        this.supplementalInformationPath = this.hoverover.getText().get("supplementalInformation");
-        this.knownProblemsPath = this.hoverover.getText().get("knownProblemsPath");
-
         if (this.producerCommentsPath != null)
             this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);
-        if (this.supplementalInformationPath != null)
-            this.supplementalInformationExpression = xPath.compile(this.supplementalInformationPath);
-        if (this.knownProblemsPath != null)
-            this.knownProblemsExpression = xPath.compile(this.knownProblemsPath);
 		super.initXPaths(xPath);
 	}
 
@@ -80,25 +65,6 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
 			}
 		});
 
-        // final String[] hoveroverStrings = new String[2];
-        // visitExpressionResultStrings(this.supplementalInformationExpression, metadataXml, new
-        // ExpressionResultFunction() {
-        // @Override
-        // public boolean eval(String value) {
-        // hoveroverStrings[0] = value;
-        // return true;
-        // }
-        // });
-        // visitExpressionResultStrings(this.knownProblemsExpression, metadataXml, new
-        // ExpressionResultFunction() {
-        // @Override
-        // public boolean eval(String value) {
-        // hoveroverStrings[1] = value;
-        // return true;
-        // }
-        // });
-        //
-        // ProducerCommentsFacet f = super.updateHoverover(facet, hoveroverStrings);
         return super.updateFacet(facet, metadataXml);
 	}
 

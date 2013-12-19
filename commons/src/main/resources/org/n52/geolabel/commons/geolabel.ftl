@@ -193,7 +193,7 @@
 			<!-- Standards Compliance -->
 			<g class="standards_compliance" id="standards_compliance">
 
-				<title>${label.standardsComplianceFacet.title}!"NA"</title><#lt>
+				<title>${label.standardsComplianceFacet.title!"NA"}</title><#lt>
 				<a xlink:href="${label.standardsComplianceFacet.href!"NA"}" target="_blank">
 
 					<#assign higherFragment>
