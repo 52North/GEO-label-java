@@ -20,15 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "lineage")
 public class LineageFacet extends LabelFacet {
+
 	@XmlElement
 	private int totalProcessSteps;
 
-	public int getProcessStepCount() {
+    public int getTotalProcessSteps() {
         return this.totalProcessSteps;
-	}
+    }
 
-	public void addProcessSteps(int processStepCount) {
-		this.totalProcessSteps += processStepCount;
-	}
+    public void setTotalProcessSteps(int totalProcessSteps) {
+        this.totalProcessSteps = totalProcessSteps;
+    }
 
 }

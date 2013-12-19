@@ -15,8 +15,6 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -37,10 +35,6 @@ public class LineageFacetDescription extends FacetTransformationDescription<Line
 
     private static Logger log = LoggerFactory.getLogger(LineageFacetDescription.class);
 
-    private String processStepCountPath;
-
-	private XPathExpression processStepCountExpression;
-
     @JsonCreator
     public LineageFacetDescription(@JacksonInject
     TransformationDescriptionResources resources) {
@@ -48,20 +42,18 @@ public class LineageFacetDescription extends FacetTransformationDescription<Line
         log.debug("NEW {}", this);
     }
 
-    @Override
-	public void initXPaths(XPath xPath) throws XPathExpressionException {
-        if (this.processStepCountPath != null)
-            this.processStepCountExpression = xPath.compile(this.processStepCountPath);
-		super.initXPaths(xPath);
-	}
-
 	@Override
-	public LineageFacet updateFacet(LineageFacet facet, Document metadataXml) throws XPathExpressionException {
-        if (this.processStepCountExpression != null) {
-            Double result = (Double) this.processStepCountExpression.evaluate(metadataXml, XPathConstants.NUMBER);
-			if (result != null)
-                facet.addProcessSteps(result.intValue());
-		}
+    public LineageFacet updateFacet(final LineageFacet facet, Document metadataXml) throws XPathExpressionException {
+        XPathExpression expression = this.hoveroverExpressions.get("processStepCountPath");
+
+        visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                int totalProcessSteps = Integer.parseInt(value);
+                facet.setTotalProcessSteps(totalProcessSteps);
+                return true;
+            }
+        });
 
         LineageFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);

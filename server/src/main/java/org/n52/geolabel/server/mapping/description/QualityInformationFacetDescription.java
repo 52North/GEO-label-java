@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -32,14 +32,9 @@ import org.w3c.dom.Document;
  * Checks availability of quality information
  *
  */
-public class QualityInformationFacetDescription extends
-		FacetTransformationDescription<QualityInformationFacet> {
+public class QualityInformationFacetDescription extends FacetTransformationDescription<QualityInformationFacet> {
 
     private static Logger log = LoggerFactory.getLogger(ProducerProfileFacetDescription.class);
-
-    private String scopeLevelPath;
-
-	private XPathExpression scopeLevelExpression;
 
     @JsonCreator
     public QualityInformationFacetDescription(@JacksonInject
@@ -49,32 +44,27 @@ public class QualityInformationFacetDescription extends
     }
 
     @Override
-	public void initXPaths(XPath xPath) throws XPathExpressionException {
-        if (this.scopeLevelPath != null)
-            this.scopeLevelExpression = xPath.compile(this.scopeLevelPath);
-		super.initXPaths(xPath);
-	}
+    public QualityInformationFacet updateFacet(final QualityInformationFacet facet, Document metadataXml) throws XPathExpressionException {
+        XPathExpression scopeLevelExpression = this.hoveroverExpressions.get("scopeLevelPath");
 
-	@Override
-	public QualityInformationFacet updateFacet(
-			final QualityInformationFacet facet, Document metadataXml)
-			throws XPathExpressionException {
-        visitExpressionResultStrings(this.scopeLevelExpression, metadataXml,
-				new ExpressionResultFunction() {
-					@Override
-					public boolean eval(String value) {
-						facet.addScopeLevel(value);
-						return true;
-					}
-				});
+        visitExpressionResultStrings(scopeLevelExpression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                if ( !value.isEmpty()) {
+                    facet.addScopeLevel(value.trim());
+                    return true;
+                }
+                return false;
+            }
+        });
 
         QualityInformationFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);
-	}
+    }
 
-	@Override
-	public QualityInformationFacet getAffectedFacet(Label label) {
-		return label.getQualityInformationFacet();
-	}
+    @Override
+    public QualityInformationFacet getAffectedFacet(Label label) {
+        return label.getQualityInformationFacet();
+    }
 
 }

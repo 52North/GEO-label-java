@@ -96,7 +96,8 @@ public class LMLResourceV1 {
         MetadataTransformer metadataTransformer = this.transformer.get();
 
         Label label = new Label();
-        // label.setMetadataUrl(new URL("http://not.available.for.direct.upload"));
+        label.setMetadataUrl(new URL("http://not.available.for.direct.upload"));
+        label.setFeedbackUrl(new URL("http://not.available.for.direct.upload"));
 
         PushbackInputStream tempStream;
         boolean hasData = false;

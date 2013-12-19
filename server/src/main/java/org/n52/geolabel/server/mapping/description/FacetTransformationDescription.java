@@ -318,7 +318,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     private XPathExpression availabilityExpression;
 
-    private Map<String, XPathExpression> hoveroverExpressions = new HashMap<>();
+    protected Map<String, XPathExpression> hoveroverExpressions = new HashMap<>();
 
     protected HoveroverInformation hoverover;
 

@@ -36,10 +36,6 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
 
     private static Logger log = LoggerFactory.getLogger(ProducerCommentsFacetDescription.class);
 
-    private String producerCommentsPath;
-
-    private XPathExpression producerCommentsExpression;
-
     @JsonCreator
     public ProducerCommentsFacetDescription(@JacksonInject
     TransformationDescriptionResources resources) {
@@ -47,15 +43,34 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
         log.debug("NEW {}", this);
     }
 
-    // @Override
-    // public void initXPaths(XPath xPath) throws XPathExpressionException {
-    // // if (this.producerCommentsPath != null)
-    // // this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);
-    // super.initXPaths(xPath);
-    // }
-
     @Override
     public ProducerCommentsFacet updateFacet(final ProducerCommentsFacet facet, Document metadataXml) throws XPathExpressionException {
+        XPathExpression expression = this.hoveroverExpressions.get("supplementalInformation");
+
+        visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                if ( !value.isEmpty()) {
+                    facet.setSupplementalInformation(value.trim());
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        expression = this.hoveroverExpressions.get("knownProblemsPath");
+
+        visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                if ( !value.isEmpty()) {
+                    facet.setKnownProblems(value.trim());
+                    return false;
+                }
+                return true;
+            }
+        });
+
         ProducerCommentsFacet f = super.updateDrilldownUrlWithMetadata(facet);
         return super.updateFacet(f, metadataXml);
     }
