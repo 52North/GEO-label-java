@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -36,9 +36,9 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
 
     private static Logger log = LoggerFactory.getLogger(ProducerCommentsFacetDescription.class);
 
-	private String producerCommentsPath;
+    private String producerCommentsPath;
 
-	private XPathExpression producerCommentsExpression;
+    private XPathExpression producerCommentsExpression;
 
     @JsonCreator
     public ProducerCommentsFacetDescription(@JacksonInject
@@ -47,30 +47,22 @@ public class ProducerCommentsFacetDescription extends FacetTransformationDescrip
         log.debug("NEW {}", this);
     }
 
+    // @Override
+    // public void initXPaths(XPath xPath) throws XPathExpressionException {
+    // // if (this.producerCommentsPath != null)
+    // // this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);
+    // super.initXPaths(xPath);
+    // }
+
     @Override
-	public void initXPaths(XPath xPath) throws XPathExpressionException {
-        if (this.producerCommentsPath != null)
-            this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);
-		super.initXPaths(xPath);
-	}
+    public ProducerCommentsFacet updateFacet(final ProducerCommentsFacet facet, Document metadataXml) throws XPathExpressionException {
+        ProducerCommentsFacet f = super.updateDrilldownUrlWithMetadata(facet);
+        return super.updateFacet(f, metadataXml);
+    }
 
-	@Override
-	public ProducerCommentsFacet updateFacet(final ProducerCommentsFacet facet, Document metadataXml)
-			throws XPathExpressionException {
-        visitExpressionResultStrings(this.producerCommentsExpression, metadataXml, new ExpressionResultFunction() {
-			@Override
-			public boolean eval(String value) {
-				facet.addProducerComment(value);
-				return true;
-			}
-		});
-
-        return super.updateFacet(facet, metadataXml);
-	}
-
-	@Override
-	public ProducerCommentsFacet getAffectedFacet(Label label) {
-		return label.getProducerCommentsFacet();
-	}
+    @Override
+    public ProducerCommentsFacet getAffectedFacet(Label label) {
+        return label.getProducerCommentsFacet();
+    }
 
 }
