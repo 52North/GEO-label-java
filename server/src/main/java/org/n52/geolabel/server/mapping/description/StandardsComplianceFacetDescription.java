@@ -19,8 +19,13 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.StandardsComplianceFacet;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -28,11 +33,20 @@ import org.w3c.dom.Document;
  */
 public class StandardsComplianceFacetDescription extends FacetTransformationDescription<StandardsComplianceFacet> {
 
+    private static Logger log = LoggerFactory.getLogger(StandardsComplianceFacetDescription.class);
+
     private String standardsPath;
 
 	private XPathExpression standardsExpression;
 
-	@Override
+    @JsonCreator
+    public StandardsComplianceFacetDescription(@JacksonInject
+    TransformationDescriptionResources resources) {
+        super(resources);
+        log.debug("NEW {}", this);
+    }
+
+    @Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
         if (this.standardsPath != null)
             this.standardsExpression = xPath.compile(this.standardsPath);
@@ -50,7 +64,8 @@ public class StandardsComplianceFacetDescription extends FacetTransformationDesc
 			}
 		});
 
-		return super.updateFacet(facet, metadataXml);
+        StandardsComplianceFacet f = super.updateDrilldownUrlWithMetadata(facet);
+        return super.updateFacet(f, metadataXml);
 	}
 
 	@Override

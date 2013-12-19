@@ -35,7 +35,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.server.config.GeoLabelConfig;
 import org.n52.geolabel.server.config.TransformationDescriptionLoader;
-import org.n52.geolabel.server.config.TransformationDescriptionResources;
 import org.n52.geolabel.server.mapping.description.TransformationDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -191,26 +190,37 @@ public class MetadataTransformer {
         @Override
         public Label load(LabelUrlKey key) throws Exception {
             key.cacheWriteTime = new Date();
-            log.info("Generating new GEO label for cache from urls {}", key);
+            log.info("Generating new GEO label for cache...");
 
-            Label label = new Label();
-
-            if (key.feedbackUrl != null)
-                label = updateGeoLabel(key.feedbackUrl, label);
-            if (key.metadataUrl != null)
-                label = updateGeoLabel(key.metadataUrl, label);
-
+            Label label = getLabel(key);
             return label;
         }
+
     });
+
+    protected Label getLabel(LabelUrlKey key) throws IOException {
+        log.info("Generating new GEO label from urls {}", key);
+        Label label = new Label();
+
+        // set the metadata URL which is needed for drilldown link generation
+        label.setMetadataUrl(key.metadataUrl);
+        label.setFeedbackUrl(key.feedbackUrl);
+
+        if (key.feedbackUrl != null)
+            label = updateGeoLabel(key.feedbackUrl, label);
+        if (key.metadataUrl != null)
+            label = updateGeoLabel(key.metadataUrl, label);
+
+        return label;
+    }
 
     private Set<TransformationDescription> transformationDescriptions;
 
     private TransformationDescriptionLoader loader;
 
     @Inject
-    public MetadataTransformer(TransformationDescriptionResources resources) {
-        this.loader = new TransformationDescriptionLoader(resources);
+    public MetadataTransformer(TransformationDescriptionLoader loader) {
+        this.loader = loader;
         log.debug("NEW {}", this);
     }
 
@@ -278,47 +288,29 @@ public class MetadataTransformer {
     }
 
     /**
-     * Returns new {@link Label} instance from supplied metadata XML stream. See
-     * {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}
-     *
-     * @param xml
-     * @return
-     * @throws IOException
-     */
-    public Label createGeoLabel(InputStream xml) throws IOException {
-        return updateGeoLabel(xml, new Label());
-    }
-
-    /**
-     * Returns new {@link Label} instance from supplied metadata XML {@link URL} reference. See
-     * {@link MetadataTransformer#updateGeoLabel(InputStream, Label)}
-     *
-     * @param metadataUrl
-     * @return
-     * @throws IOException
-     */
-    public Label createGeoLabel(URL metadataUrl) throws IOException {
-        return updateGeoLabel(metadataUrl, new Label());
-    }
-
-    /**
      * Returns a {@link Label} from metadata and/or feedback {@link URL}. Results are cached.
-     *
-     * @param metadataURL
-     * @param feedbackURL
-     * @return
-     * @throws IOException
      */
     public Label getLabel(URL metadataURL, URL feedbackURL) throws IOException {
+        return getLabel(metadataURL, feedbackURL, true);
+    }
+
+    /**
+     * Returns a {@link Label} from metadata and/or feedback {@link URL}.
+     */
+    public Label getLabel(URL metadataURL, URL feedbackURL, boolean useCache) throws IOException {
         log.debug("Creating label for metadata {} and feedback {}", metadataURL, feedbackURL);
 
-        try {
-            LabelUrlKey labelUrlKey = new LabelUrlKey(metadataURL, feedbackURL);
-            return this.labelUrlCache.get(labelUrlKey);
-        }
-        catch (ExecutionException e) {
-            throw new IOException(e.getCause());
-        }
+        LabelUrlKey labelUrlKey = new LabelUrlKey(metadataURL, feedbackURL);
+
+        if (useCache)
+            try {
+                return this.labelUrlCache.get(labelUrlKey);
+            }
+            catch (ExecutionException e) {
+                throw new IOException(e.getCause());
+            }
+
+        return getLabel(labelUrlKey);
     }
 
     public Set<LabelUrlKey> getCacheContent() {

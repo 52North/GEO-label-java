@@ -19,8 +19,13 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.CitationsFacet;
 import org.n52.geolabel.commons.Label;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -28,11 +33,20 @@ import org.w3c.dom.Document;
  */
 public class CitationsFacetDescription extends FacetTransformationDescription<CitationsFacet> {
 
+    private static Logger log = LoggerFactory.getLogger(CitationsFacetDescription.class);
+
     private String citationsCountPath;
 
 	private XPathExpression citationsCountExpression;
 
-	@Override
+    @JsonCreator
+    public CitationsFacetDescription(@JacksonInject
+    TransformationDescriptionResources resources) {
+        super(resources);
+        log.debug("NEW {}", this);
+    }
+
+    @Override
 	public void initXPaths(XPath xPath) throws XPathExpressionException {
         if (this.citationsCountPath != null)
             this.citationsCountExpression = xPath.compile(this.citationsCountPath);
@@ -48,6 +62,16 @@ public class CitationsFacetDescription extends FacetTransformationDescription<Ci
 				return true;
 			}
 		});
+
+        // is the only facet that needs both urls, create drilldown link here:
+        if (this.drilldown.url != null && this.drilldownEndpoint != null && this.originalFeedbackUrl != null
+                && this.originalMetadataUrl != null) {
+            String drilldownURL = String.format(this.drilldown.url,
+                                                this.drilldownEndpoint,
+                                                this.originalMetadataUrl,
+                                                this.originalFeedbackUrl);
+            facet.setHref(drilldownURL);
+        }
 
 		return super.updateFacet(facet, metadataXml);
 	}

@@ -1,0 +1,1356 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<gvq:GVQ_Metadata xmlns:updated19115="http://www.geoviqua.org/19115_updates" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gvq="http://www.geoviqua.org/QualityInformationModel/4.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gmd19157="http://www.geoviqua.org/gmd19157" xmlns:un="http://www.uncertml.org/2.0" xsi:schemaLocation="http://www.isotc211.org/2005/gmx http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd 
+http://www.geoviqua.org/QualityInformationModel/4.0 http://schemas.geoviqua.org/GVQ/4.0/GeoViQua_PQM_UQM.xsd
+http://www.uncertml.org/2.0 http://www.uncertml.org/uncertml.xsd" id="dataset_MD">
+	<gmd:fileIdentifier>
+		<gco:CharacterString>mtri2an1ib</gco:CharacterString>
+	</gmd:fileIdentifier>
+	<gmd:language>
+		<gco:CharacterString>eng</gco:CharacterString>
+	</gmd:language>
+	<gmd:characterSet>
+		<gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part1">8859part1</gmd:MD_CharacterSetCode>
+	</gmd:characterSet>
+	<gmd:contact>
+		<gmd:CI_ResponsibleParty id="MN_UAB">
+			<gmd:individualName>
+				<gco:CharacterString>Miquel Ninyerola</gco:CharacterString>
+			</gmd:individualName>
+			<gmd:organisationName>
+				<gco:CharacterString>Animal and Plant Biology and Ecology Department (Autonomous University of Barcelona)</gco:CharacterString>
+			</gmd:organisationName>
+			<gmd:positionName>
+				<gco:CharacterString>Professor</gco:CharacterString>
+			</gmd:positionName>
+			<gmd:contactInfo>
+				<gmd:CI_Contact>
+					<gmd:address>
+						<gmd:CI_Address>
+							<gmd:electronicMailAddress>
+								<gco:CharacterString>miquel.ninyerola@uab.cat</gco:CharacterString>
+							</gmd:electronicMailAddress>
+						</gmd:CI_Address>
+					</gmd:address>
+				</gmd:CI_Contact>
+			</gmd:contactInfo>
+			<gmd:role>
+				<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="author">author</gmd:CI_RoleCode>
+			</gmd:role>
+		</gmd:CI_ResponsibleParty>
+	</gmd:contact>
+	<gmd:dateStamp>
+		<gco:Date>2008-02-08</gco:Date>
+	</gmd:dateStamp>
+	<gmd:metadataStandardName>
+		<gco:CharacterString>ISO 19115:2003/19139</gco:CharacterString>
+	</gmd:metadataStandardName>
+	<gmd:metadataStandardVersion>
+		<gco:CharacterString>1.0</gco:CharacterString>
+	</gmd:metadataStandardVersion>
+	<gmd:spatialRepresentationInfo>
+		<gmd:MD_Georectified id="dataset_SR">
+			<gmd:numberOfDimensions>
+				<gco:Integer>2</gco:Integer>
+			</gmd:numberOfDimensions>
+			<gmd:axisDimensionProperties>
+				<gmd:MD_Dimension>
+					<gmd:dimensionName>
+						<gmd:MD_DimensionNameTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_DimensionNameTypeCode" codeListValue="row">row</gmd:MD_DimensionNameTypeCode>
+					</gmd:dimensionName>
+					<gmd:dimensionSize>
+						<gco:Integer>4425</gco:Integer>
+					</gmd:dimensionSize>
+					<gmd:resolution>
+						<gco:Measure uom="m">200</gco:Measure>
+					</gmd:resolution>
+				</gmd:MD_Dimension>
+			</gmd:axisDimensionProperties>
+			<gmd:axisDimensionProperties>
+				<gmd:MD_Dimension>
+					<gmd:dimensionName>
+						<gmd:MD_DimensionNameTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_DimensionNameTypeCode" codeListValue="column">column</gmd:MD_DimensionNameTypeCode>
+					</gmd:dimensionName>
+					<gmd:dimensionSize>
+						<gco:Integer>5540</gco:Integer>
+					</gmd:dimensionSize>
+					<gmd:resolution>
+						<gco:Measure uom="m">200</gco:Measure>
+					</gmd:resolution>
+				</gmd:MD_Dimension>
+			</gmd:axisDimensionProperties>
+			<gmd:cellGeometry>
+				<gmd:MD_CellGeometryCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CellGeometryCode" codeListValue="area">area</gmd:MD_CellGeometryCode>
+			</gmd:cellGeometry>
+			<gmd:transformationParameterAvailability>
+				<gco:Boolean>true</gco:Boolean>
+			</gmd:transformationParameterAvailability>
+			<gmd:checkPointAvailability>
+				<gco:Boolean>false</gco:Boolean>
+			</gmd:checkPointAvailability>
+			<gmd:cornerPoints>
+				<gml:Point gml:id="NW">
+					<gml:pos>-73900 4864900</gml:pos>
+				</gml:Point>
+			</gmd:cornerPoints>
+			<gmd:cornerPoints>
+				<gml:Point gml:id="NE">
+					<gml:pos>1033900 4864900</gml:pos>
+				</gml:Point>
+			</gmd:cornerPoints>
+			<gmd:cornerPoints>
+				<gml:Point gml:id="SE">
+					<gml:pos>1033900 3980100</gml:pos>
+				</gml:Point>
+			</gmd:cornerPoints>
+			<gmd:cornerPoints>
+				<gml:Point gml:id="SW">
+					<gml:pos>-73900 3980100</gml:pos>
+				</gml:Point>
+			</gmd:cornerPoints>
+			<gmd:pointInPixel>
+				<gmd:MD_PixelOrientationCode>center</gmd:MD_PixelOrientationCode>
+			</gmd:pointInPixel>
+		</gmd:MD_Georectified>
+	</gmd:spatialRepresentationInfo>
+	<gmd:referenceSystemInfo>
+		<gmd:MD_ReferenceSystem>
+			<gmd:referenceSystemIdentifier>
+				<gmd:RS_Identifier>
+					<gmd:code>
+						<gco:CharacterString>EPSG:23030</gco:CharacterString>
+					</gmd:code>
+				</gmd:RS_Identifier>
+			</gmd:referenceSystemIdentifier>
+		</gmd:MD_ReferenceSystem>
+	</gmd:referenceSystemInfo>
+	<gmd:identificationInfo>
+		<gvq:GVQ_DataIdentification>
+			<gmd:citation>
+				<gmd:CI_Citation>
+					<gmd:title>
+						<gco:CharacterString>Mean Annual Temperature (Digital Climatic Atlas of the Iberian Peninsula)</gco:CharacterString>
+					</gmd:title>
+					<gmd:alternateTitle>
+						<gco:CharacterString>CDAIP</gco:CharacterString>
+					</gmd:alternateTitle>
+					<gmd:alternateTitle>
+						<gco:CharacterString>ACDPI</gco:CharacterString>
+					</gmd:alternateTitle>
+					<gmd:alternateTitle>
+						<gco:CharacterString>Temperatura mitjana anual (Atles climàtic Digital de la peninsula Ibèrica)</gco:CharacterString>
+					</gmd:alternateTitle>
+					<gmd:alternateTitle>
+						<gco:CharacterString>Temperatura media anual (Atlas climático Digital de la peninsula Ibérica)</gco:CharacterString>
+					</gmd:alternateTitle>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2004-07-03</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation">creation</gmd:CI_DateTypeCode>
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:identifier>
+						<updated19115:MD_Identifier id="mtri2an1ib">
+							<gmd:code>
+								<gco:CharacterString>mtri2an1ib</gco:CharacterString>
+							</gmd:code>
+							<updated19115:codeSpace>
+								<gco:CharacterString>opengis.uab.cat</gco:CharacterString>
+							</updated19115:codeSpace>
+						</updated19115:MD_Identifier>
+					</gmd:identifier>
+					<gmd:presentationForm>
+						<gmd:CI_PresentationFormCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_PresentationFormCode" codeListValue="mapDigital">mapDigital</gmd:CI_PresentationFormCode>
+					</gmd:presentationForm>
+					<gmd:series>
+						<gmd:CI_Series id="Series_title">
+							<gmd:name>
+								<!-- Replacing the character string with a URL which is a persistent identifier (as suggested by NOAA:                             https://geo-ide.noaa.gov/wiki/index.php?title=Character_String_Extended_Types -->
+								<gmx:Anchor xlink:href="opengis.uab.cat/wms/iberia" xlink:actuate="onRequest">Digital Climatic Atlas of the Iberian Peninsula</gmx:Anchor>
+							</gmd:name>
+						</gmd:CI_Series>
+					</gmd:series>
+					<gmd:otherCitationDetails>
+						<gco:CharacterString>Please when using this dataset cite it as: "Ninyerola M, Pons X y Roure JM. 2005. Atlas Climático Digital de la Península Ibérica. Metodología y aplicaciones en bioclimatología y geobotánica. ISBN 932860-8-7. Universidad Autónoma de Barcelona, Bellaterra"</gco:CharacterString>
+					</gmd:otherCitationDetails>
+					<gmd:collectiveTitle>
+						<gco:CharacterString>Digital Climatic Atlas of the Iberian Peninsula</gco:CharacterString>
+					</gmd:collectiveTitle>
+				</gmd:CI_Citation>
+			</gmd:citation>
+			<gmd:abstract>
+				<gco:CharacterString>Annual climatic digital maps, of mean temperature. Maps have been generated by means of statistical techniques, Geographic Information Systems and spatial interpolation.</gco:CharacterString>
+			</gmd:abstract>
+			<gmd:purpose>
+				<gco:CharacterString>It is well-known that the Iberian Peninsula presents interesting characteristics, as well as complex, in climatological and biogeographical terms. In addition, from geosciences and biosciences (hydrology, ecology, biogeography, etc) as well as from land managers (conservation agencies, etc) there is an obvious interest for climatology. Despite this interest, just data coming from meteorological stations is relevant enough. Even though, these stations present an irregular and discrete spatial distribution throughout the territory and hence spatial interpolation methods to obtain continuous surfaces are applied.</gco:CharacterString>
+			</gmd:purpose>
+			<gmd:status>
+				<gmd:MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed">completed</gmd:MD_ProgressCode>
+			</gmd:status>
+			<gmd:pointOfContact xlink:href="#MN_UAB"/>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty id="XP_UAB">
+					<gmd:individualName>
+						<gco:CharacterString>Xavier Pons</gco:CharacterString>
+					</gmd:individualName>
+					<gmd:organisationName>
+						<gco:CharacterString>Geography Department (Autonomous University of Barcelona)</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:positionName>
+						<gco:CharacterString>Professor</gco:CharacterString>
+					</gmd:positionName>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="author">author</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty id="JR_UAB">
+					<gmd:individualName>
+						<gco:CharacterString>Joan M. Roure</gco:CharacterString>
+					</gmd:individualName>
+					<gmd:organisationName>
+						<gco:CharacterString>Animal and Plant Biology and Ecology Department (Autonomous University of Barcelona)</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:positionName>
+						<gco:CharacterString>Professor</gco:CharacterString>
+					</gmd:positionName>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="author">author</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>Joan Masó</gco:CharacterString>
+					</gmd:individualName>
+					<gmd:organisationName>
+						<gco:CharacterString>CREAF (Autonomous University of Barcelona)</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:positionName>
+						<gco:CharacterString>Researcher</gco:CharacterString>
+					</gmd:positionName>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="processor">processor</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>Núria Julià</gco:CharacterString>
+					</gmd:individualName>
+					<gmd:organisationName>
+						<gco:CharacterString>CREAF (Autonomous University of Barcelona)</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:positionName>
+						<gco:CharacterString>Researcher</gco:CharacterString>
+					</gmd:positionName>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="processor">processor</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:resourceMaintenance>
+				<gmd:MD_MaintenanceInformation>
+					<gmd:maintenanceAndUpdateFrequency>
+						<gmd:MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded">asNeeded</gmd:MD_MaintenanceFrequencyCode>
+					</gmd:maintenanceAndUpdateFrequency>
+					<gmd:updateScope>
+						<gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+					</gmd:updateScope>
+					<gmd:maintenanceNote>
+						<gco:CharacterString>Updated when a significant data retrieval from meteorological stations can be integrated. Spatial uncertainty maps in progress.</gco:CharacterString>
+					</gmd:maintenanceNote>
+				</gmd:MD_MaintenanceInformation>
+			</gmd:resourceMaintenance>
+			<gmd:graphicOverview>
+				<!-- ··$$·· To be agreed. On "src" it should be kinf of a query to GeoLabel server that is able to return the desired GeoLabel -->
+				<gmd:MD_BrowseGraphic>
+					<gmd:fileName>
+						<gmx:FileName src="http://geolabel.net/api/v1/image/ ***** fileName.svg">GeoLabel.svg</gmx:FileName>
+					</gmd:fileName>
+					<gmd:fileDescription>
+						<gco:CharacterString>A GEOLabel for this dataset</gco:CharacterString>
+					</gmd:fileDescription>
+					<gmd:fileType>
+						<gco:CharacterString>image/svg+xml;type=GEOLabel</gco:CharacterString>
+					</gmd:fileType>
+				</gmd:MD_BrowseGraphic>
+			</gmd:graphicOverview>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword>
+						<gco:CharacterString>Temperature</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>Spatial interpolation</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:type>
+						<gmd:MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme">theme</gmd:MD_KeywordTypeCode>
+					</gmd:type>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword>
+						<gco:CharacterString>Iberian peninsula</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:type>
+						<gmd:MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place">place</gmd:MD_KeywordTypeCode>
+					</gmd:type>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:resourceConstraints>
+				<gmd:MD_Constraints>
+					<gmd:useLimitation>
+						<gco:CharacterString>There is no use or access limitation.</gco:CharacterString>
+					</gmd:useLimitation>
+				</gmd:MD_Constraints>
+			</gmd:resourceConstraints>
+			<gmd:spatialRepresentationType>
+				<gmd:MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid">grid</gmd:MD_SpatialRepresentationTypeCode>
+			</gmd:spatialRepresentationType>
+			<gmd:spatialResolution>
+				<gmd:MD_Resolution>
+					<gmd:equivalentScale>
+						<gmd:MD_RepresentativeFraction>
+							<gmd:denominator>
+								<gco:Integer>200000</gco:Integer>
+							</gmd:denominator>
+						</gmd:MD_RepresentativeFraction>
+					</gmd:equivalentScale>
+				</gmd:MD_Resolution>
+			</gmd:spatialResolution>
+			<gmd:language>
+				<gco:CharacterString>cat</gco:CharacterString>
+			</gmd:language>
+			<gmd:topicCategory>
+				<gmd:MD_TopicCategoryCode>climatologyMeteorologyAtmosphere</gmd:MD_TopicCategoryCode>
+			</gmd:topicCategory>
+			<gmd:topicCategory>
+				<gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+			</gmd:topicCategory>
+			<gmd:extent>
+				<gmd:EX_Extent id="datasetExtent">
+					<gmd:description>
+						<gco:CharacterString>Iberian peninsula excluding Andorra</gco:CharacterString>
+					</gmd:description>
+					<gmd:geographicElement>
+						<gmd:EX_GeographicBoundingBox>
+							<gmd:westBoundLongitude>
+								<gco:Decimal>-10.12421992</gco:Decimal>
+							</gmd:westBoundLongitude>
+							<gmd:eastBoundLongitude>
+								<gco:Decimal>3.63115860</gco:Decimal>
+							</gmd:eastBoundLongitude>
+							<gmd:southBoundLatitude>
+								<gco:Decimal>35.79574603</gco:Decimal>
+							</gmd:southBoundLatitude>
+							<gmd:northBoundLatitude>
+								<gco:Decimal>43.93704722</gco:Decimal>
+							</gmd:northBoundLatitude>
+						</gmd:EX_GeographicBoundingBox>
+					</gmd:geographicElement>
+				</gmd:EX_Extent>
+			</gmd:extent>
+			<gvq:referenceDoc>
+				<gvq:GVQ_Publication id="IJC_2007_Ninyerola_et_al">
+					<gmd:title>
+						<gco:CharacterString>Objective air temperature mapping for the Iberian Peninsula using spatial interpolation and GIS</gco:CharacterString>
+					</gmd:title>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2007-07</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:citedResponsibleParty xlink:href="#MN_UAB"/>
+					<gmd:citedResponsibleParty xlink:href="#XP_UAB"/>
+					<gmd:citedResponsibleParty xlink:href="#JR_UAB"/>
+					<gmd:series>
+						<gmd:CI_Series>
+							<gmd:name>
+								<gco:CharacterString>International Journal of Climatology</gco:CharacterString>
+							</gmd:name>
+							<gmd:issueIdentification>
+								<gco:CharacterString>Volume 27, Issue 9</gco:CharacterString>
+							</gmd:issueIdentification>
+							<gmd:page>
+								<gco:CharacterString>1231–1242</gco:CharacterString>
+							</gmd:page>
+						</gmd:CI_Series>
+					</gmd:series>
+					<gmd:ISSN>
+						<gco:CharacterString>1097-0088</gco:CharacterString>
+					</gmd:ISSN>
+					<gvq:target xlink:href="#mtri2an1ib"/>
+					<gvq:doi>
+						<gco:CharacterString>110.1002/joc.1462</gco:CharacterString>
+					</gvq:doi>
+					<gvq:purpose>
+						<gvq:GVQ_PublicationPurposeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationPurposeCode" codeListValue="describe">describe</gvq:GVQ_PublicationPurposeCode>
+					</gvq:purpose>
+					<gvq:scope xlink:href="#datasetScope"/>
+					<gvq:category>
+						<gvq:GVQ_PublicationCategoryCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationCategoryCode" codeListValue="journalArticle">journalArticle</gvq:GVQ_PublicationCategoryCode>
+					</gvq:category>
+					<gvq:onlineResource>
+						<gmd:CI_OnlineResource>
+							<gmd:linkage>
+								<gmd:URL>http://onlinelibrary.wiley.com/doi/10.1002/joc.1462/abstract</gmd:URL>
+							</gmd:linkage>
+						</gmd:CI_OnlineResource>
+					</gvq:onlineResource>
+				</gvq:GVQ_Publication>
+			</gvq:referenceDoc>
+			<gvq:referenceDoc>
+				<gvq:GVQ_Publication id="TAC_2007_Ninyerola_et_al">
+					<gmd:title>
+						<gco:CharacterString>Monthly precipitation mapping of the Iberian Peninsula using spatial interpolation tools implemented in a Geographic Information System</gco:CharacterString>
+					</gmd:title>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2007-07</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:citedResponsibleParty xlink:href="#MN_UAB"/>
+					<gmd:citedResponsibleParty xlink:href="#XP_UAB"/>
+					<gmd:citedResponsibleParty xlink:href="#JR_UAB"/>
+					<gmd:series>
+						<gmd:CI_Series>
+							<gmd:name>
+								<gco:CharacterString>Theoretical and Applied Climatology</gco:CharacterString>
+							</gmd:name>
+							<gmd:issueIdentification>
+								<gco:CharacterString>Volume 89, Numbers 3-4</gco:CharacterString>
+							</gmd:issueIdentification>
+							<gmd:page>
+								<gco:CharacterString>195-209</gco:CharacterString>
+							</gmd:page>
+						</gmd:CI_Series>
+					</gmd:series>
+					<gmd:ISSN>
+						<gco:CharacterString>1434-4483</gco:CharacterString>
+					</gmd:ISSN>
+					<gvq:target xlink:href="#mtri2an1ib"/>
+					<gvq:doi>
+						<gco:CharacterString>10.1007/s00704-006-0264-2</gco:CharacterString>
+					</gvq:doi>
+					<gvq:purpose>
+						<gvq:GVQ_PublicationPurposeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationPurposeCode" codeListValue="describe">describe</gvq:GVQ_PublicationPurposeCode>
+					</gvq:purpose>
+					<gvq:scope xlink:href="#datasetScope"/>
+					<gvq:category>
+						<gvq:GVQ_PublicationCategoryCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationCategoryCode" codeListValue="journalArticle">journalArticle</gvq:GVQ_PublicationCategoryCode>
+					</gvq:category>
+					<gvq:onlineResource>
+						<gmd:CI_OnlineResource>
+							<gmd:linkage>
+								<gmd:URL>http://www.springerlink.com/content/06463p2677318556/</gmd:URL>
+							</gmd:linkage>
+						</gmd:CI_OnlineResource>
+					</gvq:onlineResource>
+				</gvq:GVQ_Publication>
+			</gvq:referenceDoc>
+		</gvq:GVQ_DataIdentification>
+	</gmd:identificationInfo>
+	<gmd:contentInfo>
+		<gmd:MD_CoverageDescription id="mtri2an1ib_mean_temp">
+			<gmd:attributeDescription>
+				<gco:RecordType>Mean Annual Temperature</gco:RecordType>
+			</gmd:attributeDescription>
+			<gmd:contentType>
+				<gmd:MD_CoverageContentTypeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#MD_CoverageContentTypeCode" codeListValue="modelResult">modelResult</gmd:MD_CoverageContentTypeCode>
+			</gmd:contentType>
+		</gmd:MD_CoverageDescription>
+	</gmd:contentInfo>
+	<gmd:contentInfo>
+		<gmd:MD_CoverageDescription id="mtri2an1ib_mean_temp_residuals">
+			<gmd:attributeDescription>
+				<gco:RecordType>Residuals from the multiple regression</gco:RecordType>
+			</gmd:attributeDescription>
+			<gmd:contentType>
+				<gmd:MD_CoverageContentTypeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#MD_CoverageContentTypeCode" codeListValue="qualityInformation">qualityInformation</gmd:MD_CoverageContentTypeCode>
+			</gmd:contentType>
+		</gmd:MD_CoverageDescription>
+	</gmd:contentInfo>
+	<gmd:contentInfo>
+		<gmd:MD_CoverageDescription id="mtri2an1ib_mean_temp_intermodel_variability">
+			<gmd:attributeDescription>
+				<gco:RecordType>Standard deviation of the inter-model variability</gco:RecordType>
+			</gmd:attributeDescription>
+			<gmd:contentType>
+				<gmd:MD_CoverageContentTypeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#MD_CoverageContentTypeCode" codeListValue="qualityInformation">qualityInformation</gmd:MD_CoverageContentTypeCode>
+			</gmd:contentType>
+		</gmd:MD_CoverageDescription>
+	</gmd:contentInfo>
+	<gmd:distributionInfo>
+		<gmd:MD_Distribution>
+			<gmd:distributionFormat xlink:href="#dataset_Format"/>
+			<gmd:distributor>
+				<gmd:MD_Distributor>
+					<gmd:distributorContact>
+						<gmd:CI_ResponsibleParty id="dataset_Distributor_contact">
+							<gmd:individualName>
+								<gco:CharacterString>Eduard Luque</gco:CharacterString>
+							</gmd:individualName>
+							<gmd:organisationName>
+								<gco:CharacterString>CREAF (Autonomous University of Barcelona)</gco:CharacterString>
+							</gmd:organisationName>
+							<gmd:positionName>
+								<gco:CharacterString>Researcher</gco:CharacterString>
+							</gmd:positionName>
+							<gmd:contactInfo>
+								<gmd:CI_Contact>
+									<gmd:address>
+										<gmd:CI_Address>
+											<gmd:electronicMailAddress>
+												<gco:CharacterString>e.luque@creaf.uab.cat</gco:CharacterString>
+											</gmd:electronicMailAddress>
+										</gmd:CI_Address>
+									</gmd:address>
+								</gmd:CI_Contact>
+							</gmd:contactInfo>
+							<gmd:role>
+								<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="processor">processor</gmd:CI_RoleCode>
+							</gmd:role>
+						</gmd:CI_ResponsibleParty>
+					</gmd:distributorContact>
+					<gmd:distributionOrderProcess>
+						<gmd:MD_StandardOrderProcess>
+							<gmd:orderingInstructions>
+								<gco:CharacterString>If an offLine distribution (DVD) is required or if any problem with the Web Coverage Service (download capabilities) is found please contact Eduard Luque.</gco:CharacterString>
+							</gmd:orderingInstructions>
+						</gmd:MD_StandardOrderProcess>
+					</gmd:distributionOrderProcess>
+					<gmd:distributorFormat xlink:href="#dataset_Format"/>
+					<gmd:distributorTransferOptions>
+						<gmd:MD_DigitalTransferOptions>
+							<gmd:onLine>
+								<!-- WMS 1.3.0 -->
+								<updated19115:CI_OnlineResource>
+									<gmd:linkage>
+										<gmd:URL>http://www.opengis.uab.es/cgi-bin/iberia/MiraMon.cgi?REQUEST=GetCapabilities&amp;VERSION=1.3.0&amp;SERVICE=WMS</gmd:URL>
+									</gmd:linkage>
+									<!-- ··$$·· Where can be indicated the client(s) URL? In fact many clients showing data from the same server are possible e.g. http://www.opengis.uab.cat/wms/iberia/mms/ and Greenland. -->
+									<gmd:protocol>
+										<gco:CharacterString>urn:ogc:serviceType:WebMapService:1.3.0:HTTP</gco:CharacterString>
+									</gmd:protocol>
+									<gmd:name> <!-- only LAYER name, without LAYER= ? ··$$·· -->
+										<gco:CharacterString>LAYER=clima_anual_iberia&amp;STYLE=Tmit</gco:CharacterString>
+									</gmd:name>
+									<gmd:description>
+										<gco:CharacterString>Servidor de Mapas del Atlas Climático Digital de la Península Ibérica (WMS)</gco:CharacterString>
+									</gmd:description>
+									<gmd:function>
+										<gmd:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download">download</gmd:CI_OnLineFunctionCode>
+									</gmd:function>
+									<updated19115:protocolRequest>
+										<gco:CharacterString>Web Map Service (WMS) 1.3.0</gco:CharacterString>
+									</updated19115:protocolRequest>
+								</updated19115:CI_OnlineResource>
+							</gmd:onLine>
+							<gmd:onLine>
+								<!-- WMS-Q 1.3.0 -->
+								<updated19115:CI_OnlineResource>
+									<gmd:linkage>
+										<gmd:URL>http://www.ogc.uab.cat/cgi-bin/GeoViQUA/WMSQ/MiraMon.cgi?REQUEST=GetCapabilities&amp;VERSION=1.3.0&amp;SERVICE=WMS></gmd:URL>
+									</gmd:linkage>
+									<!-- ··$$·· Where can be indicated the client(s) URL? In fact many clients showing data from the same server are possible e.g. http://www.ogc.uab.cat/GeoViQUA/WMSQ/ and Greenland. -->
+									<gmd:protocol>
+										<gco:CharacterString>urn:ogc:serviceType:WebMapService:1.3.0:HTTP:QualityProfile</gco:CharacterString>
+									</gmd:protocol>
+									<gmd:name> <!-- only LAYER name, without LAYER= ? ··$$·· -->
+										<gco:CharacterString>LAYER=MeanAnnualTemperature</gco:CharacterString>
+									</gmd:name>
+									<gmd:description>
+										<gco:CharacterString>CREAF-MiraMon WMS-Q and WMTS-Q test demonstration server</gco:CharacterString>
+									</gmd:description>
+									<gmd:function>
+										<gmd:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download">download</gmd:CI_OnLineFunctionCode>
+									</gmd:function>
+									<updated19115:protocolRequest>
+										<gco:CharacterString>Web Map Service (WMS) 1.3.0 - Quality profile</gco:CharacterString>
+									</updated19115:protocolRequest>
+								</updated19115:CI_OnlineResource>
+							</gmd:onLine>
+							<gmd:onLine>
+								<!-- WCS 1.0 -->
+								<updated19115:CI_OnlineResource>
+									<gmd:linkage>
+										<gmd:URL>http://www.opengis.uab.es/cgi-bin/iberia/MiraMon.cgi?REQUEST=GetCapabilities&amp;VERSION=1.0&amp;SERVICE=WCS</gmd:URL>
+									</gmd:linkage>
+									<gmd:protocol>
+										<gco:CharacterString>urn:ogc:serviceType:WebCoverageService:1.0:HTTP</gco:CharacterString>
+									</gmd:protocol>
+									<gmd:name>
+										<!-- the content of this element is simulated --> <!-- only LAYER name, without LAYER= ? ··$$·· -->
+										<gco:CharacterString>COVERAGE=clima_anual_iberia&amp;BAND=Tmit</gco:CharacterString>
+									</gmd:name>
+									<gmd:description>
+										<gco:CharacterString>Servidor de Mapas del Atlas Climático Digital de la Península Ibérica (WCS)</gco:CharacterString>
+									</gmd:description>
+									<gmd:function>
+										<gmd:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download">download</gmd:CI_OnLineFunctionCode>
+									</gmd:function>
+									<updated19115:protocolRequest>
+										<gco:CharacterString>Web Coverage Service (WCS) 1.0</gco:CharacterString>
+									</updated19115:protocolRequest>
+								</updated19115:CI_OnlineResource>
+							</gmd:onLine>
+							<gmd:offLine>
+								<gmd:MD_Medium>
+									<gmd:name>
+										<gmd:MD_MediumNameCode codeListValue="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MediumName" codeList="dvd">dvd</gmd:MD_MediumNameCode>
+									</gmd:name>
+									<gmd:volumes>
+										<gco:Integer>1</gco:Integer>
+									</gmd:volumes>
+								</gmd:MD_Medium>
+							</gmd:offLine>
+						</gmd:MD_DigitalTransferOptions>
+					</gmd:distributorTransferOptions>
+				</gmd:MD_Distributor>
+			</gmd:distributor>
+		</gmd:MD_Distribution>
+	</gmd:distributionInfo>
+	<gmd:describes>
+		<gmx:MX_DataSet>
+			<gmd:has xlink:href="#dataset_MD"/>
+			<gmx:dataFile>
+				<gmx:MX_DataFile id="mtri2an1ib_MMZ_file">
+					<gmx:fileName>
+						<gmx:FileName>mtri2an1ib.mmz</gmx:FileName>
+					</gmx:fileName>
+					<gmx:fileDescription>
+						<gco:CharacterString>MMZ encoding of climatic data including uncertainty information at pixel level</gco:CharacterString>
+					</gmx:fileDescription>
+					<gmx:fileType>
+						<gmx:MimeFileType type="application/x-mmz">MiraMon Compressed Map</gmx:MimeFileType>
+					</gmx:fileType>
+					<gmx:featureTypes> <!-- ··$$·· to be clarified with lucy. needed? what happens if identifiers inside MMZ are not the same than those used here? we can consider that first is first but this is tooo risky... usually a human would be able to tell (similar names) but can we try to define it in a "automatically undesrtandable way"?? -->
+						<gco:LocalName>mtri2an1ib_mean_temp,mtri2an1ib_mean_temp_residuals,mtri2an1ib_mean_temp_intermodel_variability</gco:LocalName>
+					</gmx:featureTypes>
+					<gmx:fileFormat>
+						<gmd:MD_Format id="dataset_Format">
+							<gmd:name>
+								<gco:CharacterString>MiraMon Compressed Map (MMZ)</gco:CharacterString>
+							</gmd:name>
+							<gmd:version>
+								<gco:CharacterString>1.1</gco:CharacterString>
+							</gmd:version>
+							<gmd:fileDecompressionTechnique>
+								<gco:CharacterString>deflate</gco:CharacterString>
+							</gmd:fileDecompressionTechnique>
+						</gmd:MD_Format>
+					</gmx:fileFormat>
+				</gmx:MX_DataFile>
+			</gmx:dataFile>
+		</gmx:MX_DataSet>
+	</gmd:describes>
+	<gvq:dataQualityInfo>
+		<gmd19157:DQ_DataQuality>
+			<gmd19157:scope>
+				<gmd19157:DQ_Scope id="datasetScope">
+					<gmd19157:level>
+						<gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+					</gmd19157:level>
+					<gmd19157:extent xlink:href="#datasetExtent"/>
+				</gmd19157:DQ_Scope>
+			</gmd19157:scope>
+			<gmd19157:report>
+				<gmd19157:DQ_QuantitativeAttributeAccuracy id="CrossValidationAccuraccy">
+					<gmd19157:dateTime>
+						<gco:DateTime>2004-07-02T00:00:00.0</gco:DateTime>
+					</gmd19157:dateTime>
+					<gmd19157:evaluation>
+						<gvq:GVQ_SampleBasedInspection>
+							<gmd19157:evaluationMethodDescription>
+								<gco:CharacterString>Cross-validation and calculation of Pearson Coefficient (R2) and Root Mean Square Error (RMSE) with 40% of the ground meteorological stations (global quality indicators)</gco:CharacterString>
+							</gmd19157:evaluationMethodDescription>
+							<gmd19157:evaluationProcedure xlink:href="#TAC_2007_Ninyerola_et_al"/>
+							<gmd19157:referenceDoc xlink:href="#TAC_2007_Ninyerola_et_al"/>
+							<gmd19157:evaluationMethodType>
+								<!-- ·$· QUESTION: The evaluation method type we are not sure if directInternal or directExternal should be used because we do not like any of them. -->
+								<!-- ·$· ANSWER: I understand - because you have divided the original dataset for cross-validation, these aren’t genuinely independent data, but nor are they completely about internal consistency. Might have to ask for some other opinions on this one…. -->
+								<gmd19157:DQ_EvaluationMethodTypeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#DQ_EvaluationMethodTypeCode" codeListValue="directInternal">directInternal</gmd19157:DQ_EvaluationMethodTypeCode>
+							</gmd19157:evaluationMethodType>
+							<gmd19157:samplingScheme>
+								<gco:CharacterString>Random sampling into two lots</gco:CharacterString>
+							</gmd19157:samplingScheme>
+							<gmd19157:lotDescription>
+								<gco:CharacterString>Subsets of 40% and 60% of the population</gco:CharacterString>
+							</gmd19157:lotDescription>
+							<gmd19157:samplingRatio>
+								<gco:CharacterString>100% of each lot is inspected</gco:CharacterString>
+							</gmd19157:samplingRatio>
+						</gvq:GVQ_SampleBasedInspection>
+					</gmd19157:evaluation>
+					<gmd19157:result>
+						<gmd19157:DQ_QuantitativeResult>
+							<gmd19157:resultScope xlink:href="#datasetScope"/>
+							<gmd19157:valueType>
+								<gco:RecordType xlink:href="http://www.uncertml.org/statistics/correlation">Pearson Coefficient (R2)</gco:RecordType>
+							</gmd19157:valueType>
+							<gmd19157:valueUnit xlink:href="urn:ogc:def:nil:OGC::inapplicable"/>
+							<gmd19157:value>
+								<gco:Record>
+									<un:Correlation>
+										<un:values>0.9</un:values>
+									</un:Correlation>
+								</gco:Record>
+							</gmd19157:value>
+						</gmd19157:DQ_QuantitativeResult>
+					</gmd19157:result>
+					<gmd19157:result>
+						<gmd19157:DQ_QuantitativeResult>
+							<gmd19157:resultScope xlink:href="#datasetScope"/>
+							<gmd19157:valueType>
+								<gco:RecordType xlink:href="http://www.uncertml.org/statistics/normal">Distribution of errors</gco:RecordType>
+							</gmd19157:valueType>
+							<gmd19157:valueUnit xlink:href="urn:ogc:def:uom:OGC::degC"/>
+							<gmd19157:value>
+								<gco:Record>
+									<un:NormalDistribution>
+										<!-- ··$$·· actual values in DEGREES (no tenths of deg) are needed! -->
+										<un:mean>0</un:mean>
+										<un:variance>16</un:variance>
+									</un:NormalDistribution>
+								</gco:Record>
+							</gmd19157:value>
+						</gmd19157:DQ_QuantitativeResult>
+					</gmd19157:result>
+					<gmd19157:result>
+						<gmd19157:DQ_QuantitativeResult>
+							<gmd19157:resultScope xlink:href="#datasetScope"/>
+							<gmd19157:valueType>
+								<!-- ··$$·· urn for RMSE is needed!!! We will describe here the new link to http://Qthesaurus.geoviqua.org-->
+								<gco:RecordType xlink:href="http://www.uncertml.org/statistics/variance">Root Mean Square Error (RMSE)</gco:RecordType>
+							</gmd19157:valueType>
+							<gmd19157:valueUnit xlink:href="urn:ogc:def:uom:OGC::degC"/>
+							<gmd19157:value>
+								<gco:Record>0.8</gco:Record>
+							</gmd19157:value>
+						</gmd19157:DQ_QuantitativeResult>
+					</gmd19157:result>
+				</gmd19157:DQ_QuantitativeAttributeAccuracy>
+			</gmd19157:report>
+			<gmd19157:report>
+				<gmd19157:DQ_QuantitativeAttributeAccuracy id="ResidualAccuracy">
+					<gmd19157:evaluation>
+						<gvq:GVQ_FullInspection>
+							<gmd19157:evaluationMethodDescription>
+								<gco:CharacterString>Interpolation of the residuals from the multiple regression using 100% of the ground meteorological stations.</gco:CharacterString>
+							</gmd19157:evaluationMethodDescription>
+							<gmd19157:evaluationProcedure xlink:href="#TAC_2007_Ninyerola_et_al"/>
+							<gmd19157:referenceDoc xlink:href="#TAC_2007_Ninyerola_et_al"/>
+							<gmd19157:evaluationMethodType>
+								<gmd19157:DQ_EvaluationMethodTypeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#DQ_EvaluationMethodTypeCode" codeListValue="directInternal">directInternal</gmd19157:DQ_EvaluationMethodTypeCode>
+							</gmd19157:evaluationMethodType>
+						</gvq:GVQ_FullInspection>
+					</gmd19157:evaluation>
+					<gmd19157:result>
+						<gmd19157:QE_CoverageResult>
+							<gmd19157:resultScope xlink:href="#datasetScope"/>
+							<gmd19157:spatialRepresentationType>
+								<gmd:MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid">grid</gmd:MD_SpatialRepresentationTypeCode>
+							</gmd19157:spatialRepresentationType>
+							<gmd19157:resultFile xlink:href="#mtri2an1ib_MMZ_file"/>
+							<gmd19157:resultSpatialRepresentation xlink:href="#dataset_SR"/>
+							<gmd19157:resultContentDescription xlink:href="#mtri2an1ib_mean_temp_residuals"/>
+							<gmd19157:resultFormat xlink:href="#datasetFormat"/>
+						</gmd19157:QE_CoverageResult>
+					</gmd19157:result>
+				</gmd19157:DQ_QuantitativeAttributeAccuracy>
+			</gmd19157:report>
+			<gmd19157:report>
+				<gmd19157:DQ_QuantitativeAttributeAccuracy id="SensibilityAnalysis">
+					<gmd19157:evaluation>
+						<gvq:GVQ_SampleBasedInspection>
+							<gmd19157:evaluationMethodDescription>
+								<gco:CharacterString>Standard deviation of the inter-model variability.</gco:CharacterString>
+							</gmd19157:evaluationMethodDescription>
+							<gmd19157:evaluationProcedure xlink:href="#TAC_2007_Ninyerola_et_al"/>
+							<gmd19157:referenceDoc xlink:href="#TAC_2007_Ninyerola_et_al"/>
+							<gmd19157:evaluationMethodType>
+								<gmd19157:DQ_EvaluationMethodTypeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#DQ_EvaluationMethodTypeCode" codeListValue="directInternal">directInternal</gmd19157:DQ_EvaluationMethodTypeCode>
+							</gmd19157:evaluationMethodType>
+							<gmd19157:samplingScheme>
+								<gco:CharacterString>Bootstrap sampling techniques are used to obtain 20 different models that are compared to obtain the inter-model variability.</gco:CharacterString>
+							</gmd19157:samplingScheme>
+							<gmd19157:lotDescription>
+								<gco:CharacterString>··$$··</gco:CharacterString>
+							</gmd19157:lotDescription>
+							<gmd19157:samplingRatio>
+								<gco:CharacterString>··$$··</gco:CharacterString>
+							</gmd19157:samplingRatio>
+						</gvq:GVQ_SampleBasedInspection>
+					</gmd19157:evaluation>
+					<gmd19157:result>
+						<gmd19157:QE_CoverageResult>
+							<gmd19157:resultScope xlink:href="#datasetScope"/>
+							<gmd19157:spatialRepresentationType>
+								<gmd:MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid">grid</gmd:MD_SpatialRepresentationTypeCode>
+							</gmd19157:spatialRepresentationType>
+							<gmd19157:resultFile xlink:href="#mtri2an1ib_MMZ_file"/>
+							<gmd19157:resultSpatialRepresentation xlink:href="#dataset_SR"/>
+							<gmd19157:resultContentDescription xlink:href="#mtri2an1ib_mean_temp_intermodel_variability"/>
+							<gmd19157:resultFormat xlink:href="#datasetFormat"/>
+						</gmd19157:QE_CoverageResult>
+					</gmd19157:result>
+				</gmd19157:DQ_QuantitativeAttributeAccuracy>
+			</gmd19157:report>
+			<gmd19157:report>
+				<gvq:GVQ_Traceability>
+					<gmd19157:evaluation gco:nilReason="definedElsewhere"/>
+					<gmd19157:result gco:nilReason="definedElsewhere"/>
+					<gmd19157:relatedElement xlink:href="#CrossValidationAccuraccy"/>
+					<gvq:trace>
+						<gmd19157:LI_Lineage>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Empirical selection of the best proportion of the ground meteorological stations to be used to fit and to test the regression model (e.g. 60%-40%, 70%-30%,...)</gco:CharacterString>
+									</gmd19157:description>
+									<gmd19157:source xlink:href="#MeteorologicalStations"/>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Random sampling (without constrains) over meteorological stations to assign each one of them to the fit (60%) and test (40%) sets.</gco:CharacterString>
+									</gmd19157:description>
+									<gmd19157:source xlink:href="#MeteorologicalStations"/>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Enrichment of the test set of ground meteorological stations to include dataset values (predicted by linear regression) using binomial interpolation</gco:CharacterString>
+									</gmd19157:description>
+									<gmd19157:source xlink:href="#MeteorologicalStations"/>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Pearson coefficient and Root Mean Squared Error computation using dataset and observed values for each ground meteorological stations on the test set</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+						</gmd19157:LI_Lineage>
+					</gvq:trace>
+				</gvq:GVQ_Traceability>
+			</gmd19157:report>
+			<gmd19157:report>
+				<gvq:GVQ_Traceability>
+					<gmd19157:evaluation gco:nilReason="definedElsewhere"/>
+					<gmd19157:result gco:nilReason="definedElsewhere"/>
+					<gmd19157:relatedElement xlink:href="#ResidualAccuracy"/>
+					<gvq:trace>
+						<gmd19157:LI_Lineage>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Apply multiple regression techniques to the 100% of the meteorological stations.</gco:CharacterString>
+									</gmd19157:description>
+									<gmd19157:source xlink:href="#MeteorologicalStations"/>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Regression residuals for each meteorological station are computed</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Residual spatial interpolation is performed</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+						</gmd19157:LI_Lineage>
+					</gvq:trace>
+				</gvq:GVQ_Traceability>
+			</gmd19157:report>
+			<gmd19157:report>
+				<gvq:GVQ_Traceability>
+					<gmd19157:evaluation gco:nilReason="definedElsewhere"/>
+					<gmd19157:result gco:nilReason="definedElsewhere"/>
+					<gmd19157:relatedElement xlink:href="#SensibilityAnalysis"/>
+					<gvq:trace>
+						<gmd19157:LI_Lineage>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Split meteorological stations into train (70%) and test (30%) sets recursively (20 models) using bootstrap methods.</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>The 20 models obtained from the bootsrap sampling are mapped.</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+							<gmd19157:processStep>
+								<gmd19157:LI_ProcessStep>
+									<gmd19157:description>
+										<gco:CharacterString>Standard deviation of the inter-model variability (using the 20 models) is computed.</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_ProcessStep>
+							</gmd19157:processStep>
+						</gmd19157:LI_Lineage>
+					</gvq:trace>
+				</gvq:GVQ_Traceability>
+			</gmd19157:report>
+			<gmd19157:lineage>
+				<gmd19157:LI_Lineage>
+					<gmd19157:statement>
+						<gco:CharacterString>There are two different origins depending on the part of the Iberian Peninsula. In the case of Spain, the original layer comes from the Army Map Service (SGE) 1:200000 topograhic series. The paper maps were scanned and georeferenced. The contour lines were digitized, converted into a topological structure and finally spatially interpolated using the ISOMDE procedure (implemented in the MiraMon GIS). In the case of Portugal, the 1km GTOPO30 world DEM was densifiyed and mosaiked with the contour line-based raster.</gco:CharacterString>
+					</gmd19157:statement>
+					<gmd19157:processStep>
+						<gmd19157:LI_ProcessStep>
+							<gmd19157:description>
+								<gco:CharacterString>Meteorological stations from AEMET are filtered. First of all, the geometric position of the stations has been checked and modifiyed when need and possible. Secondly, stations with outlier values have been removed. Finally, stations with a temporal series length lower than 15 years have been removed. This theshold has been defined in order to obtain a compromise bewteen spatial coverage and temporal series lenght.</gco:CharacterString>
+							</gmd19157:description>
+							<gmd19157:source>
+								<gmd19157:LI_Source id="MeteorologicalStations">
+									<gmd19157:description>
+										<gco:CharacterString>Meteorological stations from AEMET</gco:CharacterString>
+									</gmd19157:description>
+									<gmd19157:sourceCitation>
+										<gmd:CI_Citation>
+											<gmd:title>
+												<gco:CharacterString>Mean monthly climate records from the AEMET (temeprature and precipitation)</gco:CharacterString>
+											</gmd:title>
+											<gmd:date>
+												<gmd:CI_Date>
+													<gmd:date>
+														<gco:Date>2000</gco:Date>
+													</gmd:date>
+													<gmd:dateType>
+														<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation">creation</gmd:CI_DateTypeCode>
+													</gmd:dateType>
+												</gmd:CI_Date>
+											</gmd:date>
+											<gmd:citedResponsibleParty>
+												<gmd:CI_ResponsibleParty>
+													<gmd:organisationName>
+														<gco:CharacterString>Unidad de Información Meteorológica. Instituto Nacional de Meteorología.</gco:CharacterString>
+													</gmd:organisationName>
+													<gmd:contactInfo>
+														<gmd:CI_Contact>
+															<gmd:phone>
+																<gmd:CI_Telephone>
+																	<gmd:voice>
+																		<gco:CharacterString>+34 915 819 810</gco:CharacterString>
+																	</gmd:voice>
+																	<gmd:facsimile>
+																		<gco:CharacterString>+34 915 819 811</gco:CharacterString>
+																	</gmd:facsimile>
+																</gmd:CI_Telephone>
+															</gmd:phone>
+															<gmd:address>
+																<gmd:CI_Address>
+																	<gmd:deliveryPoint>
+																		<gco:CharacterString>C/ Leonardo Prieto Castro, 8 (Ciudad Universitaria)</gco:CharacterString>
+																	</gmd:deliveryPoint>
+																	<gmd:administrativeArea>
+																		<gco:CharacterString>Madrid</gco:CharacterString>
+																	</gmd:administrativeArea>
+																	<gmd:postalCode>
+																		<gco:CharacterString>28071</gco:CharacterString>
+																	</gmd:postalCode>
+																	<gmd:country>
+																		<gco:CharacterString>Spain</gco:CharacterString>
+																	</gmd:country>
+																	<gmd:electronicMailAddress>
+																		<gco:CharacterString>secinfomet@inm.es</gco:CharacterString>
+																	</gmd:electronicMailAddress>
+																	<gmd:electronicMailAddress>
+																		<gco:CharacterString>infomet@inm.es</gco:CharacterString>
+																	</gmd:electronicMailAddress>
+																</gmd:CI_Address>
+															</gmd:address>
+															<gmd:onlineResource>
+																<gmd:CI_OnlineResource>
+																	<gmd:linkage>
+																		<gmd:URL>http://www.aemet.es/es/portada</gmd:URL>
+																	</gmd:linkage>
+																</gmd:CI_OnlineResource>
+															</gmd:onlineResource>
+														</gmd:CI_Contact>
+													</gmd:contactInfo>
+													<gmd:role>
+														<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="author">author</gmd:CI_RoleCode>
+													</gmd:role>
+												</gmd:CI_ResponsibleParty>
+											</gmd:citedResponsibleParty>
+											<gmd:presentationForm>
+												<gmd:CI_PresentationFormCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_PresentationFormCode" codeListValue="tableHardcopy">tableHardcopy</gmd:CI_PresentationFormCode>
+											</gmd:presentationForm>
+										</gmd:CI_Citation>
+									</gmd19157:sourceCitation>
+									<gmd19157:sourceExtent>
+										<gmd:EX_Extent>
+											<gmd:temporalElement>
+												<gmd:EX_TemporalExtent>
+													<gmd:extent>
+														<gml:TimePeriod gml:id="MeteorologicalStations_TempEx">
+															<gml:beginPosition>1975</gml:beginPosition>
+															<gml:endPosition>2000</gml:endPosition>
+														</gml:TimePeriod>
+													</gmd:extent>
+												</gmd:EX_TemporalExtent>
+											</gmd:temporalElement>
+										</gmd:EX_Extent>
+									</gmd19157:sourceExtent>
+									<gmd19157:sourceStep>
+										<gmd19157:LI_ProcessStep>
+											<gmd19157:description>
+												<gco:CharacterString>Mean monthly climate records have been computed from raw AEMET data by using own routines. These routines fix problems with repeated records, inconsistencies in values and missing values to obtain an accurate monthly database that will be used as a basis for the spatial interpolations procedures. The total number of meteorological stations is 1068.</gco:CharacterString>
+											</gmd19157:description>
+										</gmd19157:LI_ProcessStep>
+									</gmd19157:sourceStep>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+						</gmd19157:LI_ProcessStep>
+					</gmd19157:processStep>
+					<gmd19157:processStep>
+						<gmd19157:LI_ProcessStep>
+							<gmd19157:description>
+								<gco:CharacterString>Indepent variables for the regression have been selected using prior expert knowledge. This set of variables have been feeded to statistical analysis to select the significant ones for the model.</gco:CharacterString>
+							</gmd19157:description>
+							<gmd19157:source>
+								<gmd19157:LI_Source>
+									<gmd19157:description>
+										<gco:CharacterString>ASTER Global Digital Elevation Model</gco:CharacterString>
+									</gmd19157:description>
+									<gmd19157:sourceCitation>
+										<gmd:CI_Citation>
+											<gmd:title>
+												<gco:CharacterString>ASTER Global Digital Elevation Model</gco:CharacterString>
+											</gmd:title>
+											<gmd:date>
+												<gmd:CI_Date>
+													<gmd:date>
+														<gco:Date>2009-06-29</gco:Date>
+													</gmd:date>
+													<gmd:dateType>
+														<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+													</gmd:dateType>
+												</gmd:CI_Date>
+											</gmd:date>
+										</gmd:CI_Citation>
+									</gmd19157:sourceCitation>
+									<gmd19157:sourceStep>
+										<gmd19157:LI_ProcessStep>
+											<gmd19157:description>
+												<gco:CharacterString>The GDEM was created by stereo-correlating the 1.3 million scene ASTER VNIR, covering the surface of the Earth between latitudes 83N and 83S. The GDEM is produced with ~ 30 m spatial resolution, with a scenes of 1 x 1 degree in GeoTIFF format. Each GDEM file is accompanied by a file of quality assessment, which gives either the number of ASTER scenes used to calculate the value of a pixel (positive values) or whether external DEM data source used to fill the gaps of ASTER (negative values). The correspondence in this case is as follows: -1 in the case of SRTM3 V3 and -2 in the case of SRTM3 V2.</gco:CharacterString>
+											</gmd19157:description>
+										</gmd19157:LI_ProcessStep>
+									</gmd19157:sourceStep>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+							<gmd19157:source>
+								<gmd19157:LI_Source>
+									<gmd19157:description>
+										<gco:CharacterString>GIS based latitude</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+							<gmd19157:source>
+								<gmd19157:LI_Source>
+									<gmd19157:description>
+										<gco:CharacterString>GIS based distance to Mediterranean sea (to express continentality)</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+							<gmd19157:source>
+								<gmd19157:LI_Source>
+									<gmd19157:description>
+										<gco:CharacterString>GIS based distance to Cantabric sea (to express continentality)</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+							<gmd19157:source>
+								<gmd19157:LI_Source>
+									<gmd19157:description>
+										<gco:CharacterString>GIS based distance to Atlantic sea (to express continentality)</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+							<gmd19157:source>
+								<gmd19157:LI_Source>
+									<gmd19157:description>
+										<gco:CharacterString>DEM based solar radiation</gco:CharacterString>
+									</gmd19157:description>
+								</gmd19157:LI_Source>
+							</gmd19157:source>
+						</gmd19157:LI_ProcessStep>
+					</gmd19157:processStep>
+					<gmd19157:processStep>
+						<gmd19157:LI_ProcessStep>
+							<gmd19157:description>
+								<gco:CharacterString>Multiple lineal regression model is fitted and mapped. A mask is provided to identify intepolated and extrapolated areas (i.e. those whithin or outside the meteorological stations statistical range).</gco:CharacterString>
+							</gmd19157:description>
+						</gmd19157:LI_ProcessStep>
+					</gmd19157:processStep>
+					<gmd19157:processStep>
+						<gmd19157:LI_ProcessStep>
+							<gmd19157:description>
+								<gco:CharacterString>Regression residuals have been interpolated using inverse distance weighting.</gco:CharacterString>
+							</gmd19157:description>
+						</gmd19157:LI_ProcessStep>
+					</gmd19157:processStep>
+					<gmd19157:processStep>
+						<gmd19157:LI_ProcessStep>
+							<gmd19157:description>
+								<gco:CharacterString>Regression map and residual map (obtained on the two previous process steps) are combined to obtain the final dataset.</gco:CharacterString>
+							</gmd19157:description>
+						</gmd19157:LI_ProcessStep>
+					</gmd19157:processStep>
+				</gmd19157:LI_Lineage>
+			</gmd19157:lineage>
+		</gmd19157:DQ_DataQuality>
+	</gvq:dataQualityInfo>
+	<gvq:dataQualityInfo>
+		<gvq:GVQ_DataQuality>
+			<gmd19157:scope xlink:href="#datasetScope"/>
+			<gvq:discoveredIssue>
+				<gvq:GVQ_DiscoveredIssue>
+					<gvq:target xlink:href="#mtri2an1ib"/>
+					<gvq:knownProblem>
+						<gco:CharacterString>Some methodological constraints can be defined</gco:CharacterString>
+					</gvq:knownProblem>
+					<gvq:workAround>
+						<gco:CharacterString>First of all be careful with extrapolated areas (checking them in the provided binary mask). Moreover, be careful with areas with high uncertainty (checking them in the provided residuals map).</gco:CharacterString>
+					</gvq:workAround>
+				</gvq:GVQ_DiscoveredIssue>
+			</gvq:discoveredIssue>
+		</gvq:GVQ_DataQuality>
+	</gvq:dataQualityInfo>
+	<gvq:dataQualityInfo>
+		<gvq:GVQ_DataQuality>
+			<gmd19157:scope>
+				<gmd19157:DQ_Scope>
+					<gmd19157:level>
+						<gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+						<!-- ··$$··LB: not very happy about this - I'd prefer to be able to say 'subset of dataset' -->
+						<!-- ··$$·· AZ: what about "tile" information applies to a tile, a spatial subset of geographic data ? -->
+					</gmd19157:level>
+					<gmd19157:extent>
+						<gmd:EX_Extent id="maskNavarraExtent">
+							<gmd:description>
+								<gco:CharacterString>Area of Navarra with incorrectly modelled values</gco:CharacterString>
+							</gmd:description>
+							<gmd:geographicElement>
+								<gmd:EX_BoundingPolygon>
+									<gmd:polygon>
+										<gml:LineString gml:id="coordsId1" srsName="urn:ogc:def:crs:EPSG:23030">
+											<gml:coordinates>634145.9 4764080.8 634145.9 4775323.2 646710.9 4775323.2 646710.9 4764080.8</gml:coordinates>
+										</gml:LineString>
+									</gmd:polygon>
+								</gmd:EX_BoundingPolygon>
+							</gmd:geographicElement>
+						</gmd:EX_Extent>
+					</gmd19157:extent>
+				</gmd19157:DQ_Scope>
+			</gmd19157:scope>
+			<gvq:discoveredIssue>
+				<gvq:GVQ_DiscoveredIssue>
+					<gvq:target xlink:href="#mtri2an1ib"/>
+					<gvq:knownProblem>
+						<gco:CharacterString>A problem with the DEM on an subset of the Navarra area lead to an incorrect modelling of the temperature and to a very high residuals (due to a bad adjust of the model there) on this area. The problem is due to a bad attribute (a missing "0", i.e. the curve stated “10” instead of “100” m) on the isolines indicating heigh used to produce the DEM.</gco:CharacterString>
+					</gvq:knownProblem>
+					<gvq:workAround>
+						<gco:CharacterString>The area with incorrect values can be masked (marked with NoData). The bounding box with the incorrect values is (expressed in the reference system of the dataset): Min X: 634145.9, Min Y:4764080.8, Max X: 646710.9, Max X: 4775323.2. Next version of the Atlas will solve this problem.</gco:CharacterString>
+					</gvq:workAround>
+				</gvq:GVQ_DiscoveredIssue>
+			</gvq:discoveredIssue>
+		</gvq:GVQ_DataQuality>
+	</gvq:dataQualityInfo>
+    <gvq:userFeedback>
+    <gvq:GVQ_FeedbackCollection>
+        <gvq:itemUnderReview>
+            <updated19115:MD_Identifier>
+					<gmd:code>
+						<gco:CharacterString>mtri2an1ib</gco:CharacterString>
+					</gmd:code>
+					<updated19115:codeSpace>
+						<gco:CharacterString>opengis.uab.cat</gco:CharacterString>
+					</updated19115:codeSpace>
+				</updated19115:MD_Identifier>
+		</gvq:itemUnderReview>
+	<gvq:item>
+		<gvq:identifier>
+			<updated19115:MD_Identifier>
+				<gmd:code/>
+			</updated19115:MD_Identifier>
+		</gvq:identifier>
+		<gvq:subject>string</gvq:subject>
+		<gvq:primaryTarget>
+			<gvq:resourceRef>
+				<updated19115:MD_Identifier>
+					<gmd:code>
+						<gco:CharacterString>mtri2an1ib</gco:CharacterString>
+					</gmd:code>
+					<updated19115:codeSpace>
+						<gco:CharacterString>opengis.uab.cat</gco:CharacterString>
+					</updated19115:codeSpace>
+				</updated19115:MD_Identifier>
+			</gvq:resourceRef>
+			<gvq:natureOfTarget>
+				<gvq:MD_ScopeCode codeList="http://www.geoviqua.org/gmd19157/resources/codeList.xml#MD_ScopeCode" codeListValue="metadata"/>
+			</gvq:natureOfTarget>
+		</gvq:primaryTarget>
+		<gvq:userRole>
+			<gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_UserRoleCode" codeListValue=" NonresearchEndUser "/>
+		</gvq:userRole>
+		<gvq:user>
+			<gvq:userDetails>
+				<gmd:individualName>
+					<gco:CharacterString>Pepito</gco:CharacterString>
+				</gmd:individualName>
+				<gmd:organisationName>
+					<gco:CharacterString>Afrucat</gco:CharacterString>
+				</gmd:organisationName>
+				<gmd:contactInfo>
+					<gmd:CI_Contact>
+						<gmd:phone>
+							<gmd:CI_Telephone>
+								<gmd:voice>
+									<gco:CharacterString>00 34 973 22 01 49</gco:CharacterString>
+								</gmd:voice>
+								<gmd:facsimile>
+									<gco:CharacterString>00 34 973 22 01 49</gco:CharacterString>
+								</gmd:facsimile>
+							</gmd:CI_Telephone>
+						</gmd:phone>
+						<gmd:address>
+							<gmd:CI_Address>
+								<gmd:deliveryPoint>
+									<gco:CharacterString>Av. Tortosa n�1 Edificio Mercolleida</gco:CharacterString>
+								</gmd:deliveryPoint>
+								<gmd:city>
+									<gco:CharacterString>Lleida</gco:CharacterString>
+								</gmd:city>
+								<gmd:postalCode>
+									<gco:CharacterString>25005</gco:CharacterString>
+								</gmd:postalCode>
+								<gmd:country>
+									<gco:CharacterString>Spain</gco:CharacterString>
+								</gmd:country>
+								<gmd:electronicMailAddress>
+									<gco:CharacterString>administracio@afrucat.com</gco:CharacterString>
+								</gmd:electronicMailAddress>
+							</gmd:CI_Address>
+						</gmd:address>
+					</gmd:CI_Contact>
+				</gmd:contactInfo>
+				<gmd:role>
+					<gmd:CI_RoleCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_RoleCode" codeListValue="user"/>
+				</gmd:role>
+			</gvq:userDetails>
+			<gvq:applicationDomain>http://www.eionet.europa.eu/gemet/concept/3502</gvq:applicationDomain>
+			<!--
+what's this??? $$$ level 4? 
+  -->
+			<gvq:expertiseLevel>4</gvq:expertiseLevel>
+			<!-- 
+codelist???
+  -->
+			<gvq:userRole>
+				<gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_UserRoleCode" codeListValue="NonresearchEndUser"/>
+			</gvq:userRole>
+		</gvq:user>
+		<gvq:dateStamp>
+			<gco:DateTime>2006-01-31T00:00:00.0Z</gco:DateTime>
+		</gvq:dateStamp>
+		<gvq:qualityOverride>
+			<gvq:GVQ_DataQuality>
+				<gmd19157:scope/>
+				<gvq:discoveredIssue/>
+			</gvq:GVQ_DataQuality>
+		</gvq:qualityOverride>
+		<gvq:userComment>
+			<gvq:comment>When validating the Suitability Map of Golden Apple (link) with field survey evidences, we noticed that in the area of the �Corn de Borges Blanques, UTM: xxx� the results were not the expected. Instead of having high suitability rates for this particular fruit tree model matching the field reality, the multicriteria model shows low values. This conflict is caused by the GDD layer (an input in the fruit trees suitability multicriteria model). This layer is in turn derived from the mean June temperature, mean July temperature and mean August temperature layers included in the DCAIP  (MD_Identifier id). This leads us to discover that the climatic surfaces of these layers in the DCAIP do not reflect appropriately these local climate features ultimately favouring the golden apple suitability (i.e., the climatic model locally in this geographic area used as input in the fruit tree model gives lower values than the high suitability evidences found in the field). This is caused by the lower than expected values of the nearest in-situ meteorological sensors used in the climatic surfaces interpolation models, even though the values series of this sensor are compliant with the time series length specifications. This causes that the residual interpolation structure is not representative of these particular climatic features. </gvq:comment>
+			<gvq:mime-type>text/plain</gvq:mime-type>
+		</gvq:userComment>
+		<gvq:rating>
+			<gvq:score>5</gvq:score>
+			<gvq:justification>The data itself is appropriated for this application and the metadata records is beyond the expectation allowing for error traceability.</gvq:justification>
+		</gvq:rating>
+		<gvq:usage>
+			<gvq:reportAspect>
+				<gvq:GVQ_ReportAspectCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_ReportAspectCode" codeListValue="FitnessForPurpose"/>
+			</gvq:reportAspect>
+			<gvq:usageDescription> which is the difference between user comment, report aspect and discovered issue
+
+I purchased this data for suitability modelling, and had never dealt with supplier Y before. I found that the metadata on the supplier's website was compliant with the GeoViQua Producer Quality Model. However, for this particular application, this user feedback is relevant and should be linked to the PQM even if only affecting locally and for this particular fruit variety.</gvq:usageDescription>
+			<gvq:discoveredIssue>
+				<gvq:GVQ_DiscoveredIssue>
+					<gvq:target xlink:href="targetUID"/>
+					<gvq:knownProblem>
+						<gco:CharacterString> which is the difference between user comment, report aspect and discovered issue
+
+
+The data itself is of high quality, and the PQM states some usage recommendations. However, logically these records on the producer side, cannot foresee all potential uses. That�s why I want to contribute to the further understanding of this fit-for-purpose quality issue, which cannot be conveyed in the normal standards.</gco:CharacterString>
+					</gvq:knownProblem>
+					<gvq:referenceDoc>
+						<gvq:GVQ_Publication>
+							<gmd:title>
+								<gco:CharacterString>link to the Suitability map portal?</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2013-05-07</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_DateTypeCode" codeListValue="creation"/>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gvq:target xlink:href="targetUID"/>
+							<gvq:category>
+								<gvq:GVQ_PublicationCategoryCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_PublicationCategoryCode" codeListValue="webPage"/>
+							</gvq:category>
+							<gvq:onlineResource>
+								<gmd:CI_OnlineResource>
+									<gmd:linkage>
+										<gmd:URL><![CDATA[ ???
+http://www.ogc.uab.cat/cgi-bin/geossback/GEOSSBack.cgi?accio=EstilXML&AfegirEstil=rubric&URL=http://clearinghouse.cisc.gmu.edu/geonetwork/srv/en/iso19139.xml?id=491540
+  ]]></gmd:URL>
+									</gmd:linkage>
+								</gmd:CI_OnlineResource>
+							</gvq:onlineResource>
+						</gvq:GVQ_Publication>
+					</gvq:referenceDoc>
+				</gvq:GVQ_DiscoveredIssue>
+			</gvq:discoveredIssue>
+		</gvq:usage>
+		<gvq:domainURN>http://www.eionet.europa.eu/gemet/concept/9278</gvq:domainURN>
+		<gvq:tags>Climate ??? </gvq:tags>
+	</gvq:item>
+</gvq:GVQ_FeedbackCollection>
+        </gvq:userFeedback>
+</gvq:GVQ_Metadata>

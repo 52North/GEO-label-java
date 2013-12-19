@@ -16,9 +16,13 @@
 
 package org.n52.geolabel.commons;
 
-//@XmlRootElement(name = "errorInformation")
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "errorInformation")
 public class ErrorFacet extends LabelFacet {
-    // @XmlElement
+
+    @XmlElement
     private String errorMessage;
 
     public String getErrorMessage() {

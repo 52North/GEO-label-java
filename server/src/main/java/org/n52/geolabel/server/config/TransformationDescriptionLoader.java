@@ -53,13 +53,16 @@ public class TransformationDescriptionLoader {
 
     private TransformationDescriptionResources resources;
 
+    private ObjectMapper mapper;
+
     private static Set<TransformationDescription> descriptions;
 
     private static Map<URL, Source> transformationDescriptionUsedSource = new HashMap<>();
 
     @Inject
-    public TransformationDescriptionLoader(TransformationDescriptionResources resources) {
+    public TransformationDescriptionLoader(TransformationDescriptionResources resources, ObjectMapper mapper) {
         this.resources = resources;
+        this.mapper = mapper;
     }
 
     private TransformationDescription readTransformationDescription(InputStream input) throws IOException {
@@ -84,8 +87,7 @@ public class TransformationDescriptionLoader {
         /**
          * using Jackson
          */
-        ObjectMapper m = new ObjectMapper();
-        TransformationDescriptionWrapper wrapper = m.readValue(input, TransformationDescriptionWrapper.class);
+        TransformationDescriptionWrapper wrapper = this.mapper.readValue(input, TransformationDescriptionWrapper.class);
 
         return wrapper.transformationDescription;
     }
@@ -157,7 +159,7 @@ public class TransformationDescriptionLoader {
 
                 td = readTransformationDescription(temp);
                 log.debug("Loaded transformation description from {} ", entry.getKey());
-                setUsedSource(entry.getKey(), Source.ONLINE);
+                setUsedSource(entry.getKey(), Source.URL);
             }
             catch (Exception e) {
                 log.warn("There was a problem loading transformation description from {}: {} : {}",

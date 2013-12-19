@@ -15,13 +15,16 @@
  */
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.LineageFacet;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -30,26 +33,30 @@ import org.w3c.dom.Document;
  */
 public class LineageFacetDescription extends FacetTransformationDescription<LineageFacet> {
 
-    private String processStepCountPath;
+    private static Logger log = LoggerFactory.getLogger(LineageFacetDescription.class);
 
-	private XPathExpression processStepCountExpression;
-
-	@Override
-	public void initXPaths(XPath xPath) throws XPathExpressionException {
-        if (this.processStepCountPath != null)
-            this.processStepCountExpression = xPath.compile(this.processStepCountPath);
-		super.initXPaths(xPath);
-	}
+    @JsonCreator
+    public LineageFacetDescription(@JacksonInject
+    TransformationDescriptionResources resources) {
+        super(resources);
+        log.debug("NEW {}", this);
+    }
 
 	@Override
-	public LineageFacet updateFacet(LineageFacet facet, Document metadataXml) throws XPathExpressionException {
-        if (this.processStepCountExpression != null) {
-            Double result = (Double) this.processStepCountExpression.evaluate(metadataXml, XPathConstants.NUMBER);
-			if (result != null)
-                facet.addProcessSteps(result.intValue());
-		}
+    public LineageFacet updateFacet(final LineageFacet facet, Document metadataXml) throws XPathExpressionException {
+        XPathExpression expression = this.hoveroverExpressions.get("processStepCountPath");
 
-		return super.updateFacet(facet, metadataXml);
+        visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                int totalProcessSteps = Integer.parseInt(value);
+                facet.setTotalProcessSteps(totalProcessSteps);
+                return true;
+            }
+        });
+
+        LineageFacet f = super.updateDrilldownUrlWithMetadata(facet);
+        return super.updateFacet(f, metadataXml);
 	}
 
 	@Override

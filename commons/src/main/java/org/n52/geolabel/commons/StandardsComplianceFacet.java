@@ -37,7 +37,7 @@ public class StandardsComplianceFacet extends LabelFacet {
 
 	public void addStandard(String standard) {
         if (this.standards == null)
-            this.standards = new HashSet<String>();
+            this.standards = new HashSet<>();
 		this.standards.add(standard);
 	}
 }

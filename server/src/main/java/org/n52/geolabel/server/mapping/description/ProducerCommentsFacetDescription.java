@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.mapping.description;
 
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.n52.geolabel.commons.Label;
 import org.n52.geolabel.commons.ProducerCommentsFacet;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 /**
@@ -29,34 +34,50 @@ import org.w3c.dom.Document;
  */
 public class ProducerCommentsFacetDescription extends FacetTransformationDescription<ProducerCommentsFacet> {
 
-	private String producerCommentsPath;
+    private static Logger log = LoggerFactory.getLogger(ProducerCommentsFacetDescription.class);
 
-	private XPathExpression producerCommentsExpression;
+    @JsonCreator
+    public ProducerCommentsFacetDescription(@JacksonInject
+    TransformationDescriptionResources resources) {
+        super(resources);
+        log.debug("NEW {}", this);
+    }
 
-	@Override
-	public void initXPaths(XPath xPath) throws XPathExpressionException {
-        if (this.producerCommentsPath != null)
-            this.producerCommentsExpression = xPath.compile(this.producerCommentsPath);
-		super.initXPaths(xPath);
-	}
+    @Override
+    public ProducerCommentsFacet updateFacet(final ProducerCommentsFacet facet, Document metadataXml) throws XPathExpressionException {
+        XPathExpression expression = this.hoveroverExpressions.get("supplementalInformation");
 
-	@Override
-	public ProducerCommentsFacet updateFacet(final ProducerCommentsFacet facet, Document metadataXml)
-			throws XPathExpressionException {
-        visitExpressionResultStrings(this.producerCommentsExpression, metadataXml, new ExpressionResultFunction() {
-			@Override
-			public boolean eval(String value) {
-				facet.addProducerComment(value);
-				return true;
-			}
-		});
+        visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                if ( !value.isEmpty()) {
+                    facet.setSupplementalInformation(value.trim());
+                    return false;
+                }
+                return true;
+            }
+        });
 
-		return super.updateFacet(facet, metadataXml);
-	}
+        expression = this.hoveroverExpressions.get("knownProblemsPath");
 
-	@Override
-	public ProducerCommentsFacet getAffectedFacet(Label label) {
-		return label.getProducerCommentsFacet();
-	}
+        visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+            @Override
+            public boolean eval(String value) {
+                if ( !value.isEmpty()) {
+                    facet.setKnownProblems(value.trim());
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        ProducerCommentsFacet f = super.updateDrilldownUrlWithMetadata(facet);
+        return super.updateFacet(f, metadataXml);
+    }
+
+    @Override
+    public ProducerCommentsFacet getAffectedFacet(Label label) {
+        return label.getProducerCommentsFacet();
+    }
 
 }

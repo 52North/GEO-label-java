@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "qualityInformation")
 public class QualityInformationFacet extends LabelFacet {
+
 	@XmlElement(name = "scopeLevel")
 	private Set<String> scopeLevels;
 
@@ -37,7 +38,7 @@ public class QualityInformationFacet extends LabelFacet {
 
 	public void addScopeLevel(String level) {
         if (this.scopeLevels == null)
-            this.scopeLevels = new HashSet<String>();
+            this.scopeLevels = new HashSet<>();
 		this.scopeLevels.add(level);
 	}
 }

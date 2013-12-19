@@ -15,29 +15,32 @@
  */
 package org.n52.geolabel.commons;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "producerComments")
 public class ProducerCommentsFacet extends LabelFacet {
-	@XmlElement(name = "commentsText")
-	private Set<String> producerComments;
 
-	public Collection<String> getProducerComments() {
-        if (this.producerComments == null)
-			return Collections.emptySet();
+    @XmlElement
+    private String supplementalInformation;
 
-        return this.producerComments;
-	}
+    @XmlElement
+    private String knownProblems;
 
-	public void addProducerComment(String producerComment) {
-        if (this.producerComments == null)
-            this.producerComments = new HashSet<String>();
-		this.producerComments.add(producerComment);
-	}
+    public String getKnownProblems() {
+        return this.knownProblems;
+    }
+
+    public void setKnownProblems(String knownProblems) {
+        this.knownProblems = knownProblems;
+    }
+
+    public String getSupplementalInformation() {
+        return this.supplementalInformation;
+    }
+
+    public void setSupplementalInformation(String supplementalInformation) {
+        this.supplementalInformation = supplementalInformation;
+    }
+
 }

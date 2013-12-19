@@ -14,22 +14,8 @@
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.5</version>
 	</parent>
-
-	<developers>
-		<developer>
-			<name>Holger Hopmann</name>
-			<email>h.hopmann@52north.org</email>
-			<organization>${project.organization.name}</organization>
-			<organizationUrl>${project.organization.url}</organizationUrl>
-			<timezone>GMT+1</timezone>
-		</developer>
-
-		<developer>
-			<name>Victoria Lush</name>
-		</developer>
-	</developers>
 
 	<properties>
 		<!-- Directory where swagger-maven-plugin generates its output, relative to pom location -->
@@ -42,6 +28,17 @@
 	<build>
 		<finalName>glbservice</finalName>
 
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+            	    <!-- Exclude those since they are copied from the profile folder for the build -->
+					<exclude>**/logback.xml</exclude>
+					<exclude>**/logback-test.xml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -81,7 +78,7 @@
 					<excludes>
 						<exclude>**/logback.xml</exclude>
 						<exclude>**/logback-test.xml</exclude>
-						<exclude>src/test/resources/testfiles/**</exclude>
+						<exclude>src/test/resources/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -94,8 +91,12 @@
 					<webResources>
 						<resource>
 							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+						</resource>
+						<resource>
 							<directory>src/main/resources</directory>
 							<filtering>true</filtering>
+							<targetPath>WEB-INF/classes</targetPath>
 						</resource>
 					</webResources>
 				</configuration>
@@ -189,18 +190,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sf.saxon</groupId>
-			<artifactId>saxon-xpath</artifactId>
-			<version>${saxon.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sf.saxon</groupId>
-			<artifactId>saxon-dom</artifactId>
-			<version>${saxon.version}</version>
 		</dependency>
 
 		<dependency>

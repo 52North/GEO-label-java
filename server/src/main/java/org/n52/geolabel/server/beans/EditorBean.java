@@ -81,7 +81,7 @@ public class EditorBean {
 	private String metadataContent = "";
 	private String feedbackContent = "";
 
-	private List<Endpoint> comparisonServices = new ArrayList<Endpoint>();
+    private List<Endpoint> comparisonServices = new ArrayList<>();
 	private Endpoint newCustomService = new Endpoint();
 
 	public String getFeedbackContent() {
