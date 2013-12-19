@@ -15,47 +15,74 @@
  */
 package org.n52.geolabel.commons;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-// TODO consistency when unmarshalled
 @XmlSeeAlso({ UserFeedbackFacet.class, ExpertFeedbackFacet.class })
 public class FeedbackFacet extends LabelFacet {
 
-	private int totalFeedbacks;
+    private int totalItems;
 
-    private List<Double> ratings = new ArrayList<>(1);
-	private Double avgRating = null;
+    private int ratingCount;
 
-	public int getTotalFeedbacks() {
-        return this.totalFeedbacks;
-	}
+    private double averageRating;
 
-	@XmlElement
-	public Double getAverageRating() {
-        if (this.avgRating == null && !this.ratings.isEmpty()) {
-            this.avgRating = Double.valueOf(0d);
-            for (Double rating : this.ratings)
-                this.avgRating = Double.valueOf(this.avgRating.doubleValue() + rating.doubleValue());
-            this.avgRating = Double.valueOf(this.avgRating.doubleValue() / this.ratings.size());
-		}
+    public int getTotalItems() {
+        return this.totalItems;
+    }
 
-        return this.avgRating;
-	}
+    public void setTotalItems(int totalItems) {
+        this.totalItems = totalItems;
+    }
 
-	public int getTotalRatings() {
-        return this.ratings.size();
-	}
+    @XmlElement
+    public int getRatingCount() {
+        return this.ratingCount;
+    }
 
-	public void addRating(double rating) {
-        this.ratings.add(Double.valueOf(rating));
-        this.avgRating = null;
-	}
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
+    }
 
-	public void addFeedbacks(int feedbackCount) {
-        this.totalFeedbacks += feedbackCount;
-	}
+    @XmlElement
+    public double getAverageRating() {
+        return this.averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("FeedbackFacet [totalItems=");
+        builder.append(this.totalItems);
+        builder.append(", ratingCount=");
+        builder.append(this.ratingCount);
+        builder.append(", averageRating=");
+        builder.append(this.averageRating);
+        builder.append("]");
+        return builder.toString();
+    }
+
+    // @XmlElement
+    // PUBLIC DOUBLE GETAVERAGERATING() {
+    // IF (THIS.AVERAGERATING == NULL && !THIS.RATINGS.ISEMPTY()) {
+    // THIS.AVERAGERATING = DOUBLE.VALUEOF(0D);
+    // FOR (DOUBLE RATING : THIS.RATINGS)
+    // THIS.AVERAGERATING = DOUBLE.VALUEOF(THIS.AVERAGERATING.DOUBLEVALUE() + RATING.DOUBLEVALUE());
+    // THIS.AVERAGERATING = DOUBLE.VALUEOF(THIS.AVERAGERATING.DOUBLEVALUE() / THIS.RATINGS.SIZE());
+    // }
+    //
+    // RETURN THIS.AVERAGERATING;
+    // }
+
+    // public void addRating(double rating) {
+    // this.ratings.add(Double.valueOf(rating));
+    // this.averageRating = null;
+    // }
+    // public void addFeedbacks(int feedbackCount) {
+    // this.totalItems += feedbackCount;
+    // }
 }

@@ -58,7 +58,7 @@ import org.w3c.dom.NodeList;
                @JsonSubTypes.Type(value = CitationsFacetDescription.class, name = "citations")})
 public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
-    protected static Logger log = LoggerFactory.getLogger(FacetTransformationDescription.class);
+    private static Logger log = LoggerFactory.getLogger(FacetTransformationDescription.class);
 
     @JsonRootName("hoverover")
     public static class HoveroverWrapper {
@@ -403,7 +403,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                                     values.add(number);
                                 }
                                 catch (ParseException e) {
-                                    log.error("Could not parse number returned by expression.");
+                                    // log.error("Could not parse number returned by expression.");
                                     values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
                                 }
                                 return false;

@@ -20,21 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "expertReview")
 class ExpertFeedbackFacet extends FeedbackFacet {
+
 	@Override
 	@XmlElement(name = "totalReviews")
-	public int getTotalFeedbacks() {
-		return super.getTotalFeedbacks();
+	public int getTotalItems() {
+		return super.getTotalItems();
 	}
 
-	@Override
-	@XmlElement
-	public int getTotalRatings() {
-		return super.getTotalRatings();
-	}
-
-	@Override
-	@XmlElement
-	public Double getAverageRating() {
-		return super.getAverageRating();
-	}
 }

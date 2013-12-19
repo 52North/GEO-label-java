@@ -76,14 +76,14 @@ public class MetadataTransformerTest {
         assertTrue(geoLabel.getQualityInformationFacet().getScopeLevels().size() == 1);
 
         assertTrue(geoLabel.getUserFeedbackFacet().getAvailability() == Availability.NOT_AVAILABLE);
-        assertTrue(geoLabel.getUserFeedbackFacet().getAverageRating() == null);
-        assertTrue(geoLabel.getUserFeedbackFacet().getTotalFeedbacks() == 0);
-        assertTrue(geoLabel.getUserFeedbackFacet().getTotalRatings() == 0);
+        assertTrue(geoLabel.getUserFeedbackFacet().getAverageRating() == 0);
+        assertTrue(geoLabel.getUserFeedbackFacet().getTotalItems() == 0);
+        assertTrue(geoLabel.getUserFeedbackFacet().getRatingCount() == 0);
 
         assertTrue(geoLabel.getExpertFeedbackFacet().getAvailability() == Availability.AVAILABLE);
-        assertTrue(geoLabel.getExpertFeedbackFacet().getAverageRating().doubleValue() == 2.5);
-        assertTrue(geoLabel.getExpertFeedbackFacet().getTotalFeedbacks() == 2);
-        assertTrue(geoLabel.getExpertFeedbackFacet().getTotalRatings() == 2);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getAverageRating() == 2.5);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getTotalItems() == 2);
+        assertTrue(geoLabel.getExpertFeedbackFacet().getRatingCount() == 2);
 
         assertTrue(geoLabel.getCitationsFacet().getAvailability() == Availability.AVAILABLE);
         assertTrue(geoLabel.getCitationsFacet().getTotalCitations() == 7);
@@ -303,30 +303,30 @@ public class MetadataTransformerTest {
         if (control.expertRating != null)
             assertEquals("Expert rating",
                          control.expertRating.doubleValue(),
-                         label.getExpertFeedbackFacet().getAverageRating().doubleValue(),
+                         label.getExpertFeedbackFacet().getAverageRating(),
                          0.05);
         if (control.expertRatingCount != null)
             assertEquals("Expert rating count",
                          control.expertRatingCount.intValue(),
-                         label.getExpertFeedbackFacet().getTotalRatings());
+                         label.getExpertFeedbackFacet().getRatingCount());
         if (control.expertReviewCount != null)
             assertEquals("Expert review count",
                          control.expertReviewCount.intValue(),
-                         label.getExpertFeedbackFacet().getTotalFeedbacks());
+                         label.getExpertFeedbackFacet().getTotalItems());
 
         if (control.userRating != null)
             assertEquals("User rating",
                          control.userRating.doubleValue(),
-                         label.getUserFeedbackFacet().getAverageRating().doubleValue(),
+                         label.getUserFeedbackFacet().getAverageRating(),
                          0.05);
         if (control.userRatingCount != null)
             assertEquals("User rating count",
                          control.userRatingCount.intValue(),
-                         label.getUserFeedbackFacet().getTotalRatings());
+                         label.getUserFeedbackFacet().getRatingCount());
         if (control.userReviewCount != null)
             assertEquals("User review count",
                          control.userReviewCount.intValue(),
-                         label.getUserFeedbackFacet().getTotalFeedbacks());
+                         label.getUserFeedbackFacet().getTotalItems());
 
         if (control.citationCount != null)
             assertEquals("citations", control.citationCount.intValue(), label.getCitationsFacet().getTotalCitations());

@@ -336,7 +336,7 @@
 
 			<!-- Expert Feedback -->
 			<g class="expert_review" id="expert_review">
-				<title>${label.expertFeedbackFacet.tile!"NA"}</title><#lt>
+				<title>${label.expertFeedbackFacet.title!"NA"}</title><#lt>
 				<a xlink:href="${label.expertFeedbackFacet.href!"NA"}" target="_blank">
  
  					<#assign higherFragment>
