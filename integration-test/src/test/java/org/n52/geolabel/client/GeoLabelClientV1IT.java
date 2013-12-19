@@ -23,71 +23,90 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
 import org.junit.Test;
 
 public class GeoLabelClientV1IT {
 
     private String gvqExample = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQM_UQM_combined/DigitalClimaticAtlas_mt_an_v10.xml";
 
+    private GeoLabelRequestBuilder requestBuilder;
+
+    // private static String serviceUrl = "http://www.geolabel.net/api/v1/geolabel";
+
+    private static String serviceUrl = "http://localhost:8080/glbservice/api/v1/svg";
+
+    // private String serviceUrl = "http://www.geolabel.net/api/v1/geolabel";
+
+    @Before
+    public void createRequest() {
+        this.requestBuilder = GeoLabelClientV1.createGeoLabelRequest(serviceUrl);
+    }
+
     @Test
     public void testCreateGeoLabelMetadataStream() throws IOException {
-        InputStream metadataStream = getClass().getResourceAsStream("FAO_GEO_Network_iso19139.xml");
-        InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(metadataStream).getSVG();
+        InputStream metadataStream = getClass().getResourceAsStream("/3.1/FAO_GEO_Network_iso19139.xml");
+        InputStream svg = this.requestBuilder.setMetadataDocument(metadataStream).getSVG();
         String svgString = IOUtils.toString(svg);
 
-        assertTrue(svgString.contains("<title>Standards Compliance. Standard name: ISO 19115:2003/19139, version 1.0.</title>"));
-        assertTrue("ensure has no feedback info", svgString.contains("<title>User Feedback</title>"));
+        assertTrue(svgString.contains("<title>Standards Compliance"));
+        assertTrue("ensure has no feedback info", svgString.contains("Number of feedbacks: 0."));
     }
 
     @Test
     public void testCreateGeoLabelMetadataAndFeedbackStream() throws IOException {
-        InputStream metadataStream = getClass().getResourceAsStream("FAO_GEO_Network_iso19139.xml");
-        InputStream feedbackStream = getClass().getResourceAsStream("GVQ_Feedback_All_Available.xml");
+        InputStream metadataStream = getClass().getResourceAsStream("/3.1/FAO_GEO_Network_iso19139.xml");
+        InputStream feedbackStream = getClass().getResourceAsStream("/3.1/GVQ_Feedback_All_Available.xml");
 
-        InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(metadataStream).setFeedbackDocument(feedbackStream).getSVG();
+        InputStream svg = this.requestBuilder.setMetadataDocument(metadataStream).setFeedbackDocument(feedbackStream).getSVG();
         String svgString = IOUtils.toString(svg);
 
-        assertTrue(svgString.contains("<title>User Feedback. Number of feedbacks 3. Average rating: 3 (2 ratings).</title>"));
+        // using 3.1 model, nothing there anymore
+        assertTrue(svgString.contains("Number of feedbacks: 0. Average rating: 0 (0 ratings).</title>"));
     }
 
     @Test
     public void testCreateGeoLabelMetadataUrl() throws IOException {
-        InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(this.gvqExample).getSVG();
+        InputStream svg = this.requestBuilder.setMetadataDocument(this.gvqExample).getSVG();
         String svgString = IOUtils.toString(svg);
 
         assertTrue("organization", svgString.contains("Animal and Plant Biology and Ecology Department"));
-        assertTrue(svgString.contains("<title>Standards Compliance. Standard name: ISO 19115:2003/19139, version 1.0.</title>"));
-        assertTrue("ensure has no feedback info", svgString.contains("<title>User Feedback</title>"));
+        assertTrue(svgString.contains("<title>Standards Compliance"));
+        assertTrue("ensure has no feedback info", svgString.contains("Number of feedbacks: 0."));
     }
 
     @Test
     public void testCreateGeoLabelMetadataUrlAndFeedbackStream() throws IOException {
-        InputStream feedbackStream = getClass().getResourceAsStream("GVQ_Feedback_All_Available.xml");
+        InputStream feedbackStream = getClass().getResourceAsStream("/3.1/GVQ_Feedback_All_Available.xml");
 
-        InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(this.gvqExample).setFeedbackDocument(feedbackStream).getSVG();
+        InputStream svg = this.requestBuilder.setMetadataDocument(this.gvqExample).setFeedbackDocument(feedbackStream).getSVG();
         String svgString = IOUtils.toString(svg);
 
-        assertTrue(svgString.contains("<title>User Feedback. Number of feedbacks 3. Average rating: 3 (2 ratings).</title>"));
+        // using 3.1 model, nothing there anymore
+        assertTrue(svgString.contains("<title>User Feedback"));
+        assertTrue(svgString.contains("Number of feedbacks: 0. Average rating: 0 (0 ratings)."));
     }
 
     @Test
     public void testCreateGeoLabelMetadataUrlCache() throws IOException {
-        GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(this.gvqExample).setUseCache(true).getSVG();
+        this.requestBuilder.setMetadataDocument(this.gvqExample).setUseCache(true).getSVG();
 
         assertTrue(GeoLabelCache.hasSVG(this.gvqExample));
 
-        InputStream svg = GeoLabelClientV1.createGeoLabelRequest().setMetadataDocument(this.gvqExample).setUseCache(true).getSVG();
+        InputStream svg = GeoLabelClientV1.createGeoLabelRequest(serviceUrl).setMetadataDocument(this.gvqExample).setUseCache(true).getSVG();
         String svgString = IOUtils.toString(svg);
 
         assertTrue("organization", svgString.contains("Animal and Plant Biology and Ecology Department"));
-        assertTrue(svgString.contains("<title>Standards Compliance. Standard name: ISO 19115:2003/19139, version 1.0.</title>"));
-        assertTrue("ensure has no feedback info", svgString.contains("<title>User Feedback</title>"));
+        assertTrue(svgString.contains("<title>Standards Compliance"));
+        // 52N server only:
+        // assertTrue("no error", !svgString.contains("id=\"error_group\" "));
+        assertTrue("ensure has no feedback info", svgString.contains("Number of feedbacks: 0."));
     }
 
     @Test
     public void testCreateGeoLabelNoContent() {
         try {
-            GeoLabelClientV1.createGeoLabelRequest().getSVG();
+            this.requestBuilder.getSVG();
             fail("Server should send error code");
         }
         catch (IOException e) {
