@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.5</version>
 	</parent>
 
 	<properties>
@@ -78,7 +78,7 @@
 					<excludes>
 						<exclude>**/logback.xml</exclude>
 						<exclude>**/logback-test.xml</exclude>
-						<exclude>src/test/resources/testfiles/**</exclude>
+						<exclude>src/test/resources/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
