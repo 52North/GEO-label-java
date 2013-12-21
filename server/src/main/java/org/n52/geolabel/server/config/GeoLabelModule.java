@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.n52.geolabel.formats.PngEncoder;
 import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
@@ -26,6 +27,7 @@ import org.n52.geolabel.server.mapping.MetadataTransformer;
 import org.n52.geolabel.server.resources.ApiResource;
 import org.n52.geolabel.server.resources.CacheResourceV1;
 import org.n52.geolabel.server.resources.LMLResourceV1;
+import org.n52.geolabel.server.resources.PNGResourceV1;
 import org.n52.geolabel.server.resources.SVGResourceV1;
 import org.n52.geolabel.server.resources.StaticLabelResourceV1;
 import org.n52.geolabel.server.resources.TransformationsResourceV1;
@@ -40,6 +42,7 @@ public class GeoLabelModule extends JerseyServletModule {
     protected void configureServlets() {
         bind(LMLResourceV1.class);
         bind(SVGResourceV1.class);
+        bind(PNGResourceV1.class);
         bind(StaticLabelResourceV1.class);
         bind(TransformationsResourceV1.class);
         bind(CacheResourceV1.class);
@@ -53,6 +56,7 @@ public class GeoLabelModule extends JerseyServletModule {
         bind(TransformationDescriptionResources.class);
 
         bind(MetadataTransformer.class);
+        bind(PngEncoder.class);
 
         Map<String, String> jerseyInitPrams = new HashMap<>();
         jerseyInitPrams.put(ServletContainer.FEATURE_FILTER_FORWARD_ON_404, "true");

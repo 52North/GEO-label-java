@@ -19,6 +19,7 @@
 		<module>client</module>
 		<module>commons</module>
 		<module>jsf</module>
+		<module>formats</module>
 	</modules>
 
 	<organization>
