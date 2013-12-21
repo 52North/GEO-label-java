@@ -27,9 +27,9 @@
 
 <svg version="1.1"
 	xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="${size}"	height="${size}" id="${id!""}">
+	width="${size}" height="${size}" id="${id!"NA"}">
 		
-	
+	<svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 ${size} ${size}">
 
 	<#escape x as x?xml>
 
@@ -522,3 +522,5 @@
 	</#escape>  
 	
 	</svg>
+	
+</svg>

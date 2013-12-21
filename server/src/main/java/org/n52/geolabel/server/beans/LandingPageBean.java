@@ -68,6 +68,8 @@ public class LandingPageBean {
     private List<Example> examplesList = new ArrayList<>();
 
     public LandingPageBean() {
+        this.examplesList.add(new Example("DAB-Q",
+                                          "http://geoviqua.essi-lab.eu/dabq-demo/services/cswisoq?service=CSW&request=GetRecordById&id=mtri2an1ib&outputschema=http://www.geoviqua.org/QualityInformationModel/4.0&elementSetName=full"));
         this.examplesList.add(new Example("GLC 2000",
                                           "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/GLC_2000_GVQ_raw.xml"));
         this.examplesList.add(new Example("Feedback Use Case",
