@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>GEO label testing</title>
+<title>GEO label resizing test</title>
 </head>
 <body>
 	<h1>resize SVG in wrapping html page</h1>
@@ -10,14 +10,21 @@
 	<p>Test if the preserveAspectRatio and viewport allow resizing in html
 	object tag:</p>
 
-	<h2>localhost</h2>
+	<h2>fixed svg</h2>
 	<div>
 		<object style="width: 142px;"
-			data="http://localhost:8080/glbservice/api/v1/svg?metadata=http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml&size=400"></object>
+			data="http://geoviqua.dev.52north.org/glbservice-dev/api/v1/svg?metadata=http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml&size=400"></object>
 	</div>
 	
-	<p>works if the size attribute is not set in svg</p>
-
+	<p>solution: nest svg and make the inner preserve the aspect ratio</p>
+	<code>
+		<svg version="1.1"
+	xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="${size}" height="${size}" id="${id!"NA"}">
+		
+	<svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 ${size} ${size}">
+	</code>
+	
 	<h2>online (not updated at test time)</h2>
 	<div>
 		<object style="width: 142px;"
