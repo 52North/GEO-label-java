@@ -15,32 +15,43 @@
  */
 package org.n52.geolabel.server.resources;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.ws.WebServiceException;
 
+import org.apache.commons.io.IOUtils;
 import org.n52.geolabel.server.config.TransformationDescriptionLoader;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
 import org.n52.geolabel.server.config.TransformationDescriptionResources.Source;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.inject.servlet.SessionScoped;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("/v1/transformations")
 @Api(value = "/v1/transformations", description = "Access to the transformation rules used to generate a label")
-@Singleton
+@SessionScoped
 public class TransformationsResourceV1 {
 
     protected static final Logger log = LoggerFactory.getLogger(TransformationsResourceV1.class);
@@ -50,7 +61,7 @@ public class TransformationsResourceV1 {
 
         public String url;
 
-        public String fallback;
+        private String fallback;
 
         public String used;
 
@@ -79,6 +90,14 @@ public class TransformationsResourceV1 {
             builder.append("]");
             return builder.toString();
         }
+
+        public String getFallback() {
+            return this.fallback;
+        }
+
+        public void setFallback(String fallback) {
+            this.fallback = fallback;
+        }
     }
 
     @XmlRootElement(name = "transformations")
@@ -91,11 +110,16 @@ public class TransformationsResourceV1 {
             //
         }
 
-        public TransformationsHolder(Map<URL, String> transformationDescriptionResources, Map<URL, Source> usedSources) {
+        public TransformationsHolder(UriInfo uri,
+                                     Map<URL, String> transformationDescriptionResources,
+                                     Map<URL, Source> usedSources) {
             for (Entry<URL, String> entry : transformationDescriptionResources.entrySet()) {
                 Transformation t = new Transformation();
                 t.url = entry.getKey().toString();
-                t.fallback = entry.getValue();
+
+                URI fallbackUrl = getUriToFallbackFile(uri, entry.getValue());
+                t.setFallback(fallbackUrl.toString());
+
                 Source source = usedSources.get(entry.getKey());
                 t.used = (source == null) ? Source.NA.toString() : source.toString();
 
@@ -104,26 +128,82 @@ public class TransformationsResourceV1 {
             }
         }
 
+        private URI getUriToFallbackFile(UriInfo uri, String fallback) {
+            String id = getFallbackFileId(fallback);
+            URI fallbackUri = uri.getRequestUriBuilder().path(id).build();
+            return fallbackUri;
+        }
+
 	}
 
     private TransformationDescriptionLoader loader;
 
     private TransformationDescriptionResources resources;
 
+    private UriInfo uri;
+
 	@Inject
-    public TransformationsResourceV1(TransformationDescriptionResources resources,
+    public TransformationsResourceV1(@Context
+    UriInfo uri, TransformationDescriptionResources resources,
                                      TransformationDescriptionLoader loader) {
+        this.uri = uri;
         this.resources = resources;
         this.loader = loader;
 	}
 
+    protected static String getFallbackFileId(final String fallback) {
+        return fallback.substring(fallback.lastIndexOf("/") + 1, fallback.length());
+    }
+
 	@GET
+    @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Returns a list of used transformations")
-    public TransformationsHolder getTransformationsInfo() {
-        TransformationsHolder holder = new TransformationsHolder(this.resources.getResources(),
+    public Response getTransformationsInfo(@PathParam("id")
+    String id) {
+        Collection<String> res = this.resources.getResources().values();
+        String path = null;
+        for (String r : res) {
+            String name = getFallbackFileId(r);
+            if (name.equals(id))
+                path = r;
+        }
+
+        if (path != null) {
+            InputStream input = getClass().getResourceAsStream(path);
+            try {
+                String s = IOUtils.toString(input);
+                return Response.ok(s).build();
+            }
+            catch (IOException e) {
+                throw new WebServiceException(e);
+            }
+        }
+
+        return Response.ok().status(Status.NOT_FOUND).build();
+    }
+
+    private ArrayList<String> getLocalResourcesNames() {
+        Collection<String> res = this.resources.getResources().values();
+        ArrayList<String> names = new ArrayList<>();
+        for (String r : res) {
+            String name = getFallbackFileId(r);
+            names.add(name);
+        }
+        return names;
+    }
+
+    @GET
+    @Path("/")
+    @Produces({MediaType.APPLICATION_JSON})
+    @ApiOperation(value = "Returns a list of used transformations")
+    public Response getTransformationsInfo() {
+        TransformationsHolder holder = new TransformationsHolder(this.uri,
+                                                                 this.resources.getResources(),
                                                                  this.loader.getUsedSources());
 
-        return holder;
-	}
+        return Response.ok().entity(holder).build();
+
+    }
+
 }

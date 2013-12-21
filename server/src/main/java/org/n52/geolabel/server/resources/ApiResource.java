@@ -92,6 +92,12 @@ public class ApiResource {
         sb.append("\"");
         sb.append(",");
 
+        sb.append("\"transformations\" : \"");
+        sb.append(this.baseUri);
+        sb.append("v1/transformations");
+        sb.append("\"");
+        sb.append(",");
+
         sb.append("\"lml-label-generation\" : \"");
         sb.append(this.baseUri);
         sb.append("v1/lml");
