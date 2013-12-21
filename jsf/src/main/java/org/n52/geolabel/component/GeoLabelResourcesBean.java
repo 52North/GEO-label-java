@@ -28,10 +28,10 @@ public class GeoLabelResourcesBean {
 
     private boolean resourcesAdded = false;
     private boolean geoLabelServiceFailed = false;
-    private Set<String> failedEndpoints = new HashSet<String>();
+    private Set<String> failedEndpoints = new HashSet<>();
 
     public boolean isResourcesAdded() {
-        return resourcesAdded;
+        return this.resourcesAdded;
     }
 
     public void setResourcesAdded(boolean resourcesAdded) {
@@ -39,14 +39,13 @@ public class GeoLabelResourcesBean {
     }
 
     public boolean isGeoLabelServiceFailed() {
-        return geoLabelServiceFailed;
+        return this.geoLabelServiceFailed;
     }
 
     public void setGeoLabelServiceFailed(boolean geoLabelServiceFailed) {
         this.geoLabelServiceFailed = geoLabelServiceFailed;
-        if ( !geoLabelServiceFailed) {
+        if ( !geoLabelServiceFailed)
             this.failedEndpoints.clear();
-        }
     }
 
     public void setGeoLabelServiceFailed(String endpoint) {
@@ -55,6 +54,6 @@ public class GeoLabelResourcesBean {
     }
 
     public boolean isGeoLabelServiceFailed(String endpoint) {
-        return failedEndpoints.contains(endpoint);
+        return this.failedEndpoints.contains(endpoint);
     }
 }
