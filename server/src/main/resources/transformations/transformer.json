@@ -36,10 +36,12 @@
                "availabilityPath":"boolean(normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation'] | //*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem'])))",
                "hoverover":{
                   "facetName":"Producer Comments",
-                  "template":"Supplemental information: %s. Known problems: %s.",
+                  "template":"Supplemental information: %s. %sFirst of %s known issues: %s.",
                   "text":{
-                     "supplementalInformation":"normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation']))",
-                     "knownProblemsPath":"normalize-space(string(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem']))"
+                    "supplementalInformationPath":"normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation']))",
+					"EOL":"\n",
+					"knownProblemsCountPath":"count(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem'])",
+					"knownProblemsPath":"normalize-space(string(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem']))"
                   }
                },
                "drilldown":{
@@ -49,7 +51,7 @@
          },
          {
             "lineage":{
-               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='trace']/*[local-name()='LI_Lineage']/*[local-name()='processStep'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='statement'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='processStep'])))",
+               "availabilityPath":"boolean(normalize-space(string(//*[local-name()='trace']/*[local-name()='LI_Lineage'] | //*[local-name()='trace']/*[local-name()='LI_Lineage']/*[local-name()='processStep'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='statement'] | //*[local-name()='lineage']/*[local-name()='LI_Lineage']/*[local-name()='processStep'])))",
                "hoverover":{
                   "facetName":"Lineage Information",
                   "template":"Number of process steps: %d.",
@@ -58,7 +60,7 @@
                   }
                },
                "drilldown":{
-                  "url":"%s?metadata=%s&facet=lineage"
+                  "url":"%s?metadata=%s&facet=lineage_information"
                }
             }
          },
@@ -129,7 +131,7 @@
          },
          {
             "citations":{
-               "availabilityPath":"boolean(number(count(//*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'] | //*[local-name()='identificationInfo']/*[local-name()='GVQ_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='discoveredIssue']/*[local-name()='GVQ_DiscoveredIssue']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'])) + number(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']))",
+               "availabilityPath":"boolean(number(number(count(//*[local-name()='LI_Lineage']/*[local-name()='processStep']//*[local-name()='sourceCitation']/*[local-name()='CI_Citation'] | //*[local-name()='identificationInfo']/*[local-name()='GVQ_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='identificationInfo']/*[local-name()='MD_DataIdentification']/*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='dataQualityInfo']/*[local-name()='GVQ_DataQuality']/*[local-name()='report']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'] | //*[local-name()='discoveredIssue']/*[local-name()='GVQ_DiscoveredIssue']//*[local-name()='referenceDoc']/*[local-name()='GVQ_Publication'])) + number(concat(substring(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']/text(), 1 div boolean(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']/text())), substring('0', 1 div not(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='numberOfPublications']/text()))))))",
                "hoverover":{
                   "facetName":"Citations Information",
                   "template":"Number of citations: %d.",
