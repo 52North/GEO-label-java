@@ -21,10 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -45,6 +42,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+import com.google.inject.name.Named;
 
 @Singleton
 public class TransformationDescriptionLoader {
@@ -55,14 +53,20 @@ public class TransformationDescriptionLoader {
 
     private ObjectMapper mapper;
 
+    private boolean useLocalOnly;
+
     private static Set<TransformationDescription> descriptions;
 
     private static Map<URL, Source> transformationDescriptionUsedSource = new HashMap<>();
 
     @Inject
-    public TransformationDescriptionLoader(TransformationDescriptionResources resources, ObjectMapper mapper) {
+    public TransformationDescriptionLoader(TransformationDescriptionResources resources,
+                                           ObjectMapper mapper,
+                                           @Named("transformer.useLocalOnly")
+                                           boolean useLocalOnly) {
         this.resources = resources;
         this.mapper = mapper;
+        this.useLocalOnly = useLocalOnly;
     }
 
     private TransformationDescription readTransformationDescription(InputStream input) throws IOException {
@@ -101,45 +105,65 @@ public class TransformationDescriptionLoader {
         return readTransformationDescription(new FileInputStream(descriptionFile));
     }
 
-    /**
-     * Reads {@link TransformationDescription}s from resources based on all files in a specified folder.
-     *
-     */
-    @Deprecated
-    public void loadLocal(String folder) throws IOException {
-        Enumeration<URL> descriptionResources = getClass().getClassLoader().getResources(folder);
-
-        while (descriptionResources.hasMoreElements()) {
-            URL element = descriptionResources.nextElement();
-            log.debug("Loading local mapping:  {}", element);
-
-            try {
-                URI descriptionResourceURI = element.toURI();
-                File descriptionResourceFile = new File(descriptionResourceURI);
-                for (File descriptionFile : descriptionResourceFile.listFiles())
-                    try {
-                        log.debug("Loading transformation description: {}", descriptionFile);
-                        // String fileExtension = Files.getFileExtension(descriptionFile.getName());
-                        readTransformationDescription(descriptionFile);
-                    }
-                    catch (IOException e) {
-                        log.error("Could not read transformation description " + descriptionFile.getName() + ".", e);
-                    }
-            }
-            catch (URISyntaxException e) {
-                log.error("Could not read transformation description.", e);
-            }
-        }
-    }
-
     public Set<TransformationDescription> load() {
         if (descriptions == null)
-            descriptions = internalLoad(this.resources);
+            if (this.useLocalOnly)
+                descriptions = loadLocal(this.resources);
+            else
+                descriptions = loadWithFallback(this.resources);
 
         return descriptions;
     }
 
-    private Set<TransformationDescription> internalLoad(final TransformationDescriptionResources res) {
+    private Set<TransformationDescription> loadLocal(final TransformationDescriptionResources res) {
+        log.info("Loading resources _locally only_ from {}", res);
+
+        final Set<TransformationDescription> ds = new HashSet<>();
+
+        Set<Entry<URL, String>> entrySet = this.resources.getResources().entrySet();
+        for (Entry<URL, String> entry : entrySet) {
+            log.debug("Loading transformation description from fallback {}", entry.getValue());
+
+            TransformationDescription td = null;
+            log.debug("Using fallback {} for URL {}", entry.getValue(), entry.getKey());
+            InputStream stream = getClass().getResourceAsStream(entry.getValue());
+
+            try {
+                td = readTransformationDescription(stream);
+                log.debug("Loaded transformation description from {} ", entry.getValue());
+                setUsedSource(entry.getKey(), Source.FALLBACK);
+            }
+            catch (IOException e) {
+                log.error("There was a problem loading transformation description from {}: {} : {}",
+                          entry.getValue(),
+                          e.getClass(),
+                          e.getMessage());
+            }
+
+            if (td != null) {
+                ds.add(td);
+                log.debug("Read transformation description: {}", td);
+            }
+            else
+                log.error("Could load neither from URL nor fallback!");
+        }
+
+        // init desriptions
+        for (TransformationDescription td : ds)
+            try {
+                td.initXPaths();
+                log.debug("Added description: {}", td);
+            }
+            catch (XPathExpressionException e) {
+                log.error("Error while compiling XPaths in tranformation description {}", td, e);
+            }
+
+        log.debug("Loaded {} transformation descriptions with the names {}", Integer.valueOf(ds.size()), getNames(ds));
+
+        return ds;
+    }
+
+    private Set<TransformationDescription> loadWithFallback(final TransformationDescriptionResources res) {
         log.info("Loading resources from {}", res);
 
         final Set<TransformationDescription> ds = new HashSet<>();
@@ -237,6 +261,5 @@ public class TransformationDescriptionLoader {
         builder.append("]");
         return builder.toString();
     }
-
 
 }

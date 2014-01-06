@@ -44,7 +44,7 @@ public class MetadataTransformerTest_40 {
 
     public static MetadataTransformer newMetadataTransformer() {
         TransformationDescriptionResources res = new TransformationDescriptionResources();
-        return new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res)));
+        return new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res), false));
     }
 
     private class LabelControlHolder {
@@ -185,7 +185,7 @@ public class MetadataTransformerTest_40 {
     @Test
     public void testLabelUrlKey() throws IOException {
         TransformationDescriptionResources res = new TransformationDescriptionResources();
-        new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res))) {
+        new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res), false)) {
             {
                 URL testURL1 = new URL("http://test1.resource1");
                 URL testURL2 = new URL("http://test2.resource2");

@@ -85,7 +85,7 @@ public class TransformationDescriptionTest {
     @Before
     public void instantiateLoader() {
         TransformationDescriptionResources res = new TransformationDescriptionResources();
-        this.loader = new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res));
+        this.loader = new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res), false);
     }
 
     @SuppressWarnings("boxing")

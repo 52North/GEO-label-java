@@ -183,16 +183,6 @@ public class TransformationsResourceV1 {
         return Response.ok().status(Status.NOT_FOUND).build();
     }
 
-    private ArrayList<String> getLocalResourcesNames() {
-        Collection<String> res = this.resources.getResources().values();
-        ArrayList<String> names = new ArrayList<>();
-        for (String r : res) {
-            String name = getFallbackFileId(r);
-            names.add(name);
-        }
-        return names;
-    }
-
     @GET
     @Path("/")
     @Produces({MediaType.APPLICATION_JSON})
