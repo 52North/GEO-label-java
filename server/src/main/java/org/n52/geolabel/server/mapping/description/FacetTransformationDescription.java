@@ -334,11 +334,18 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         if (this.availabilityPath != null)
             this.availabilityExpression = xPath.compile(this.availabilityPath);
 
-        for (Entry<String, String> e : this.hoverover.getText().entrySet()) {
-            XPathExpression expression = xPath.compile(e.getValue());
-            log.debug("Storing expression {} for {}", expression, e.getKey());
-            this.hoveroverExpressions.put(e.getKey(), expression);
-        }
+        for (Entry<String, String> e : this.hoverover.getText().entrySet())
+            if (e.getValue() != null // is not null
+                    && !e.getValue().trim().isEmpty() // is not an empty string or a new line (\n)
+            ) {
+
+                log.debug("Creating expression from {}", e);
+                XPathExpression expression = xPath.compile(e.getValue());
+                log.debug("Storing expression {} for {}", expression, e.getKey());
+                this.hoveroverExpressions.put(e.getKey(), expression);
+            }
+            else
+                log.warn("Got empty expression '{}' with name {}", e.getValue(), e.getKey());
     }
 
     private T updateDrilldownUrl(T facet, URL metadataOrFeedbackUrl) {
