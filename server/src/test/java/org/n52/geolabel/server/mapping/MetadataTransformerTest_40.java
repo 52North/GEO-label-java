@@ -43,7 +43,7 @@ import org.n52.geolabel.server.config.TransformationDescriptionResources;
 public class MetadataTransformerTest_40 {
 
     public static MetadataTransformer newMetadataTransformer() {
-        TransformationDescriptionResources res = new TransformationDescriptionResources();
+        TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json,http://geoviqua.github.io/geolabel/mappings/transformerSML10.json=/transformations/transformerSML10.json");
         return new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res), false));
     }
 
@@ -184,7 +184,7 @@ public class MetadataTransformerTest_40 {
     @SuppressWarnings("unused")
     @Test
     public void testLabelUrlKey() throws IOException {
-        TransformationDescriptionResources res = new TransformationDescriptionResources();
+        TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json");
         new MetadataTransformer(new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res), false)) {
             {
                 URL testURL1 = new URL("http://test1.resource1");

@@ -1,7 +1,7 @@
 {
    "transformationDescription":{
-      "name":"transformer",
-      "applicabilityPath":"boolean('true')",
+      "name":"transformerSML10",
+      "applicabilityPath":"boolean(//*[local-name()='SensorML'][@version='1.0.1'])",
       "namespaceMappings":[
          {
             "prefix":"gmd",
@@ -14,6 +14,18 @@
          {
             "prefix":"gmd19157",
             "namespace":"http://www.geoviqua.org/gmd19157"
+         },
+         {
+            "prefix":"sml",
+            "namespace":"http://www.opengis.net/sensorML/1.0.1"
+         },
+         {
+            "prefix":"gml",
+            "namespace":"http://www.opengis.net/gml"
+         },
+         {
+            "prefix":"swe",
+            "namespace":"http://www.opengis.net/swe/1.0.1"
          }
       ],
       "facetDescriptions":[

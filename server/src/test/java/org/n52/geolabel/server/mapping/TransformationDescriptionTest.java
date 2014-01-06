@@ -22,10 +22,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -84,18 +80,13 @@ public class TransformationDescriptionTest {
 
     @Before
     public void instantiateLoader() {
-        TransformationDescriptionResources res = new TransformationDescriptionResources();
+        TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json");
         this.loader = new TransformationDescriptionLoader(res, new GeoLabelObjectMapper(res), false);
     }
 
     @SuppressWarnings("boxing")
     @Test
-    public void loadGvqJsonTransformationDescription() throws MalformedURLException {
-
-        Map<URL, String> resources = new HashMap<>();
-        resources.put(new URL("http://do.not.even.look/for/it"), "transformations/transformerGVQ.json");
-
-
+    public void loadGvqJsonTransformationDescription() {
         Set<TransformationDescription> tds = this.loader.load();
         TransformationDescription description = tds.iterator().next();
 
@@ -118,11 +109,7 @@ public class TransformationDescriptionTest {
 
     @SuppressWarnings("boxing")
     @Test
-    public void loadJsonTransformationDescription() throws MalformedURLException {
-
-        Map<URL, String> resources = new HashMap<>();
-        resources.put(new URL("http://do.not.even.look/for/it"), "/transformations/transformer.json");
-
+    public void loadJsonTransformationDescription() {
         Set<TransformationDescription> tds = this.loader.load();
         TransformationDescription description = tds.iterator().next();
 
@@ -152,7 +139,7 @@ public class TransformationDescriptionTest {
         d.name = "testname";
 
         d.facetDescriptions = new FacetTransformationDescription< ? >[2];
-        CitationsFacetDescription cfd = new CitationsFacetDescription(new TransformationDescriptionResources());
+        CitationsFacetDescription cfd = new CitationsFacetDescription(new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json"));
         cfd.setCitationsCountPath("/test/path");
         d.facetDescriptions[0] = cfd;
 

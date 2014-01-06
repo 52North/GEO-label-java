@@ -158,7 +158,7 @@ public class TransformationDescriptionLoader {
                 log.error("Error while compiling XPaths in tranformation description {}", td, e);
             }
 
-        log.debug("Loaded {} transformation descriptions with the names {}", Integer.valueOf(ds.size()), getNames(ds));
+        log.debug("Loaded {} transformation descriptions: {}", Integer.valueOf(ds.size()), getNames(ds));
 
         return ds;
     }
@@ -199,6 +199,7 @@ public class TransformationDescriptionLoader {
                 try {
                     td = readTransformationDescription(stream);
                     log.debug("Loaded transformation description from {} ", entry.getValue());
+
                     setUsedSource(entry.getKey(), Source.FALLBACK);
                 }
                 catch (IOException e) {

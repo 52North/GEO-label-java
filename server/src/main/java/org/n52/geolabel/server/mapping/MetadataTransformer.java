@@ -60,7 +60,6 @@ public class MetadataTransformer {
      * Acts as key for caching {@link Label}s based on its metadata and/or feedback source. Since
      * metadata/feedback sources are handled equally, all combinations of equal metadata/feedback source urls
      * are identical.
-     *
      */
     @XmlRootElement(name = "CacheMapping")
     public static class LabelUrlKey {
