@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.1" xsi:schemaLocation="http://www.opengis.net/sensorML/1.0.1 http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/gml.xsd http://www.opengis.net/swe/1.0.1 http://schemas.opengis.net/sweCommon/1.0.1/swe.xsd">
+	<sml:member>
+		<sml:System>
+			<gml:description>This ELV WS2500 instance is operated and
+								maintained by 52°North at the office location on a balcony in
+								the first floor. So, please do not use the observed data for
+								important processes. The station is used to test, demonstrate,
+								and develop sensor web technology in terms of data gathering,
+								processing, storing, and visualization. Feel free to use it but
+								get in touch with us, if you are going to request data on a
+								regular basis which might cause performance issues. Contact
+								information are contained in this document in "./sml:contact".
+							</gml:description>
+			<sml:keywords>
+				<sml:KeywordList>
+					<sml:keyword>http://geoviqua.dev.52north.org/stations/ELV-WS2500
+									</sml:keyword>
+					<sml:keyword>AirTemperature</sml:keyword>
+					<sml:keyword>Sunshine</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Windchill
+									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Sunshine
+									</sml:keyword>
+					<sml:keyword>Humidity</sml:keyword>
+					<sml:keyword>52n-elv-ws2500</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Humidity
+									</sml:keyword>
+					<sml:keyword>RainfallAccumulated</sml:keyword>
+					<sml:keyword>WindSpeed</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Luminance
+									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/WindDirection
+									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/RainfallAccumulated
+									</sml:keyword>
+					<sml:keyword>Windchill</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/AirTemperature
+									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/WindSpeed
+									</sml:keyword>
+					<sml:keyword>Luminance</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Dewpoint
+									</sml:keyword>
+					<sml:keyword>WindDirection</sml:keyword>
+					<sml:keyword>Dewpoint</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/AthmosphericPressure
+									</sml:keyword>
+					<sml:keyword>AthmosphericPressure</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/procedures/ws2500
+									</sml:keyword>
+					<sml:keyword>52North ELV WS2500 Home Weather Station
+									</sml:keyword>
+				</sml:KeywordList>
+			</sml:keywords>
+			<sml:identification>
+				<sml:IdentifierList>
+					<sml:identifier name="uniqueID">
+						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
+							<sml:value>http://geoviqua.dev.52north.org/procedures/ws2500
+											</sml:value>
+						</sml:Term>
+					</sml:identifier>
+					<sml:identifier name="longName">
+						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+							<sml:value>52North ELV WS2500 Home Weather Station
+											</sml:value>
+						</sml:Term>
+					</sml:identifier>
+					<sml:identifier name="shortName">
+						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
+							<sml:value>52n-elv-ws2500</sml:value>
+						</sml:Term>
+					</sml:identifier>
+				</sml:IdentifierList>
+			</sml:identification>
+			<sml:classification>
+				<sml:ClassifierList>
+					<sml:classifier name="intendedApplication">
+						<sml:Term definition="urn:ogc:def:classifier:OGC:1.0:application">
+							<sml:value>Weather</sml:value>
+						</sml:Term>
+					</sml:classifier>
+					<sml:classifier name="sensorType">
+						<sml:Term definition="urn:ogc:def:classifier:OGC:1.0:sensorType">
+							<sml:value>weather station</sml:value>
+						</sml:Term>
+					</sml:classifier>
+				</sml:ClassifierList>
+			</sml:classification>
+			<sml:validTime>
+				<gml:TimePeriod>
+					<gml:beginPosition>2013-10-08T15:45:45.839Z</gml:beginPosition>
+					<gml:endPosition indeterminatePosition="unknown"/>
+				</gml:TimePeriod>
+			</sml:validTime>
+			<sml:capabilities name="offerings">
+				<swe:SimpleDataRecord>
+					<swe:field name="Offering for ELV WS2500 @ 52N office">
+						<swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+							<swe:value>http://geoviqua.dev.52north.org/procedures/ws2500
+											</swe:value>
+						</swe:Text>
+					</swe:field>
+				</swe:SimpleDataRecord>
+			</sml:capabilities>
+			<sml:capabilities name="status">
+				<swe:DataRecord>
+					<swe:field name="status">
+						<swe:Boolean>
+							<swe:value>true</swe:value>
+						</swe:Boolean>
+					</swe:field>
+				</swe:DataRecord>
+			</sml:capabilities>
+			<sml:capabilities name="observedBBOX">
+				<swe:DataRecord>
+					<swe:field name="observedBBOX">
+						<swe:Envelope referenceFrame="0">
+							<swe:lowerCorner>
+								<swe:Vector>
+									<swe:coordinate name="easting">
+										<swe:Quantity axisID="x">
+											<swe:uom code="degree"/>
+											<swe:value>7.652428</swe:value>
+										</swe:Quantity>
+									</swe:coordinate>
+									<swe:coordinate name="northing">
+										<swe:Quantity axisID="y">
+											<swe:uom code="degree"/>
+											<swe:value>7.652099609375</swe:value>
+										</swe:Quantity>
+									</swe:coordinate>
+								</swe:Vector>
+							</swe:lowerCorner>
+							<swe:upperCorner>
+								<swe:Vector>
+									<swe:coordinate name="easting">
+										<swe:Quantity axisID="x">
+											<swe:uom code="degree"/>
+											<swe:value>51.93501281738281</swe:value>
+										</swe:Quantity>
+									</swe:coordinate>
+									<swe:coordinate name="northing">
+										<swe:Quantity axisID="y">
+											<swe:uom code="degree"/>
+											<swe:value>51.934813</swe:value>
+										</swe:Quantity>
+									</swe:coordinate>
+								</swe:Vector>
+							</swe:upperCorner>
+						</swe:Envelope>
+					</swe:field>
+				</swe:DataRecord>
+			</sml:capabilities>
+			<sml:capabilities name="featuresOfInterest">
+				<swe:SimpleDataRecord>
+					<swe:field name="featureOfInterestID">
+						<swe:Text definition="http://www.opengis.net/def/featureOfInterest/identifier">
+							<swe:value>http://geoviqua.dev.52north.org/stations/ELV-WS2500
+											</swe:value>
+						</swe:Text>
+					</swe:field>
+				</swe:SimpleDataRecord>
+			</sml:capabilities>
+			<sml:contact>
+				<sml:ResponsibleParty>
+					<sml:individualName>Jürrens, Eike Hinderk</sml:individualName>
+					<sml:organizationName>52°North</sml:organizationName>
+					<sml:positionName>Station Maintainer, Software Developer
+									</sml:positionName>
+					<sml:contactInfo>
+						<sml:phone>
+							<sml:voice>+49 251 / 39 63 71 33</sml:voice>
+						</sml:phone>
+						<sml:address>
+							<sml:deliveryPoint>Martin-Luther-King-Weg 24
+											</sml:deliveryPoint>
+							<sml:city>Münster</sml:city>
+							<sml:postalCode>48155</sml:postalCode>
+							<sml:country>Germany</sml:country>
+							<sml:electronicMailAddress>e.h.juerrens@52north.org
+											</sml:electronicMailAddress>
+						</sml:address>
+					</sml:contactInfo>
+				</sml:ResponsibleParty>
+			</sml:contact>
+			<sml:contact>
+				<sml:ContactList>
+					<sml:member>
+						<sml:ResponsibleParty>
+							<sml:individualName>Jürrens, Eike Hinderk
+											</sml:individualName>
+							<sml:organizationName>52°North</sml:organizationName>
+							<sml:positionName>Station Maintainer, Software Developer
+											</sml:positionName>
+							<sml:contactInfo>
+								<sml:phone>
+									<sml:voice>+49 251 / 39 63 71 33</sml:voice>
+								</sml:phone>
+								<sml:address>
+									<sml:deliveryPoint>Martin-Luther-King-Weg 24
+													</sml:deliveryPoint>
+									<sml:city>Münster</sml:city>
+									<sml:postalCode>48155</sml:postalCode>
+									<sml:country>Germany</sml:country>
+								</sml:address>
+							</sml:contactInfo>
+						</sml:ResponsibleParty>
+					</sml:member>
+				</sml:ContactList>
+			</sml:contact>
+			<sml:position name="sensorPosition">
+				<swe:Position fixed="false" referenceFrame="urn:ogc:def:crs:EPSG::urn:ogc:def:crs:EPSG::4979">
+					<swe:location>
+						<swe:Vector>
+							<swe:coordinate name="easting">
+								<swe:Quantity axisID="x">
+									<swe:uom code="deg"/>
+									<swe:value>7.652428</swe:value>
+								</swe:Quantity>
+							</swe:coordinate>
+							<swe:coordinate name="northing">
+								<swe:Quantity axisID="y">
+									<swe:uom code="deg"/>
+									<swe:value>51.934813</swe:value>
+								</swe:Quantity>
+							</swe:coordinate>
+							<swe:coordinate name="altitude">
+								<swe:Quantity axisID="z">
+									<swe:uom code="meters"/>
+									<swe:value>60.0</swe:value>
+								</swe:Quantity>
+							</swe:coordinate>
+						</swe:Vector>
+					</swe:location>
+				</swe:Position>
+			</sml:position>
+			<sml:inputs>
+				<sml:InputList>
+					<sml:input name="Humidity">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Humidity"/>
+					</sml:input>
+					<sml:input name="AthmosphericPressure">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/AthmosphericPressure"/>
+					</sml:input>
+					<sml:input name="AirTemperature">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/AirTemperature"/>
+					</sml:input>
+					<sml:input name="RainfallAccumulated">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/RainfallAccumulated"/>
+					</sml:input>
+					<sml:input name="WindSpeed">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/WindSpeed"/>
+					</sml:input>
+					<sml:input name="WindDirection">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/WindDirection"/>
+					</sml:input>
+					<sml:input name="Sunshine">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Sunshine"/>
+					</sml:input>
+					<sml:input name="Luminance">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Luminance"/>
+					</sml:input>
+					<sml:input name="Windchill">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Windchill"/>
+					</sml:input>
+					<sml:input name="Dewpoint">
+						<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Dewpoint"/>
+					</sml:input>
+				</sml:InputList>
+			</sml:inputs>
+			<sml:outputs>
+				<sml:OutputList>
+					<sml:output name="AthmosphericPressure">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/AthmosphericPressure">
+							<swe:uom code="hPa"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="RainfallAccumulated">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/RainfallAccumulated">
+							<swe:uom code="l_m^2"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="WindSpeed">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/WindSpeed">
+							<swe:uom code="km_h"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="WindDirection">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/WindDirection">
+							<swe:uom code="deg"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="Sunshine">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Sunshine">
+							<swe:uom code="min"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="Luminance">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Luminance">
+							<swe:uom code="klux"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="Windchill">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Windchill">
+							<swe:uom code="degC"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="Humidity">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Humidity">
+							<swe:uom code="%"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="Dewpoint">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Dewpoint">
+							<swe:uom code="degC"/>
+						</swe:Quantity>
+					</sml:output>
+					<sml:output name="AirTemperature">
+						<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/AirTemperature">
+							<swe:uom code="degC"/>
+						</swe:Quantity>
+					</sml:output>
+				</sml:OutputList>
+			</sml:outputs>
+		</sml:System>
+		<sml:ProcessChain gml:id="TestChain">
+			<gml:description>A fake test chain.</gml:description>
+			<gml:name>Test Detector</gml:name>
+			<inputs>
+				<InputList>
+					<input name="inputValue">
+						<swe:Quantity/>
+					</input>
+				</InputList>
+			</inputs>
+			<outputs>
+				<OutputList>
+					<output name="newValue">
+						<swe:Quantity/>
+					</output>
+				</OutputList>
+			</outputs>
+			<parameters>
+				<ParameterList>
+					<parameter name="someParameter">
+						<swe:Boolean/>
+					</parameter>
+				</ParameterList>
+			</parameters>
+			<connections>
+				<ConnectionList>
+					<connection name="inputToStep1">
+						<Link>
+							<source ref="this/inputs/inputValue"/>
+							<destination ref="step1/inputs/inputValue"/>
+						</Link>
+					</connection>
+					<connection name="step1To2">
+						<Link>
+							<source ref="step1/outputs/newValue"/>
+							<destination ref="step2/inputs/inputValue"/>
+						</Link>
+					</connection>
+					<connection name="step2ToOut">
+						<Link>
+							<source ref="this/inputs/inputValue"/>
+							<destination ref="someOther/inputs/newValue"/>
+						</Link>
+					</connection>
+				</ConnectionList>
+			</connections>
+		</sml:ProcessChain>
+		<sml:history>
+			<sml:EventList>
+				<sml:member name="deployment" xlink:arcrole="urn:ogc:def:property:OGC:deployment">
+					<sml:Event>
+						<sml:date>1900-01-01T00:00:00Z</sml:date>
+						<gml:description>Deployment event</gml:description>
+						<sml:contact xlink:arcrole="operator" xlink:href="http://www.myCompany.com/bob.xml"/>
+						<sml:documentation xlink:arcrole="deploymentNotes">
+							<sml:Document>
+								<gml:description>deployment report</gml:description>
+								<sml:onlineResource xlink:href="http://www.myCompany.com/bobsNotes.pdf"/>
+							</sml:Document>
+						</sml:documentation>
+					</sml:Event>
+				</sml:member>
+			</sml:EventList>
+		</sml:history>
+	</sml:member>
+</sml:SensorML>

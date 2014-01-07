@@ -73,6 +73,12 @@ public class LandingPageBean {
         this.examplesList.add(new Example("Online Feedback Server",
                                           null,
                                           "http://geoviqua.stcorp.nl/devel/api/v1/feedback/collections/search?format=xml&target_code=mtri2an1ib&target_codespace=http://www.opengis.uab.cat"));
+        this.examplesList.add(new Example("Sensor Web label: sensor description",
+                                          "http://geoviqua.dev.52north.org/SOS-Q/sos/kvp?service=SOS&version=2.0.0&request=DescribeSensor&procedure=http://geoviqua.dev.52north.org/procedures/ws2500&procedureDescriptionFormat=http://www.opengis.net/sensorML/1.0.1",
+                                          "http://geoviqua.stcorp.nl/devel/api/v1/feedback/collections/search?format=xml&target_code=http://geoviqua.dev.52north.org/procedures/WXT520&target_codespace=http://geoviqua.dev.52north.org/SOS-Q/"));
+        this.examplesList.add(new Example("Sensor Web label: service description",
+                                          "http://geoviqua.dev.52north.org/SOS-Q/sos/kvp?service=SOS&request=GetCapabilities",
+                                          null));
         this.examplesList.add(new Example("GLC 2000",
                                           "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/GLC_2000_GVQ_raw.xml"));
         // this.examplesList.add(new Example("Feedback Use Case",

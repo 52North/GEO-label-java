@@ -143,7 +143,7 @@ public class TransformationDescription {
                     boolean value = Boolean.parseBoolean(textContent);
 
                     if ( !value) {
-                        log.debug("TransformationDescription {} is not usable for this document.", this.name);
+                        log.debug("TransformationDescription {} is NOT usable for this document.", this.name);
                         return false;
                     }
                 }
@@ -152,9 +152,9 @@ public class TransformationDescription {
                 log.error("Could not evaluate usability expression", e);
             }
 
-        log.debug("Applicapility tested with path {}, applying this transformation {}",
-                  this.applicabilityPath,
-                  this.name);
+        log.debug("TransformationDescription {} is usable for this document, tested with path {}",
+                  this.name,
+                  this.applicabilityPath);
         for (FacetTransformationDescription< ? > facetDescription : this.facetDescriptions)
             facetDescription.updateLabel(label, metadataXml);
 

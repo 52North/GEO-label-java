@@ -1,0 +1,54 @@
+{
+   "transformationDescription":{
+      "name":"transformerSOS20",
+      "applicabilityPath":"boolean(//*[local-name()='Capabilities'][@version='2.0.0']) and boolean(namespace-uri(/*[local-name()='Capabilities']) = 'http://www.opengis.net/sos/2.0')",
+      "namespaceMappings":[
+         {
+            "prefix":"sos",
+            "namespace":"http://www.opengis.net/sos/2.0"
+         },
+         {
+            "prefix":"ows",
+            "namespace":"http://www.opengis.net/ows/1.1"
+         },
+         {
+            "prefix":"xlink",
+            "namespace":"http://www.w3.org/1999/xlink"
+         }
+      ],
+      "facetDescriptions":[
+      	{
+            "producerProfile":{
+               "availabilityPath":"boolean(//*[local-name()='ServiceProvider'])",
+               "hoverover":{
+                  "facetName":"Producer Profile",
+                  "template":"Organisation name: %s. URL: %s",
+                  "text":{
+						"organizationNamePath":"normalize-space(string(//*[local-name()='ServiceProvider']/*[local-name()='ProviderName']))",
+						"orgUrlPath":"normalize-space(string(//*[local-name()='ServiceProvider']/*[local-name()='ProviderSite']/@xlink:href))"
+					}
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=producer_profile"
+               }
+            }
+         },
+         {
+            "standardsCompliance":{
+               "availabilityPath":"boolean(//*[local-name()='Capabilities'])",
+               "hoverover":{
+                  "facetName":"Standards Compliance",
+                  "template":"Standard name: %s, number of supported versions: %d.",
+                  "text":{
+                     "standardNamePath":"//*[local-name()='ServiceType']/text()",
+                     "standardVersion":"count(//*[local-name()='ServiceTypeVersion'])"
+                  }
+               },
+               "drilldown":{
+                  "url":"%s?metadata=%s&facet=standards_complaince"
+               }
+            }
+         }
+      ]
+   }
+}
