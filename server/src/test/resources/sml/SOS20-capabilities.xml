@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:Capabilities xmlns:sos="http://www.opengis.net/sos/2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ows="http://www.opengis.net/ows/1.1"
+	xmlns:xlink="http://www.w3.org/1999/xlink" version="2.0.0"
+	xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetCapabilities.xsd http://www.opengis.net/ows/1.1 http://schemas.opengis.net/ows/1.1.0/owsAll.xsd">
+	<ows:ServiceIdentification>
+		<ows:Title>52N SOS</ows:Title>
+		<ows:Abstract>52N SOS capbilities for testing</ows:Abstract>
+		<ows:ServiceType>OGC:SOS</ows:ServiceType>
+		<ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+		<ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+		<ows:Profile>http://www.opengis.net/extension/SOSDO/1.0/observationDeletion</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/categoryObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/countObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/geometryObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/measurement</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/textObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/truthObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/categoryObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/countObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/geometryObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/measurement</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingCurve</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingPoint</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingSurface</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/spatialSampling</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/textObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/truthObservation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/1.0/conf/core</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/1.0/conf/enhanced</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/core</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/daRetrieval</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/foiRetrieval</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/insertionCap</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/json</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/kvp-core</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsByIdRetrieval</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsInsertion</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/pox</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/rest</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultInsertion</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultRetrieval</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorDeletion</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorInsertion</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/soap</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/updateSensorDescription</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/core</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/general-encoding-rules</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/text-encoding-rules</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-block-components</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-record-components</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-simple-components</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-simple-encodings</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-block-components</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-record-components</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-simple-components</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-simple-encodings</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/uml-measurement-timeries-tvp-observation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/uml-timeseries-tvp-observation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-measurement-timeseries-tvp</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-timeseries-observation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-timeseries-tvp-observation</ows:Profile>
+		<ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-xml-rules</ows:Profile>
+		<ows:Fees>NONE</ows:Fees>
+		<ows:AccessConstraints>NONE</ows:AccessConstraints>
+	</ows:ServiceIdentification>
+	<ows:ServiceProvider>
+		<ows:ProviderName>52North</ows:ProviderName>
+		<ows:ProviderSite xlink:href="http://52north.org/swe" />
+		<ows:ServiceContact>
+			<ows:IndividualName>Lucy</ows:IndividualName>
+			<ows:PositionName>Dog</ows:PositionName>
+			<ows:ContactInfo>
+				<ows:Phone>
+					<ows:Voice>+49(0)251/396 371-0</ows:Voice>
+				</ows:Phone>
+				<ows:Address>
+					<ows:DeliveryPoint>Martin-Luther-King-Weg 24</ows:DeliveryPoint>
+					<ows:City>Münster</ows:City>
+					<ows:AdministrativeArea>North Rhine-Westphalia</ows:AdministrativeArea>
+					<ows:PostalCode>48155</ows:PostalCode>
+					<ows:Country>Germany</ows:Country>
+					<ows:ElectronicMailAddress>lucy@52north.org</ows:ElectronicMailAddress>
+				</ows:Address>
+			</ows:ContactInfo>
+		</ows:ServiceContact>
+	</ows:ServiceProvider>
+</sos:Capabilities>

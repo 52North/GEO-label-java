@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>GEO label resizing test</title>
+</head>
+<body>
+	<h1>resize SVG in wrapping html page</h1>
+	
+	<p>Test if the preserveAspectRatio and viewport allow resizing in html
+	object tag.</p>
+
+	<h2>fixed svg</h2>
+	<div>
+		<object style="width: 142px;"
+			data="http://geoviqua.dev.52north.org/glbservice-dev/api/v1/svg?metadata=http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml&size=400"></object>
+	</div>
+	
+	<p>solution: nest svg and make the inner preserve the aspect ratio</p>
+	
+	<h2>online (not updated at test time)</h2>
+	<div>
+		<object style="width: 142px;"
+			data="http://geoviqua.dev.52north.org/glbservice/api/v1/svg?metadata=http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml&size=400"></object>
+	</div>
+	
+	<h2>geolabel.net</h2>
+	<div>
+		<object style="width: 170px;"
+			data="http://www.geolabel.net/api/v1/geolabel?metadata=http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml&size=400"></object>
+	</div>
+</body>
+</html>

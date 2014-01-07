@@ -16,22 +16,58 @@
 package org.n52.geolabel.server.mapping;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
+import org.n52.geolabel.server.config.GeoLabelConfig;
 import org.n52.geolabel.server.config.TransformationDescriptionLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 public class MetadataTransformerProvider implements Provider<MetadataTransformer> {
 
+    private static Logger log = LoggerFactory.getLogger(MetadataTransformerProvider.class);
+
     private TransformationDescriptionLoader resources;
 
+    private long cacheMaxLabels;
+
+    private long cacheMaxHours;
+
     @Inject
-    public MetadataTransformerProvider(TransformationDescriptionLoader resources) {
+    public MetadataTransformerProvider(TransformationDescriptionLoader resources,
+                                       @Named(GeoLabelConfig.CACHE_MAX_LABELS)
+                                       long cacheMaxLabels,
+                                       @Named(GeoLabelConfig.CACHE_MAX_HOURS)
+                                       long cacheMaxHours) {
         this.resources = resources;
+        this.cacheMaxLabels = cacheMaxLabels;
+        this.cacheMaxHours = cacheMaxHours;
+
+        log.info("NEW {}", this);
     }
 
-	@Override
+    @Override
 	public MetadataTransformer get() {
-        return new MetadataTransformer(this.resources);
+        return new MetadataTransformer(this.resources, this.cacheMaxLabels, this.cacheMaxHours);
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("MetadataTransformerProvider [");
+        if (this.resources != null) {
+            builder.append("resources=");
+            builder.append(this.resources);
+            builder.append(", ");
+        }
+        builder.append("cacheMaxLabels=");
+        builder.append(this.cacheMaxLabels);
+        builder.append(", cacheMaxHours=");
+        builder.append(this.cacheMaxHours);
+        builder.append("]");
+        return builder.toString();
+    }
 
 }

@@ -121,6 +121,11 @@ public abstract class LabelFacet {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("LabelFacet [");
+        if (getClass().getCanonicalName() != null) {
+            builder.append("class=");
+            builder.append(getClass().getCanonicalName());
+            builder.append(", ");
+        }
         if (this.availability != null) {
             builder.append("availability=");
             builder.append(this.availability);
@@ -129,10 +134,6 @@ public abstract class LabelFacet {
         if (this.href != null) {
             builder.append("drilldownURL=");
             builder.append(this.href);
-        }
-        if (getClass().getCanonicalName() != null) {
-            builder.append("class=");
-            builder.append(getClass().getCanonicalName());
         }
         builder.append("]");
         return builder.toString();

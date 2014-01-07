@@ -13,48 +13,64 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.geolabel.server.config;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Singleton;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Splitter;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 @Singleton
 public class TransformationDescriptionResources {
 
     protected static final Logger log = LoggerFactory.getLogger(TransformationDescriptionResources.class);
 
-    private static final String TRANSFORMATIONS_RESOURCE = "transformations";
-
     public static enum Source {
         URL, FALLBACK, NA;
     }
 
-    private String drilldownEndpoint = "http://geolabel.net/api/v1/drilldown";
+    private String drilldownEndpoint;
 
     /**
      * map between normative URL and fallback
      */
     private Map<URL, String> resources = new HashMap<>();
 
-    public TransformationDescriptionResources() {
-        try {
-            this.resources.put(new URL("http://geoviqua.github.io/geolabel/mappings/transformer.json"),
-                                                        "/" + TRANSFORMATIONS_RESOURCE + "/transformer.json");
-        }
-        catch (MalformedURLException e) {
-            log.error("Could not create transformation description resources.", e);
-        }
+    @Inject
+    public TransformationDescriptionResources(@Named("transformer.resources")
+    String resourcesString, @Named(GeoLabelConfig.DRILLDOWN_EXTERNAL_ENDPOINT)
+    String drilldownEndpoint) {
+        this.drilldownEndpoint = drilldownEndpoint;
+
+        Map<String, String> splitted = Splitter.on(",").withKeyValueSeparator("=").split(resourcesString);
+
+        for (Entry<String, String> entry : splitted.entrySet())
+            try {
+                this.resources.put(new URL(entry.getKey()), entry.getValue());
+                log.debug("Added transformation resource {} with fallback {}", entry.getKey(), entry.getValue());
+            }
+            catch (MalformedURLException e) {
+                log.error("Could not create transformation description resources.", e);
+            }
     }
 
     public TransformationDescriptionResources(Map<URL, String> resources) {
         this.resources.putAll(resources);
+    }
+
+    public TransformationDescriptionResources(String resourcesString) {
+        this(resourcesString, null);
     }
 
     public Map<URL, String> getResources() {

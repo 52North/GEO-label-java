@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,6 +42,7 @@ import org.w3c.dom.Document;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.inject.name.Named;
 
 /**
  * Transforms metadata XML into {@link Label} representations
@@ -53,14 +53,10 @@ public class MetadataTransformer {
 
     protected static final Logger log = LoggerFactory.getLogger(MetadataTransformer.class);
 
-    public static int CACHE_MAX_LABELS = 100; // TODO make available as property
-    public static int CACHE_MAX_HOURS = 48;// TODO make available as property
-
     /**
      * Acts as key for caching {@link Label}s based on its metadata and/or feedback source. Since
      * metadata/feedback sources are handled equally, all combinations of equal metadata/feedback source urls
      * are identical.
-     *
      */
     @XmlRootElement(name = "CacheMapping")
     public static class LabelUrlKey {
@@ -185,18 +181,7 @@ public class MetadataTransformer {
 
     }
 
-    private LoadingCache<LabelUrlKey, Label> labelUrlCache = CacheBuilder.newBuilder().maximumSize(CACHE_MAX_LABELS).expireAfterWrite(CACHE_MAX_HOURS,
-                                                                                                                                      TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
-        @Override
-        public Label load(LabelUrlKey key) throws Exception {
-            key.cacheWriteTime = new Date();
-            log.info("Generating new GEO label for cache...");
-
-            Label label = getLabel(key);
-            return label;
-        }
-
-    });
+    private LoadingCache<LabelUrlKey, Label> labelUrlCache;
 
     protected Label getLabel(LabelUrlKey key) throws IOException {
         log.info("Generating new GEO label from urls {}", key);
@@ -218,10 +203,34 @@ public class MetadataTransformer {
 
     private TransformationDescriptionLoader loader;
 
-    @Inject
-    public MetadataTransformer(TransformationDescriptionLoader loader) {
+    public MetadataTransformer(TransformationDescriptionLoader loader, @Named(GeoLabelConfig.CACHE_MAX_LABELS)
+    long cacheMaxLabels, @Named(GeoLabelConfig.CACHE_MAX_HOURS)
+    long cacheMaxHours) {
         this.loader = loader;
+
+        this.labelUrlCache = CacheBuilder.newBuilder().maximumSize(cacheMaxLabels).expireAfterWrite(cacheMaxHours,
+                                                                                                    TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
+            @Override
+            public Label load(LabelUrlKey key) throws Exception {
+                key.cacheWriteTime = new Date();
+                log.info("Generating new GEO label for cache...");
+
+                Label label = getLabel(key);
+                return label;
+            }
+
+        });
+
         log.debug("NEW {}", this);
+    }
+
+    /**
+     * creates a transformer with 0 cache size
+     *
+     * @param transformationDescriptionLoader
+     */
+    public MetadataTransformer(TransformationDescriptionLoader transformationDescriptionLoader) {
+        this(transformationDescriptionLoader, 0, 0);
     }
 
     /**

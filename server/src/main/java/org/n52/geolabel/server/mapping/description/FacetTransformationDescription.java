@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -334,11 +335,18 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         if (this.availabilityPath != null)
             this.availabilityExpression = xPath.compile(this.availabilityPath);
 
-        for (Entry<String, String> e : this.hoverover.getText().entrySet()) {
-            XPathExpression expression = xPath.compile(e.getValue());
-            log.debug("Storing expression {} for {}", expression, e.getKey());
-            this.hoveroverExpressions.put(e.getKey(), expression);
-        }
+        for (Entry<String, String> e : this.hoverover.getText().entrySet())
+            if (e.getValue() != null // is not null
+                    && !e.getValue().trim().isEmpty() // is not an empty string or a new line (\n)
+            ) {
+
+                log.debug("Creating expression from {}", e);
+                XPathExpression expression = xPath.compile(e.getValue());
+                log.debug("Storing expression {} for {}", expression, e.getKey());
+                this.hoveroverExpressions.put(e.getKey(), expression);
+            }
+            else
+                log.warn("Got empty expression '{}' with name {}", e.getValue(), e.getKey());
     }
 
     private T updateDrilldownUrl(T facet, URL metadataOrFeedbackUrl) {
@@ -386,59 +394,80 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                 log.warn("template placeholder count differs from replacement string count.");
 
             // get the evaluated values
-            final ArrayList<Object> values = new ArrayList<>();
+            final ArrayList<Object> replacedValues = new ArrayList<>();
+
+            final Iterator<String> keySetIter = texts.keySet().iterator();
 
             for (int i = 0; i < texts.size(); i++) {
-                String key = texts.keySet().iterator().next();
+                String key = keySetIter.next();
                 TypedPlaceholder tp = typedPlaceholders.get(i);
                 XPathExpression expression = this.hoveroverExpressions.get(key);
 
-                if (tp.isNumber())
-                    visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
-                        @Override
-                        public boolean eval(String value) {
-                            if ( !value.isEmpty()) {
-                                try {
-                                    Number number = NumberFormat.getInstance().parse(value);
-                                    values.add(number);
-                                }
-                                catch (ParseException e) {
-                                    // log.error("Could not parse number returned by expression.");
-                                    values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
-                                }
-                                return false;
-                            }
-                            values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
-                            return true;
-                        }
-                    });
+                if (expression != null)
+                    updateHoveroverWithExpression(tp, expression, metadataXml, replacedValues);
                 else
-                    visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
-                        @Override
-                        public boolean eval(String value) {
-                            if ( !value.isEmpty()) {
-                                values.add(value);
-                                return false;
-                            }
-                            values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_TEXT);
-                            return true;
-                        }
-                    });
+                    updateHoveroverWithManualExpression(tp, key, texts.get(key), replacedValues);
+
             }
 
             final StringBuilder sb = new StringBuilder();
             sb.append(this.hoverover.getFacetName());
 
-            if (typedPlaceholders.size() != values.size())
+            if (typedPlaceholders.size() != replacedValues.size())
                 log.warn("template placeholder count differs from result strings of xpath evaluations.");
             else {
                 sb.append("\n");
-                sb.append(String.format(template, values.toArray()));
+                sb.append(String.format(template, replacedValues.toArray()));
             }
 
             facet.setTitle(sb.toString());
         }
         return facet;
+    }
+
+    private void updateHoveroverWithManualExpression(TypedPlaceholder tp,
+                                                     String key,
+                                                     String value,
+                                                     final ArrayList<Object> values) {
+        if (value.equals("\n") || values.equals("\t"))
+            values.add(value);
+    }
+
+    private void updateHoveroverWithExpression(TypedPlaceholder tp,
+                                               XPathExpression expression,
+                                               Document metadataXml,
+                                               final ArrayList<Object> values) throws XPathExpressionException {
+        if (tp.isNumber())
+            visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+                @Override
+                public boolean eval(String value) {
+                    if ( !value.isEmpty()) {
+                        try {
+                            Number number = NumberFormat.getInstance().parse(value);
+                            values.add(number);
+                        }
+                        catch (ParseException e) {
+                            // log.error("Could not parse number returned by expression.");
+                            values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
+                        }
+                        return false;
+                    }
+                    values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
+                    return true;
+                }
+            });
+        else
+            visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
+                @Override
+                public boolean eval(String value) {
+                    if ( !value.isEmpty()) {
+                        values.add(value);
+                        return false;
+                    }
+                    values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_TEXT);
+                    return true;
+                }
+            });
     }
 
     /**

@@ -29,7 +29,7 @@ public class XPathTest {
 
     @Test
     public void problematicPaths() {
-        InputStream metadataStream = getClass().getClassLoader().getResourceAsStream("testfiles/metadata/DigitalClimaticAtlas_mt_an_GEOlabel.xml");
+        InputStream metadataStream = getClass().getClassLoader().getResourceAsStream("4.0/DigitalClimaticAtlas_mt_an_GEOlabel.xml");
         InputSource input = new InputSource(metadataStream);
 
         String path = "boolean(normalize-space(string(//*[local-name()='contact']/*[local-name()='CI_ResponsibleParty'] | //*[local-name()='ptcontac']/*[local-name()='cntinfo'] | //*[local-name()='pointOfContact']/*[local-name()='CI_ResponsibleParty'])))";

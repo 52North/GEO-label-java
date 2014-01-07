@@ -23,6 +23,7 @@ import java.util.Map;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
@@ -77,13 +78,18 @@ public class TransformationDescription {
 
     public String name;
 
+    public String applicabilityPath;
+
     public NamespaceMapping[] namespaceMappings;
 
     public FacetTransformationDescription< ? >[] facetDescriptions;
 
+    private XPathExpression applicabilityExpression;
+
     public void initXPaths() throws XPathExpressionException {
+        XPathFactory factory = XPathFactory.newInstance();
+
         if (this.namespaceMappings != null) {
-            XPathFactory factory = XPathFactory.newInstance();
             XPath xPath = factory.newXPath();
 
             final Map<String, String> namespaceMap = new HashMap<>();
@@ -117,11 +123,42 @@ public class TransformationDescription {
         }
         else
             log.warn("No mappings defined!");
+
+        if (this.applicabilityPath != null) {
+            XPath xPath = factory.newXPath();
+            this.applicabilityExpression = xPath.compile(this.applicabilityPath);
+            log.debug("Created usability expresssion {} based on {}", this.applicabilityExpression, this.applicabilityPath);
+        }
+        else
+            log.warn("No usability expression defined!");
     }
 
-    public void updateGeoLabel(Label label, Document metadataXml) {
+    public boolean updateGeoLabel(Label label, Document metadataXml) {
+        if (this.applicabilityExpression != null)
+            try {
+                Object evaluationResult = this.applicabilityExpression.evaluate(metadataXml);
+
+                if (evaluationResult instanceof String) {
+                    String textContent = (String) evaluationResult;
+                    boolean value = Boolean.parseBoolean(textContent);
+
+                    if ( !value) {
+                        log.debug("TransformationDescription {} is NOT usable for this document.", this.name);
+                        return false;
+                    }
+                }
+            }
+            catch (XPathExpressionException e) {
+                log.error("Could not evaluate usability expression", e);
+            }
+
+        log.debug("TransformationDescription {} is usable for this document, tested with path {}",
+                  this.name,
+                  this.applicabilityPath);
         for (FacetTransformationDescription< ? > facetDescription : this.facetDescriptions)
             facetDescription.updateLabel(label, metadataXml);
+
+        return true;
     }
 
     @Override
@@ -131,6 +168,11 @@ public class TransformationDescription {
         if (this.name != null) {
             builder.append("name=");
             builder.append(this.name);
+            builder.append(", ");
+        }
+        if (this.applicabilityPath != null) {
+            builder.append("usabilityPath=");
+            builder.append(this.applicabilityPath);
             builder.append(", ");
         }
         if (this.namespaceMappings != null) {

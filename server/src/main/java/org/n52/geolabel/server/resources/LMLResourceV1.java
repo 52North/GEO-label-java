@@ -86,8 +86,6 @@ public class LMLResourceV1 {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream")
     @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
-    // TODO Find a way to use Document as Type for FormDataParams, seems to be
-    // unsupported
     public Label getLabelByStream(
     /* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA)
     InputStream metadataInputStream,
