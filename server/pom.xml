@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.5</version>
+		<version>0.1</version>
 	</parent>
 
 	<properties>
@@ -136,7 +136,7 @@
 			<artifactId>client</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>formats</artifactId>
@@ -315,6 +315,9 @@
 		<profile>
 			<!-- profile for generating api information with swagger, not active by default because it is still buggy -->
 			<id>swagger</id>
+<!-- 			<activation> -->
+<!-- 				<activeByDefault>true</activeByDefault> -->
+<!-- 			</activation> -->
 			<build>
 				<plugins>
 					<plugin>

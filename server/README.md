@@ -9,9 +9,12 @@ This server project provides two build profiles
  * appserver
 
    Profile will not include JSF implementation dependencies as these are part of JEE application servers
- * webserver
+ * webserver (default)
 
    Includes basic JSF 2.0 implementation (mojarra) in output archive
+ * swagger
+ 
+   Build API documentation with swagger. Run it with ''mvn clean install -Pswagger''.
    
    
 Metadata Transformation Mappings

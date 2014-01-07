@@ -87,9 +87,6 @@ public class LandingPageBean {
         // this.examplesList.add(new Example("Rice Fields User Feedback",
         // null,
         // "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/RiceFields_UserFeedback_v3.xml"));
-        this.examplesList.add(new Example("Combinded Producer and User Data",
-                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQM_UQM_combined/DigitalClimaticAtlas_mt_an_v10.xml",
-                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQM_UQM_combined/DigitalClimaticAtlas_mt_an_v10.xml"));
     }
 
     public String getMetadataUrl() {
