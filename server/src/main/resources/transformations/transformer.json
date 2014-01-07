@@ -1,7 +1,6 @@
 {
    "transformationDescription":{
       "name":"transformer",
-      "applicabilityPath":"boolean('true')",
       "namespaceMappings":[
          {
             "prefix":"gmd",
@@ -39,7 +38,8 @@
                   "facetName":"Producer Comments",
                   "template":"Supplemental information: %s. %sFirst of %s known issues: %s.",
                   "text":{
-                    "supplementalInformationPath":"normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation']))",
+                     "supplementalInformationPath":"normalize-space(string(//*[local-name()='identificationInfo']//*[local-name()='supplementalInformation']))",
+					 
 					"EOL":"\n",
 					"knownProblemsCountPath":"count(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem'])",
 					"knownProblemsPath":"normalize-space(string(//*[local-name()='dataQualityInfo']//*[local-name()='GVQ_DiscoveredIssue']/*[local-name()='knownProblem']))"
