@@ -226,7 +226,7 @@ public class MetadataTransformer {
 
     /**
      * creates a transformer with 0 cache size
-     * 
+     *
      * @param transformationDescriptionLoader
      */
     public MetadataTransformer(TransformationDescriptionLoader transformationDescriptionLoader) {

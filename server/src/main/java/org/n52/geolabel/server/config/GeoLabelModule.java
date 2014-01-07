@@ -31,6 +31,7 @@ import org.n52.geolabel.server.config.ExceptionMappers.ContainerExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.IOExceptionMapper;
 import org.n52.geolabel.server.config.ExceptionMappers.ParamExceptionMapper;
 import org.n52.geolabel.server.mapping.MetadataTransformer;
+import org.n52.geolabel.server.mapping.MetadataTransformerProvider;
 import org.n52.geolabel.server.resources.ApiResource;
 import org.n52.geolabel.server.resources.CacheResourceV1;
 import org.n52.geolabel.server.resources.LMLResourceV1;
@@ -78,7 +79,7 @@ public class GeoLabelModule extends JerseyServletModule {
         bind(ObjectMapper.class).to(GeoLabelObjectMapper.class);
         bind(TransformationDescriptionResources.class);
 
-        bind(MetadataTransformer.class);
+        bind(MetadataTransformer.class).toProvider(MetadataTransformerProvider.class);
         bind(PngEncoder.class);
 
         Map<String, String> jerseyInitPrams = new HashMap<>();
