@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.0.5</version>
+		<version>0.1</version>
 	</parent>
 
 	<dependencies>
