@@ -103,8 +103,6 @@ public class PNGResourceV1 {
     @Produces(MEDIA_TYPE)
     @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
     @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
-    // TODO Find a way to use Document as Type for FormDataParams, instead of
-    // Streams, seems to be unsupported
     public Response getLabelSVGByFile(
     /* @ApiParam("LML representation") */@FormDataParam(Constants.PARAM_LML)
     Label label,

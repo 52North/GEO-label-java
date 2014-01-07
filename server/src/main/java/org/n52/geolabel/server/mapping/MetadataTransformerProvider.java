@@ -18,20 +18,33 @@ package org.n52.geolabel.server.mapping;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.n52.geolabel.server.config.GeoLabelConfig;
 import org.n52.geolabel.server.config.TransformationDescriptionLoader;
+
+import com.google.inject.name.Named;
 
 public class MetadataTransformerProvider implements Provider<MetadataTransformer> {
 
     private TransformationDescriptionLoader resources;
 
+    private long cacheMaxLabels;
+
+    private long cacheMaxHours;
+
     @Inject
-    public MetadataTransformerProvider(TransformationDescriptionLoader resources) {
+    public MetadataTransformerProvider(TransformationDescriptionLoader resources,
+                                       @Named(GeoLabelConfig.CACHE_MAX_LABELS)
+                                       long cacheMaxLabels,
+                                       @Named(GeoLabelConfig.CACHE_MAX_HOURS)
+                                       long cacheMaxHours) {
         this.resources = resources;
+        this.cacheMaxLabels = cacheMaxLabels;
+        this.cacheMaxHours = cacheMaxHours;
     }
 
 	@Override
 	public MetadataTransformer get() {
-        return new MetadataTransformer(this.resources);
+        return new MetadataTransformer(this.resources, this.cacheMaxLabels, this.cacheMaxHours);
 	}
 
 }

@@ -28,6 +28,12 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 
     public static final Object EXPRESSION_HAD_NO_RESULT_NUMBER = Integer.valueOf(0);
 
+    public static final String CACHE_MAX_LABELS = "cache.labels.max";
+
+    public static final String CACHE_MAX_HOURS = "cache.hours.max";
+
+    public static final String DRILLDOWN_EXTERNAL_ENDPOINT = "drilldown.external.endpoint";
+
     public static int CONNECT_TIMEOUT = 10000;
 
 	public static int READ_TIMEOUT = 20000;

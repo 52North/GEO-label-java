@@ -40,8 +40,7 @@ public class TransformationDescriptionResources {
         URL, FALLBACK, NA;
     }
 
-    // TODO make property
-    private String drilldownEndpoint = "http://geolabel.net/api/v1/drilldown";
+    private String drilldownEndpoint;
 
     /**
      * map between normative URL and fallback
@@ -50,7 +49,10 @@ public class TransformationDescriptionResources {
 
     @Inject
     public TransformationDescriptionResources(@Named("transformer.resources")
-    String resourcesString) {
+    String resourcesString, @Named(GeoLabelConfig.DRILLDOWN_EXTERNAL_ENDPOINT)
+    String drilldownEndpoint) {
+        this.drilldownEndpoint = drilldownEndpoint;
+
         Map<String, String> splitted = Splitter.on(",").withKeyValueSeparator("=").split(resourcesString);
 
         for (Entry<String, String> entry : splitted.entrySet())
@@ -65,6 +67,10 @@ public class TransformationDescriptionResources {
 
     public TransformationDescriptionResources(Map<URL, String> resources) {
         this.resources.putAll(resources);
+    }
+
+    public TransformationDescriptionResources(String resourcesString) {
+        this(resourcesString, null);
     }
 
     public Map<URL, String> getResources() {

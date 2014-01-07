@@ -63,7 +63,7 @@ public class CitationsFacetDescription extends FacetTransformationDescription<Ci
 			}
 		});
 
-        // is the only facet that needs both urls, create drilldown link here:
+        // is the only facet that needs both urls, so create drilldown link here:
         if (this.drilldown.url != null && this.drilldownEndpoint != null && this.originalFeedbackUrl != null
                 && this.originalMetadataUrl != null) {
             String drilldownURL = String.format(this.drilldown.url,
