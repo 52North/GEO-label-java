@@ -171,22 +171,7 @@
 		</profile>
 	</profiles>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>src/test/resources/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencies>
-
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>commons</artifactId>
@@ -210,7 +195,6 @@
 			<version>1.4</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 </project>
