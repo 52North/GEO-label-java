@@ -100,7 +100,7 @@
 				<artifactId>license-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<header>license_header.txt</header>
+					<header>misc/license_header.txt</header>
 					<properties>
 						<year>${project.inceptionYear}</year>
 					</properties>
@@ -108,6 +108,30 @@
 						<include>src/**/*.java</include>
 						<include>src/**/*.xml</include>
 					</includes>
+					<excludes>
+						<exclude>**/logback.xml</exclude>
+						<exclude>**/logback-test.xml</exclude>
+						<exclude>**/src/test/resources/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jasig.maven</groupId>
+				<artifactId>maven-notice-plugin</artifactId>
+				<version>1.0.5</version>
+				<configuration>
+					<noticeTemplate>misc/NOTICE.template</noticeTemplate>
+					<licenseMapping>
+						<param>misc/license-mappings.xml</param>
+					</licenseMapping>
+					<generateChildNotices>false</generateChildNotices>
 				</configuration>
 				<executions>
 					<execution>

@@ -72,18 +72,6 @@
 
 		<plugins>
 			<plugin>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>**/logback.xml</exclude>
-						<exclude>**/logback-test.xml</exclude>
-						<exclude>src/test/resources/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
