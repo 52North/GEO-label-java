@@ -41,12 +41,12 @@ This project includes:
   Commons Logging under The Apache Software License, Version 2.0
   Data Mapper for Jackson under The Apache Software License, Version 2.0
   FreeMarker under BSD-style license
-  GEO label Java under Apache 2
-  GEO label Java Client JSF Library under Apache 2
-  GEO label Java Client Library under Apache 2
-  GEO label Java commons under Apache 2
-  GEO label Java formats under Apache 2
-  GEO label Java Server under Apache 2
+  GEO label Java under The Apache Software License, Version 2.0
+  GEO label Java Client JSF Library under The Apache Software License, Version 2.0
+  GEO label Java Client Library under The Apache Software License, Version 2.0
+  GEO label Java commons under The Apache Software License, Version 2.0
+  GEO label Java formats under The Apache Software License, Version 2.0
+  GEO label Java Server under The Apache Software License, Version 2.0
   Google Guice - Core Library under The Apache Software License, Version 2.0
   Google Guice - Extensions - Servlet under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0
@@ -73,7 +73,7 @@ This project includes:
   jersey-servlet under CDDL 1.1 or GPL2 w/ CPE
   Jettison under The Apache Software License, Version 2.0
   jquery under MIT License
-  jsp-api under GNU GENERAL PUBLIC LICENSE (GPL Version 2, June 1991)
+  jsp-api under CDDL 1.1 or GPL2 w/ CPE
   jstl under CDDL 1.1 or GPL2 w/ CPE
   JUnit under Common Public License Version 1.0
   Logback Classic Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
@@ -82,7 +82,7 @@ This project includes:
   MIME streaming extension under Dual license consisting of the CDDL v1.1 and GPL v2
   Oracle's implementation of the JSF 2.2 specification API. under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL
   Oracle's implementation of the JSF 2.2 specification. under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL
-  servlet-api under Commons Development and Distribution License, Version 1.0
+  servlet-api under CDDL 1.1 or GPL2 w/ CPE
   SLF4J API Module under MIT License
   Streaming API for XML under GNU General Public Library or COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
   swagger-annotations under Apache License 2.0
