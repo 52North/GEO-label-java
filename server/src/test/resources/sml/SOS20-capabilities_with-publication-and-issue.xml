@@ -36,67 +36,91 @@
 	<sos:extension>
 	</sos:extension>
 	<sos:extension>
-		<gvq:dataQualityInfo xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmd19157="http://www.geoviqua.org/gmd19157" xmlns:updated19115="http://www.geoviqua.org/19115_updates" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gvq="http://www.geoviqua.org/QualityInformationModel/4.0" xsi:schemaLocation="http://www.isotc211.org/2005/gmx http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd 
+		<gvq:GVQ_Metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmd19157="http://www.geoviqua.org/gmd19157" xmlns:updated19115="http://www.geoviqua.org/19115_updates" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gvq="http://www.geoviqua.org/QualityInformationModel/4.0" xsi:schemaLocation="http://www.isotc211.org/2005/gmx http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd 
 http://www.geoviqua.org/QualityInformationModel/4.0 http://schemas.geoviqua.org/GVQ/4.0/GeoViQua_PQM_UQM.xsd">
-			<gvq:GVQ_DataQuality>
-				<gmd19157:scope xlink:href="#datasetScope"/>
-				<gvq:GVQ_DiscoveredIssue>
-					<gvq:target>
-						<updated19115:MD_Identifier>
-							<gmd:code>
-								<gco:CharacterString>SOS-Q</gco:CharacterString>
-							</gmd:code>
-							<updated19115:codeSpace>
-								<gco:CharacterString>http://geoviqua.dev.52north.org/</gco:CharacterString>
-							</updated19115:codeSpace>
-						</updated19115:MD_Identifier>
-					</gvq:target>
-					<gvq:knownProblem>
-						<gco:CharacterString>The location is not optimal, on a balcony near a building.</gco:CharacterString>
-					</gvq:knownProblem>
-					<gvq:workAround>
-						<gco:CharacterString>Use values with care and don't rely on observed properties that are heavily influenced on a small scale such as wind and wind direction.</gco:CharacterString>
-					</gvq:workAround>
-					<gvq:referenceDoc>
-						<gvq:GVQ_Publication>
-							<gmd:title>
-								<gco:CharacterString>Persistent testbed report</gco:CharacterString>
-							</gmd:title>
-							<gmd:date>
-								<gmd:CI_Date>
+			<gmd:contact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>Daniel Nüst</gco:CharacterString>
+					</gmd:individualName>
+					<gmd:organisationName>
+						<gco:CharacterString>52N</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:positionName>
+						<gco:CharacterString>Project Coordinator</gco:CharacterString>
+					</gmd:positionName>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_RoleCode" codeListValue="pointOfContact"/>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:contact>
+			<gmd:dateStamp>
+				<gco:DateTime>2014-01-09T12:00:00</gco:DateTime>
+			</gmd:dateStamp>
+			<gmd:identificationInfo/>
+			<gvq:dataQualityInfo>
+				<gvq:GVQ_DataQuality>
+					<gmd19157:scope xlink:href="#datasetScope"/>
+					<gvq:discoveredIssue>
+						<gvq:GVQ_DiscoveredIssue>
+							<gvq:target>
+								<updated19115:MD_Identifier>
+									<gmd:code>
+										<gco:CharacterString>SOS-Q</gco:CharacterString>
+									</gmd:code>
+									<updated19115:codeSpace>
+										<gco:CharacterString>http://geoviqua.dev.52north.org/</gco:CharacterString>
+									</updated19115:codeSpace>
+								</updated19115:MD_Identifier>
+							</gvq:target>
+							<gvq:knownProblem>
+								<gco:CharacterString>The location is not optimal, on a balcony near a building.</gco:CharacterString>
+							</gvq:knownProblem>
+							<gvq:workAround>
+								<gco:CharacterString>Use values with care and don't rely on observed properties that are heavily influenced on a small scale such as wind and wind direction.</gco:CharacterString>
+							</gvq:workAround>
+							<gvq:referenceDoc>
+								<gvq:GVQ_Publication>
+									<gmd:title>
+										<gco:CharacterString>Persistent testbed report</gco:CharacterString>
+									</gmd:title>
 									<gmd:date>
-										<gco:Date>2014-01-07</gco:Date>
+										<gmd:CI_Date>
+											<gmd:date>
+												<gco:Date>2014-01-07</gco:Date>
+											</gmd:date>
+											<gmd:dateType>
+												<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+											</gmd:dateType>
+										</gmd:CI_Date>
 									</gmd:date>
-									<gmd:dateType>
-										<gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
-									</gmd:dateType>
-								</gmd:CI_Date>
-							</gmd:date>
-							<gmd:ISSN>
-								<gco:CharacterString>1434-4483</gco:CharacterString>
-							</gmd:ISSN>
-							<gvq:target xlink:href="#mtri2an1ib"/>
-							<gvq:doi>
-								<gco:CharacterString>10.1007/s00704-006-0264-2</gco:CharacterString>
-							</gvq:doi>
-							<gvq:purpose>
-								<gvq:GVQ_PublicationPurposeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationPurposeCode" codeListValue="evaluate">evaluate</gvq:GVQ_PublicationPurposeCode>
-							</gvq:purpose>
-							<gvq:scope xlink:href="#datasetScope"/>
-							<gvq:category>
-								<gvq:GVQ_PublicationCategoryCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationCategoryCode" codeListValue="blogWiki">blogWiki</gvq:GVQ_PublicationCategoryCode>
-							</gvq:category>
-							<gvq:onlineResource>
-								<gmd:CI_OnlineResource>
-									<gmd:linkage>
-										<gmd:URL>https://wiki.52north.org/bin/view/SensorWeb/WeatherStationsPersistentTestbed</gmd:URL>
-									</gmd:linkage>
-								</gmd:CI_OnlineResource>
-							</gvq:onlineResource>
-						</gvq:GVQ_Publication>
-					</gvq:referenceDoc>
-				</gvq:GVQ_DiscoveredIssue>
-			</gvq:GVQ_DataQuality>
-		</gvq:dataQualityInfo>
+									<gmd:ISSN>
+										<gco:CharacterString>1434-4483</gco:CharacterString>
+									</gmd:ISSN>
+									<gvq:target xlink:href="#mtri2an1ib"/>
+									<gvq:doi>
+										<gco:CharacterString>10.1007/s00704-006-0264-2</gco:CharacterString>
+									</gvq:doi>
+									<gvq:purpose>
+										<gvq:GVQ_PublicationPurposeCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationPurposeCode" codeListValue="evaluate">evaluate</gvq:GVQ_PublicationPurposeCode>
+									</gvq:purpose>
+									<gvq:scope xlink:href="#datasetScope"/>
+									<gvq:category>
+										<gvq:GVQ_PublicationCategoryCode codeList="http://schemas.geoviqua.org/GVQ/4.0/resources/Codelist/gvqCodelists.xml#GVQ_PublicationCategoryCode" codeListValue="blogWiki">blogWiki</gvq:GVQ_PublicationCategoryCode>
+									</gvq:category>
+									<gvq:onlineResource>
+										<gmd:CI_OnlineResource>
+											<gmd:linkage>
+												<gmd:URL>https://wiki.52north.org/bin/view/SensorWeb/WeatherStationsPersistentTestbed</gmd:URL>
+											</gmd:linkage>
+										</gmd:CI_OnlineResource>
+									</gvq:onlineResource>
+								</gvq:GVQ_Publication>
+							</gvq:referenceDoc>
+						</gvq:GVQ_DiscoveredIssue>
+					</gvq:discoveredIssue>
+				</gvq:GVQ_DataQuality>
+			</gvq:dataQualityInfo>
+		</gvq:GVQ_Metadata>
 	</sos:extension>
 </sos:Capabilities>
