@@ -107,7 +107,7 @@
 			<sml:capabilities name="status">
 				<swe:DataRecord>
 					<swe:field name="status">
-						<swe:Boolean>
+						<swe:Boolean definition="urn:n52:sensor:collectingData">
 							<swe:value>true</swe:value>
 						</swe:Boolean>
 					</swe:field>
@@ -116,7 +116,7 @@
 			<sml:capabilities name="observedBBOX">
 				<swe:DataRecord>
 					<swe:field name="observedBBOX">
-						<swe:Envelope referenceFrame="0">
+						<swe:Envelope referenceFrame="0" definition="urn:ogc:def:property:OGC:1.0:observedBBOX">
 							<swe:lowerCorner>
 								<swe:Vector>
 									<swe:coordinate name="easting">
