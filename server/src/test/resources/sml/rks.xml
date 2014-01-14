@@ -1,0 +1,226 @@
+<sml:SensorML
+    xmlns:gml="http://www.opengis.net/gml"
+    xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+    xmlns:swe="http://www.opengis.net/swe/1.0.1"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.1">
+    <sml:member>
+        <sml:System>
+            <gml:description>The Institute for Landscape Ecology (ILÖK [http://www.uni-muenster.de/Landschaftsoekologie/en/index.html]) is running an automatic weather station on the rooftop of the institute's building. These data are uncontrolled raw data and therefore, there is no guarentee for the quality of the data.</gml:description>
+            <sml:keywords>
+                <sml:KeywordList>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/Precipitation</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/WindDirection</sml:keyword>
+                    <sml:keyword>http://kli.uni-muenster.de/stations/rks</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/AirTemperature</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/WindSpeed</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/ShortwaveRadiation</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/AirHumidity</sml:keyword>
+                    <sml:keyword>http://kli.uni-muenster.de/stations/rks/observations</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/WeatherCode</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/Visibility</sml:keyword>
+                    <sml:keyword>Weather Station Robert-Koch-Strasse (maintained by kli.uni-muenster.de: http://kli.uni-muenster.de/wetter/stations_besch.shtml)</sml:keyword>
+                    <sml:keyword>http://geoviqua.dev.52north.org/properties/AirPressure</sml:keyword>
+                    <sml:keyword>WS Robert-Koch-Strasse</sml:keyword>
+                </sml:KeywordList>
+            </sml:keywords>
+            <sml:identification>
+                <sml:IdentifierList>
+                    <sml:identifier name="uniqueID">
+                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
+                            <sml:value>http://kli.uni-muenster.de/stations/rks</sml:value>
+                        </sml:Term>
+                    </sml:identifier>
+                    <sml:identifier name="longName">
+                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+                            <sml:value>Weather Station Robert-Koch-Strasse (maintained by kli.uni-muenster.de: http://kli.uni-muenster.de/wetter/stations_besch.shtml)</sml:value>
+                        </sml:Term>
+                    </sml:identifier>
+                    <sml:identifier name="shortName">
+                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
+                            <sml:value>WS Robert-Koch-Strasse</sml:value>
+                        </sml:Term>
+                    </sml:identifier>
+                </sml:IdentifierList>
+            </sml:identification>
+            <sml:classification>
+                <sml:ClassifierList>
+                    <sml:classifier name="intendedApplication">
+                        <sml:Term definition="urn:ogc:def:classifier:OGC:1.0:application">
+                            <sml:value>Weather</sml:value>
+                        </sml:Term>
+                    </sml:classifier>
+                    <sml:classifier name="sensorType">
+                        <sml:Term definition="urn:ogc:def:classifier:OGC:1.0:sensorType">
+                            <sml:value>weather station</sml:value>
+                        </sml:Term>
+                    </sml:classifier>
+                </sml:ClassifierList>
+            </sml:classification>
+            <sml:validTime>
+                <gml:TimePeriod>
+                    <gml:beginPosition>2013-10-10T09:54:06.150Z</gml:beginPosition>
+                    <gml:endPosition indeterminatePosition="unknown"/>
+                </gml:TimePeriod>
+            </sml:validTime>
+            <sml:capabilities name="observedBBOX">
+                <swe:DataRecord>
+                    <swe:field name="observedBBOX">
+                        <swe:Envelope referenceFrame="0" definition="urn:ogc:def:property:OGC:1.0:observedBBOX">
+                            <swe:lowerCorner>
+                                <swe:Vector>
+                                    <swe:coordinate name="easting">
+                                        <swe:Quantity axisID="x">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>7.607028</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="northing">
+                                        <swe:Quantity axisID="y">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>7.607028</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                </swe:Vector>
+                            </swe:lowerCorner>
+                            <swe:upperCorner>
+                                <swe:Vector>
+                                    <swe:coordinate name="easting">
+                                        <swe:Quantity axisID="x">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>51.959861</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="northing">
+                                        <swe:Quantity axisID="y">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>51.959861</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                </swe:Vector>
+                            </swe:upperCorner>
+                        </swe:Envelope>
+                    </swe:field>
+                </swe:DataRecord>
+            </sml:capabilities>
+            <sml:capabilities name="featuresOfInterest">
+                <swe:SimpleDataRecord>
+                    <swe:field name="featureOfInterestID">
+                        <swe:Text definition="http://www.opengis.net/def/featureOfInterest/identifier">
+                            <swe:value>http://kli.uni-muenster.de/stations/rks</swe:value>
+                        </swe:Text>
+                    </swe:field>
+                </swe:SimpleDataRecord>
+            </sml:capabilities>
+            <sml:capabilities name="offerings">
+                <swe:SimpleDataRecord>
+                    <swe:field name="Offering for Weather Station Robert-Koch-Strasse">
+                        <swe:Text definition="http://www.opengis.net/def/offering/identifier">
+                            <swe:value>http://kli.uni-muenster.de/stations/rks/observations</swe:value>
+                        </swe:Text>
+                    </swe:field>
+                </swe:SimpleDataRecord>
+            </sml:capabilities>
+            <sml:contact>
+                <sml:ResponsibleParty>
+                    <sml:individualName>Claudia Meyer</sml:individualName>
+                    <sml:organizationName>Institut für Landschaftsökologie</sml:organizationName>
+                    <sml:positionName>Management Office</sml:positionName>
+                    <sml:contactInfo>
+                        <sml:phone>
+                            <sml:voice>+49 251 83-30 043</sml:voice>
+                        </sml:phone>
+                        <sml:address>
+                            <sml:deliveryPoint>Heisenbergstr. 2</sml:deliveryPoint>
+                            <sml:city>Münster</sml:city>
+                            <sml:postalCode>48149</sml:postalCode>
+                            <sml:country>Germany</sml:country>
+                        </sml:address>
+                        <sml:onlineResource xlink:href="http://www.uni-muenster.de/Landschaftsoekologie/kontakt.html"/>
+                    </sml:contactInfo>
+                </sml:ResponsibleParty>
+            </sml:contact>
+            <sml:position name="sensorPosition">
+                <swe:Position fixed="false" referenceFrame="urn:ogc:def:crs:EPSG::4326">
+                    <swe:location>
+                        <swe:Vector>
+                            <swe:coordinate name="easting">
+                                <swe:Quantity axisID="x">
+                                    <swe:uom code="degree"/>
+                                    <swe:value>7.607028</swe:value>
+                                </swe:Quantity>
+                            </swe:coordinate>
+                            <swe:coordinate name="northing">
+                                <swe:Quantity axisID="y">
+                                    <swe:uom code="degree"/>
+                                    <swe:value>51.959861</swe:value>
+                                </swe:Quantity>
+                            </swe:coordinate>
+                            <swe:coordinate name="altitude">
+                                <swe:Quantity axisID="z">
+                                    <swe:uom code="m"/>
+                                    <swe:value>71.0</swe:value>
+                                </swe:Quantity>
+                            </swe:coordinate>
+                        </swe:Vector>
+                    </swe:location>
+                </swe:Position>
+            </sml:position>
+            <sml:inputs>
+                <sml:InputList>
+                    <sml:input name="weather">
+                        <swe:ObservableProperty definition="http://www.example.com/meteorological-ontology.rdf#weather"/>
+                    </sml:input>
+                </sml:InputList>
+            </sml:inputs>
+            <sml:outputs>
+                <sml:OutputList>
+                    <sml:output name="AirTemperature">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/AirTemperature">
+                            <swe:uom code="degC"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="AirHumidity">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Humidity">
+                            <swe:uom code="%"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="AirPressure">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/AirPressure">
+                            <swe:uom code="hPa"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="Precipitation">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Precipitation">
+                            <swe:uom code="mm_h"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="ShortwaveRadiation">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/ShortwaveRadiation">
+                            <swe:uom code="W_m^2"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="Visibility">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Visibility">
+                            <swe:uom code="m"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="WeatherCode">
+                        <swe:Category definition="http://geoviqua.dev.52north.org/properties/WeatherCode">
+                            <swe:codeSpace xlink:href="http://www.wmo.int/pages/prog/www/WMOCodes/Manual/Volume-I-selection/Sel10.pdf#4680"/>
+                        </swe:Category>
+                    </sml:output>
+                    <sml:output name="WindDirection">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/WindDirection">
+                            <swe:uom code="deg"/>
+                        </swe:Quantity>
+                    </sml:output>
+                    <sml:output name="WindSpeed">
+                        <swe:Quantity definition="http://geoviqua.dev.52north.org/properties/WindSpeed">
+                            <swe:uom code="m_s"/>
+                        </swe:Quantity>
+                    </sml:output>
+                </sml:OutputList>
+            </sml:outputs>
+        </sml:System>
+    </sml:member>
+</sml:SensorML>

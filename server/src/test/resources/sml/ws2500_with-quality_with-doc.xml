@@ -308,7 +308,7 @@
 							<swe:uom code="degC"/>
 							<swe:quality>
 								<swe:QuantityRange definition="urn:ogc:def:property:OGC:absoluteAccuracy">
-									<swe:uom xlink:href="urn:ogc:def:property:OGC:temperature"/>
+									<swe:uom code="cel"/>
 									<swe:value>-1 1</swe:value>
 								</swe:QuantityRange>
 							</swe:quality>
@@ -320,7 +320,7 @@
 							</swe:quality>
 							<swe:quality>
 								<swe:Quantity definition="urn:ogc:def:property:OGC:resolution">
-									<swe:uom xlink:href="cel"/>
+									<swe:uom code="cel"/>
 									<swe:value>0.1</swe:value>
 								</swe:Quantity>
 							</swe:quality>
