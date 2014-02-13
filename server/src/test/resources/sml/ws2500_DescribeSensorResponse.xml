@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<swes:DescribeSensorResponse xmlns:swes="http://www.opengis.net/swes/2.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml/3.2"
-	xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swesDescribeSensor.xsd sml http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/gml.xsd http://www.opengis.net/swe/1.0.1 http://schemas.opengis.net/sweCommon/1.0.1/swe.xsd">
+<swes:DescribeSensorResponse xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml/3.2" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swesDescribeSensor.xsd sml http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/gml.xsd http://www.opengis.net/swe/1.0.1 http://schemas.opengis.net/sweCommon/1.0.1/swe.xsd">
 	<swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
 	<swes:description>
 		<swes:SensorDescription>
 			<swes:validTime>
 				<gml:TimePeriod gml:id="tp_98BB4A05EAC4B2E7F4B35755AE091DBE7F10DAB5">
 					<gml:beginPosition>2013-10-08T15:45:45.839Z</gml:beginPosition>
-					<gml:endPosition indeterminatePosition="unknown" />
+					<gml:endPosition indeterminatePosition="unknown"/>
 				</gml:TimePeriod>
 			</swes:validTime>
 			<swes:data>
-				<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
-					xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0.1"
-					version="1.0.1">
+				<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0.1" version="1.0.1">
 					<sml:member>
 						<sml:System>
 							<gml:description>This ELV WS2500 instance is operated and
@@ -106,7 +102,7 @@
 							<sml:validTime>
 								<gml:TimePeriod>
 									<gml:beginPosition>2013-10-08T15:45:45.839Z</gml:beginPosition>
-									<gml:endPosition indeterminatePosition="unknown" />
+									<gml:endPosition indeterminatePosition="unknown"/>
 								</gml:TimePeriod>
 							</sml:validTime>
 							<sml:capabilities name="offerings">
@@ -122,7 +118,7 @@
 							<sml:capabilities name="status">
 								<swe:DataRecord>
 									<swe:field name="status">
-										<swe:Boolean>
+										<swe:Boolean definition="urn:n52:sensor:collectingData">
 											<swe:value>true</swe:value>
 										</swe:Boolean>
 									</swe:field>
@@ -131,18 +127,18 @@
 							<sml:capabilities name="observedBBOX">
 								<swe:DataRecord>
 									<swe:field name="observedBBOX">
-										<swe:Envelope referenceFrame="0">
+										<swe:Envelope referenceFrame="0" definition="urn:ogc:def:property:OGC:1.0:observedBBOX">
 											<swe:lowerCorner>
 												<swe:Vector>
 													<swe:coordinate name="easting">
 														<swe:Quantity axisID="x">
-															<swe:uom code="degree" />
+															<swe:uom code="degree"/>
 															<swe:value>7.652428</swe:value>
 														</swe:Quantity>
 													</swe:coordinate>
 													<swe:coordinate name="northing">
 														<swe:Quantity axisID="y">
-															<swe:uom code="degree" />
+															<swe:uom code="degree"/>
 															<swe:value>7.652099609375</swe:value>
 														</swe:Quantity>
 													</swe:coordinate>
@@ -152,13 +148,13 @@
 												<swe:Vector>
 													<swe:coordinate name="easting">
 														<swe:Quantity axisID="x">
-															<swe:uom code="degree" />
+															<swe:uom code="degree"/>
 															<swe:value>51.93501281738281</swe:value>
 														</swe:Quantity>
 													</swe:coordinate>
 													<swe:coordinate name="northing">
 														<swe:Quantity axisID="y">
-															<swe:uom code="degree" />
+															<swe:uom code="degree"/>
 															<swe:value>51.934813</swe:value>
 														</swe:Quantity>
 													</swe:coordinate>
@@ -171,8 +167,7 @@
 							<sml:capabilities name="featuresOfInterest">
 								<swe:SimpleDataRecord>
 									<swe:field name="featureOfInterestID">
-										<swe:Text
-											definition="http://www.opengis.net/def/featureOfInterest/identifier">
+										<swe:Text definition="http://www.opengis.net/def/featureOfInterest/identifier">
 											<swe:value>http://geoviqua.dev.52north.org/stations/ELV-WS2500
 											</swe:value>
 										</swe:Text>
@@ -227,25 +222,24 @@
 								</sml:ContactList>
 							</sml:contact>
 							<sml:position name="sensorPosition">
-								<swe:Position fixed="false"
-									referenceFrame="urn:ogc:def:crs:EPSG::urn:ogc:def:crs:EPSG::4979">
+								<swe:Position fixed="false" referenceFrame="urn:ogc:def:crs:EPSG::urn:ogc:def:crs:EPSG::4979">
 									<swe:location>
 										<swe:Vector>
 											<swe:coordinate name="easting">
 												<swe:Quantity axisID="x">
-													<swe:uom code="deg" />
+													<swe:uom code="deg"/>
 													<swe:value>7.652428</swe:value>
 												</swe:Quantity>
 											</swe:coordinate>
 											<swe:coordinate name="northing">
 												<swe:Quantity axisID="y">
-													<swe:uom code="deg" />
+													<swe:uom code="deg"/>
 													<swe:value>51.934813</swe:value>
 												</swe:Quantity>
 											</swe:coordinate>
 											<swe:coordinate name="altitude">
 												<swe:Quantity axisID="z">
-													<swe:uom code="meters" />
+													<swe:uom code="meters"/>
 													<swe:value>60.0</swe:value>
 												</swe:Quantity>
 											</swe:coordinate>
@@ -256,107 +250,87 @@
 							<sml:inputs>
 								<sml:InputList>
 									<sml:input name="Humidity">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/Humidity" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Humidity"/>
 									</sml:input>
 									<sml:input name="AthmosphericPressure">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/AthmosphericPressure" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/AthmosphericPressure"/>
 									</sml:input>
 									<sml:input name="AirTemperature">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/AirTemperature" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/AirTemperature"/>
 									</sml:input>
 									<sml:input name="RainfallAccumulated">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/RainfallAccumulated" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/RainfallAccumulated"/>
 									</sml:input>
 									<sml:input name="WindSpeed">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/WindSpeed" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/WindSpeed"/>
 									</sml:input>
 									<sml:input name="WindDirection">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/WindDirection" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/WindDirection"/>
 									</sml:input>
 									<sml:input name="Sunshine">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/Sunshine" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Sunshine"/>
 									</sml:input>
 									<sml:input name="Luminance">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/Luminance" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Luminance"/>
 									</sml:input>
 									<sml:input name="Windchill">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/Windchill" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Windchill"/>
 									</sml:input>
 									<sml:input name="Dewpoint">
-										<swe:ObservableProperty
-											definition="http://geoviqua.dev.52north.org/properties/Dewpoint" />
+										<swe:ObservableProperty definition="http://geoviqua.dev.52north.org/properties/Dewpoint"/>
 									</sml:input>
 								</sml:InputList>
 							</sml:inputs>
 							<sml:outputs>
 								<sml:OutputList>
 									<sml:output name="AthmosphericPressure">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/AthmosphericPressure">
-											<swe:uom code="hPa" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/AthmosphericPressure">
+											<swe:uom code="hPa"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="RainfallAccumulated">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/RainfallAccumulated">
-											<swe:uom code="l_m^2" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/RainfallAccumulated">
+											<swe:uom code="l_m^2"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="WindSpeed">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/WindSpeed">
-											<swe:uom code="km_h" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/WindSpeed">
+											<swe:uom code="km_h"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="WindDirection">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/WindDirection">
-											<swe:uom code="deg" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/WindDirection">
+											<swe:uom code="deg"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="Sunshine">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/Sunshine">
-											<swe:uom code="min" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Sunshine">
+											<swe:uom code="min"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="Luminance">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/Luminance">
-											<swe:uom code="klux" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Luminance">
+											<swe:uom code="klux"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="Windchill">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/Windchill">
-											<swe:uom code="degC" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Windchill">
+											<swe:uom code="degC"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="Humidity">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/Humidity">
-											<swe:uom code="%" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Humidity">
+											<swe:uom code="%"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="Dewpoint">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/Dewpoint">
-											<swe:uom code="degC" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/Dewpoint">
+											<swe:uom code="degC"/>
 										</swe:Quantity>
 									</sml:output>
 									<sml:output name="AirTemperature">
-										<swe:Quantity
-											definition="http://geoviqua.dev.52north.org/properties/AirTemperature">
-											<swe:uom code="degC" />
+										<swe:Quantity definition="http://geoviqua.dev.52north.org/properties/AirTemperature">
+											<swe:uom code="degC"/>
 										</swe:Quantity>
 									</sml:output>
 								</sml:OutputList>

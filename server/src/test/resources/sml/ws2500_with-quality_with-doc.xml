@@ -14,57 +14,42 @@
 							</gml:description>
 			<sml:keywords>
 				<sml:KeywordList>
-					<sml:keyword>http://geoviqua.dev.52north.org/stations/ELV-WS2500
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/stations/ELV-WS2500</sml:keyword>
 					<sml:keyword>AirTemperature</sml:keyword>
 					<sml:keyword>Sunshine</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/Windchill
-									</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/Sunshine
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Windchill</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Sunshine</sml:keyword>
 					<sml:keyword>Humidity</sml:keyword>
 					<sml:keyword>52n-elv-ws2500</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/Humidity
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Humidity</sml:keyword>
 					<sml:keyword>RainfallAccumulated</sml:keyword>
 					<sml:keyword>WindSpeed</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/Luminance
-									</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/WindDirection
-									</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/RainfallAccumulated
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Luminance</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/WindDirection</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/RainfallAccumulated</sml:keyword>
 					<sml:keyword>Windchill</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/AirTemperature
-									</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/WindSpeed
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/AirTemperature</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/WindSpeed</sml:keyword>
 					<sml:keyword>Luminance</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/Dewpoint
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/Dewpoint</sml:keyword>
 					<sml:keyword>WindDirection</sml:keyword>
 					<sml:keyword>Dewpoint</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/properties/AthmosphericPressure
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/properties/AthmosphericPressure</sml:keyword>
 					<sml:keyword>AthmosphericPressure</sml:keyword>
-					<sml:keyword>http://geoviqua.dev.52north.org/procedures/ws2500
-									</sml:keyword>
-					<sml:keyword>52North ELV WS2500 Home Weather Station
-									</sml:keyword>
+					<sml:keyword>http://geoviqua.dev.52north.org/procedures/ws2500</sml:keyword>
+					<sml:keyword>52North ELV WS2500 Home Weather Station</sml:keyword>
 				</sml:KeywordList>
 			</sml:keywords>
 			<sml:identification>
 				<sml:IdentifierList>
 					<sml:identifier name="uniqueID">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-							<sml:value>http://geoviqua.dev.52north.org/procedures/ws2500
-											</sml:value>
+							<sml:value>http://geoviqua.dev.52north.org/procedures/ws2500</sml:value>
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="longName">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-							<sml:value>52North ELV WS2500 Home Weather Station
-											</sml:value>
+							<sml:value>52North ELV WS2500 Home Weather Station</sml:value>
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="shortName">
@@ -98,8 +83,7 @@
 				<swe:SimpleDataRecord>
 					<swe:field name="Offering for ELV WS2500 @ 52N office">
 						<swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
-							<swe:value>http://geoviqua.dev.52north.org/procedures/ws2500
-											</swe:value>
+							<swe:value>http://geoviqua.dev.52north.org/procedures/ws2500</swe:value>
 						</swe:Text>
 					</swe:field>
 				</swe:SimpleDataRecord>
@@ -107,7 +91,7 @@
 			<sml:capabilities name="status">
 				<swe:DataRecord>
 					<swe:field name="status">
-						<swe:Boolean>
+						<swe:Boolean definition="urn:n52:sensor:collectingData">
 							<swe:value>true</swe:value>
 						</swe:Boolean>
 					</swe:field>
@@ -116,7 +100,7 @@
 			<sml:capabilities name="observedBBOX">
 				<swe:DataRecord>
 					<swe:field name="observedBBOX">
-						<swe:Envelope referenceFrame="0">
+						<swe:Envelope referenceFrame="0" definition="urn:ogc:def:property:OGC:1.0:observedBBOX">
 							<swe:lowerCorner>
 								<swe:Vector>
 									<swe:coordinate name="easting">
@@ -157,68 +141,24 @@
 				<swe:SimpleDataRecord>
 					<swe:field name="featureOfInterestID">
 						<swe:Text definition="http://www.opengis.net/def/featureOfInterest/identifier">
-							<swe:value>http://geoviqua.dev.52north.org/stations/ELV-WS2500
-											</swe:value>
+							<swe:value>http://geoviqua.dev.52north.org/stations/ELV-WS2500</swe:value>
 						</swe:Text>
 					</swe:field>
 				</swe:SimpleDataRecord>
 			</sml:capabilities>
-			<sml:references>
-				<sml:DocumentList>
-					<sml:documentation xlink:arcrole="urn:ogc:role:manual">
-						<sml:Document>
-							<gml:description>manufacturer's manual</gml:description>
-							<sml:format>pdf</sml:format>
-							<sml:onlineResource xlink:href="http://www.elv-downloads.de/service/manuals/53759/WS2500-Schnittstellenbeschreibung.pdf"/>
-						</sml:Document>
-					</sml:documentation>
-					<sml:documentation xlink:arcrole="urn:ogc:role:specificationSheet">
-						<sml:Document>
-							<gml:description>specification sheet in a weather station wiki</gml:description>
-							<sml:format>html</sml:format>
-							<sml:onlineResource xlink:href="http://wiki.wetterstationen.info/index.php?title=LaCrosse_WS2500"/>
-						</sml:Document>
-					</sml:documentation>
-				</sml:DocumentList>
-			</sml:references>
-			<sml:contact>
-				<sml:ResponsibleParty>
-					<sml:individualName>Jürrens, Eike Hinderk</sml:individualName>
-					<sml:organizationName>52°North</sml:organizationName>
-					<sml:positionName>Station Maintainer, Software Developer
-									</sml:positionName>
-					<sml:contactInfo>
-						<sml:phone>
-							<sml:voice>+49 251 / 39 63 71 33</sml:voice>
-						</sml:phone>
-						<sml:address>
-							<sml:deliveryPoint>Martin-Luther-King-Weg 24
-											</sml:deliveryPoint>
-							<sml:city>Münster</sml:city>
-							<sml:postalCode>48155</sml:postalCode>
-							<sml:country>Germany</sml:country>
-							<sml:electronicMailAddress>e.h.juerrens@52north.org
-											</sml:electronicMailAddress>
-						</sml:address>
-					</sml:contactInfo>
-				</sml:ResponsibleParty>
-			</sml:contact>
 			<sml:contact>
 				<sml:ContactList>
 					<sml:member>
 						<sml:ResponsibleParty>
-							<sml:individualName>Jürrens, Eike Hinderk
-											</sml:individualName>
+							<sml:individualName>Jürrens, Eike Hinderk</sml:individualName>
 							<sml:organizationName>52°North</sml:organizationName>
-							<sml:positionName>Station Maintainer, Software Developer
-											</sml:positionName>
+							<sml:positionName>Station Maintainer, Software Developer</sml:positionName>
 							<sml:contactInfo>
 								<sml:phone>
 									<sml:voice>+49 251 / 39 63 71 33</sml:voice>
 								</sml:phone>
 								<sml:address>
-									<sml:deliveryPoint>Martin-Luther-King-Weg 24
-													</sml:deliveryPoint>
+									<sml:deliveryPoint>Martin-Luther-King-Weg 24</sml:deliveryPoint>
 									<sml:city>Münster</sml:city>
 									<sml:postalCode>48155</sml:postalCode>
 									<sml:country>Germany</sml:country>
@@ -228,6 +168,24 @@
 					</sml:member>
 				</sml:ContactList>
 			</sml:contact>
+			<sml:documentation>
+				<sml:DocumentList>
+					<sml:member name="" xlink:arcrole="urn:ogc:role:manual">
+						<sml:Document>
+							<gml:description>manufacturer's manual</gml:description>
+							<sml:format>pdf</sml:format>
+							<sml:onlineResource xlink:href="http://www.elv-downloads.de/service/manuals/53759/WS2500-Schnittstellenbeschreibung.pdf"/>
+						</sml:Document>
+					</sml:member>
+					<sml:member name="" xlink:arcrole="urn:ogc:role:specificationSheet">
+						<sml:Document>
+							<gml:description>specification sheet in a weather station wiki</gml:description>
+							<sml:format>html</sml:format>
+							<sml:onlineResource xlink:href="http://wiki.wetterstationen.info/index.php?title=LaCrosse_WS2500"/>
+						</sml:Document>
+					</sml:member>
+				</sml:DocumentList>
+			</sml:documentation>
 			<sml:position name="sensorPosition">
 				<swe:Position fixed="false" referenceFrame="urn:ogc:def:crs:EPSG::urn:ogc:def:crs:EPSG::4979">
 					<swe:location>
@@ -350,7 +308,7 @@
 							<swe:uom code="degC"/>
 							<swe:quality>
 								<swe:QuantityRange definition="urn:ogc:def:property:OGC:absoluteAccuracy">
-									<swe:uom xlink:href="urn:ogc:def:property:OGC:temperature"/>
+									<swe:uom code="cel"/>
 									<swe:value>-1 1</swe:value>
 								</swe:QuantityRange>
 							</swe:quality>
@@ -362,7 +320,7 @@
 							</swe:quality>
 							<swe:quality>
 								<swe:Quantity definition="urn:ogc:def:property:OGC:resolution">
-									<swe:uom xlink:href="cel"/>
+									<swe:uom code="cel"/>
 									<swe:value>0.1</swe:value>
 								</swe:Quantity>
 							</swe:quality>
