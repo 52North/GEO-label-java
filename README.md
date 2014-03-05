@@ -89,7 +89,7 @@ For more details see `commons/Readme.md`
 
 Daniel Nüst (d.nuest@52north.org)
 
-Support: Geostatistics mailing list, see http://geostatistics.forum.52north.org/
+Support: Metadatada management community mailing list, see http://metadata.forum.52north.org/
 
 ## License
 
