@@ -16,7 +16,6 @@ This project includes:
   AOP alliance under Public Domain
   Apache FOP under The Apache Software License, Version 2.0
   Apache XML Graphics Commons under The Apache Software License, Version 2.0
-  ASM Core under BSD 3-Clause License
   Avalon Framework API under The Apache Software License, Version 2.0
   Avalon Framework Implementation under The Apache Software License, Version 2.0
   Batik animation engine under The Apache Software License, Version 2.0
@@ -34,13 +33,14 @@ This project includes:
   Batik SVG transcoder classes under The Apache Software License, Version 2.0
   Batik utility library under The Apache Software License, Version 2.0
   Batik XML utility library under The Apache Software License, Version 2.0
-  Bean Validation API under Apache License, Version 2.0
+  Bean Validation API under The Apache Software License, Version 2.0
   Bootstrap under Apache License, Version 2.0
   Commons Codec under The Apache Software License, Version 2.0
   Commons IO under The Apache Software License, Version 2.0
   Commons Logging under The Apache Software License, Version 2.0
   Data Mapper for Jackson under The Apache Software License, Version 2.0
-  FreeMarker under BSD-style license
+  Expression Language API (2.1 Maintenance Release) under CDDL + GPLv2 with classpath exception
+  FreeMarker under Apache License, Version 2.0
   GEO label Java under The Apache Software License, Version 2.0
   GEO label Java Client JSF Library under The Apache Software License, Version 2.0
   GEO label Java Client Library under The Apache Software License, Version 2.0
@@ -56,10 +56,10 @@ This project includes:
   HttpClient under Apache License
   HttpCore under Apache License
   HttpMime under Apache License
-  IO under The Apache Software License, Version 2.0
   Jackson under The Apache Software License, Version 2.0
   Java Servlet API under CDDL + GPLv2 with classpath exception
   JavaBeans Activation Framework (JAF) under Common Development and Distribution License (CDDL) v1.0
+  JavaServer Pages(TM) API under CDDL + GPLv2 with classpath exception
   javax.inject under The Apache Software License, Version 2.0
   JAX-RS provider for JSON content type under The Apache Software License, Version 2.0 or GNU Lesser General Public License (LGPL), Version 2.1
   JAXB API bundle for GlassFish V3 under CDDL 1.1 or GPL2 w/ CPE
@@ -73,19 +73,17 @@ This project includes:
   jersey-servlet under CDDL 1.1 or GPL2 w/ CPE
   Jettison under The Apache Software License, Version 2.0
   jquery under MIT License
-  jsp-api under CDDL 1.1 or GPL2 w/ CPE
   jstl under CDDL 1.1 or GPL2 w/ CPE
   JUnit under Common Public License Version 1.0
   Logback Classic Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
   Logback Core Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
   Logging under The Apache Software License, Version 2.0
-  MIME streaming extension under Dual license consisting of the CDDL v1.1 and GPL v2
+  MIME streaming extension under CDDL 1.1 or GPL2 w/ CPE
   Oracle's implementation of the JSF 2.2 specification API. under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL
   Oracle's implementation of the JSF 2.2 specification. under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL
   servlet-api under CDDL 1.1 or GPL2 w/ CPE
   SLF4J API Module under MIT License
   Streaming API for XML under GNU General Public Library or COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
-  swagger-annotations under Apache License 2.0
   xalan under The Apache Software License, Version 2.0
   XML Commons External Components XML APIs under The Apache Software License, Version 2.0
   XML Commons External Components XML APIs Extensions under The Apache Software License, Version 2.0

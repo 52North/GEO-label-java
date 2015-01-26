@@ -11,10 +11,6 @@ This server project provides two build profiles
  * `appserver`
 
    Profile will not include JSF implementation dependencies as these are part of JEE application servers
- * `swagger` (deprecated)
- 
-   Build API documentation with swagger. Run it with `mvn clean install -Pswagger`.
-   
    
 ## Metadata Transformation Mappings
 

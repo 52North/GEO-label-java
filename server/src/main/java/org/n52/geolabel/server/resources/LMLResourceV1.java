@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.geolabel.server.resources;
 
 import java.io.IOException;
@@ -42,14 +41,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.multipart.FormDataParam;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/v1/lml")
-@Api(value = "/v1/lml", description = "Operations to retrieve GEO label LML representations")
+//@Api(value = "/v1/lml", description = "Operations to retrieve GEO label LML representations")
 public class LMLResourceV1 {
 
     private static Logger log = LoggerFactory.getLogger(LMLResourceV1.class);
@@ -63,18 +57,16 @@ public class LMLResourceV1 {
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as url")
-    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
-    public Label getLabelByURL(@ApiParam("Url to metadata document")
-    @QueryParam(Constants.PARAM_METADATA)
-    URL metadataURL, @ApiParam("Url to feedback document")
-    @QueryParam(Constants.PARAM_FEEDBACK)
-    URL feedbackURL, @ApiParam("use cached labels")
-    @QueryParam(Constants.PARAM_USECACHE)
-    @DefaultValue(Constants.PARAM_USECACHE_DEFAULT)
-    boolean useCache) throws IOException {
-        if (metadataURL == null && feedbackURL == null)
+//    @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as url")
+//    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+    public Label getLabelByURL(/*@ApiParam("Url to metadata document")*/
+            @QueryParam(Constants.PARAM_METADATA) URL metadataURL, /*@ApiParam("Url to feedback document")*/
+            @QueryParam(Constants.PARAM_FEEDBACK) URL feedbackURL, /*@ApiParam("use cached labels")*/
+            @QueryParam(Constants.PARAM_USECACHE)
+            @DefaultValue(Constants.PARAM_USECACHE_DEFAULT) boolean useCache) throws IOException {
+        if (metadataURL == null && feedbackURL == null) {
             throw new WebApplicationException(Response.ok().status(Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("No metadata or feedback URL specified").build());
+        }
 
         MetadataTransformer metadataTransformer = this.transformer.get();
 
@@ -84,13 +76,11 @@ public class LMLResourceV1 {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream")
-    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+//    @ApiOperation(value = "Returns a GEO label LML representation", notes = "Requires metadata/feedback documents as data stream")
+//    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
     public Label getLabelByStream(
-    /* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA)
-    InputStream metadataInputStream,
-    /* @ApiParam("Feedback document") */@FormDataParam(Constants.PARAM_FEEDBACK)
-    InputStream feedbackInputStream) throws IOException {
+            /* @ApiParam("Metadata document") */@FormDataParam(Constants.PARAM_METADATA) InputStream metadataInputStream,
+            /* @ApiParam("Feedback document") */ @FormDataParam(Constants.PARAM_FEEDBACK) InputStream feedbackInputStream) throws IOException {
         MetadataTransformer metadataTransformer = this.transformer.get();
 
         Label label = new Label();
@@ -107,9 +97,9 @@ public class LMLResourceV1 {
                 log.debug("Reading from metadata stream...");
                 metadataTransformer.updateGeoLabel(tempStream, label);
                 hasData = true;
-            }
-            else
+            } else {
                 tempStream.close();
+            }
         }
         if (feedbackInputStream != null) {
             tempStream = new PushbackInputStream(feedbackInputStream);
@@ -119,13 +109,14 @@ public class LMLResourceV1 {
                 log.debug("Reading from feedback stream...");
                 metadataTransformer.updateGeoLabel(tempStream, label);
                 hasData = true;
-            }
-            else
+            } else {
                 tempStream.close();
+            }
         }
 
-        if ( !hasData)
+        if (!hasData) {
             throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_PLAIN).entity("No metadata or feedback file specified").build());
+        }
 
         return label;
     }

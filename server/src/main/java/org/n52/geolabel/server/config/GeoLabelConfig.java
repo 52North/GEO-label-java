@@ -26,7 +26,7 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 
     public static final String EXPRESSION_HAD_NO_RESULT_TEXT = "unavailable";
 
-    public static final Object EXPRESSION_HAD_NO_RESULT_NUMBER = Integer.valueOf(0);
+    public static final Integer EXPRESSION_HAD_NO_RESULT_NUMBER = 0;
 
     public static final String CACHE_MAX_LABELS = "cache.labels.max";
 
@@ -40,6 +40,6 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 
 	@Override
 	protected Injector getInjector() {
-        return Guice.createInjector(new GeoLabelModule());
+            return Guice.createInjector(new GeoLabelModule());
 	}
 }

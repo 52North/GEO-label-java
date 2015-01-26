@@ -155,17 +155,6 @@
 							</execution>
 						</executions>
 					</plugin>
-					
-					<!-- disable swagger during integration-tests -->
-					<plugin>
-						<groupId>com.github.kongchen</groupId>
-						<artifactId>swagger-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>none</phase>
-							</execution>
-						</executions>
-					</plugin>
 				</plugins>
 			</build>
 		</profile>

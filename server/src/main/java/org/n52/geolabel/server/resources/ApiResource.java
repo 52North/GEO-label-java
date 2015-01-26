@@ -31,11 +31,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.servlet.SessionScoped;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("/")
-@Api(value = "/", description = "Operations to explore the service cache")
+//@Api(value = "/", description = "Operations to explore the service cache")
 @SessionScoped
 public class ApiResource {
 
@@ -53,7 +51,7 @@ public class ApiResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a list of currently available api versions")
+//    @ApiOperation(value = "Returns a list of currently available api versions")
     public Response getApiListing() {
         StringBuilder sb = new StringBuilder();
 
@@ -77,7 +75,7 @@ public class ApiResource {
     @GET
     @Path("/v1")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a list of available api endpoints")
+//    @ApiOperation(value = "Returns a list of available api endpoints")
     public Response getV1Listing() {
         StringBuilder sb = new StringBuilder();
 

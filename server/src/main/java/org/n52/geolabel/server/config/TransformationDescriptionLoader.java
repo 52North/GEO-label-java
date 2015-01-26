@@ -178,7 +178,7 @@ public class TransformationDescriptionLoader {
             TransformationDescription td = null;
             try {
                 File temp = File.createTempFile("geolabel_transformationDescription_", ".json");
-                ByteStreams.copy(Resources.newInputStreamSupplier(entry.getKey()), Files.newOutputStreamSupplier(temp));
+                Resources.asByteSource(entry.getKey()).copyTo(Files.asByteSink(temp));
                 log.debug("Saved transformation description from {} to {}", entry.getKey(), temp);
 
                 td = readTransformationDescription(temp);
