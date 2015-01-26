@@ -127,10 +127,10 @@ public class TransformationDescription {
         if (this.applicabilityPath != null) {
             XPath xPath = factory.newXPath();
             this.applicabilityExpression = xPath.compile(this.applicabilityPath);
-            log.debug("Created usability expresssion {} based on {}", this.applicabilityExpression, this.applicabilityPath);
+            log.debug("Created applicability expresssion {} based on {}", this.applicabilityExpression, this.applicabilityPath);
         }
         else
-            log.warn("No usability expression defined!");
+            log.warn("No applicability expression defined!");
     }
 
     public boolean updateGeoLabel(Label label, Document metadataXml) {
