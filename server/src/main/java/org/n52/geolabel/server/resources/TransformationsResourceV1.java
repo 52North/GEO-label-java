@@ -140,7 +140,7 @@ public class TransformationsResourceV1 {
 
     private UriInfo uri;
 
-	@Inject
+    @Inject
     public TransformationsResourceV1(@Context
     UriInfo uri, TransformationDescriptionResources resources,
                                      TransformationDescriptionLoader loader) {
@@ -153,7 +153,7 @@ public class TransformationsResourceV1 {
         return fallback.substring(fallback.lastIndexOf("/") + 1, fallback.length());
     }
 
-	@GET
+    @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
 //    @ApiOperation(value = "Returns a list of used transformations")

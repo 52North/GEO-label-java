@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.geolabel.server.resources;
 
 import java.net.URI;
@@ -42,8 +41,7 @@ public class ApiResource {
     private URI baseUri;
 
     @Inject
-    public ApiResource(@Context
-    UriInfo uri) {
+    public ApiResource(@Context UriInfo uri) {
         this.baseUri = uri.getBaseUri();
 
         log.info("NEW {} @ {}", this, this.baseUri);
@@ -111,4 +109,5 @@ public class ApiResource {
 
         return Response.ok().entity(sb.toString()).build();
     }
+
 }
