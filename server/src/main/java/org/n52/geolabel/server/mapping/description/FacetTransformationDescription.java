@@ -462,7 +462,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             Document metadataXml,
             final ArrayList<Object> values) throws XPathExpressionException {
         if (tp.isNumber()) {
-            visitExpressionResultStrings(expression, metadataXml, new NumericExpressionResultFunction(values));
+            visitExpressionResultStrings(expression, metadataXml, new NumericExpressionResultFunction(tp, values));
         } else {
             visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
                 @Override

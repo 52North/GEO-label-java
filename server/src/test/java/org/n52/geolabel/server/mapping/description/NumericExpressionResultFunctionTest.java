@@ -22,28 +22,41 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.n52.geolabel.server.config.GeoLabelConfig;
+import static org.n52.geolabel.server.mapping.description.FacetTransformationDescription.TypedPlaceholder.Type.FLOAT;
+import static org.n52.geolabel.server.mapping.description.FacetTransformationDescription.TypedPlaceholder.Type.INTEGER;
 
 /**
  *
  * @author Daniel
  */
-public class FacetTransformationDescriptionTest {
+public class NumericExpressionResultFunctionTest {
 
     @Test
     public void doubleWithoutFractionIsParsed() {
         ArrayList<Object> values = new ArrayList<>();
-        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(values);
+        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(new FacetTransformationDescription.TypedPlaceholder("%d", FLOAT), values);
 
         boolean b = nerf.eval("1.0");
         assertFalse(b);
-        assertThat("double is in values as long", values, hasItem(new Long("1")));
-        assertThat("double is not in values as double", values, not(hasItem(new Double("1.0"))));
+        assertThat("double is in values as long", values, hasItem(new Double("1")));
+        assertThat("double is not in values as double", values, not(hasItem(new Long("1"))));
     }
-    
+
+    @Test
+    public void doubleZeroIsParsedAsDouble() {
+        ArrayList<Object> values = new ArrayList<>();
+        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(new FacetTransformationDescription.TypedPlaceholder("%f", FLOAT), values);
+
+        boolean b = nerf.eval("0.0");
+        assertFalse(b);
+        assertThat("double is in values as double", values, hasItem(new Double("0.0")));
+        assertThat("double is not in values as long", values, not(hasItem(new Long("1"))));
+    }
+
     @Test
     public void doubleWithCommaFractionIsNotParsed() {
         ArrayList<Object> values = new ArrayList<>();
-        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(values);
+        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(new FacetTransformationDescription.TypedPlaceholder("%f", FLOAT), values);
 
         boolean b = nerf.eval("1,1");
         assertFalse(b);
@@ -51,37 +64,37 @@ public class FacetTransformationDescriptionTest {
         assertThat("no double is in values", values, not(hasItem(new Double("1.1"))));
         assertThat("unknown value number is in values", values, hasItem(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER));
     }
-    
+
     @Test
     public void nonNumberIsNotParsed() {
         ArrayList<Object> values = new ArrayList<>();
-        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(values);
+        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(new FacetTransformationDescription.TypedPlaceholder("%f", FLOAT), values);
 
         boolean b = nerf.eval("hello, world.");
         assertFalse(b);
         assertThat("unknown value number is in values", values, hasItem(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER));
     }
-    
+
     @Test
     public void doubleIsParsed() {
         ArrayList<Object> values = new ArrayList<>();
-        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(values);
+        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(new FacetTransformationDescription.TypedPlaceholder("%f", FLOAT), values);
 
         boolean b = nerf.eval("1.1");
         assertFalse(b);
         assertThat("no long is in values", values, not(hasItem(new Long("1"))));
         assertThat("double is in values", values, hasItem(new Double("1.1")));
     }
-    
+
     @Test
     public void longIsParsed() {
         ArrayList<Object> values = new ArrayList<>();
-        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(values);
+        NumericExpressionResultFunction nerf = new NumericExpressionResultFunction(new FacetTransformationDescription.TypedPlaceholder("%d", INTEGER), values);
 
-        boolean b = nerf.eval("1");
+        boolean b = nerf.eval("42");
         assertFalse(b);
-        assertThat("long is in values", values, hasItem(new Long("1")));
-        assertThat("no double is in values", values, not(hasItem(new Double("1.0"))));
+        assertThat("long is in values", values, hasItem(new Long("42")));
+        assertThat("no double is in values", values, not(hasItem(new Double("42.0"))));
     }
 
 }

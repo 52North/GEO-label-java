@@ -17,33 +17,40 @@ package org.n52.geolabel.server.mapping.description;
 
 import java.util.ArrayList;
 import org.n52.geolabel.server.config.GeoLabelConfig;
+import org.n52.geolabel.server.mapping.description.FacetTransformationDescription.TypedPlaceholder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Daniel Nüst
  */
 public class NumericExpressionResultFunction implements FacetTransformationDescription.ExpressionResultFunction {
+
+    protected static final Logger log = LoggerFactory.getLogger(NumericExpressionResultFunction.class);
     
     private final ArrayList<Object> values;
 
-    public NumericExpressionResultFunction(ArrayList<Object> values) {
+    private final FacetTransformationDescription.TypedPlaceholder tp;
+
+    public NumericExpressionResultFunction(TypedPlaceholder tp, ArrayList<Object> values) {
         this.values = values;
+        this.tp = tp;
     }
 
     @Override
     public boolean eval(String value) {
         if (!value.isEmpty()) {
             try {
-                Double d = Double.parseDouble(value);
-                if ((d % 1) == 0) {
-                    values.add((Number) d.longValue());
+                if (tp.type.equals(TypedPlaceholder.Type.INTEGER)) {
+                    values.add(Long.valueOf(value));
+                } else if (tp.type.equals(TypedPlaceholder.Type.FLOAT)) {
+                    values.add(Double.valueOf(value));
                 } else {
-                    values.add((Number) d);
+                    values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
                 }
-                //                    Number number = NumberFormat.getInstance(Locale.UK).parse(value);
-                //                    values.add(number);
             } catch (NumberFormatException e) {
-                // log.error("Could not parse number returned by expression.");
+                log.trace("Could not parse number returned by expression: {} | defined type: {}", value, this.tp);
                 values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
             }
             return false;
@@ -51,5 +58,5 @@ public class NumericExpressionResultFunction implements FacetTransformationDescr
         values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
         return true;
     }
-    
+
 }
