@@ -63,7 +63,7 @@ public class LandingPageBean {
     @org.hibernate.validator.constraints.URL
     private String metadataUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml";
     @org.hibernate.validator.constraints.URL
-    private String feedbackUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/DigitalClimaticAtlas_UserFeedback_v1.xml";
+    private String feedbackUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/example_feedback_summary.xml";//"http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/DigitalClimaticAtlas_UserFeedback_v1.xml";
 
     private List<Example> examplesList = new ArrayList<>();
 
