@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.geolabel.server.mapping;
 
 import java.io.IOException;
@@ -60,6 +59,7 @@ public class MetadataTransformer {
      */
     @XmlRootElement(name = "CacheMapping")
     public static class LabelUrlKey {
+
         protected URL metadataUrl;
         protected URL feedbackUrl;
         protected Date cacheWriteTime;
@@ -92,13 +92,15 @@ public class MetadataTransformer {
             if (obj instanceof LabelUrlKey) {
                 LabelUrlKey other = (LabelUrlKey) obj;
 
-                if ( (this.metadataUrl != null && this.metadataUrl.equals(other.metadataUrl) || this.metadataUrl == other.metadataUrl)
-                        && (this.feedbackUrl != null && this.feedbackUrl.equals(other.feedbackUrl) || this.feedbackUrl == other.feedbackUrl))
+                if ((this.metadataUrl != null && this.metadataUrl.equals(other.metadataUrl) || this.metadataUrl == other.metadataUrl)
+                        && (this.feedbackUrl != null && this.feedbackUrl.equals(other.feedbackUrl) || this.feedbackUrl == other.feedbackUrl)) {
                     return true;
+                }
 
-                if ( (this.metadataUrl != null && this.metadataUrl.equals(other.feedbackUrl) || this.metadataUrl == other.feedbackUrl)
-                        && (this.feedbackUrl != null && this.feedbackUrl.equals(other.metadataUrl) || this.feedbackUrl == other.metadataUrl))
+                if ((this.metadataUrl != null && this.metadataUrl.equals(other.feedbackUrl) || this.metadataUrl == other.feedbackUrl)
+                        && (this.feedbackUrl != null && this.feedbackUrl.equals(other.metadataUrl) || this.feedbackUrl == other.metadataUrl)) {
                     return true;
+                }
             }
             return super.equals(obj);
         }
@@ -106,10 +108,12 @@ public class MetadataTransformer {
         @Override
         public int hashCode() {
             int hash = 0;
-            if (this.metadataUrl != null)
+            if (this.metadataUrl != null) {
                 hash += this.metadataUrl.hashCode();
-            if (this.feedbackUrl != null)
+            }
+            if (this.feedbackUrl != null) {
                 hash += this.feedbackUrl.hashCode();
+            }
 
             return hash;
         }
@@ -150,32 +154,37 @@ public class MetadataTransformer {
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ( (this.fallbackFile == null) ? 0 : this.fallbackFile.hashCode());
-            result = prime * result + ( (this.online == null) ? 0 : this.online.hashCode());
+            result = prime * result + ((this.fallbackFile == null) ? 0 : this.fallbackFile.hashCode());
+            result = prime * result + ((this.online == null) ? 0 : this.online.hashCode());
             return result;
         }
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             RemoteTransformationDescription other = (RemoteTransformationDescription) obj;
             if (this.fallbackFile == null) {
-                if (other.fallbackFile != null)
+                if (other.fallbackFile != null) {
                     return false;
-            }
-            else if ( !this.fallbackFile.equals(other.fallbackFile))
+                }
+            } else if (!this.fallbackFile.equals(other.fallbackFile)) {
                 return false;
+            }
             if (this.online == null) {
-                if (other.online != null)
+                if (other.online != null) {
                     return false;
-            }
-            else if ( !this.online.equals(other.online))
+                }
+            } else if (!this.online.equals(other.online)) {
                 return false;
+            }
             return true;
         }
 
@@ -191,10 +200,12 @@ public class MetadataTransformer {
         label.setMetadataUrl(key.metadataUrl);
         label.setFeedbackUrl(key.feedbackUrl);
 
-        if (key.feedbackUrl != null)
+        if (key.feedbackUrl != null) {
             label = updateGeoLabel(key.feedbackUrl, label);
-        if (key.metadataUrl != null)
+        }
+        if (key.metadataUrl != null) {
             label = updateGeoLabel(key.metadataUrl, label);
+        }
 
         return label;
     }
@@ -203,25 +214,23 @@ public class MetadataTransformer {
 
     private TransformationDescriptionLoader loader;
 
-    public MetadataTransformer(TransformationDescriptionLoader loader, @Named(GeoLabelConfig.CACHE_MAX_LABELS)
-    long cacheMaxLabels, @Named(GeoLabelConfig.CACHE_MAX_HOURS)
-    long cacheMaxHours) {
+    public MetadataTransformer(TransformationDescriptionLoader loader, @Named(GeoLabelConfig.CACHE_MAX_LABELS) long cacheMaxLabels, @Named(GeoLabelConfig.CACHE_MAX_HOURS) long cacheMaxHours) {
         this.loader = loader;
 
         this.labelUrlCache = CacheBuilder.newBuilder().maximumSize(cacheMaxLabels).expireAfterWrite(cacheMaxHours,
-                                                                                                    TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
-            @Override
-            public Label load(LabelUrlKey key) throws Exception {
-                key.cacheWriteTime = new Date();
-                log.info("Generating new GEO label for cache...");
+                TimeUnit.HOURS).build(new CacheLoader<LabelUrlKey, Label>() {
+                    @Override
+                    public Label load(LabelUrlKey key) throws Exception {
+                        key.cacheWriteTime = new Date();
+                        log.debug("Generating new GEO label for cache...");
 
-                Label label = getLabel(key);
-                return label;
-            }
+                        Label label = getLabel(key);
+                        return label;
+                    }
 
-        });
+                });
 
-        log.debug("NEW {}", this);
+        log.debug("NEW {}", this.toString());
     }
 
     /**
@@ -244,8 +253,9 @@ public class MetadataTransformer {
      *         If reading XML stream or initial loading of transformation descriptions fails
      */
     public Label updateGeoLabel(InputStream xmlInputStream, Label label) throws IOException {
-        if (this.transformationDescriptions == null)
+        if (this.transformationDescriptions == null) {
             readTransformationDescriptions();
+        }
 
         Document doc;
         try {
@@ -256,13 +266,13 @@ public class MetadataTransformer {
             doc = builder.parse(xmlInputStream);
 
             log.debug("Loaded metadata XML: {}, first child name: {}", doc, doc.getFirstChild().getNodeName());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new IOException("Could not parse supplied metadata xml", e);
         }
 
-        for (TransformationDescription transformer : this.transformationDescriptions)
+        for (TransformationDescription transformer : this.transformationDescriptions) {
             transformer.updateGeoLabel(label, doc);
+        }
 
         return label;
     }
@@ -288,8 +298,7 @@ public class MetadataTransformer {
             InputStream is = con.getInputStream();
 
             return updateGeoLabel(is, label);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.debug("Could not update label with URL {}", metadataUrl, e);
             label.setError(e);
             return label;
@@ -307,17 +316,17 @@ public class MetadataTransformer {
      * Returns a {@link Label} from metadata and/or feedback {@link URL}.
      */
     public Label getLabel(URL metadataURL, URL feedbackURL, boolean useCache) throws IOException {
-        log.debug("Creating label for metadata {} and feedback {}", metadataURL, feedbackURL);
+        log.debug("Creating {} label for metadata {} and feedback {}", useCache ? "cached" : "", metadataURL, feedbackURL);
 
         LabelUrlKey labelUrlKey = new LabelUrlKey(metadataURL, feedbackURL);
 
-        if (useCache)
+        if (useCache) {
             try {
                 return this.labelUrlCache.get(labelUrlKey);
-            }
-            catch (ExecutionException e) {
+            } catch (ExecutionException e) {
                 throw new IOException(e.getCause());
             }
+        }
 
         return getLabel(labelUrlKey);
     }

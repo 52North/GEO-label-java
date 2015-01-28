@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.geolabel.server.mapping.description;
 
 import java.net.URL;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -49,27 +46,30 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
-@JsonSubTypes({@JsonSubTypes.Type(value = ProducerProfileFacetDescription.class, name = "producerProfile"),
-               @JsonSubTypes.Type(value = LineageFacetDescription.class, name = "lineage"),
-               @JsonSubTypes.Type(value = ExpertReviewFacetDescription.class, name = "expertReview"),
-               @JsonSubTypes.Type(value = UserFeedbackFacetDescription.class, name = "userFeedback"),
-               @JsonSubTypes.Type(value = ProducerCommentsFacetDescription.class, name = "producerComments"),
-               @JsonSubTypes.Type(value = StandardsComplianceFacetDescription.class, name = "standardsCompliance"),
-               @JsonSubTypes.Type(value = QualityInformationFacetDescription.class, name = "qualityInformation"),
-               @JsonSubTypes.Type(value = CitationsFacetDescription.class, name = "citations")})
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = ProducerProfileFacetDescription.class, name = "producerProfile"),
+    @JsonSubTypes.Type(value = LineageFacetDescription.class, name = "lineage"),
+    @JsonSubTypes.Type(value = ExpertReviewFacetDescription.class, name = "expertReview"),
+    @JsonSubTypes.Type(value = UserFeedbackFacetDescription.class, name = "userFeedback"),
+    @JsonSubTypes.Type(value = ProducerCommentsFacetDescription.class, name = "producerComments"),
+    @JsonSubTypes.Type(value = StandardsComplianceFacetDescription.class, name = "standardsCompliance"),
+    @JsonSubTypes.Type(value = QualityInformationFacetDescription.class, name = "qualityInformation"),
+    @JsonSubTypes.Type(value = CitationsFacetDescription.class, name = "citations")})
 public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     private static Logger log = LoggerFactory.getLogger(FacetTransformationDescription.class);
 
     @JsonRootName("hoverover")
     public static class HoveroverWrapper {
+
         public HoveroverInformation hoverover;
     }
 
     public static class TypedPlaceholder {
 
         public enum Type {
-            STRING, DECIMAL, UNKNOWN
+
+            STRING, INTEGER, FLOAT, UNKNOWN
         }
 
         public String placeholder;
@@ -97,28 +97,33 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ( (this.placeholder == null) ? 0 : this.placeholder.hashCode());
-            result = prime * result + ( (this.type == null) ? 0 : this.type.hashCode());
+            result = prime * result + ((this.placeholder == null) ? 0 : this.placeholder.hashCode());
+            result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
             return result;
         }
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             TypedPlaceholder other = (TypedPlaceholder) obj;
             if (this.placeholder == null) {
-                if (other.placeholder != null)
+                if (other.placeholder != null) {
                     return false;
+                }
+            } else if (!this.placeholder.equals(other.placeholder)) {
+                return false;
             }
-            else if ( !this.placeholder.equals(other.placeholder))
+            if (this.type != other.type) {
                 return false;
-            if (this.type != other.type)
-                return false;
+            }
             return true;
         }
 
@@ -169,8 +174,9 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         }
 
         public ArrayList<TypedPlaceholder> getTypedPlaceholders() {
-            if (this.typedPlaceholders == null)
+            if (this.typedPlaceholders == null) {
                 this.typedPlaceholders = getTypedPlacehoders(this);
+            }
             return this.typedPlaceholders;
         }
 
@@ -179,20 +185,26 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
             String templ = hoveroverInformation.getTemplate();
 
             ArrayList<String> placeholders = new ArrayList<>();
-            for (int i = -1; (i = templ.indexOf("%", i + 1)) != -1;)
+            for (int i = -1; (i = templ.indexOf("%", i + 1)) != -1;) {
                 placeholders.add(templ.substring(i, i + 2).trim());
+            }
+
+            // based on http://php.net/sprintf
             for (String s : placeholders) {
-                Type t = null;
+                Type t;
                 switch (s) {
-                case "%s":
-                    t = Type.STRING;
-                    break;
-                case "%d":
-                    t = Type.DECIMAL;
-                    break;
-                default:
-                    t = Type.UNKNOWN;
-                    break;
+                    case "%s":
+                        t = Type.STRING;
+                        break;
+                    case "%d":
+                        t = Type.INTEGER;
+                        break;
+                    case "%f":
+                        t = Type.FLOAT;
+                        break;
+                    default:
+                        t = Type.UNKNOWN;
+                        break;
                 }
                 list.add(new TypedPlaceholder(s, t));
             }
@@ -227,10 +239,12 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
     @JsonRootName("drilldown")
     public static class DrilldownWrapper {
+
         public Drilldown url;
     }
 
     public static class Drilldown {
+
         public String url;
 
         @Override
@@ -250,6 +264,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
      * functional interface to process the result of an xpath expression in the calling class.
      */
     protected interface ExpressionResultFunction {
+
         /**
          *
          * @param value
@@ -268,51 +283,54 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
      * if method throws no exception, evaluation was successful
      */
     protected static void visitExpressionResultStrings(XPathExpression expression,
-                                                       Document xml,
-                                                       ExpressionResultFunction resultFunction) throws XPathExpressionException {
+            Document xml,
+            ExpressionResultFunction resultFunction) throws XPathExpressionException {
         if (expression == null) {
-            log.debug("Expression is null, not evaluating anything!");
+            log.trace("Expression is null, not evaluating anything!");
             return;
         }
 
         Object evaluationResult = expression.evaluate(xml); // for use with saxon respectively XPath 2.0: ,
-                                                            // XPathConstants.NODESET);
+        // XPathConstants.NODESET);
         if (evaluationResult instanceof String) {
             String textContent = (String) evaluationResult;
-            if ( !resultFunction.eval(textContent.trim()))
+            if (!resultFunction.eval(textContent.trim())) {
                 return;
-        }
-        else if (evaluationResult instanceof NodeList) {
+            }
+        } else if (evaluationResult instanceof NodeList) {
             NodeList nodeList = (NodeList) evaluationResult;
-            if (nodeList.getLength() < 1)
+            if (nodeList.getLength() < 1) {
                 log.debug("Evaluation returned no results for expression '{}' and xml '{}'", expression, xml);
-            else
+            } else {
                 for (int i = 0, len = nodeList.getLength(); i < len; i++) {
                     Node n = nodeList.item(i);
                     String textContent = n.getTextContent();
                     if (log.isDebugEnabled()) {
                         String t = textContent.replaceAll("^\\s+|\\s+$|\\s*(\n)\\s*|(\\s)\\s*", "$1$2").replace("\t",
-                                                                                                                " ");
+                                " ");
                         log.debug("Found content in evaluation of path: {}", t);
                     }
-                    if (textContent != null && !resultFunction.eval(textContent.trim()))
+                    if (textContent != null && !resultFunction.eval(textContent.trim())) {
                         break;
+                    }
                 }
-        }
-        else if (evaluationResult instanceof Collection< ? >) {
-            ArrayList< ? > resultList = (ArrayList< ? >) evaluationResult;
-            if (resultList.size() < 1)
+            }
+        } else if (evaluationResult instanceof Collection< ?>) {
+            ArrayList< ?> resultList = (ArrayList< ?>) evaluationResult;
+            if (resultList.size() < 1) {
                 log.debug("Evaluation returned no results for expression '{}' and xml '{}'", expression, xml);
+            }
 
             for (int i = 0, len = resultList.size(); i < len; i++) {
                 String textContent = resultList.get(i).toString();
-                if ( !resultFunction.eval(textContent.trim()))
+                if (!resultFunction.eval(textContent.trim())) {
                     break;
+                }
             }
-        }
-        else
+        } else {
             throw new IllegalStateException("XPath generated unexpected result type of "
                     + evaluationResult.getClass().getSimpleName());
+        }
     }
 
     private String availabilityPath;
@@ -332,33 +350,35 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     public abstract T getAffectedFacet(Label label);
 
     public void initXPaths(XPath xPath) throws XPathExpressionException {
-        if (this.availabilityPath != null)
+        if (this.availabilityPath != null) {
             this.availabilityExpression = xPath.compile(this.availabilityPath);
+        }
 
-        for (Entry<String, String> e : this.hoverover.getText().entrySet())
+        for (Entry<String, String> e : this.hoverover.getText().entrySet()) {
             if (e.getValue() != null // is not null
                     && !e.getValue().trim().isEmpty() // is not an empty string or a new line (\n)
-            ) {
+                    ) {
 
                 log.debug("Creating expression from {}", e);
                 XPathExpression expression = xPath.compile(e.getValue());
                 log.debug("Storing expression {} for {}", expression, e.getKey());
                 this.hoveroverExpressions.put(e.getKey(), expression);
-            }
-            else
+            } else {
                 log.warn("Got empty expression '{}' with name {}", e.getValue(), e.getKey());
+            }
+        }
     }
 
     private T updateDrilldownUrl(T facet, URL metadataOrFeedbackUrl) {
         if (this.drilldown.url != null && this.drilldownEndpoint != null && metadataOrFeedbackUrl != null) {
             String drilldownURL = String.format(this.drilldown.url, this.drilldownEndpoint, metadataOrFeedbackUrl);
             facet.setHref(drilldownURL);
-        }
-        else
+        } else {
             log.debug("Could not update drilldown URL with the information provided: {} {} {}",
-                      this.drilldown,
-                      this.drilldownEndpoint,
-                      this.originalMetadataUrl);
+                    this.drilldown,
+                    this.drilldownEndpoint,
+                    this.originalMetadataUrl);
+        }
         return facet;
     }
 
@@ -390,8 +410,9 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
 
             ArrayList<TypedPlaceholder> typedPlaceholders = this.hoverover.getTypedPlaceholders();
 
-            if (typedPlaceholders.size() != texts.size())
+            if (typedPlaceholders.size() != texts.size()) {
                 log.warn("template placeholder count differs from replacement string count.");
+            }
 
             // get the evaluated values
             final ArrayList<Object> replacedValues = new ArrayList<>();
@@ -403,64 +424,50 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                 TypedPlaceholder tp = typedPlaceholders.get(i);
                 XPathExpression expression = this.hoveroverExpressions.get(key);
 
-                if (expression != null)
+                if (expression != null) {
                     updateHoveroverWithExpression(tp, expression, metadataXml, replacedValues);
-                else
+                } else {
                     updateHoveroverWithManualExpression(tp, key, texts.get(key), replacedValues);
+                }
 
             }
 
             final StringBuilder sb = new StringBuilder();
             sb.append(this.hoverover.getFacetName());
 
-            if (typedPlaceholders.size() != replacedValues.size())
+            if (typedPlaceholders.size() != replacedValues.size()) {
                 log.warn("template placeholder count differs from result strings of xpath evaluations.");
-            else {
+            } else {
                 sb.append("\n");
                 sb.append(String.format(template, replacedValues.toArray()));
             }
 
+            log.trace("Setting title of facet {} to '{}'", facet, sb.toString());
             facet.setTitle(sb.toString());
         }
         return facet;
     }
 
     private void updateHoveroverWithManualExpression(TypedPlaceholder tp,
-                                                     String key,
-                                                     String value,
-                                                     final ArrayList<Object> values) {
-        if (value.equals("\n") || values.equals("\t"))
+            String key,
+            String value,
+            final ArrayList<Object> values) {
+        if (value.equals("\n") || values.equals("\t")) {
             values.add(value);
+        }
     }
 
     private void updateHoveroverWithExpression(TypedPlaceholder tp,
-                                               XPathExpression expression,
-                                               Document metadataXml,
-                                               final ArrayList<Object> values) throws XPathExpressionException {
-        if (tp.isNumber())
+            XPathExpression expression,
+            Document metadataXml,
+            final ArrayList<Object> values) throws XPathExpressionException {
+        if (tp.isNumber()) {
+            visitExpressionResultStrings(expression, metadataXml, new NumericExpressionResultFunction(values));
+        } else {
             visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
                 @Override
                 public boolean eval(String value) {
-                    if ( !value.isEmpty()) {
-                        try {
-                            Number number = NumberFormat.getInstance().parse(value);
-                            values.add(number);
-                        }
-                        catch (ParseException e) {
-                            // log.error("Could not parse number returned by expression.");
-                            values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
-                        }
-                        return false;
-                    }
-                    values.add(GeoLabelConfig.EXPRESSION_HAD_NO_RESULT_NUMBER);
-                    return true;
-                }
-            });
-        else
-            visitExpressionResultStrings(expression, metadataXml, new ExpressionResultFunction() {
-                @Override
-                public boolean eval(String value) {
-                    if ( !value.isEmpty()) {
+                    if (!value.isEmpty()) {
                         values.add(value);
                         return false;
                     }
@@ -468,6 +475,7 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
                     return true;
                 }
             });
+        }
     }
 
     /**
@@ -477,25 +485,25 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
     public T updateFacet(final T facet, Document metadataXml) throws XPathExpressionException {
         if (this.availabilityExpression == null) {
             log.warn("Availability expression is null, returning faced unchanged: {} for document {}",
-                     facet,
-                     metadataXml);
+                    facet,
+                    metadataXml);
             return facet;
         }
 
         final AtomicBoolean hasTextNodes = new AtomicBoolean(false);
-        log.debug("Checking availability of facet {} using {} in document {}",
-                  facet.getClass().getSimpleName(),
-                  this.availabilityPath,
-                  metadataXml);
+        log.trace("Checking availability of facet {} using {} in document {}",
+                facet.getClass().getSimpleName(),
+                this.availabilityPath,
+                metadataXml);
 
         visitExpressionResultStrings(this.availabilityExpression, metadataXml, new ExpressionResultFunction() {
             @Override
             public boolean eval(String value) {
-                if ( !value.isEmpty() && Boolean.parseBoolean(value)) {
+                if (!value.isEmpty() && Boolean.parseBoolean(value)) {
                     hasTextNodes.set(true);
                     return false;
                 }
-                if ( !value.isEmpty() && !Boolean.parseBoolean(value)) {
+                if (!value.isEmpty() && !Boolean.parseBoolean(value)) {
                     hasTextNodes.set(false);
                     return true;
                 }
@@ -520,14 +528,13 @@ public abstract class FacetTransformationDescription<T extends LabelFacet> {
         try {
             T affectedF = getAffectedFacet(label);
             T updatedFacet = updateFacet(affectedF, metadataXml);
-            log.debug("Updated facet: {} \n\t\tfor label: {}", updatedFacet, label);
+            log.trace("Updated facet: {} \n\t\tfor label: {}", updatedFacet, label);
             return label;
-        }
-        catch (XPathExpressionException e) {
+        } catch (XPathExpressionException e) {
             log.error("Error while executing XPath expression for facet {} in label {}", getClass().getName(), label, e);
             throw new RuntimeException(String.format("Error while executing XPath expression for facet %s in label %s",
-                                                     getClass().getName(),
-                                                     label), e);
+                    getClass().getName(),
+                    label), e);
         }
     }
 

@@ -26,7 +26,7 @@ public class GeoLabelConfig extends GuiceServletContextListener {
 
     public static final String EXPRESSION_HAD_NO_RESULT_TEXT = "unavailable";
 
-    public static final Integer EXPRESSION_HAD_NO_RESULT_NUMBER = 0;
+    public static final Integer EXPRESSION_HAD_NO_RESULT_NUMBER = Integer.MIN_VALUE;
 
     public static final String CACHE_MAX_LABELS = "cache.labels.max";
 
