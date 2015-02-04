@@ -144,8 +144,8 @@
                 <sml:Document>
                     <gml:description>A sensor web label for this sensor description</gml:description>
                     <sml:date>2014-01-01</sml:date>
-                    <sml:format>image/svg+xml</sml:format>
-                    <sml:onlineResource xlink:title="Sensor web label" xlink:href="http://sensorweblabel.net/api/v1/geolabel?metadata=http%3A%2F%2Fgeoviqua.dev.52north.org%2Fsos%2Fkvp%3Fservice%3DSOS%26version%3D2.0.0%26request%3DDescribeSensor%26procedure%3Dhttp%3A%2F%2Fkli.uni-muenster.de%2Fstations%2Frks%26procedureDescriptionFormat%3Dhttp%3A%2F%2Fwww.opengis.net%2FsensorML%2F1.0.1" />
+                    <sml:format>image/svg+xml; subtype=geolabel</sml:format>
+                    <sml:onlineResource xlink:title="Sensor web label" xlink:href="http://sensorweblabel.net/api/v1/geolabel?metadata=http%3A%2F%2Fgeoviqua.dev.52north.org%2Fsos%2Fkvp%3Fservice%3DSOS%26version%3D2.0.0%26request%3DDescribeSensor%26procedure%3Dhttp%3A%2F%2Fkli.uni-muenster.de%2Fstations%2Frks%26procedureDescriptionFormat%3Dhttp%3A%2F%2Fwww.opengis.net%2FsensorML%2F1.0.1" xlink:role="http://geolabel.net/ontology/role/metadataSummaryLabel" />
                 </sml:Document>
             </sml:documentation>
             <sml:position name="sensorPosition">

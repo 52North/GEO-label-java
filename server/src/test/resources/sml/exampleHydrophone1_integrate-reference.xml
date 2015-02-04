@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--This document contains an exemplary description of specific hydrophone (instance of a type)-->
 <sml:PhysicalSystem gml:id="ExampleHydrophone1" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
-    <!--Short textual description of the hydrophone-->
     <gml:description>Exemplary description of a hydrophone</gml:description>
-    <!--Keywords describing the hydrophone-->
-    <sml:keywords>
+    <sml:keywords><!--Keywords describing the hydrophone-->
         <sml:KeywordList>
             <sml:keyword>Earth Science > Oceans > Ocean Acoustics</sml:keyword>
             <sml:keyword>Ocean Acoustics</sml:keyword>
@@ -12,8 +10,7 @@
             <sml:keyword>Projects:ESONET Platforms: Fixed Oberservation Stations</sml:keyword>
         </sml:KeywordList>
     </sml:keywords>
-    <!--Identifiers of the hydrophone-->
-    <sml:identification>
+    <sml:identification><!--Identifiers of the hydrophone-->
         <sml:IdentifierList>
             <!--UUID of the hydrophone-->
             <sml:identifier>
@@ -59,15 +56,13 @@
             </sml:identifier>
         </sml:IdentifierList>
     </sml:identification>
-    <!--Time period for which the description of this hydrophone is valid-->
-    <sml:validTime>
+    <sml:validTime><!--Time period for which the description of this hydrophone is valid-->
         <gml:TimePeriod gml:id="validityPeriod">
             <gml:beginPosition>2015-01-10T13:22:31+00:00</gml:beginPosition>
             <gml:endPosition>2015-01-17T16:57:56+00:00</gml:endPosition>
         </gml:TimePeriod>
     </sml:validTime>
-    <!--Contact details for this hydrophone-->
-    <sml:contacts>
+    <sml:contacts> <!--Contact details for this hydrophone-->
         <sml:ContactList>
             <!--Point of contact for this hydrophone-->
             <sml:contact xlink:title="pointOfContact">
@@ -270,8 +265,25 @@
             </sml:contact>
         </sml:ContactList>
     </sml:contacts>
-    <!--Collection of events describing the history of the hydrophone-->
-    <sml:history>
+    <sml:documentation><!-- sensor web label -->
+        <sml:DocumentList>
+            <sml:document xlink:arcrole="http://geolabel.net/ontology/role/metadataSummaryLabel">
+                <gmd:CI_OnlineResource>
+                    <gmd:linkage>
+                        <gmd:URL>http://myCompany.com/metadata/labels/hydrophone.svg</gmd:URL>
+                    </gmd:linkage>
+                    <gmd:name>
+                        <gco:CharacterString>Sensor Web label (a GEO label)</gco:CharacterString>
+                    </gmd:name>
+                    <gmd:description>
+                        <gco:CharacterString>An interactive metadata summary of this sensor</gco:CharacterString>
+                    </gmd:description>
+                </gmd:CI_OnlineResource>
+            </sml:document>
+        </sml:DocumentList>
+    </sml:documentation>
+    
+    <sml:history><!--Collection of events describing the history of the hydrophone-->
         <sml:EventList>
             <!--Event describing the installation-->
             <sml:event>
@@ -376,8 +388,7 @@
     </sml:history>
     <!--Reference to the description of the hydrophone type. The referenced URL links to a SensorML document describing all properties which are the same for all hydrophones of this type.-->
     <sml:typeOf xlink:href="http://52north.org/hydrophone_Type_123456B.xml"/>
-    <!--Parameters of the hydrophone (= properties which can be adjusted)-->
-    <sml:parameters>
+    <sml:parameters><!--Parameters of the hydrophone (= properties which can be adjusted)-->
         <sml:ParameterList>
             <!--Indication if the hydrophone is active-->
             <sml:parameter name="isActive">
@@ -429,8 +440,7 @@
             </sml:parameter>
         </sml:ParameterList>
     </sml:parameters>
-    <!--Position of the hydrphone-->
-    <sml:position>
+    <sml:position><!--Position of the hydrphone-->
         <swe:DataRecord>
             <!--Longitude of the hydrophone position-->
             <swe:field name="longitude">
@@ -462,8 +472,7 @@
             </swe:field>
         </swe:DataRecord>
     </sml:position>
-    <!--Components that belong to this hydrophone-->
-    <sml:components>
+    <sml:components><!--Components that belong to this hydrophone-->
         <sml:ComponentList>
             <!--Reference to a SensorML document describing of the pressure detector of this hydrophone-->
             <sml:component name="pressureDetector_of_ExampleHydrophone1" xlink:href="http://52north.org/pressureDetector_of_ExampleHydrophone1.xml"/>
