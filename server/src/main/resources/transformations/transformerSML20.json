@@ -1,7 +1,7 @@
 {
     "transformationDescription": {
         "name": "transformerSML20",
-        "applicabilityPath": "boolean(//*[local-name()='SensorML'][@version='2.0'])",
+        "applicabilityPath": "boolean(//*[local-name()='PhysicalComponent'] //*[local-name()='SimpleProcess']) //*[local-name()='PhysicalSystem']) | //*[local-name()='AggregateProcess'])",
         "xpathVersion": "1.0",
         "namespaceMappings": [
             {
@@ -24,14 +24,15 @@
         "facetDescriptions": [
             {
                 "producerProfile": {
-                    "availabilityPath": "boolean(//*[local-name()='contact']//*[local-name()='ResponsibleParty'])",
+                    "availabilityPath": "boolean(//*[local-name()='contact']//*[local-name()='gmd:CI_ResponsibleParty'])",
                     "hoverover": {
                         "facetName": "Producer Profile",
-                        "template": "%d responsible parties, first name and organisation are %s from %s",
+                        "template": "%d responsible parties, first  contact is %s from %s (role: %s)",
                         "text": {
-                            "responsiblePartiesCountPath": "count(//*[local-name()='contact']//*[local-name()='ResponsibleParty'])",
-                            "individualName": "//*[local-name()='contact']//*[local-name()='ResponsibleParty']//*[local-name()='individualName']",
-                            "orgNamePath": "//*[local-name()='contact']//*[local-name()='ResponsibleParty']//*[local-name()='organizationName']"
+                            "responsiblePartiesCountPath": "count(//*[local-name()='contact']//*[local-name()='gmd:CI_ResponsibleParty'])",
+                            "individualName": "//*[local-name()='contact']//*[local-name()='CI_ResponsibleParty']//*[local-name()='individualName']/*/text()",
+                            "orgNamePath": "//*[local-name()='contact']//*[local-name()='CI_ResponsibleParty']//*[local-name()='organisationName']",
+                            "rolePath": "//*[local-name()='contact']//*[local-name()='CI_ResponsibleParty']//*[local-name()='role']/*/@codeListValue"
                         }
                     },
                     "drilldown": {
@@ -41,13 +42,12 @@
             },
             {
                 "standardsCompliance": {
-                    "availabilityPath": "boolean(//*[local-name()='SensorML'])",
+                    "availabilityPath": "boolean(//*[local-name()='PhysicalComponent'] | //*[local-name()='SimpleProcess']) | //*[local-name()='PhysicalSystem']) | //*[local-name()='AggregateProcess'])",
                     "hoverover": {
                         "facetName": "Standards Compliance",
-                        "template": "Standard name: %s, version %s.",
+                        "template": "Standard: SensorML %s",
                         "text": {
-                            "standardNamePath": "normalize-space(string(name(//*[local-name()='SensorML'])))",
-                            "standardVersion": "normalize-space(string(//*[local-name()='SensorML']/@version))"
+                            "standardVersion": "normalize-space(string(2.0))"
                         }
                     },
                     "drilldown": {
@@ -57,15 +57,15 @@
             },
             {
                 "qualityInformation": {
-                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='output']//*[local-name()='quality'])))",
+                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='capabilities']//*[local-name()='quality'] | //*[local-name()='output']//*[local-name()='quality'])))",
                     "hoverover": {
                         "facetName": "Quality Information",
                         "template": "Outputs with quality information: %d, of which %d are textual, %d are categorical, and %d are quantities.",
                         "text": {
-                            "outputsWithQualityCount": "count(//*[local-name()='output']//*[local-name()='quality'])",
-                            "outputsWithTextQualityCount": "count(//*[local-name()='output']//*[local-name()='quality']/*[local-name()='Text'])",
-                            "outputsWithCategeoryQualityCount": "count(//*[local-name()='output']//*[local-name()='quality']/*[local-name()='Category'])",
-                            "outputsWithQuantityAndQuantityRangeCount": "count(//*[local-name()='output']//*[local-name()='quality']/*[local-name()='QuantityRange'] | //*[local-name()='output']//*[local-name()='quality']/*[local-name()='Quantity'])"
+                            "qualityCount": "count(//*[local-name()='quality'])",
+                            "textQualityCount": "count(//*[local-name()='quality']/*[local-name()='Text'])",
+                            "categeoryQualityCount": "count(//*[local-name()='quality']/*[local-name()='Category'])",
+                            "quantityAndQuantityRangeCount": "count(//*[local-name()='quality']/*[local-name()='QuantityRange'] | //*[local-name()='quality']/*[local-name()='Quantity'])"
                         }
                     },
                     "drilldown": {
@@ -75,13 +75,14 @@
             },
             {
                 "lineage": {
-                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='ProcessChain'] | //*[local-name()='history'])))",
+                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='method'] | //*[local-name()='history'] | //*[local-name()='connections'])))",
                     "hoverover": {
                         "facetName": "Lineage Information",
-                        "template": "Number of process steps: %d. Number of history entries: %d.",
+                        "template": "Number of process steps: %d. Number of history entries: %d. Algorithm described: %s",
                         "text": {
-                            "processStepCountPath": "count(//*[local-name()='ProcessChain']//*[local-name()='connection'])",
-                            "historyCountPath": "count(//*[local-name()='history']//*[local-name()='Event'])"
+                            "processStepCountPath": "count(//*[local-name()='connections']//*[local-name()='connection'])",
+                            "historyCountPath": "count(//*[local-name()='history']//*[local-name()='event'])",
+                            "methodPath": "string(boolean(//*[local-name()='method']//*[local-name()='ProcessMethod']))"
                         }
                     },
                     "drilldown": {
