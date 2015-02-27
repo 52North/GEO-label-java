@@ -1,5 +1,4 @@
-GEO-label-java server
-======================
+# GEO-label-java server
 
 ## Build Profiles
 
@@ -11,6 +10,16 @@ This server project provides two build profiles
  * `appserver`
 
    Profile will not include JSF implementation dependencies as these are part of JEE application servers
+
+## Installation
+
+Clone the project from GitHub, build it with Maven, then deploy the created .war file to a servlet container of your choice:
+
+```
+git clone https://github.com/52North/GEO-label-java.git
+cd GEO-label-java
+maven clean install
+```
    
 ## Metadata Transformation Mappings
 
