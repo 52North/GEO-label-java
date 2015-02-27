@@ -8,7 +8,7 @@
                 <svg:title>GEO label</svg:title>
                 <svg:metadata>
                     <geolabel>true</geolabel>
-                    <labelUrl>http://geolabel.net/api/v1/geolabel?metadata=http://sensorweblabe.net/example/hydrophone.xml</labelUrl>
+                    <labelUrl>http://geolabel.net/api/v1/geolabel?metadata=http://sensorweblabel.net/example/hydrophone.xml</labelUrl>
                 </svg:metadata>
                 <svg:svg>
                     <!-- actual GEO label -->

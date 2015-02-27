@@ -267,7 +267,7 @@
     </sml:contacts>
     <sml:documentation><!-- sensor web label -->
         <sml:DocumentList>
-            <sml:document xlink:arcrole="http://geolabel.net/ontology/role/metadataSummaryLabel">
+            <sml:document xlink:role="http://geolabel.net/ontology/role/metadataSummaryLabel">
                 <gmd:CI_OnlineResource>
                     <gmd:linkage>
                         <gmd:URL>http://myCompany.com/metadata/labels/hydrophone.svg</gmd:URL>
