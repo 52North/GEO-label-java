@@ -42,7 +42,7 @@ SVG representations from supplied metadata, a client API to access such a servic
 component to directly render GEO labels into JSF 1/2 and JSP based webpages.
 
 
-###Client
+### Client
 
 Client API to access a GEO label service. Uses a builder pattern to allow various combinations of metadata 
 and feedback document inputs supporting streams, URL references and XML Documents.
@@ -54,7 +54,7 @@ InputStream geoLabel = GeoLabelClientV1.createGeoLabelRequest()
 							.getSVG();
 ```
 
-###JSF
+### JSF
 
 Simple JSF component rendering GEO labels from actual feedback/metadata documents and/or URL references. Supports asynchronous 
 loading using Partial Page Rendering.
@@ -73,13 +73,13 @@ loading using Partial Page Rendering.
 
 For more details see `jsf/Readme.md`
 
-###Server
+### Server
 
 An demo instance is deployed at http://geoviqua.dev.52north.org/glbservice
 
 For more details see `server/Readme.md`
 
-###Commons
+### Commons
 
 Resources required by server and client modules.
 
