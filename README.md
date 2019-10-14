@@ -105,6 +105,15 @@ mvn test
 The service uses plugins to manage the license headers and the NOTICE file during every build.
 
 Check the NOTICE file and license headers with `mvn notice:check` and `mvn license:check` respectively.
+Update the NOTICE file with `mvn notice:generate`.
+Update the license headers (based on the template in `/misc`) with `mvn license:format`.
+
+You can also see the plugins' documentation/help pages with Maven:
+
+```bash
+mvn notice:help -Ddetail=true
+mvn license:help -Ddetail=true
+```
 
 ## Contact
 
