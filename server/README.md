@@ -42,6 +42,12 @@ A [SoapUI](https://www.soapui.org/downloads/soapui.html) (use the Open Source on
 docker run --rm -it -v $(pwd)/server/target/glbservice.war:/usr/local/tomcat/webapps/glbservice.war -v $(pwd)/misc/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml -p 8080:8080 tomcat:8-jdk8-openjdk
 ```
 
+Or for Windows CMD:
+
+```bash
+docker run --rm -it -v "%cd%"/server/target/glbservice.war:/usr/local/tomcat/webapps/glbservice.war -v "%cd%"/misc/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml -p 8080:8080 tomcat:8-jdk8-openjdk
+```
+
 Open http://localhost:8080/glbservice/
 
 **Jetty**
