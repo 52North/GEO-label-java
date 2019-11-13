@@ -58,12 +58,12 @@ This project includes:
   HttpMime under Apache License
   Jackson under The Apache Software License, Version 2.0
   Java Servlet API under CDDL 1.1 or GPL2 w/ CPE
-  JavaBeans Activation Framework (JAF) under Common Development and Distribution License (CDDL) v1.0
+  Java(TM) EE 6 Web Specification APIs under CDDL + GPLv2 with classpath exception
+  JavaBeans(TM) Activation Framework under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
   JavaServer Pages(TM) API under CDDL 1.1 or GPL2 w/ CPE
   javax.inject under The Apache Software License, Version 2.0
   JAX-RS provider for JSON content type under The Apache Software License, Version 2.0 or GNU Lesser General Public License (LGPL), Version 2.1
-  JAXB API bundle for GlassFish V3 under CDDL 1.1 or GPL2 w/ CPE
-  JAXB RI under CDDL 1.1 or GPL2 w/ CPE
+  jaxb-api under CDDL 1.1 or GPL2 w/ CPE
   JBoss Logging 3 under GNU Lesser General Public License, version 2.1
   jersey-core under CDDL 1.1 or GPL2 w/ CPE
   jersey-guice under CDDL 1.1 or GPL2 w/ CPE
@@ -79,11 +79,12 @@ This project includes:
   Logback Core Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
   Logging under The Apache Software License, Version 2.0
   MIME streaming extension under CDDL 1.1 or GPL2 w/ CPE
+  Old JAXB Core under CDDL+GPL License
+  Old JAXB Runtime under CDDL+GPL License
   Oracle's implementation of the JSF 2.2 specification API. under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL
   Oracle's implementation of the JSF 2.2 specification. under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) plus GPL
   servlet-api under CDDL 1.1 or GPL2 w/ CPE
   SLF4J API Module under MIT License
-  Streaming API for XML under GNU General Public Library or COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
   Xalan Java under The Apache Software License, Version 2.0
   Xalan Java Serializer under The Apache Software License, Version 2.0
   XML Commons External Components XML APIs under The Apache Software License, Version 2.0
