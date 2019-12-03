@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:org="http://www.w3.org/ns/org#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:gr="http://purl.org/goodrelations/v1#"
+         xmlns:ns0="http://www.w3.org/ns/ssn/systems/"
+         xmlns:schema="http://schema.org/"
+         xmlns:ns1="http://www.w3.org/ns/ssn/"
+         xmlns:ns2="http://www.w3.org/ns/sosa/"
+         xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+         xmlns:prov="http://www.w3.org/ns/prov#">
+
+  <org:Organization rdf:about="https://data.grandlyon.com/Organization/1">
+    <owl:sameAs rdf:resource="http://dbpedia.org/page/Metropolis_of_Lyon"/>
+  </org:Organization>
+
+  <rdf:Description rdf:about="https://data.grandlyon.com/Air">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
+    <rdfs:label xml:lang="en">The air.</rdfs:label>
+  </rdf:Description>
+
+  <owl:Class rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor">
+    <rdf:type rdf:resource="http://purl.org/goodrelations/v1#ProductOrServiceModel"/>
+    <gr:name xml:lang="en">IP68 Outdoor Temperature Sensor</gr:name>
+    <rdfs:label xml:lang="en">IP68 Outdoor Temperature Sensor</rdfs:label>
+    <rdfs:subClassOf>
+      <rdf:Description>
+        <owl:onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/hasOperatingRange"/>
+        <owl:hasValue>
+          <rdf:Description rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#operatingRange">
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/OperatingRange"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+            <ns0:inCondition rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#normalOperatingCondition"/>
+          </rdf:Description>
+        </owl:hasValue>
+
+      </rdf:Description>
+    </rdfs:subClassOf>
+
+    <rdfs:subClassOf>
+      <rdf:Description>
+        <owl:onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemCapability"/>
+        <owl:hasValue>
+          <rdf:Description rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#systemCapability">
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
+            <rdfs:comment xml:lang="en">The sensor capability in normal operating conditions.</rdfs:comment>
+            <ns0:hasSystemProperty>
+              <rdf:Description rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#RFSensitivity">
+                <rdf:type rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+                <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Sensitivity"/>
+                <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+                <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">-137</schema:value>
+                <schema:unitCode rdf:resource="http://qudt.org/vocab/unit#DecibelReferredToOneMilliwatt"/>
+              </rdf:Description>
+            </ns0:hasSystemProperty>
+
+            <ns0:hasSystemProperty>
+              <rdf:Description rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#TemperatureAccuracy">
+                <rdf:type rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+                <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Accuracy"/>
+                <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+                <ns1:forProperty rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85#temperature"/>
+                <schema:minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-0.2</schema:minValue>
+                <schema:maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2</schema:maxValue>
+                <schema:unitCode rdf:resource="http://qudt.org/vocab/unit#DegreeCelsius"/>
+              </rdf:Description>
+            </ns0:hasSystemProperty>
+
+            <ns0:hasSystemProperty>
+              <ns1:Property rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#TemperatureResolution">
+                <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Resolution"/>
+                <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+                <ns1:forProperty rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85#temperature"/>
+                <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0625</schema:value>
+                <schema:unitCode rdf:resource="http://qudt.org/vocab/unit#DegreeCelsius"/>
+              </ns1:Property>
+            </ns0:hasSystemProperty>
+
+            <ns0:hasSystemProperty rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#BatteryAccuracy"/>
+            <ns0:hasSystemProperty>
+              <ns1:Property rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#BatteryResolution">
+                <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Resolution"/>
+                <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+                <ns1:forProperty rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1#battery"/>
+                <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.937e-3</schema:value>
+                <schema:unitCode rdf:resource="http://qudt.org/vocab/unit#Percent"/>
+              </ns1:Property>
+            </ns0:hasSystemProperty>
+
+            <ns0:inCondition rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#normalOperatingCondition"/>
+          </rdf:Description>
+        </owl:hasValue>
+
+      </rdf:Description>
+    </rdfs:subClassOf>
+
+  </owl:Class>
+
+  <ns0:Condition rdf:about="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#normalOperatingCondition">
+    <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+    <rdfs:comment xml:lang="en">A temperature range of -20 to 70 Celsius.</rdfs:comment>
+    <schema:minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-20.0</schema:minValue>
+    <schema:maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">70.0</schema:maxValue>
+    <schema:unitCode rdf:resource="http://qudt.org/vocab/unit#DegreeCelsius"/>
+  </ns0:Condition>
+
+  <rdf:Description rdf:about="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sample"/>
+    <rdfs:label xml:lang="en">The air at lat 45.75 and long 4.85.</rdfs:label>
+    <ns2:isSampleOf rdf:resource="https://data.grandlyon.com/Air"/>
+    <ns1:hasProperty rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85#temperature"/>
+  </rdf:Description>
+
+  <ns1:Property rdf:about="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85#temperature">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+    <ns1:isPropertyOf rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85"/>
+  </ns1:Property>
+
+  <gr:ProductOrService rdf:about="https://data.grandlyon.com/Sensor/SL-T-P1">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    <rdf:type rdf:resource="https://w3id.org/seas/LoRaCommunicationDevice"/>
+    <rdf:type rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor"/>
+    <gr:hasBrand>
+      <gr:Brand>
+        <gr:name xml:lang="en">Sensing Labs</gr:name>
+      </gr:Brand>
+    </gr:hasBrand>
+
+    <geo:alt rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</geo:alt>
+    <geo:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">45.75</geo:lat>
+    <geo:lon rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.85</geo:lon>
+    <ns1:implements rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#temperatureSensingProcedure"/>
+    <ns1:implements rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor#batterySensingProcedure"/>
+    <ns1:observes rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1#battery"/>
+    <ns1:observes rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85#temperature"/>
+  </gr:ProductOrService>
+
+  <ns1:Deployment rdf:about="https://data.grandlyon.com/Deployment/SL-T-P1/2017-06-06">
+    <ns1:deployedSystem rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
+    <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2017-06-06</prov:startedAtTime>
+    <prov:wasAssociatedWith rdf:resource="https://data.grandlyon.com/Organization/1"/>
+    <ns1:deployedOnPlatform rdf:resource="https://data.grandlyon.com/Tree/1"/>
+  </ns1:Deployment>
+
+  <ns2:Observation rdf:about="https://data.grandlyon.com/Observation/5872357#temperature">
+    <ns2:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">64.5244681928429 Cel</ns2:hasSimpleResult>
+    <ns2:madeBySensor rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
+    <ns2:hasFeatureOfInterest rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85"/>
+    <ns2:observedProperty rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85#temperature"/>
+    <ns2:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-20T21:49:18+00:00</ns2:resultTime>
+  </ns2:Observation>
+
+  <ns2:Observation rdf:about="https://data.grandlyon.com/Observation/5872357#battery">
+    <ns2:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">73.2 %</ns2:hasSimpleResult>
+    <ns2:madeBySensor rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
+    <ns2:hasFeatureOfInterest rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
+    <ns2:observedProperty rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1#battery"/>
+    <ns2:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-20T21:49:18+00:00</ns2:resultTime>
+  </ns2:Observation>
+
+</rdf:RDF>
