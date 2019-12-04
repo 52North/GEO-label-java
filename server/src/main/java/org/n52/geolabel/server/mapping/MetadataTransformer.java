@@ -50,6 +50,7 @@ import com.google.inject.name.Named;
 @Singleton
 public class MetadataTransformer {
 
+    
     protected static final Logger log = LoggerFactory.getLogger(MetadataTransformer.class);
 
     /**
