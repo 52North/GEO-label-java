@@ -1,7 +1,7 @@
 {
     "transformationDescription": {
         "name": "transformerSSNO",
-        "applicabilityPath": "boolean(/rdf:RDF)",
+        "applicabilityPath": "boolean(/*[local-name()='RDF'])",
         "namespaceMappings": [
             {
                 "prefix": "sml",
