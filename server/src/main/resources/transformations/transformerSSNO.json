@@ -4,87 +4,33 @@
         "applicabilityPath": "boolean(/*[local-name()='RDF'])",
         "namespaceMappings": [
             {
-                "prefix": "sml",
-                "namespace": "http://www.opengis.net/sensorML/1.0.1"
+                "prefix": "sosa",
+                "namespace": "http://www.w3.org/ns/sosa/"
             },
             {
-                "prefix": "gml",
-                "namespace": "http://www.opengis.net/gml"
+                "prefix": "ssn",
+                "namespace": "http://www.w3.org/ns/ssn/"
             },
             {
-                "prefix": "swe",
-                "namespace": "http://www.opengis.net/swe/1.0.1"
-            },
-            {
-                "prefix": "xlink",
-                "namespace": "http://www.w3.org/1999/xlink"
+                "prefix": "ssn-system",
+                "namespace": "http://www.w3.org/ns/ssn/systems/"
             }
         ],
         "facetDescriptions": [
             {
-                "producerProfile": {
-                    "availabilityPath": "boolean(//*[local-name()='contact']//*[local-name()='ResponsibleParty'])",
+                "qualityInformation": {
+                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty])",
                     "hoverover": {
-                        "facetName": "Producer Profile",
-                        "template": "%d responsible parties, first name and organisation are %s from %s",
+                        "facetName": "Quality Information",
+                        "template": "Hoverover is not supported yet.",
                         "text": {
-                            "responsiblePartiesCountPath": "count(//*[local-name()='contact']//*[local-name()='ResponsibleParty'])",
-                            "individualName": "//*[local-name()='contact']//*[local-name()='ResponsibleParty']//*[local-name()='individualName']",
-                            "orgNamePath": "//*[local-name()='contact']//*[local-name()='ResponsibleParty']//*[local-name()='organizationName']"
+                            "responsiblePartiesCountPath": "",
+                            "individualName": "",
+                            "orgNamePath": ""
                         }
                     },
                     "drilldown": {
                         "url": "%s?metadata=%s&facet=producer_profile"
-                    }
-                }
-            },
-            {
-                "standardsCompliance": {
-                    "availabilityPath": "boolean(//*[local-name()='SensorML'])",
-                    "hoverover": {
-                        "facetName": "Standards Compliance",
-                        "template": "Standard name: %s, version %s.",
-                        "text": {
-                            "standardNamePath": "normalize-space(string(name(//*[local-name()='SensorML'])))",
-                            "standardVersion": "normalize-space(string(//*[local-name()='SensorML']/@version))"
-                        }
-                    },
-                    "drilldown": {
-                        "url": "%s?metadata=%s&facet=standards_complaince"
-                    }
-                }
-            },
-            {
-                "qualityInformation": {
-                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='output']//*[local-name()='quality'])))",
-                    "hoverover": {
-                        "facetName": "Quality Information",
-                        "template": "Outputs with quality information: %d, of which %d are textual, %d are categorical, and %d are quantities.",
-                        "text": {
-                            "outputsWithQualityCount": "count(//*[local-name()='output']//*[local-name()='quality'])",
-                            "outputsWithTextQualityCount": "count(//*[local-name()='output']//*[local-name()='quality']/*[local-name()='Text'])",
-                            "outputsWithCategeoryQualityCount": "count(//*[local-name()='output']//*[local-name()='quality']/*[local-name()='Category'])",
-                            "outputsWithQuantityAndQuantityRangeCount": "count(//*[local-name()='output']//*[local-name()='quality']/*[local-name()='QuantityRange'] | //*[local-name()='output']//*[local-name()='quality']/*[local-name()='Quantity'])"
-                        }
-                    },
-                    "drilldown": {
-                        "url": "%s?metadata=%s&facet=quality_information"
-                    }
-                }
-            },
-            {
-                "lineage": {
-                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='ProcessChain'] | //*[local-name()='history'])))",
-                    "hoverover": {
-                        "facetName": "Lineage Information",
-                        "template": "Number of process steps: %d. Number of history entries: %d.",
-                        "text": {
-                            "processStepCountPath": "count(//*[local-name()='ProcessChain']//*[local-name()='connection'])",
-                            "historyCountPath": "count(//*[local-name()='history']//*[local-name()='Event'])"
-                        }
-                    },
-                    "drilldown": {
-                        "url": "%s?metadata=%s&facet=lineage_information"
                     }
                 }
             }
