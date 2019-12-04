@@ -1,7 +1,7 @@
 {
     "transformationDescription": {
         "name": "transformerSSNO",
-        "applicabilityPath": "boolean(/rdf:RDF) and (boolean(//namespace-uri()='http://www.w3.org/ns/ssn/') or boolean(//namespace-uri()='http://www.w3.org/ns/sosa/'))",
+        "applicabilityPath": "boolean(/rdf:RDF)",
         "namespaceMappings": [
             {
                 "prefix": "sml",
