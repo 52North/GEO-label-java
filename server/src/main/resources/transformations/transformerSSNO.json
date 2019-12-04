@@ -1,7 +1,7 @@
 {
     "transformationDescription": {
         "name": "transformerSSNO",
-        "applicabilityPath": "boolean(//*[local-name()='SensorML'][@version='1.0.1'])",
+        "applicabilityPath": "boolean(//*[local-name()='RDF']) and (boolean(//namespace-uri()='http://www.w3.org/ns/ssn/') or boolean(//namespace-uri()='http://www.w3.org/ns/sosa/'))",
         "namespaceMappings": [
             {
                 "prefix": "sml",
