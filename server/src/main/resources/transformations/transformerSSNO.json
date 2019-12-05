@@ -22,12 +22,8 @@
                     "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty])",
                     "hoverover": {
                         "facetName": "Quality Information",
-                        "template": "Hoverover is not supported yet.",
-                        "text": {
-                            "responsiblePartiesCountPath": "",
-                            "individualName": "",
-                            "orgNamePath": ""
-                        }
+                        "template": "",
+                        "text": {}
                     },
                     "drilldown": {
                         "url": "%s?metadata=%s&facet=producer_profile"
