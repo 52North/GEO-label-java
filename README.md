@@ -115,6 +115,42 @@ mvn notice:help -Ddetail=true
 mvn license:help -Ddetail=true
 ```
 
+## Deployment
+
+### Deployment with Google Cloud Run
+
+"Cloud Run is a managed compute platform that automatically scales your stateless containers." (https://cloud.google.com/run/)
+
+Create a new Project in Google Cloud, e.g. "glbservice" and select it (make sure that billing is enabled for the project).
+
+Enable the Cloud Run API.
+
+Open the Cloud Shell. 
+
+Enter the following commands:
+
+```bash
+//clone the project from GitHub
+git clone https://github.com/anikagraupner/GEO-label-java.git
+cd GEO-label-java
+
+//build the container image with the dockerfile, glbservice is the project-id, geolabel the name of the image 
+gcloud builds submit --tag gcr.io/glbservice/geolabel
+
+//deploying to cloud run
+gcloud run deploy --image gcr.io/glbservice/geolabel --platform managed
+//enter a service name, e.g. geolabel
+//choose a region, e.g. europe-west1-b
+//respond y to allow unauthenticated invocations
+//after a few seconds, the command line displays the service URL
+```
+
+More Information at https://cloud.google.com/run/docs/quickstarts/build-and-deploy .
+
+### Deployment with ...........
+
+
+
 ## Contact
 
 Daniel Nüst (d.nuest@52north.org)

@@ -1,3 +1,4 @@
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ip68-smart-sensor-->
 <?xml version="1.0" encoding="utf-8" ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:org="http://www.w3.org/ns/org#"
