@@ -14,19 +14,63 @@
             {
                 "prefix": "ssn-system",
                 "namespace": "http://www.w3.org/ns/ssn/systems/"
+            },
+            {
+                "prefix": "rdfs",
+                "namespace": "http://www.w3.org/2000/01/rdf-schema#"
+            },
+            {
+                "prefix": "dcterms",
+                "namespace": "http://purl.org/dc/terms/"
+            },
+            {
+                "prefix": "foaf",
+                "namespace": "http://xmlns.com/foaf/0.1/"
             }
         ],
         "facetDescriptions": [
+            {
+                "producerProfile":{
+                    "availabilityPath":"boolean(//*[dcterms:creator/foaf:Agent]) or  boolean(//*[dcterms:creator/foaf:Person]) or boolean(//*[dcterms:creator/foaf:Organization]) or boolean(//*[dcterms:creator/foaf:Group])",
+                    "hoverover":{
+                        "facetName":"Producer Profile",
+                        "template":"Hoverover and drilldown for %s are not supported yet.",
+                        "text":{
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown":{
+                        "url":"%s?metadata=%s&facet=producer_profile"
+                      }
+                   }
+                },
+            {
+                "producerComments":{
+                   "availabilityPath":"boolean(//*[rdfs:comment])",
+                   "hoverover":{
+                      "facetName":"Producer Comments",
+                      "template":"Hoverover and drilldown for %s are not supported yet.",
+                      "text":{
+                          "placeholder":"local-name(/*)"
+                      }
+                   },
+                   "drilldown":{
+                      "url":"%s?metadata=%s&facet=producer_comments"
+                   }
+                }
+             },
             {
                 "qualityInformation": {
                     "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty])",
                     "hoverover": {
                         "facetName": "Quality Information",
-                        "template": "",
-                        "text": {}
+                        "template": "Hoverover and drilldown for %s are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
                     },
                     "drilldown": {
-                        "url": "%s?metadata=%s&facet=producer_profile"
+                        "url": "%s?metadata=%s&facet=quality_information"
                     }
                 }
             }

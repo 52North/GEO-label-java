@@ -151,7 +151,7 @@ public class TransformationDescription {
                 }
             }
             catch (XPathExpressionException e) {
-                log.error("Could not evaluate usability expression", e);
+                log.debug("Could not evaluate usability expression", e);
             }
 
         log.debug("TransformationDescription {} is usable for this document, tested with path {}",
