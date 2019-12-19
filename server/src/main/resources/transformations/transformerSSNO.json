@@ -61,7 +61,22 @@
              },
             {
                 "qualityInformation": {
-                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty]) or  boolean(//*[ssn-system:hasOperatingProperty) or boolean(//*[ssn-system:hasSurvivalProperty])",
+                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty]) or boolean(//*[ssn-system:hasOperatingProperty]) or boolean(//*[ssn-system:hasSurvivalProperty])",
+                    "hoverover": {
+                        "facetName": "Quality Information",
+                        "template": "Hoverover and drilldown for %s are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=quality_information"
+                    }
+                }
+            },
+            {
+                "lineage": {
+                    "availabilityPath": "boolean(//*[ssn:implements]) or boolean(//*[ssn:implementedBy]) or boolean(//*[sosa:usedProcedure])",
                     "hoverover": {
                         "facetName": "Quality Information",
                         "template": "Hoverover and drilldown for %s are not supported yet.",
