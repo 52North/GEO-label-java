@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#dht22-description-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ns0="http://www.w3.org/ns/ssn/"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:ns1="https://w3id.org/rdfp/"
+         xmlns:ns2="http://www.w3.org/ns/ssn/systems/"
+         xmlns:schema="http://schema.org/"
+         xmlns:ns3="http://www.w3.org/ns/sosa/"
+         xmlns:ns4="http://example.org/"
+         xmlns:ns5="http://qudt.org/1.1/schema/qudt#">
+
+  <rdf:Description rdf:about="http://example.org/data/DHT22#Procedure">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
+    <ns0:hasOutput>
+      <ns0:Output rdf:about="http://example.org/data/DHT22#output">
+        <rdf:type rdf:resource="https://w3id.org/rdfp/GraphDescription"/>
+        <rdfs:comment xml:lang="en">The output is a RDF Graph that describes both the temperature and the humidity. It can be validated by a SHACL shapes graph.</rdfs:comment>
+        <ns1:presentedBy>
+          <ns1:GraphDescription>
+            <ns1:validationRule rdf:resource="http://example.org/data/shacl_shapes_graph"/>
+          </ns1:GraphDescription>
+        </ns1:presentedBy>
+
+      </ns0:Output>
+    </ns0:hasOutput>
+
+  </rdf:Description>
+
+  <ns0:System rdf:about="http://example.org/data/DHT22/4578">
+    <rdfs:comment xml:lang="en">DHT22 sensor #4578 contains a humidity and a temperature sensor.</rdfs:comment>
+    <rdfs:seeAlso rdf:resource="https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf"/>
+    <ns0:hasSubSystem rdf:resource="http://example.org/data/DHT22/4578#TemperatureSensor"/>
+    <ns0:hasSubSystem>
+      <rdf:Description rdf:about="http://example.org/data/DHT22/4578#HumiditySensor">
+        <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/ssn/System"/>
+        <rdfs:comment xml:lang="en">The embedded humidity sensor, a specific instance of humidity sensor.</rdfs:comment>
+        <ns2:hasOperatingRange>
+          <ns2:OperatingRange rdf:about="http://example.org/data/DHT22/4578#HumiditySensorOperatingRange">
+            <rdfs:comment xml:lang="en">The conditions in which the DHT22 humidity sensor is expected to operate.</rdfs:comment>
+            <ns2:inCondition rdf:resource="http://example.org/data/NormalTemperatureCondition"/>
+            <ns2:inCondition rdf:resource="http://example.org/data/NormalHumidityCondition"/>
+          </ns2:OperatingRange>
+        </ns2:hasOperatingRange>
+
+        <ns0:implements rdf:resource="http://example.org/data/DHT22#Procedure"/>
+      </rdf:Description>
+    </ns0:hasSubSystem>
+
+  </ns0:System>
+
+  <rdf:Description rdf:about="http://example.org/data/DHT22/4578#TemperatureSensor">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/ssn/System"/>
+    <rdfs:comment xml:lang="en">The embedded temperature sensor, a specific instance of temperature sensor.</rdfs:comment>
+    <ns2:hasOperatingRange>
+      <ns2:OperatingRange rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorOperatingRange">
+        <rdfs:comment xml:lang="en">The conditions in which the DHT22 temperature sensor is expected to operate.</rdfs:comment>
+        <ns2:inCondition rdf:resource="http://example.org/data/NormalTemperatureCondition"/>
+        <ns2:inCondition rdf:resource="http://example.org/data/NormalHumidityCondition"/>
+      </ns2:OperatingRange>
+    </ns2:hasOperatingRange>
+
+    <ns2:hasSystemCapability>
+      <ns0:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorCapability">
+        <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
+        <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+        <rdfs:comment>The capabilities of the temperature sensor in normal temperature and humidity conditions.</rdfs:comment>
+        <ns2:inCondition rdf:resource="http://example.org/data/NormalTemperatureCondition"/>
+        <ns2:inCondition rdf:resource="http://example.org/data/NormalHumidityCondition"/>
+        <ns2:hasSystemProperty>
+          <ns0:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorAccuracy">
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Accuracy"/>
+            <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+            <rdfs:comment xml:lang="en">The accuracy of the temperature sensor is +-0.5 °C in normal temperature and humidity conditions.</rdfs:comment>
+            <schema:minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-0.5</schema:minValue>
+            <schema:maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5</schema:maxValue>
+            <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#DegreeCelsius"/>
+          </ns0:Property>
+        </ns2:hasSystemProperty>
+
+        <ns2:hasSystemProperty>
+          <ns0:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorSensitivity">
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Sensitivity"/>
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Resolution"/>
+            <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+            <rdfs:comment xml:lang="en">The sensitivity and resolution of the temperature sensor is 0.1 °C in normal temperature and humidity conditions.</rdfs:comment>
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1</schema:value>
+            <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#DegreeCelsius"/>
+          </ns0:Property>
+        </ns2:hasSystemProperty>
+
+        <ns2:hasSystemProperty rdf:resource="http://example.org/data/DHT22/4578#TemperatureSensorRepeatability"/>
+        <ns2:hasSystemProperty>
+          <ns0:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorFrequency">
+            <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Frequency"/>
+            <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+            <rdfs:comment xml:lang="en">The smallest possible time between one observation and the next is 2 s on average.</rdfs:comment>
+            <schema:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</schema:value>
+            <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#Second"/>
+          </ns0:Property>
+        </ns2:hasSystemProperty>
+
+      </ns0:Property>
+    </ns2:hasSystemCapability>
+
+    <ns0:implements rdf:resource="http://example.org/data/DHT22#Procedure"/>
+  </rdf:Description>
+
+  <ns2:Condition rdf:about="http://example.org/data/NormalOperatingCondition">
+    <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+    <rdfs:comment xml:lang="en">A temperature range of -40 to 80 Celsius.</rdfs:comment>
+    <schema:minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-40.0</schema:minValue>
+    <schema:maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">80.0</schema:maxValue>
+    <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#DegreeCelsius"/>
+  </ns2:Condition>
+
+  <ns2:Condition rdf:about="http://example.org/data/NormalHumidityCondition">
+    <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+    <rdfs:comment xml:lang="en">A relative humidity range of 5 to 85 %.</rdfs:comment>
+    <schema:minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.0</schema:minValue>
+    <schema:maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">85.0</schema:maxValue>
+    <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#Percent"/>
+  </ns2:Condition>
+
+  <ns0:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorPrecision">
+    <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Precision"/>
+    <rdf:type rdf:resource="http://schema.org/PropertyValue"/>
+    <rdfs:comment xml:lang="en">The precision (= repeatability) of the temperature sensor is +-0.2 °C in normal temperature and humidity conditions.</rdfs:comment>
+    <schema:minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2</schema:minValue>
+    <schema:maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2</schema:maxValue>
+    <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#DegreeCelsius"/>
+  </ns0:Property>
+
+  <rdf:Description rdf:about="http://example.org/data/observation/1087">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+    <ns3:madeBySensor rdf:resource="http://example.org/data/DHT22/4578#TemperatureSensor"/>
+    <ns3:usedProcedure rdf:resource="http://example.org/data/DHT22#Procedure"/>
+    <ns2:qualityOfObservation>
+      <rdf:Description rdf:about="http://example.org/data/observation/1087#quality">
+        <rdf:type rdf:resource="http://example.org/FairQuality"/>
+        <rdf:type rdf:resource="http://qudt.org/1.1/schema/qudt#Quantity"/>
+        <ns4:evaluatedBy rdf:resource="http://example.org/data/Tom"/>
+        <ns4:confidenceValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</ns4:confidenceValue>
+        <rdfs:comment xml:lang="en">Tom gave a confidence value of 6 out of 10 on this observation.</rdfs:comment>
+        <ns5:quantityValue>
+          <ns5:QuantityValue>
+            <ns5:numericValue rdf:datatype="http://www.w3.org/2001/XMLSchema#double">98.4</ns5:numericValue>
+            <ns5:unit rdf:resource="http://qudt.org/1.1/vocab/unit#Percent"/>
+          </ns5:QuantityValue>
+        </ns5:quantityValue>
+
+      </rdf:Description>
+    </ns2:qualityOfObservation>
+
+  </rdf:Description>
+
+</rdf:RDF>

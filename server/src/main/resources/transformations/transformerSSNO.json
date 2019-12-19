@@ -61,7 +61,7 @@
              },
             {
                 "qualityInformation": {
-                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty])",
+                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty]) or  boolean(//*[ssn-system:hasOperatingProperty) or boolean(//*[ssn-system:hasSurvivalProperty])",
                     "hoverover": {
                         "facetName": "Quality Information",
                         "template": "Hoverover and drilldown for %s are not supported yet.",
