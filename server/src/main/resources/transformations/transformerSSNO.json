@@ -59,6 +59,21 @@
                    }
                 }
              },
+             {
+                "standardsCompliance": {
+                    "availabilityPath": "boolean(/*[local-name()='RDF'])",
+                    "hoverover": {
+                        "facetName": "Standards Compliance",
+                        "template": "Standard name: %s / XML.",
+                        "text": {
+                            "standardNamePath": "local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=standards_complaince"
+                    }
+                }
+            },
             {
                 "qualityInformation": {
                     "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty]) or boolean(//*[ssn-system:hasOperatingProperty]) or boolean(//*[ssn-system:hasSurvivalProperty])",
