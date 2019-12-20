@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ns0="http://www.w3.org/ns/sosa/"
+         xmlns:ns1="http://www.w3.org/2006/time#"
+         xmlns:ns2="http://www.w3.org/ns/duv#">
+
+  <rdf:Description rdf:about="http://example.org/data/Observation/7536">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <ns0:observedProperty rdf:resource="http://example.org/data/Sun#sunspotNumber"/>
+    <ns0:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">66</ns0:hasSimpleResult>
+    <ns0:phenomenonTime>
+      <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+        <ns1:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T11:51:42+00:00</ns1:inXSDDateTimeStamp>
+      </rdf:Description>
+    </ns0:phenomenonTime>
+
+    <ns0:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T12:00:00+00:00</ns0:resultTime>
+    <ns2:hasFeedback rdf:resource="http://example.org/data/comment1"/>
+  </rdf:Description>
+
+</rdf:RDF>

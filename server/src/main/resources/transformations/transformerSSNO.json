@@ -24,6 +24,10 @@
                 "namespace": "http://purl.org/dc/terms/"
             },
             {
+                "prefix": "duv",
+                "namespace": "http://www.w3.org/ns/duv#"
+            },
+            {
                 "prefix": "foaf",
                 "namespace": "http://xmlns.com/foaf/0.1/"
             }
@@ -90,10 +94,25 @@
                 }
             },
             {
+                "userFeedback":{
+                   "availabilityPath":"boolean(sum(//*[local-name()='GVQ_FeedbackCollection']/*[local-name()='summary']/*[local-name()='feedbackItemsByExpertiseLevel']/*[local-name()='category'][*[local-name()='value'][text()='1' or text()='2' or text()='3']]/*[local-name()='count']))",
+                   "hoverover": {
+                    "facetName": "User Feedback",
+                    "template": "Hoverover and drilldown for %s are not supported yet.",
+                    "text": {
+                        "placeholder":"local-name(/*)"
+                    }
+                },
+                   "drilldown":{
+                      "url":"%s?feedback=%s&facet=user_feedback"
+                   }
+                }
+             },
+            {
                 "lineage": {
-                    "availabilityPath": "boolean(//*[ssn:implements]) or boolean(//*[ssn:implementedBy]) or boolean(//*[sosa:usedProcedure])",
+                    "availabilityPath": "boolean(//*[duv:hasFeedback])",
                     "hoverover": {
-                        "facetName": "Quality Information",
+                        "facetName": "Lineage Information",
                         "template": "Hoverover and drilldown for %s are not supported yet.",
                         "text": {
                             "placeholder":"local-name(/*)"
