@@ -36,7 +36,40 @@ import org.n52.geolabel.server.config.TransformationDescriptionResources;
 
 public class MetadataTransformerTest_SSNO {
 
-    
+    private MetadataTransformer transformer;
+
+    @Before
+    public void newMetadataTransformer() {
+        TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformerSSNO.json=/transformations/transformerSSNO.json");
+        this.transformer = new MetadataTransformer(new TransformationDescriptionLoader(res,
+                                                                                       new GeoLabelObjectMapper(res),
+                                                                                       true));
+    }
+
+    private void testLabel(Label label) {
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+    }
+
+    @Test
+    public void testIce_Core_Producer_Profile() throws IOException {
+        Label label = testSSNODocument("ssno/Ice_Core_Producer_Profile.rdf");
+
+        testLabel(label);
+
+    }
+
+    private Label testSSNODocument(String input) throws MalformedURLException, IOException {
+        InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(input);
+        Label l = new Label();
+        l.setMetadataUrl(new URL("http://localhost:8080/glbservice"));
+        Label label = this.transformer.updateGeoLabel(metadataStream, l);
+        return label;
+    }
+
 
 }
 
