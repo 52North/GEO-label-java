@@ -44,13 +44,12 @@
     <ns3:hasFeedback>
       <ns3:UserFeedback rdf:about="http://example.org/data/comment/2">
         <ns4:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an user.</ns4:hasBody>
-        <ns4:hasTarget rdf:resource="http://example.org/data/Observation/7536"/>
+        <ns4:hasTarget rdf:resource="http://example.org/data/Observation/148"/>
         <dc:creator>
           <prov:Agent rdf:about="http://example.org/data/Person/examplePerson">
             <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
             <foaf:givenName>Examplename</foaf:givenName>
             <foaf:mbox rdf:resource="mailto:name@example.org"/>
-            <foaf:homePage rdf:resource="http://name@example.com"/>
           </prov:Agent>
         </dc:creator>
 
@@ -87,7 +86,8 @@
 
   <ns3:UserFeedback rdf:about="http://example.org/data/comment/1">
     <ns4:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an expert.</ns4:hasBody>
-    <ns4:hasTarget rdf:resource="http://example.org/data/Observation/7536"/>
+    <ns4:hasTarget rdf:resource="http://example.org/data/Observation/147"/>
+    <ns4:hasTarget rdf:resource="http://example.org/data/Observation/148"/>
     <dc:creator>
       <prov:Agent rdf:about="http://example.org/data/Person/expertPerson">
         <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>

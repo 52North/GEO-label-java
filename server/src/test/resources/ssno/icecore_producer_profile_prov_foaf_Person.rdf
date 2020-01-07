@@ -45,7 +45,6 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
     <foaf:givenName>Examplename</foaf:givenName>
     <foaf:mbox rdf:resource="mailto:name@example.org"/>
-    <foaf:homePage rdf:resource="http://name@example.com"/>
   </prov:Agent>
 
 </rdf:RDF>
