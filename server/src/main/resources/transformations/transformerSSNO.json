@@ -68,9 +68,9 @@
                     "availabilityPath": "boolean(/*[local-name()='RDF'])",
                     "hoverover": {
                         "facetName": "Standards Compliance",
-                        "template": "Standard name: %s / XML.",
+                        "template": "Hoverover and drilldown for %s are not supported yet.",
                         "text": {
-                            "standardNamePath": "local-name(/*)"
+                            "placeholder":"local-name(/*)"
                         }
                     },
                     "drilldown": {
