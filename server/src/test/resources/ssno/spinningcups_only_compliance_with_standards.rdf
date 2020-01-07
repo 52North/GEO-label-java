@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ns0="http://www.w3.org/ns/sosa/"
+         xmlns:ns1="http://www.w3.org/ns/ssn/">
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#spinning-cups-->
+
+  <rdf:Description rdf:about="http://example.org/data/windSensor/14">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    <ns0:observes rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <ns0:madeObservation>
+      <ns0:Observation rdf:about="http://example.org/data/observation/147">
+        <ns0:observedProperty rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+        <ns0:madeBySensor rdf:resource="http://example.org/data/windSensor/14"/>
+        <ns1:wasOriginatedBy rdf:resource="http://example.org/data/observation/147#spinningCupsMovement"/>
+        <ns0:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-12T12:00:00Z</ns0:resultTime>
+        <ns0:hasSimpleResult rdf:datatype="http://example.org/data/speed">47 km/h</ns0:hasSimpleResult>
+      </ns0:Observation>
+    </ns0:madeObservation>
+
+    <ns0:madeObservation>
+      <ns0:Observation rdf:about="http://example.org/data/observation/148">
+        <ns0:observedProperty rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+        <ns0:madeBySensor rdf:resource="http://example.org/data/windSensor/14"/>
+        <ns1:wasOriginatedBy rdf:resource="http://example.org/data/observation/148#spinningCupsMovement"/>
+        <ns0:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-12T12:01:00Z</ns0:resultTime>
+        <ns0:hasSimpleResult rdf:datatype="http://example.org/data/speed">43 km/h</ns0:hasSimpleResult>
+      </ns0:Observation>
+    </ns0:madeObservation>
+
+    <ns1:detects rdf:resource="http://example.org/data/observation/147#spinningCupsMovement"/>
+    <ns1:detects rdf:resource="http://example.org/data/observation/148#spinningCupsMovement"/>
+  </rdf:Description>
+
+  <ns1:Stimulus rdf:about="http://example.org/data/observation/147#spinningCupsMovement">
+    <ns1:isProxyFor rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+  </ns1:Stimulus>
+
+  <ns1:Stimulus rdf:about="http://example.org/data/observation/148#spinningCupsMovement">
+    <ns1:isProxyFor rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+  </ns1:Stimulus>
+
+</rdf:RDF>
