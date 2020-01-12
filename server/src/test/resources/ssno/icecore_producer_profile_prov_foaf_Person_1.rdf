@@ -3,9 +3,9 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:sosa="http://www.w3.org/ns/sosa/"
          xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
-         xmlns:dc="http://purl.org/dc/terms/"
-         xmlns:foaf="http://xmlns.com/foaf/0.1/"
-         xmlns:ssn="http://www.w3.org/ns/ssn/">
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:ssn="http://www.w3.org/ns/ssn/"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <rdf:Description rdf:about="http://dbpedia.org/resource/Antarctic_ice_sheet">
     <rdf:type rdf:resource="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
@@ -30,11 +30,7 @@
   </sosa:Sample>
 
   <sosa:Observation rdf:about="http://example.org/data/iceCore/12#observation">
-    <dc:creator>
-      <foaf:Agent>
-        <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-      </foaf:Agent>
-    </dc:creator>
+    <prov:wasAssociatedWith rdf:resource="http://example.org/data/Person/examplePerson"/>
     <sosa:observedProperty>
       <rdf:Description rdf:about="http://example.org/data/iceCore/12#CO2">
         <ssn:isPropertyOf rdf:resource="http://example.org/data/iceCore/12"/>
@@ -42,5 +38,11 @@
     </sosa:observedProperty>
     <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">240</sosa:hasSimpleResult>
   </sosa:Observation>
+
+  <prov:Agent rdf:about="http://example.org/data/Person/examplePerson">
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+    <foaf:givenName>Examplename</foaf:givenName>
+    <foaf:mbox rdf:resource="mailto:name@example.org"/>
+  </prov:Agent>
 
 </rdf:RDF>

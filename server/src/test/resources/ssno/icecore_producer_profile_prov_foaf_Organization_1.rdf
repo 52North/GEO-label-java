@@ -3,7 +3,7 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:sosa="http://www.w3.org/ns/sosa/"
          xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
-         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:prov="http://www.w3.org/ns/prov#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:ssn="http://www.w3.org/ns/ssn/">
 
@@ -30,11 +30,12 @@
   </sosa:Sample>
 
   <sosa:Observation rdf:about="http://example.org/data/iceCore/12#observation">
-    <dc:creator>
-      <foaf:Agent>
-        <foaf:name xml:lang="en">W3C/OGC Spatial Data on the Web Working Group</foaf:name>
-      </foaf:Agent>
-    </dc:creator>
+    <prov:wasAssociatedWith>
+      <prov:Agent rdf:about="http://example.org/data/Organization/exampleOrganization">
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
+        <foaf:name>Example Organization</foaf:name>
+      </prov:Agent>
+    </prov:wasAssociatedWith>
     <sosa:observedProperty>
       <rdf:Description rdf:about="http://example.org/data/iceCore/12#CO2">
         <ssn:isPropertyOf rdf:resource="http://example.org/data/iceCore/12"/>
