@@ -10,6 +10,8 @@
 @prefix prov: <http://www.w3.org/ns/prov#>.
 @base <http://example.org/data/> .
 
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#iphone_barometer-sosa
+
 # The barometric readings from a Bosch Sensortec BMP282 sensor in an Apple IPhone 7 observed on June 6 2017
 # using only the SOSA core.
 

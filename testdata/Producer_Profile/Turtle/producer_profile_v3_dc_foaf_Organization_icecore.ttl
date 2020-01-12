@@ -4,8 +4,11 @@
 @prefix ssn:  <http://www.w3.org/ns/ssn/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix dc: <http://purl.org/dc/terms/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
 @base <http://example.org/data/> .
 
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ice-core.
 
 # The CO2 level observed in an ice core is 240 parts per million.
 # the ice core is a sample of the polar ice sheet of Antarctica. 
