@@ -9,6 +9,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#>.
 @base <http://example.org/data/> .
 
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ice-core.
 
 # The CO2 level observed in an ice core is 240 parts per million.
 # the ice core is a sample of the polar ice sheet of Antarctica. 

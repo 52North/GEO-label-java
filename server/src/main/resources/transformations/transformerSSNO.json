@@ -123,10 +123,10 @@
              },
             {
                 "lineage": {
-                    "availabilityPath": "boolean(//*[ssn:implements]) or boolean(//*[ssn:implementedBy]) or boolean(//*[sosa:usedProcedure])",
+                    "availabilityPath": "boolean(//*[ssn:implements]) or boolean(//*[ssn:implementedBy]) or boolean(//*[sosa:usedProcedure]) or boolean(//*[sosa:Procedure])",
                     "hoverover": {
                         "facetName": "Lineage Information",
-                        "template": "Hoverover and drilldown for %s are not supported yet.",
+                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
                         "text": {
                             "placeholder":"local-name(/*)"
                         }
