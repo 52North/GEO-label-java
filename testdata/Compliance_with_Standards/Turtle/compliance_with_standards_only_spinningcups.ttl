@@ -4,6 +4,9 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @base <http://example.org/data/> .
 
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#spinning-cups
+
+
 # movements of spinning cups on wind sensor #14 serves as proxies for the wind speed
 # at the location of the wind sensor.
 

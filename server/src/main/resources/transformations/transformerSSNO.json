@@ -78,7 +78,7 @@
              },
              {
                 "standardsCompliance": {
-                    "availabilityPath": "boolean(/*[local-name()='RDF'])",
+                    "availabilityPath": "boolean(//*[contains(@*, 'w3.org')])",
                     "hoverover": {
                         "facetName": "Standards Compliance",
                         "template": "Hoverover and drilldown for %s are not supported yet.",
