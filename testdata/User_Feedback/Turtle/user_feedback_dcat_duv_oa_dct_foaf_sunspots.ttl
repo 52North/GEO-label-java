@@ -10,6 +10,8 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 @base <http://example.org/data/> .
 
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#sunspots
+
 # The result of an observation of the sunspot number is available a few minutes 
 # after the phenomenon time, due to the light travel duration.
 
