@@ -46,19 +46,29 @@ public class MetadataTransformerTest_SSNO {
                                                                                        true));
     }
 
-    private void testLabel(Label label) {
+    @Test
+    public void producerProfile() throws IOException {
+        //first RDF/XML encoding 
+        Label label = testSSNODocument("ssno/producer_profile_v1_prov_foaf_Person_icecore.rdf");
 
         assertThat("producer profile is found",
                    label.getProducerProfileFacet().getAvailability(),
                    equalTo(Availability.AVAILABLE));
         
-    }
+        assertThat("standards compliance is found",
+                   label.getStandardsComplianceFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        //second RDF/XML encoding
+        label = testSSNODocument("ssno/producer_profile_v2_prov_foaf_Organization_iphonebarometer.rdf");
 
-    @Test
-    public void testIce_Core_Producer_Profile() throws IOException {
-        Label label = testSSNODocument("ssno/Ice_Core_Producer_Profile.rdf");
-
-        testLabel(label);
+        assertThat("producer profile is found",
+                    label.getProducerProfileFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+                   
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
 
     }
 
