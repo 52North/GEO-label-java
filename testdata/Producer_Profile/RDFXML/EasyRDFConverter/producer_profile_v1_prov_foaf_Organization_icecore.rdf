@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ice-core-->
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+<rdf:RDF 
+		 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:sosa="http://www.w3.org/ns/sosa/"
          xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
          xmlns:prov="http://www.w3.org/ns/prov#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:ssn="http://www.w3.org/ns/ssn/">
-
   <rdf:Description rdf:about="http://dbpedia.org/resource/Antarctic_ice_sheet">
     <rdf:type rdf:resource="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
     <sosa:hasSample rdf:resource="http://example.org/data/iceCore/12"/>
