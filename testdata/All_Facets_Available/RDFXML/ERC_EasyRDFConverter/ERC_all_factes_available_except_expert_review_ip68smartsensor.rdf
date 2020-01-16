@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ip68-smart-sensor-->
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ip68-smart-sensor.-->
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:org="http://www.w3.org/ns/org#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -9,8 +9,14 @@
          xmlns:schema="http://schema.org/"
          xmlns:ssn="http://www.w3.org/ns/ssn/"
          xmlns:sosa="http://www.w3.org/ns/sosa/"
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
-         xmlns:prov="http://www.w3.org/ns/prov#">
+         xmlns:duv="http://www.w3.org/ns/duv#"
+         xmlns:oa="http://www.w3.org/ns/oa#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:biro="http://purl.org/spar/biro/"
+         xmlns:dc="http://purl.org/dc/terms/">
 
   <org:Organization rdf:about="https://data.grandlyon.com/Organization/1">
     <owl:sameAs rdf:resource="http://dbpedia.org/page/Metropolis_of_Lyon"/>
@@ -113,8 +119,15 @@
 
   <gr:ProductOrService rdf:about="https://data.grandlyon.com/Sensor/SL-T-P1">
     <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
     <rdf:type rdf:resource="https://w3id.org/seas/LoRaCommunicationDevice"/>
     <rdf:type rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor"/>
+    <prov:wasAttributedTo>
+      <prov:Agent rdf:about="https://data.grandlyon.com/Organization/exampleOrganization">
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
+        <foaf:name>Example Organization</foaf:name>
+      </prov:Agent>
+    </prov:wasAttributedTo>
     <gr:hasBrand>
       <gr:Brand>
         <gr:name xml:lang="en">Sensing Labs</gr:name>
@@ -137,6 +150,20 @@
   </ssn:Deployment>
 
   <sosa:Observation rdf:about="https://data.grandlyon.com/Observation/5872357#temperature">
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <duv:hasFeedback>
+      <duv:RatingFeedback rdf:about="https://data.grandlyon.com/rating/1">
+        <oa:hasBody>
+          <skos:Concept rdf:about="https://data.grandlyon.com/good">
+            <skos:inScheme rdf:resource="https://data.grandlyon.com/rating"/>
+            <skos:prefLabel xml:lang="en">good</skos:prefLabel>
+          </skos:Concept>
+        </oa:hasBody>
+        <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#temperature"/>
+        <oa:motivatedBy rdf:resource="http://www.w3.org/ns/oa#assessing"/>
+      </duv:RatingFeedback>
+    </duv:hasFeedback>
+    <duv:hasFeedback rdf:resource="https://data.grandlyon.com/comment/1"/>
     <sosa:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">64.5244681928429 Cel</sosa:hasSimpleResult>
     <sosa:madeBySensor rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
     <sosa:hasFeatureOfInterest rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85"/>
@@ -145,11 +172,40 @@
   </sosa:Observation>
 
   <sosa:Observation rdf:about="https://data.grandlyon.com/Observation/5872357#battery">
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <duv:hasFeedback rdf:resource="https://data.grandlyon.com/comment/1"/>
+    <biro:isReferencedBy>
+      <rdf:Description rdf:about="https://data.grandlyon.com/paper">
+        <rdf:type rdf:resource="http://purl.org/spar/fabio/ResearchPaper"/>
+      </rdf:Description>
+    </biro:isReferencedBy>
+
     <sosa:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">73.2 %</sosa:hasSimpleResult>
     <sosa:madeBySensor rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
     <sosa:hasFeatureOfInterest rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
     <sosa:observedProperty rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1#battery"/>
     <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-20T21:49:18+00:00</sosa:resultTime>
   </sosa:Observation>
+
+  <skos:Concept rdf:about="https://data.grandlyon.com/bad">
+    <skos:inScheme rdf:resource="https://data.grandlyon.com/rating"/>
+    <skos:prefLabel xml:lang="en">bad</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:ConceptScheme rdf:about="https://data.grandlyon.com/rating">
+    <skos:prefLabel>A set of values to rate a observation.</skos:prefLabel>
+  </skos:ConceptScheme>
+
+  <duv:UserFeedback rdf:about="https://data.grandlyon.com/comment/1">
+    <oa:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an user.</oa:hasBody>
+    <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#temperature"/>
+    <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#battery"/>
+    <dc:creator>
+      <prov:Agent rdf:about="https://data.grandlyon.com/Person/examplePerson">
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+        <foaf:givenName>Examplename</foaf:givenName>
+      </prov:Agent>
+    </dc:creator>
+  </duv:UserFeedback>
 
 </rdf:RDF>

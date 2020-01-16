@@ -13,6 +13,15 @@
 @prefix seas: <https://w3id.org/seas/>.
 @prefix cdt: <http://w3id.org/lindt/custom_datatypes#>.
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix biro:  <http://purl.org/spar/biro/> .
+@prefix fabio:  <http://purl.org/spar/fabio/> .
+@prefix frbr:  <http://purl.org/vocab/frbr/core#> .
+@prefix duv:  <http://www.w3.org/ns/duv#> .
+@prefix oa:  <http://www.w3.org/ns/oa#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 
 @base <https://data.grandlyon.com/> .
 
@@ -76,8 +85,9 @@
 <Air?lat=45.75&long=4.85#temperature> a ssn:Property , sosa:ObservableProperty ;
   ssn:isPropertyOf <Air?lat=45.75&long=4.85> .
 
-<Sensor/SL-T-P1> a gr:ProductOrService, sosa:Sensor , seas:LoRaCommunicationDevice , <IP68_Outdoor_Temperature_Sensor> ;
-    gr:hasBrand [ a gr:Brand ; gr:name "Sensing Labs"@en ] ;
+<Sensor/SL-T-P1> a gr:ProductOrService, sosa:Sensor , prov:Entity, seas:LoRaCommunicationDevice , <IP68_Outdoor_Temperature_Sensor> ;
+    prov:wasAttributedTo <Organization/exampleOrganization>;
+	gr:hasBrand [ a gr:Brand ; gr:name "Sensing Labs"@en ] ;
     geo:alt 100.0 ;
     geo:lat 45.75 ;
     geo:lon 4.85 ;
@@ -92,16 +102,64 @@
   prov:wasAssociatedWith <Organization/1> ;
   ssn:deployedOnPlatform <Tree/1> .
 
-<Observation/5872357#temperature> a sosa:Observation ;
+<Observation/5872357#temperature> a sosa:Observation , dcat:Dataset , prov:Activity ;
+    duv:hasFeedback <rating/1> ;
+	duv:hasFeedback <comment/1> ;
+	duv:hasFeedback <comment/2> ;
     sosa:hasSimpleResult "64.5244681928429 Cel"^^cdt:ucum ;
     sosa:madeBySensor <Sensor/SL-T-P1> ;
     sosa:hasFeatureOfInterest <Air?lat=45.75&long=4.85> ;
     sosa:observedProperty <Air?lat=45.75&long=4.85#temperature> ;
     sosa:resultTime "2017-06-20T21:49:18+00:00"^^xsd:dateTime .
 
-<Observation/5872357#battery> a sosa:Observation ;
+<Observation/5872357#battery> a sosa:Observation , dcat:Dataset;
+    duv:hasFeedback <comment/1> ;
+	biro:isReferencedBy <paper>;
     sosa:hasSimpleResult "73.2 %"^^cdt:ucum ;
     sosa:madeBySensor <Sensor/SL-T-P1> ;
     sosa:hasFeatureOfInterest <Sensor/SL-T-P1> ;
     sosa:observedProperty <Sensor/SL-T-P1#battery> ;
     sosa:resultTime "2017-06-20T21:49:18+00:00"^^xsd:dateTime .
+
+<rating/1> rdf:type duv:RatingFeedback ;
+  oa:hasBody <good> ;
+  oa:hasTarget <Observation/5872357#temperature> ;
+  oa:motivatedBy oa:assessing .
+
+<good> a skos:Concept ;
+      skos:inScheme <rating> ;
+      skos:prefLabel "good"@en .
+
+<bad> a skos:Concept ;
+      skos:inScheme <rating> ;
+      skos:prefLabel "bad"@en .
+
+<rating> a skos:ConceptScheme ;
+      skos:prefLabel "A set of values to rate a observation." .
+	  
+<comment/1> rdf:type duv:UserFeedback ;
+  oa:hasBody "This is a comment of an user."^^xsd:string ;
+  oa:hasTarget <Observation/5872357#temperature> , <Observation/5872357#battery> ;
+  dct:creator <Person/exampleWoman> .
+
+<Person/exampleWoman> rdf:type prov:Agent, prov:Person;
+  foaf:givenName "Woman" .
+ 
+<Organization/exampleOrganization> rdf:type prov:Agent, prov:Organization;
+  foaf:name "Example Organization" .
+ 
+<paper> rdf:type fabio:ResearchPaper .
+
+<comment/1> rdf:type duv:UserFeedback, prov:Entity;
+  oa:hasBody "This is a comment of an expert."^^xsd:string ;
+  oa:hasTarget <Observation/7536> ;
+  prov:qualifiedAssociation [
+	a prov:Association;
+	prov:agent <Person/exampleMan>;
+	prov:hadRole <expert> ]; 
+.
+
+<Person/exampleMan> rdf:type prov:Agent, prov:Person;
+  foaf:givenName "Man" .
+ 
+<expert> rdf:type prov:Role .
