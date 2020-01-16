@@ -117,7 +117,7 @@
                     }
                 },
                    "drilldown":{
-                      "url":"%s?feedback=%s&facet=user_feedback"
+                      "url":"%s?metadata=%s&facet=user_feedback"
                    }
                 }
              },
@@ -133,6 +133,36 @@
                     },
                     "drilldown": {
                         "url": "%s?metadata=%s&facet=quality_information"
+                    }
+                }
+            },
+            {
+                "expertReview": {
+                    "availabilityPath": "boolean(//*[ssn:hasnix])",
+                    "hoverover": {
+                        "facetName": "Expert Review",
+                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=expert_review"
+                    }
+                }
+            },
+            {
+                "citations": {
+                    "availabilityPath": "boolean(//*[ssn:hasnix])",
+                    "hoverover": {
+                        "facetName": "Citations Information",
+                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=citations_information"
                     }
                 }
             }

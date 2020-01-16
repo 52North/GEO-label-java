@@ -46,9 +46,9 @@ public class MetadataTransformerTest_SSNO {
                                                                                        true));
     }
 
-    @Test
+    @Test //tests if the given SSNODocuments contains information about the producer
     public void producerProfile() throws IOException {
-        //EasyRDFConverter encoding, prov:Person
+        //EasyRDFConverter RDF/XML encoding, prov:wasAssociatedWith, prov:Person
         Label label = testSSNODocument("ssno/ERC_producer_profile_prov_foaf_Person_icecore.rdf");
 
         assertThat("producer profile is found",
@@ -59,7 +59,15 @@ public class MetadataTransformerTest_SSNO {
                    label.getStandardsComplianceFacet().getAvailability(),
                    equalTo(Availability.AVAILABLE));
         
-        //MyBluemixConverter encoding, prov:Organization
+        assertThat("Hover-Over is not supported",
+                   label.getProducerProfileFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        assertThat("Hover-Over is not supported",
+                   label.getStandardsComplianceFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        //MyBluemixConverter RDF/XML encoding, prov:wasAttributedTo, prov:Organization
         label = testSSNODocument("ssno/MBC_producer_profile_prov_foaf_Organization_iphonebarometer.rdf");
 
         assertThat("producer profile is found",
@@ -70,27 +78,118 @@ public class MetadataTransformerTest_SSNO {
                     label.getStandardsComplianceFacet().getAvailability(),
                     equalTo(Availability.AVAILABLE));
 
+        assertThat("Hover-Over is not supported",
+                    label.getProducerProfileFacet().getTitle(),
+                    containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        assertThat("Hover-Over is not supported",
+                    label.getStandardsComplianceFacet().getTitle(),
+                    containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
     }
 
-    @Test
+    @Test //tests if the given SSNODocuments contains comments of the producer
     public void producerComments() throws IOException {
-        //EasyRDFConverter encoding
+        //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_producer_comments_rdf_coiloilplant.rdf");
 
         assertThat("producer comment is found",
                    label.getProducerCommentsFacet().getAvailability(),
                    equalTo(Availability.AVAILABLE));
         
-        //MyBluemixConverter encoding
+        assertThat("Hover-Over is not supported",
+                   label.getProducerCommentsFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        //MyBluemixConverter RDF/XML encoding
         label = testSSNODocument("ssno/MBC_producer_comments_rdf_coiloilplant.rdf");
 
         assertThat("producer comment is found",
                    label.getProducerCommentsFacet().getAvailability(),
                    equalTo(Availability.AVAILABLE));
 
+        assertThat("Hover-Over is not supported",
+                   label.getProducerCommentsFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+                
     }
 
-    
+    @Test //tests if the given SSNODocuments contains only information about standard compliance
+    public void onlyStandardCompliance() throws IOException {
+        //EasyRDFConverter RDF/XML encoding
+        Label label = testSSNODocument("ssno/ERC_compliance_with_standards_only_spinningcups.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is not found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("producer comment is not found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Quality information is not found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("User feedback is not found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Lineage information is not found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("Expert feedback is not found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Citations information is not found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+
+        //MyBluemixConverter RDF/XML encoding
+        label = testSSNODocument("ssno/MBC_compliance_with_standards_only_spinningcups.rdf");
+
+        assertThat("producer comment is not found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("standards compliance is found",
+                   label.getStandardsComplianceFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is not found",
+                    label.getProducerProfileFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+       
+        assertThat("producer comment is not found",
+                    label.getProducerCommentsFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Quality information is not found",
+                    label.getQualityInformationFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("User feedback is not found",
+                    label.getUserFeedbackFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Lineage information is not found",
+                    label.getLineageFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("Expert feedback is not found",
+                    label.getExpertFeedbackFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Citations information is not found",
+                    label.getCitationsFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+
+    }
 
 
     private Label testSSNODocument(String input) throws MalformedURLException, IOException {
