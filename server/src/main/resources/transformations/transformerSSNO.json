@@ -100,7 +100,7 @@
             },
             {
                 "userFeedback":{
-                   "availabilityPath":"(boolean(//*[duv:hasFeedback | duv:UserFeedback or duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]))",
+                   "availabilityPath":"(boolean(//*[duv:hasFeedback | duv:UserFeedback or duv:hasFeedback | duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]))",
                    "hoverover": {
                     "facetName": "User Feedback",
                     "template": "Hoverover and drilldown for %s / XML are not supported yet.",
@@ -130,7 +130,7 @@
             },
             {
                 "expertReview": {
-                    "availabilityPath": "boolean(//*[ssn:hasnix])",
+                    "availabilityPath": "(boolean(//*[duv:hasFeedback/duv:UserFeedback/prov:qualifiedAssociation/prov:Association/prov:hadRole/prov:Role[contains(@rdf:about, 'expert')]])) or (boolean(//*[rdf:Description[@rdf:nodeID=//rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/prov:qualifiedAssociation/@rdf:nodeID]/prov:hadRole[contains(@rdf:resource, 'expert')]]))",
                     "hoverover": {
                         "facetName": "Expert Review",
                         "template": "Hoverover and drilldown for %s / XML are not supported yet.",

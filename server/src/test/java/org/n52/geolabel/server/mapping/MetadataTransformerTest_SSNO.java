@@ -46,7 +46,7 @@ public class MetadataTransformerTest_SSNO {
                                                                                        true));
     }
 
-    @Test //tests if the given SSNODocuments contains information about the producer
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains information about the producer
     public void producerProfile() throws IOException {
         //EasyRDFConverter RDF/XML encoding, prov:wasAssociatedWith, prov:Person
         Label label = testSSNODocument("ssno/ERC_producer_profile_Person_icecore.rdf");
@@ -87,7 +87,7 @@ public class MetadataTransformerTest_SSNO {
                     containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
     }
 
-    @Test //tests if the given SSNODocuments contains comments of the producer
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains comments of the producer
     public void producerComments() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_producer_comments_coiloilplant.rdf");
@@ -113,7 +113,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the given SSNODocuments contains only information about standard compliance
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
     public void onlyStandardCompliance() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_compliance_with_standards_only_spinningcups.rdf");
@@ -191,7 +191,7 @@ public class MetadataTransformerTest_SSNO {
 
     }
 
-    @Test //tests if the given SSNODocuments contains quality and lineage information
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains quality and lineage information
     public void lineageAndQuality() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_lineage_quality_information_ip68smartsensor.rdf");
@@ -233,7 +233,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the given SSNODocuments contains user feedback or ratings
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains user feedback or ratings
     public void userFeedback() throws IOException {
         //EasyRDFConverter RDF/XML encoding, duv:RatingFeedback
         Label label = testSSNODocument("ssno/ERC_user_feedback_rating_sunspots.rdf");
@@ -259,7 +259,33 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the given SSNODocuments contains citations informations
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains expert reviews
+    public void expertReviews() throws IOException {
+        //EasyRDFConverter RDF/XML encoding
+        Label label = testSSNODocument("ssno/ERC_expert_review_sunspots.rdf");
+
+        assertThat("Expert feedback is found",
+                    label.getExpertFeedbackFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+        
+        assertThat("Hover-Over is not supported",
+                   label.getExpertFeedbackFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        //MyBluemixConverter RDF/XML encoding
+        label = testSSNODocument("ssno/MBC_expert_review_sunspots.rdf");
+
+        assertThat("Expert feedback is found",
+                    label.getExpertFeedbackFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+        
+        assertThat("Hover-Over is not supported",
+                   label.getExpertFeedbackFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+                
+    }
+
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains citations informations
     public void citationsInformation() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_citation_information_spinningcups.rdf");
@@ -286,7 +312,7 @@ public class MetadataTransformerTest_SSNO {
     }
 
 
-    
+
 
     private Label testSSNODocument(String input) throws MalformedURLException, IOException {
         InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(input);
