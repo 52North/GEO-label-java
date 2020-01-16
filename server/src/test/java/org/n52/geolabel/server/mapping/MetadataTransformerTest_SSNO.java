@@ -191,6 +191,59 @@ public class MetadataTransformerTest_SSNO {
 
     }
 
+    @Test //tests if the given SSNODocuments contains comments of the producer
+    public void lineageAndQuality() throws IOException {
+        //EasyRDFConverter RDF/XML encoding
+        Label label = testSSNODocument("ssno/ERC_lineage_quality_information_sosa_ssn_ip68smartsensor.rdf");
+
+        assertThat("Quality information is found",
+                    label.getQualityInformationFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+        
+        assertThat("Hover-Over is not supported",
+                   label.getQualityInformationFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        //MyBluemixConverter RDF/XML encoding
+        label = testSSNODocument("ssno/MBC_lineage_quality_information_sosa_ssn_dht22description.rdf");
+
+        assertThat("Quality information is found",
+                    label.getQualityInformationFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("Hover-Over is not supported",
+                   label.getQualityInformationFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+                
+    }
+
+    @Test //tests if the given SSNODocuments contains user feedback or ratings
+    public void userFeedback() throws IOException {
+        //EasyRDFConverter RDF/XML encoding, duv:RatingFeedback
+        Label label = testSSNODocument("ssno/ERC_user_feedback_rating_dcat_duv_oa_dct_foaf_sunspots.rdf");
+
+        assertThat("User feedback is found",
+                    label.getUserFeedbackFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+        
+        assertThat("Hover-Over is not supported",
+                   label.getUserFeedbackFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+        
+        //MyBluemixConverter RDF/XML encoding, duv:UserFeedback
+        label = testSSNODocument("ssno/MBC_user_feedback_feedback_dcat_duv_oa_dct_foaf_sunspots.rdf");
+
+        assertThat("User feedback is found",
+                    label.getUserFeedbackFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("Hover-Over is not supported",
+                   label.getUserFeedbackFacet().getTitle(),
+                   containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
+                
+    }
+
+
 
     private Label testSSNODocument(String input) throws MalformedURLException, IOException {
         InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(input);

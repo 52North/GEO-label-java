@@ -80,8 +80,8 @@
                 "standardsCompliance": {
                     "availabilityPath": "boolean(//*[contains(@*, 'w3.org')])",
                     "hoverover": {
-                        "facetName": "Standards Compliance",
-                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                        "facetName":"Standards Compliance",
+                        "template":"Hoverover and drilldown for %s / XML are not supported yet.",
                         "text": {
                             "placeholder":"local-name(/*)"
                         }
@@ -93,10 +93,10 @@
             },
             {
                 "qualityInformation": {
-                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty]) or boolean(//*[ssn-system:hasOperatingProperty]) or boolean(//*[ssn-system:hasSurvivalProperty])",
+                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty or ssn-system:hasOperatingProperty or ssn-system:hasSurvivalProperty or ssn-system:qualityOfObservation])",
                     "hoverover": {
-                        "facetName": "Quality Information",
-                        "template": "Hoverover and drilldown for %s are not supported yet.",
+                        "facetName":"Quality Information",
+                        "template":"Hoverover and drilldown for %s / XML are not supported yet.",
                         "text": {
                             "placeholder":"local-name(/*)"
                         }
@@ -108,7 +108,7 @@
             },
             {
                 "userFeedback":{
-                   "availabilityPath":"boolean(//*[duv:hasFeedback]) and boolean(//*[duv:UserFeedback])",
+                   "availabilityPath":"(boolean(//*[duv:hasFeedback/duv:UserFeedback or duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]))",
                    "hoverover": {
                     "facetName": "User Feedback",
                     "template": "Hoverover and drilldown for %s / XML are not supported yet.",

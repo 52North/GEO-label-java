@@ -21,10 +21,8 @@
             <rdfp:validationRule rdf:resource="http://example.org/data/shacl_shapes_graph"/>
           </rdfp:GraphDescription>
         </rdfp:presentedBy>
-
       </ssn:Output>
     </ssn:hasOutput>
-
   </rdf:Description>
 
   <ssn:System rdf:about="http://example.org/data/DHT22/4578">
@@ -43,11 +41,9 @@
             <ssn-systems:inCondition rdf:resource="http://example.org/data/NormalHumidityCondition"/>
           </ssn-systems:OperatingRange>
         </ssn-systems:hasOperatingRange>
-
         <ssn:implements rdf:resource="http://example.org/data/DHT22#Procedure"/>
       </rdf:Description>
     </ssn:hasSubSystem>
-
   </ssn:System>
 
   <rdf:Description rdf:about="http://example.org/data/DHT22/4578#TemperatureSensor">
@@ -61,7 +57,6 @@
         <ssn-systems:inCondition rdf:resource="http://example.org/data/NormalHumidityCondition"/>
       </ssn-systems:OperatingRange>
     </ssn-systems:hasOperatingRange>
-
     <ssn-systems:hasSystemCapability>
       <ssn:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorCapability">
         <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
@@ -79,7 +74,6 @@
             <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#DegreeCelsius"/>
           </ssn:Property>
         </ssn-systems:hasSystemProperty>
-
         <ssn-systems:hasSystemProperty>
           <ssn:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorSensitivity">
             <rdf:type rdf:resource="http://www.w3.org/ns/ssn/systems/Sensitivity"/>
@@ -90,7 +84,6 @@
             <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#DegreeCelsius"/>
           </ssn:Property>
         </ssn-systems:hasSystemProperty>
-
         <ssn-systems:hasSystemProperty rdf:resource="http://example.org/data/DHT22/4578#TemperatureSensorRepeatability"/>
         <ssn-systems:hasSystemProperty>
           <ssn:Property rdf:about="http://example.org/data/DHT22/4578#TemperatureSensorFrequency">
@@ -101,10 +94,8 @@
             <schema:unitCode rdf:resource="http://qudt.org/1.1/vocab/unit#Second"/>
           </ssn:Property>
         </ssn-systems:hasSystemProperty>
-
       </ssn:Property>
     </ssn-systems:hasSystemCapability>
-
     <ssn:implements rdf:resource="http://example.org/data/DHT22#Procedure"/>
   </rdf:Description>
 
@@ -150,10 +141,8 @@
             <qudt-1-1:unit rdf:resource="http://qudt.org/1.1/vocab/unit#Percent"/>
           </qudt-1-1:QuantityValue>
         </qudt-1-1:quantityValue>
-
       </rdf:Description>
     </ssn-systems:qualityOfObservation>
-
   </rdf:Description>
 
 </rdf:RDF>

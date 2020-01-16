@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#sunspots-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:sosa="http://www.w3.org/ns/sosa/"
+         xmlns:time="http://www.w3.org/2006/time#"
+         xmlns:duv="http://www.w3.org/ns/duv#"
+         xmlns:oa="http://www.w3.org/ns/oa#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+  <rdf:Description rdf:about="http://example.org/data/Observation/7536">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <sosa:observedProperty rdf:resource="http://example.org/data/Sun#sunspotNumber"/>
+    <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">66</sosa:hasSimpleResult>
+    <sosa:phenomenonTime>
+      <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+        <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T11:51:42+00:00</time:inXSDDateTimeStamp>
+      </rdf:Description>
+    </sosa:phenomenonTime>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T12:00:00+00:00</sosa:resultTime>
+    <duv:hasFeedback>
+      <duv:RatingFeedback rdf:about="http://example.org/data/rating/1">
+        <oa:hasBody>
+          <skos:Concept rdf:about="http://example.org/data/good">
+            <skos:inScheme rdf:resource="http://example.org/data/rating"/>
+            <skos:prefLabel xml:lang="en">good</skos:prefLabel>
+          </skos:Concept>
+        </oa:hasBody>
+        <oa:hasTarget rdf:resource="http://example.org/data/Observation/7536"/>
+        <oa:motivatedBy rdf:resource="http://www.w3.org/ns/oa#assessing"/>
+      </duv:RatingFeedback>
+    </duv:hasFeedback>
+  </rdf:Description>
+
+  <skos:Concept rdf:about="http://example.org/data/bad">
+    <skos:inScheme rdf:resource="http://example.org/data/rating"/>
+    <skos:prefLabel xml:lang="en">bad</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:ConceptScheme rdf:about="http://example.org/data/rating">
+    <skos:prefLabel>A set of values to rate a observation.</skos:prefLabel>
+  </skos:ConceptScheme>
+
+</rdf:RDF>
