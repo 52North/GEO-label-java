@@ -24,24 +24,16 @@
                 "namespace": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             },
             {
-                "prefix": "dcterms",
-                "namespace": "http://purl.org/dc/terms/"
-            },
-            {
-                "prefix": "dc",
-                "namespace": "http://purl.org/dc/terms/"
-            },
-            {
                 "prefix": "duv",
                 "namespace": "http://www.w3.org/ns/duv#"
             },
             {
-                "prefix": "foaf",
-                "namespace": "http://xmlns.com/foaf/0.1/"
-            },
-            {
                 "prefix": "prov",
                 "namespace": "http://www.w3.org/ns/prov#"
+            },
+            {
+                "prefix": "biro",
+                "namespace": "http://purl.org/spar/biro/"
             }
             
         ],
@@ -108,7 +100,7 @@
             },
             {
                 "userFeedback":{
-                   "availabilityPath":"(boolean(//*[duv:hasFeedback/duv:UserFeedback or duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]))",
+                   "availabilityPath":"(boolean(//*[duv:hasFeedback | duv:UserFeedback or duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]))",
                    "hoverover": {
                     "facetName": "User Feedback",
                     "template": "Hoverover and drilldown for %s / XML are not supported yet.",
@@ -123,7 +115,7 @@
              },
             {
                 "lineage": {
-                    "availabilityPath": "boolean(//*[ssn:implements]) or boolean(//*[ssn:implementedBy]) or boolean(//*[sosa:usedProcedure]) or boolean(//*[sosa:Procedure])",
+                    "availabilityPath": "boolean(//*[ssn:implements or ssn:implementedBy or sosa:usedProcedure or sosa:Procedure or @rdf:resource='http://www.w3.org/ns/sosa/Procedure'])",
                     "hoverover": {
                         "facetName": "Lineage Information",
                         "template": "Hoverover and drilldown for %s / XML are not supported yet.",
@@ -153,7 +145,7 @@
             },
             {
                 "citations": {
-                    "availabilityPath": "boolean(//*[ssn:hasnix])",
+                    "availabilityPath": "boolean(//*[biro:isReferencedBy])",
                     "hoverover": {
                         "facetName": "Citations Information",
                         "template": "Hoverover and drilldown for %s / XML are not supported yet.",
