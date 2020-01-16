@@ -48,8 +48,8 @@ public class MetadataTransformerTest_SSNO {
 
     @Test
     public void producerProfile() throws IOException {
-        //first RDF/XML encoding 
-        Label label = testSSNODocument("ssno/producer_profile_v1_prov_foaf_Person_icecore.rdf");
+        //EasyRDFConverter encoding, prov:Person
+        Label label = testSSNODocument("ssno/ERC_producer_profile_prov_foaf_Person_icecore.rdf");
 
         assertThat("producer profile is found",
                    label.getProducerProfileFacet().getAvailability(),
@@ -59,8 +59,8 @@ public class MetadataTransformerTest_SSNO {
                    label.getStandardsComplianceFacet().getAvailability(),
                    equalTo(Availability.AVAILABLE));
         
-        //second RDF/XML encoding
-        label = testSSNODocument("ssno/producer_profile_v2_prov_foaf_Organization_iphonebarometer.rdf");
+        //MyBluemixConverter encoding, prov:Organization
+        label = testSSNODocument("ssno/MBC_producer_profile_prov_foaf_Organization_iphonebarometer.rdf");
 
         assertThat("producer profile is found",
                     label.getProducerProfileFacet().getAvailability(),
@@ -71,6 +71,27 @@ public class MetadataTransformerTest_SSNO {
                     equalTo(Availability.AVAILABLE));
 
     }
+
+    @Test
+    public void producerComments() throws IOException {
+        //EasyRDFConverter encoding
+        Label label = testSSNODocument("ssno/ERC_producer_comments_rdf_coiloilplant.rdf");
+
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        //MyBluemixConverter encoding
+        label = testSSNODocument("ssno/MBC_producer_comments_rdf_coiloilplant.rdf");
+
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+    }
+
+    
+
 
     private Label testSSNODocument(String input) throws MalformedURLException, IOException {
         InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(input);
