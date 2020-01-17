@@ -100,7 +100,7 @@
             },
             {
                 "userFeedback":{
-                   "availabilityPath":"(boolean(//*[duv:hasFeedback | duv:UserFeedback or duv:hasFeedback | duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]))",
+                   "availabilityPath":"(boolean(//*[duv:hasFeedback/duv:UserFeedback[not(prov:qualifiedAssociation)] or duv:hasFeedback/duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]) and boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource][not(prov:qualifiedAssociation)]])) or (boolean(//*[duv:UserFeedback[@rdf:about=//duv:hasFeedback/@rdf:resource][not(prov:qualifiedAssociation)]])) or (boolean(//*[duv:RatingFeedback[@rdf:about=//duv:hasFeedback/@rdf:resource]]))",
                    "hoverover": {
                     "facetName": "User Feedback",
                     "template": "Hoverover and drilldown for %s / XML are not supported yet.",

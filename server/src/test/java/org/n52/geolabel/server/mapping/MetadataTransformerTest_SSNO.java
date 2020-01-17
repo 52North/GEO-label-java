@@ -242,6 +242,10 @@ public class MetadataTransformerTest_SSNO {
                     label.getUserFeedbackFacet().getAvailability(),
                     equalTo(Availability.AVAILABLE));
         
+        assertThat("Expert feedback is not found",
+                    label.getExpertFeedbackFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+        
         assertThat("Hover-Over is not supported",
                    label.getUserFeedbackFacet().getTitle(),
                    containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
@@ -252,6 +256,10 @@ public class MetadataTransformerTest_SSNO {
         assertThat("User feedback is found",
                     label.getUserFeedbackFacet().getAvailability(),
                     equalTo(Availability.AVAILABLE));
+                
+        assertThat("Expert feedback is not found",
+                    label.getExpertFeedbackFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
 
         assertThat("Hover-Over is not supported",
                    label.getUserFeedbackFacet().getTitle(),
@@ -268,6 +276,10 @@ public class MetadataTransformerTest_SSNO {
                     label.getExpertFeedbackFacet().getAvailability(),
                     equalTo(Availability.AVAILABLE));
         
+        assertThat("User feedback is not found",
+                    label.getUserFeedbackFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
+        
         assertThat("Hover-Over is not supported",
                    label.getExpertFeedbackFacet().getTitle(),
                    containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
@@ -278,6 +290,10 @@ public class MetadataTransformerTest_SSNO {
         assertThat("Expert feedback is found",
                     label.getExpertFeedbackFacet().getAvailability(),
                     equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is not found",
+                    label.getUserFeedbackFacet().getAvailability(),
+                    equalTo(Availability.NOT_AVAILABLE));
         
         assertThat("Hover-Over is not supported",
                    label.getExpertFeedbackFacet().getTitle(),
