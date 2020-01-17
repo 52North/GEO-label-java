@@ -34,11 +34,16 @@ import org.n52.geolabel.server.config.GeoLabelObjectMapper;
 import org.n52.geolabel.server.config.TransformationDescriptionLoader;
 import org.n52.geolabel.server.config.TransformationDescriptionResources;
 
+/**
+ * Test class to test the generation of labels based on SSNO (Semantic Sensor Network Ontology) and RDF documents
+ * @author Anika Graupner, WWU Münster 
+ */
 public class MetadataTransformerTest_SSNO {
 
     private MetadataTransformer transformer;
 
-    @Before
+
+    @Before // define the Transformationdescription
     public void newMetadataTransformer() {
         TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformerSSNO.json=/transformations/transformerSSNO.json");
         this.transformer = new MetadataTransformer(new TransformationDescriptionLoader(res,
@@ -46,7 +51,7 @@ public class MetadataTransformerTest_SSNO {
                                                                                        true));
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains information about the producer
+    @Test //tests if the xpath find the information about the producer profile in the given RDF Document
     public void producerProfile() throws IOException {
         //EasyRDFConverter RDF/XML encoding, prov:wasAssociatedWith, prov:Person
         Label label = testSSNODocument("ssno/ERC_producer_profile_Person_icecore.rdf");
@@ -87,7 +92,7 @@ public class MetadataTransformerTest_SSNO {
                     containsString("Hoverover and drilldown for RDF / XML are not supported yet."));
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains comments of the producer
+    @Test //tests if the xpath find the producer comments in the given RDF Document
     public void producerComments() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_producer_comments_coiloilplant.rdf");
@@ -113,7 +118,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    @Test //tests if the xpath find the information about the standard compliance in the given RDF Document
     public void onlyStandardCompliance() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_compliance_with_standards_only_spinningcups.rdf");
@@ -191,7 +196,7 @@ public class MetadataTransformerTest_SSNO {
 
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains quality and lineage information
+    @Test //tests if the xpath find the information about quality and lineage in the given RDF Document
     public void lineageAndQuality() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_lineage_quality_information_ip68smartsensor.rdf");
@@ -233,7 +238,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains user feedback or ratings
+    @Test //tests if the xpath find the user Feedback in the given RDF Document
     public void userFeedback() throws IOException {
         //EasyRDFConverter RDF/XML encoding, duv:RatingFeedback
         Label label = testSSNODocument("ssno/ERC_user_feedback_rating_sunspots.rdf");
@@ -267,7 +272,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains expert reviews
+    @Test //tests if the xpath find the expert reviews in the given RDF Document
     public void expertReviews() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_expert_review_sunspots.rdf");
@@ -301,7 +306,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains citations informations
+    @Test //tests if the xpath find the citations information in the given RDF Document
     public void citationsInformation() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_citation_information_spinningcups.rdf");
@@ -327,7 +332,7 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    @Test //tests if the xpath find informations for all facets in the given RDF Document
     public void allFacets() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_all_factes_available_ip68smartsensor.rdf");
@@ -401,7 +406,7 @@ public class MetadataTransformerTest_SSNO {
 
     }    
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    @Test //tests if the xpath find informations for all facets except expert reviews in the given RDF Document
     public void allFacetsWithoutExpert() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_all_factes_available_except_expert_review_ip68smartsensor.rdf");
@@ -475,7 +480,7 @@ public class MetadataTransformerTest_SSNO {
 
     }   
 
-    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    @Test //tests if the xpath works also with onknown prefixes, so that the namespace mapping must be execute
     public void unknownPrefixes() throws IOException {
         //EasyRDFConverter RDF/XML encoding
         Label label = testSSNODocument("ssno/ERC_all_factes_available_ip68smartsensor_unknown_prefixes.rdf");
@@ -514,8 +519,92 @@ public class MetadataTransformerTest_SSNO {
 
     }
 
+    @Test // tests first if the xpath find information about all facets and creates then an label and saves it local, the path is shown in the terminal
+    public void createLabelAllFacets() throws IOException {
+        Label label = testSSNODocument("ssno/ERC_all_factes_available_ip68smartsensor.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Quality information is found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Lineage information is found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("Expert feedback is found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Citations information is found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        File f = File.createTempFile("geolabel_", ".svg");
+        FileWriter fw = new FileWriter(f);
+        label.toSVG(fw, "test", 420);
+        System.out.println("Wrote label to " + f.getAbsolutePath());
+    }
+
+    @Test // tests first if the xpath find information only about standard compliance and creates then an label and saves it local, the path is shown in the terminal
+    public void createLabelOnlyStandardCompliance() throws IOException {
+        Label label = testSSNODocument("ssno/MBC_compliance_with_standards_only_spinningcups.rdf");
+
+        assertThat("standards compliance is found",
+            label.getStandardsComplianceFacet().getAvailability(),
+            equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is not found",
+            label.getProducerProfileFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("producer comment is not found",
+            label.getProducerCommentsFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("Quality information is not found",
+            label.getQualityInformationFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("User feedback is not found",
+            label.getUserFeedbackFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("Lineage information is not found",
+            label.getLineageFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("Expert feedback is not found",
+            label.getExpertFeedbackFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        assertThat("Citations information is not found",
+            label.getCitationsFacet().getAvailability(),
+            equalTo(Availability.NOT_AVAILABLE));
+
+        File f = File.createTempFile("geolabel_", ".svg");
+        FileWriter fw = new FileWriter(f);
+        label.toSVG(fw, "test", 420);
+        System.out.println("Wrote label to " + f.getAbsolutePath());
+    }
 
 
+    // method that generates a label 
     private Label testSSNODocument(String input) throws MalformedURLException, IOException {
         InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(input);
         Label l = new Label();
