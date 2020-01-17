@@ -327,6 +327,192 @@ public class MetadataTransformerTest_SSNO {
                 
     }
 
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    public void allFacets() throws IOException {
+        //EasyRDFConverter RDF/XML encoding
+        Label label = testSSNODocument("ssno/ERC_all_factes_available_ip68smartsensor.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Quality information is found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Lineage information is found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("Expert feedback is found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Citations information is found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        //MyBluemixConverter RDF/XML encoding
+        label = testSSNODocument("ssno/MBC_all_factes_available_ip68smartsensor.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Quality information is found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Lineage information is found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("Expert feedback is found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Citations information is found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+    }    
+
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    public void allFacetsWithoutExpert() throws IOException {
+        //EasyRDFConverter RDF/XML encoding
+        Label label = testSSNODocument("ssno/ERC_all_factes_available_except_expert_review_ip68smartsensor.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Quality information is found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Lineage information is found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("Expert feedback is not found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Citations information is found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        //MyBluemixConverter RDF/XML encoding
+        label = testSSNODocument("ssno/MBC_all_factes_available_except_expert_review_ip68smartsensor.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Quality information is found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Lineage information is found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("Expert feedback is not found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.NOT_AVAILABLE));
+        
+        assertThat("Citations information is found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+    }   
+
+    @Test //tests if the xpath recognizes that the given SSNODocuments contains only information about standard compliance
+    public void unknownPrefixes() throws IOException {
+        //EasyRDFConverter RDF/XML encoding
+        Label label = testSSNODocument("ssno/ERC_all_factes_available_ip68smartsensor_unknown_prefixes.rdf");
+
+        assertThat("standards compliance is found",
+                    label.getStandardsComplianceFacet().getAvailability(),
+                    equalTo(Availability.AVAILABLE));
+
+        assertThat("producer profile is found",
+                   label.getProducerProfileFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("producer comment is found",
+                   label.getProducerCommentsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Quality information is found",
+                   label.getQualityInformationFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("User feedback is found",
+                   label.getUserFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Lineage information is found",
+                   label.getLineageFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+        assertThat("Expert feedback is found",
+                   label.getExpertFeedbackFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+        
+        assertThat("Citations information is found",
+                   label.getCitationsFacet().getAvailability(),
+                   equalTo(Availability.AVAILABLE));
+
+    }
 
 
 
