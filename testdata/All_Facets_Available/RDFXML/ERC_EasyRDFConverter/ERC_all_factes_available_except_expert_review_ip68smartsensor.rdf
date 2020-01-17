@@ -9,14 +9,14 @@
          xmlns:schema="http://schema.org/"
          xmlns:ssn="http://www.w3.org/ns/ssn/"
          xmlns:sosa="http://www.w3.org/ns/sosa/"
-         xmlns:prov="http://www.w3.org/ns/prov#"
-         xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+         xmlns:prov="http://www.w3.org/ns/prov#"
          xmlns:duv="http://www.w3.org/ns/duv#"
          xmlns:oa="http://www.w3.org/ns/oa#"
          xmlns:skos="http://www.w3.org/2004/02/skos/core#"
          xmlns:biro="http://purl.org/spar/biro/"
-         xmlns:dc="http://purl.org/dc/terms/">
+         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <org:Organization rdf:about="https://data.grandlyon.com/Organization/1">
     <owl:sameAs rdf:resource="http://dbpedia.org/page/Metropolis_of_Lyon"/>
@@ -122,12 +122,6 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
     <rdf:type rdf:resource="https://w3id.org/seas/LoRaCommunicationDevice"/>
     <rdf:type rdf:resource="https://data.grandlyon.com/IP68_Outdoor_Temperature_Sensor"/>
-    <prov:wasAttributedTo>
-      <prov:Agent rdf:about="https://data.grandlyon.com/Organization/exampleOrganization">
-        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
-        <foaf:name>Example Organization</foaf:name>
-      </prov:Agent>
-    </prov:wasAttributedTo>
     <gr:hasBrand>
       <gr:Brand>
         <gr:name xml:lang="en">Sensing Labs</gr:name>
@@ -164,6 +158,7 @@
       </duv:RatingFeedback>
     </duv:hasFeedback>
     <duv:hasFeedback rdf:resource="https://data.grandlyon.com/comment/1"/>
+    <prov:wasAssociatedWith rdf:resource="https://data.grandlyon.com/Person/exampleMan"/>
     <sosa:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">64.5244681928429 Cel</sosa:hasSimpleResult>
     <sosa:madeBySensor rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
     <sosa:hasFeatureOfInterest rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85"/>
@@ -174,6 +169,7 @@
   <sosa:Observation rdf:about="https://data.grandlyon.com/Observation/5872357#battery">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <duv:hasFeedback rdf:resource="https://data.grandlyon.com/comment/1"/>
+    <prov:wasAssociatedWith rdf:resource="https://data.grandlyon.com/Person/exampleMan"/>
     <biro:isReferencedBy>
       <rdf:Description rdf:about="https://data.grandlyon.com/paper">
         <rdf:type rdf:resource="http://purl.org/spar/fabio/ResearchPaper"/>
@@ -201,11 +197,17 @@
     <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#temperature"/>
     <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#battery"/>
     <dc:creator>
-      <prov:Agent rdf:about="https://data.grandlyon.com/Person/examplePerson">
+      <prov:Agent rdf:about="https://data.grandlyon.com/Person/exampleWoman">
         <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
-        <foaf:givenName>Examplename</foaf:givenName>
+        <foaf:givenName>Woman</foaf:givenName>
       </prov:Agent>
     </dc:creator>
   </duv:UserFeedback>
+
+  <prov:Agent rdf:about="https://data.grandlyon.com/Person/exampleMan">
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+    <foaf:familyName>Man</foaf:familyName>
+    <foaf:mbox rdf:resource="mailto:man@example.org"/>
+  </prov:Agent>
 
 </rdf:RDF>

@@ -150,7 +150,7 @@
  
 <paper> rdf:type fabio:ResearchPaper .
 
-<comment/1> rdf:type duv:UserFeedback, prov:Entity;
+<comment/2> rdf:type duv:UserFeedback, prov:Entity;
   oa:hasBody "This is a comment of an expert."^^xsd:string ;
   oa:hasTarget <Observation/7536> ;
   prov:qualifiedAssociation [

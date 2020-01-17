@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ip68-smart-sensor-->
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ip68-smart-sensor.-->
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:org="http://www.w3.org/ns/org#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -165,7 +165,27 @@
       </duv:RatingFeedback>
     </duv:hasFeedback>
     <duv:hasFeedback rdf:resource="https://data.grandlyon.com/comment/1"/>
-    <duv:hasFeedback rdf:resource="https://data.grandlyon.com/comment/2"/>
+    <duv:hasFeedback>
+      <duv:UserFeedback rdf:about="https://data.grandlyon.com/comment/2">
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <oa:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an expert.</oa:hasBody>
+        <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/7536"/>
+        <prov:qualifiedAssociation>
+          <prov:Association>
+            <prov:agent>
+              <prov:Agent rdf:about="https://data.grandlyon.com/Person/exampleMan">
+                <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+                <foaf:givenName>Man</foaf:givenName>
+              </prov:Agent>
+            </prov:agent>
+            <prov:hadRole>
+              <prov:Role rdf:about="https://data.grandlyon.com/expert">
+              </prov:Role>
+            </prov:hadRole>
+          </prov:Association>
+        </prov:qualifiedAssociation>
+      </duv:UserFeedback>
+    </duv:hasFeedback>
     <sosa:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">64.5244681928429 Cel</sosa:hasSimpleResult>
     <sosa:madeBySensor rdf:resource="https://data.grandlyon.com/Sensor/SL-T-P1"/>
     <sosa:hasFeatureOfInterest rdf:resource="https://data.grandlyon.com/Air?lat=45.75&amp;long=4.85"/>
@@ -198,32 +218,15 @@
   </skos:ConceptScheme>
 
   <duv:UserFeedback rdf:about="https://data.grandlyon.com/comment/1">
-    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
     <oa:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an user.</oa:hasBody>
-    <oa:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an expert.</oa:hasBody>
     <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#temperature"/>
     <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/5872357#battery"/>
-    <oa:hasTarget rdf:resource="https://data.grandlyon.com/Observation/7536"/>
     <dc:creator>
       <prov:Agent rdf:about="https://data.grandlyon.com/Person/exampleWoman">
         <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
         <foaf:givenName>Woman</foaf:givenName>
       </prov:Agent>
     </dc:creator>
-    <prov:qualifiedAssociation>
-      <prov:Association>
-        <prov:agent>
-          <prov:Agent rdf:about="https://data.grandlyon.com/Person/exampleMan">
-            <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
-            <foaf:givenName>Man</foaf:givenName>
-          </prov:Agent>
-        </prov:agent>
-        <prov:hadRole>
-          <prov:Role rdf:about="https://data.grandlyon.com/expert">
-          </prov:Role>
-        </prov:hadRole>
-      </prov:Association>
-    </prov:qualifiedAssociation>
   </duv:UserFeedback>
 
 </rdf:RDF>

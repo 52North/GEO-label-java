@@ -40,7 +40,7 @@
         "facetDescriptions": [
             {
                 "producerProfile":{
-                    "availabilityPath":"(boolean(//*[rdf:Description[@rdf:about=//prov:wasAssociatedWith/@rdf:resource or @rdf:about=//prov:wasAttributedTo/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Organization' or @rdf:resource='http://www.w3.org/ns/prov#Person']])) or (boolean(//*[prov:wasAssociatedWith or prov:wasAttributedTo/prov:Agent/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Person' or @rdf:resource='http://www.w3.org/ns/prov#Organization']]))",
+                    "availabilityPath":"(boolean(//*[rdf:Description[@rdf:about=//prov:wasAssociatedWith/@rdf:resource or @rdf:about=//prov:wasAttributedTo/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Organization' or @rdf:resource='http://www.w3.org/ns/prov#Person']])) or (boolean(//*[prov:wasAttributedTo/prov:Agent/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Person' or @rdf:resource='http://www.w3.org/ns/prov#Organization']])) or (boolean(//*[prov:wasAssociatedWith/prov:Agent/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Person' or @rdf:resource='http://www.w3.org/ns/prov#Organization']])) or (boolean(//*[prov:Agent[@rdf:about=//prov:wasAssociatedWith/@rdf:resource or @rdf:about=//prov:wasAttributedTo/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Organization' or @rdf:resource='http://www.w3.org/ns/prov#Person']]))",
                     "hoverover":{
                         "facetName":"Producer Profile",
                         "template":"Hoverover and drilldown for %s / XML are not supported yet.",

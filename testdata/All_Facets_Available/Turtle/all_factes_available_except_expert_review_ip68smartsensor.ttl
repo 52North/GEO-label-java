@@ -86,7 +86,6 @@
   ssn:isPropertyOf <Air?lat=45.75&long=4.85> .
 
 <Sensor/SL-T-P1> a gr:ProductOrService, sosa:Sensor , prov:Entity, seas:LoRaCommunicationDevice , <IP68_Outdoor_Temperature_Sensor> ;
-    prov:wasAttributedTo <Organization/exampleOrganization>;
 	gr:hasBrand [ a gr:Brand ; gr:name "Sensing Labs"@en ] ;
     geo:alt 100.0 ;
     geo:lat 45.75 ;
@@ -105,6 +104,7 @@
 <Observation/5872357#temperature> a sosa:Observation , dcat:Dataset ;
     duv:hasFeedback <rating/1> ;
 	duv:hasFeedback <comment/1> ;
+	prov:wasAssociatedWith <Person/exampleMan>;
     sosa:hasSimpleResult "64.5244681928429 Cel"^^cdt:ucum ;
     sosa:madeBySensor <Sensor/SL-T-P1> ;
     sosa:hasFeatureOfInterest <Air?lat=45.75&long=4.85> ;
@@ -113,6 +113,7 @@
 
 <Observation/5872357#battery> a sosa:Observation , dcat:Dataset;
     duv:hasFeedback <comment/1> ;
+	prov:wasAssociatedWith <Person/exampleMan>;
 	biro:isReferencedBy <paper>;
     sosa:hasSimpleResult "73.2 %"^^cdt:ucum ;
     sosa:madeBySensor <Sensor/SL-T-P1> ;
@@ -139,12 +140,13 @@
 <comment/1> rdf:type duv:UserFeedback ;
   oa:hasBody "This is a comment of an user."^^xsd:string ;
   oa:hasTarget <Observation/5872357#temperature> , <Observation/5872357#battery> ;
-  dct:creator <Person/examplePerson> .
+  dct:creator <Person/exampleWoman> .
 
-<Person/examplePerson> rdf:type prov:Agent, prov:Person;
-  foaf:givenName "Examplename" .
+<Person/exampleWoman> rdf:type prov:Agent, prov:Person;
+  foaf:givenName "Woman" .
  
-<Organization/exampleOrganization> rdf:type prov:Agent, prov:Organization;
-  foaf:name "Example Organization" .
+<Person/exampleMan> rdf:type prov:Agent, prov:Person;
+  foaf:familyName "Man" ;
+  foaf:mbox <mailto:man@example.org>.
  
 <paper> rdf:type fabio:ResearchPaper .
