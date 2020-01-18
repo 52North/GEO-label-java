@@ -121,7 +121,7 @@ mvn license:help -Ddetail=true
 
 "Cloud Run is a managed compute platform that automatically scales your stateless containers." (https://cloud.google.com/run/)
 
-Create a new Project in Google Cloud, e.g. "glbservice" and select it (make sure that billing is enabled for the project).
+Create a new Project in Google Cloud, e.g. "geolabel-java-api" and select it (make sure that billing is enabled for the project).
 
 Enable the Cloud Run API.
 
@@ -134,11 +134,11 @@ Enter the following commands:
 git clone https://github.com/anikagraupner/GEO-label-java.git
 cd GEO-label-java
 
-//build the container image with the dockerfile, glbservice is the project-id, geolabel the name of the image 
-gcloud builds submit --tag gcr.io/glbservice/geolabel
+//build the container image with the dockerfile, geolabel-java-api is the project-id, geolabel the name of the image 
+gcloud builds submit --tag  eu.gcr.io/geolabel-java-api/geolabel
 
 //deploying to cloud run
-gcloud run deploy --image gcr.io/glbservice/geolabel --platform managed
+gcloud run deploy --image  eu.gcr.io/geolabel-java-api/geolabel --platform managed
 //enter a service name, e.g. geolabel
 //choose a region, e.g. europe-west1-b
 //respond y to allow unauthenticated invocations
