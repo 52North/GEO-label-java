@@ -135,7 +135,7 @@ git clone https://github.com/anikagraupner/GEO-label-java.git
 cd GEO-label-java
 
 //build the container image with the dockerfile, geolabel-java-api is the project-id, geolabel the name of the image 
-gcloud builds submit --tag  eu.gcr.io/ggeolabel-java-api/geolabel
+gcloud builds submit --tag  eu.gcr.io/geolabel-java-api/geolabel
 
 //deploying to cloud run
 gcloud run deploy --image  eu.gcr.io/geolabel-java-api/geolabel --platform managed
