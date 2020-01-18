@@ -138,7 +138,7 @@ cd GEO-label-java
 gcloud builds submit --tag gcr.io/glbservice/geolabel
 
 //deploying to cloud run
-gcloud run deploy --image gcr.io/glbservice/geolabel --platform managed
+gcloud run deploy --image  eu.gcr.io/glbservice/geolabel --platform managed
 //enter a service name, e.g. geolabel
 //choose a region, e.g. europe-west1-b
 //respond y to allow unauthenticated invocations
