@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+apt-get update
+apt-get install libxml2-utils
+
 VERSION=$(xmllint --xpath 'string(/*[local-name()="project"]/*[local-name()="version"])' pom.xml)
 
 echo "Build hook running for version" $VERSION
