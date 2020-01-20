@@ -159,11 +159,31 @@ gcloud run deploy --image  eu.gcr.io/geolabel-java-api/geolabel --platform manag
 
 More Information at https://cloud.google.com/run/docs/quickstarts/build-and-deploy .
 
-### Deployment with AWS Lambda
+### [WIP] Deployment with AWS Lambda
 
+#### With Jersey
+
+```bash
+mvn notice:generate -P lambda-jar
+mvn clean package -P lambda-jar
 ```
 
-```
+(re)use Jersey application! See https://aws.amazon.com/blogs/opensource/java-apis-aws-lambda/
+https://github.com/awslabs/aws-serverless-java-container/tree/master/samples/jersey/pet-store
+
+The file `lambda/target/glblambda.jar` is a "fat jar" [created with `maven-shade-plugin`](https://docs.aws.amazon.com/lambda/latest/dg/java-create-jar-pkg-maven-no-ide.html) that can be deployed as an AWS Lambda function.
+
+#### With handler function
+
+Use own simple handler function, see module `/lambda`
+
+The file `lambda/target/glblambda.jar` is a "fat jar" [created with `maven-shade-plugin`](https://docs.aws.amazon.com/lambda/latest/dg/java-create-jar-pkg-maven-no-ide.html) that can be deployed as an AWS Lambda function.
+
+The _Handler_ is the function `org.n52.geolabel.lambda.Hello::myHandler`.
+
+- TODO: HTTP API Gateway not working yet
+  - create a route `/hello`
+  - attach integration `geolabel-lambda` somehow with https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-integrations.html (probably "custom" to mirror the GEO Label API) so that https://dlttwho6d0.execute-api.eu-central-1.amazonaws.com/default/hello?name=Tester works
 
 ## Contact
 

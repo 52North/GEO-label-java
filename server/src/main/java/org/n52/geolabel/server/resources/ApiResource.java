@@ -16,11 +16,14 @@
 package org.n52.geolabel.server.resources;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -110,4 +113,18 @@ public class ApiResource {
         return Response.ok().entity(sb.toString()).build();
     }
 
+    @Path("/ping")
+    public class PingResource {
+
+        @GET
+        @Produces(MediaType.APPLICATION_JSON)
+        @Consumes(MediaType.WILDCARD)
+        public Response createPet() {
+            // return a basic map. This will be marshalled automatically into a 
+            // json object with a single property
+            Map<String, String> pong = new HashMap<>();
+            pong.put("pong", "Hello, World!");
+            return Response.status(200).entity(pong).build();
+        }
+    }
 }
