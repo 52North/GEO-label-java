@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+VERSION=$(xmllint --xpath 'string(/*[local-name()="project"]/*[local-name()="version"])' pom.xml)
+echo Add version tag $VERSION
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$VERSION
+docker push $DOCKER_REPO:$VERSION

@@ -4,6 +4,17 @@ A Java implementation of the GEO label server API.
 
 [![Build Status](https://travis-ci.org/52North/GEO-label-java.png?branch=master)](https://travis-ci.org/52North/GEO-label-java)
 
+## tl;dr
+
+The  GEO label summarizes geospatial metadata in various formats in a nice visual image showing the availability of information on a number of facets, such as producer metadata, stand compliance, or quality information.
+Take a look at the **demo server [https://geolabel.net](geolabel.net)** or run this implementation with [Docker](https://www.docker.com/):
+
+```bash
+docker build --tag geolabel-server .
+```
+
+Open landing page at http://localhost:8080/glbservice/ and query the API at .
+
 ## The GEO label
 
 The GEO label is an interactive visual summary of geospatial metadata to facilitate search and discovery use cases. Ii is a graphical representation which comprises 8 informational facets:
@@ -134,7 +145,7 @@ Enter the following commands:
 git clone https://github.com/anikagraupner/GEO-label-java.git
 cd GEO-label-java
 
-//build the container image with the dockerfile, geolabel-java-api is the project-id, geolabel the name of the image 
+//build the container image with the Dockerfile, geolabel-java-api is the project-id, geolabel the name of the image 
 gcloud builds submit --tag  eu.gcr.io/geolabel-java-api/geolabel
 
 //deploying to cloud run
