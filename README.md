@@ -2,7 +2,19 @@
 
 A Java implementation of the GEO label server API.
 
-[![Build Status](https://travis-ci.org/52North/GEO-label-java.png?branch=master)](https://travis-ci.org/52North/GEO-label-java)
+[![Build Status](https://travis-ci.org/nuest/GEO-label-java.png?branch=master)](https://travis-ci.org/52North/GEO-label-java) [![](https://images.microbadger.com/badges/version/nuest/geo-label-java.svg)](https://microbadger.com/images/nuest/geo-label-java "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/nuest/geo-label-java.svg)](https://microbadger.com/images/nuest/geo-label-java "Get your own image badge on microbadger.com")
+
+## tl;dr
+
+The  GEO label summarizes geospatial metadata in various formats in a nice visual image showing the availability of information on a number of facets, such as producer metadata, stand compliance, or quality information.
+Take a look at the **demo server [https://geolabel.net](geolabel.net)** or run this implementation with [Docker](https://www.docker.com/):
+
+```bash
+docker build --tag geolabel-server .
+docker run --rm -it -p 8080:8080 geolabel-server
+```
+
+Open landing page at http://localhost:8080/glbservice/ and query the API at http://localhost:8080/glbservice/api/v1/.
 
 ## The GEO label
 
@@ -134,7 +146,7 @@ Enter the following commands:
 git clone https://github.com/anikagraupner/GEO-label-java.git
 cd GEO-label-java
 
-//build the container image with the dockerfile, geolabel-java-api is the project-id, geolabel the name of the image 
+//build the container image with the Dockerfile, geolabel-java-api is the project-id, geolabel the name of the image 
 gcloud builds submit --tag  eu.gcr.io/geolabel-java-api/geolabel
 
 //deploying to cloud run
@@ -147,9 +159,11 @@ gcloud run deploy --image  eu.gcr.io/geolabel-java-api/geolabel --platform manag
 
 More Information at https://cloud.google.com/run/docs/quickstarts/build-and-deploy .
 
-### Deployment with ...........
+### Deployment with AWS Lambda
 
+```
 
+```
 
 ## Contact
 

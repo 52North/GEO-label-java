@@ -61,29 +61,31 @@ public class LandingPageBean {
     }
 
     @org.hibernate.validator.constraints.URL
-    private String metadataUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/DigitalClimaticAtlas_mt_an_GEOlabel.xml";
+    private String metadataUrl = "https://raw.githubusercontent.com/nuest/GEO-label-java/master/server/src/test/resources/4.0/DigitalClimaticAtlas_mt_an_GEOlabel.xml";
     @org.hibernate.validator.constraints.URL
-    private String feedbackUrl = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/example_feedback_summary.xml";//"http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/DigitalClimaticAtlas_UserFeedback_v1.xml";
+    private String feedbackUrl = "https://raw.githubusercontent.com/nuest/GEO-label-java/master/server/src/test/resources/4.0/DigitalClimaticAtlas_mt_an_UQM_v1.xml";
 
     private List<Example> examplesList = new ArrayList<>();
 
     public LandingPageBean() {
-        this.examplesList.add(new Example("DAB-Q",
-                                          "http://geoviqua.essi-lab.eu/dabq-demo/services/cswisoq?service=CSW&request=GetRecordById&id=mtri2an1ib&outputschema=http://www.geoviqua.org/QualityInformationModel/4.0&elementSetName=full"));
-        this.examplesList.add(new Example("Online Feedback Server",
-                                          null,
-                                          "http://geoviqua.stcorp.nl/devel/api/v1/feedback/collections/search?format=xml&target_code=mtri2an1ib&target_codespace=http://www.opengis.uab.cat"));
-        this.examplesList.add(new Example("Sensor Web label: sensor description",
-                                          "http://geoviqua.dev.52north.org/SOS-Q/sos/kvp?service=SOS&version=2.0.0&request=DescribeSensor&procedure=http://geoviqua.dev.52north.org/procedures/ws2500&procedureDescriptionFormat=http://www.opengis.net/sensorML/1.0.1",
-                                          "http://geoviqua.stcorp.nl/devel/api/v1/feedback/collections/search?format=xml&target_code=http://geoviqua.dev.52north.org/procedures/WXT520&target_codespace=http://geoviqua.dev.52north.org/SOS-Q/"));
-        this.examplesList.add(new Example("Sensor Web label: service description",
-                                          "http://geoviqua.dev.52north.org/SOS-Q/sos/kvp?service=SOS&request=GetCapabilities",
-                                          null));
+        this.examplesList.add(new Example("SSNO",
+                                          "https://raw.githubusercontent.com/nuest/GEO-label-java/master/server/src/test/resources/ssno/ERC_all_factes_available_ip68smartsensor.rdf"));
+        //this.examplesList.add(new Example("DAB-Q",
+        //                                  "http://geoviqua.essi-lab.eu/dabq-demo/services/cswisoq?service=CSW&request=GetRecordById&id=mtri2an1ib&outputschema=http://www.geoviqua.org/QualityInformationModel/4.0&elementSetName=full"));
+        //this.examplesList.add(new Example("Online Feedback Server",
+        //                                  null,
+        //                                  "http://geoviqua.stcorp.nl/devel/api/v1/feedback/collections/search?format=xml&target_code=mtri2an1ib&target_codespace=http://www.opengis.uab.cat"));
+        //this.examplesList.add(new Example("Sensor Web label: sensor description",
+        //                                  "http://geoviqua.dev.52north.org/SOS-Q/sos/kvp?service=SOS&version=2.0.0&request=DescribeSensor&procedure=http://geoviqua.dev.52north.org/procedures/ws2500&procedureDescriptionFormat=http://www.opengis.net/sensorML/1.0.1",
+        //                                  "http://geoviqua.stcorp.nl/devel/api/v1/feedback/collections/search?format=xml&target_code=http://geoviqua.dev.52north.org/procedures/WXT520&target_codespace=http://geoviqua.dev.52north.org/SOS-Q/"));
+        //this.examplesList.add(new Example("Sensor Web label: service description",
+        //                                  "http://geoviqua.dev.52north.org/SOS-Q/sos/kvp?service=SOS&request=GetCapabilities",
+        //                                  null));
         this.examplesList.add(new Example("GLC 2000",
-                                          "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQMs/GLC_2000_GVQ_raw.xml"));
-        // this.examplesList.add(new Example("Feedback Use Case",
-        // null,
-        // "http://schemas.geoviqua.org/GVQ/4.0/example_documents/FeedbackUseCase_7_7_metadata.xml"));
+                                          "https://raw.githubusercontent.com/nuest/GEO-label-java/master/server/src/test/resources/4.0/GLC_2000_GVQ_raw.xml"));
+        this.examplesList.add(new Example("Feedback Use Case",
+                                          null,
+                                          "https://raw.githubusercontent.com/nuest/GEO-label-java/master/server/src/test/resources/4.0/FeedbackUseCase_7_7_metadata.xml"));
         // this.examplesList.add(new Example("Rice Fields User Feedback",
         // null,
         // "http://schemas.geoviqua.org/GVQ/4.0/example_documents/UQMs/RiceFields_UserFeedback_v3.xml"));
