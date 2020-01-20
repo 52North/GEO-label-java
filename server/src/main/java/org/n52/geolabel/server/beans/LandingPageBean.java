@@ -69,7 +69,7 @@ public class LandingPageBean {
 
     public LandingPageBean() {
         this.examplesList.add(new Example("SSNO",
-                                          "https://raw.githubusercontent.com/nuest/GEO-label-java/2e0b9a446599b016aa6b964fb57443a573cacd80/server/src/test/resources/ssno/ERC_all_factes_available_ip68smartsensor.rdf"));
+                                          "https://raw.githubusercontent.com/nuest/GEO-label-java/master/server/src/test/resources/ssno/ERC_all_factes_available_ip68smartsensor.rdf"));
         //this.examplesList.add(new Example("DAB-Q",
         //                                  "http://geoviqua.essi-lab.eu/dabq-demo/services/cswisoq?service=CSW&request=GetRecordById&id=mtri2an1ib&outputschema=http://www.geoviqua.org/QualityInformationModel/4.0&elementSetName=full"));
         //this.examplesList.add(new Example("Online Feedback Server",
