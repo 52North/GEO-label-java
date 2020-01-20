@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#sunspots-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:sosa="http://www.w3.org/ns/sosa/"
+         xmlns:time="http://www.w3.org/2006/time#"
+         xmlns:duv="http://www.w3.org/ns/duv#"
+         xmlns:oa="http://www.w3.org/ns/oa#"
+         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+  <rdf:Description rdf:about="http://example.org/data/Observation/7536">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <sosa:observedProperty rdf:resource="http://example.org/data/Sun#sunspotNumber"/>
+    <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">66</sosa:hasSimpleResult>
+    <sosa:phenomenonTime>
+      <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+        <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T11:51:42+00:00</time:inXSDDateTimeStamp>
+      </rdf:Description>
+    </sosa:phenomenonTime>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T12:00:00+00:00</sosa:resultTime>
+    <duv:hasFeedback>
+      <duv:UserFeedback rdf:about="http://example.org/data/comment/1">
+        <oa:hasBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is a comment of an user.</oa:hasBody>
+        <oa:hasTarget rdf:resource="http://example.org/data/Observation/7536"/>
+        <dc:creator>
+          <prov:Agent rdf:about="http://example.org/data/Person/examplePerson">
+            <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+            <foaf:givenName>Examplename</foaf:givenName>
+          </prov:Agent>
+        </dc:creator>
+      </duv:UserFeedback>
+    </duv:hasFeedback>
+  </rdf:Description>
+
+</rdf:RDF>

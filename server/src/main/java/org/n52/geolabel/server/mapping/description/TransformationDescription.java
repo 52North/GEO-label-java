@@ -37,6 +37,8 @@ public class TransformationDescription {
 
     protected static final Logger log = LoggerFactory.getLogger(TransformationDescription.class);
 
+    
+
     @JsonRootName("transformationDescription")
     public static class TransformationDescriptionWrapper {
         public TransformationDescription transformationDescription;
@@ -149,7 +151,7 @@ public class TransformationDescription {
                 }
             }
             catch (XPathExpressionException e) {
-                log.error("Could not evaluate usability expression", e);
+                log.debug("Could not evaluate usability expression", e);
             }
 
         log.debug("TransformationDescription {} is usable for this document, tested with path {}",

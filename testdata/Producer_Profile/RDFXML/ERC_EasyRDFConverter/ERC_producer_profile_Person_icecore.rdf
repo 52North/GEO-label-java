@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ice-core-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:sosa="http://www.w3.org/ns/sosa/"
+         xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+         xmlns:prov="http://www.w3.org/ns/prov#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:ssn="http://www.w3.org/ns/ssn/">
+
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Antarctic_ice_sheet">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
+    <sosa:hasSample rdf:resource="http://example.org/data/iceCore/12"/>
+    <sosa:hasSample rdf:resource="http://example.org/data/iceCore/13"/>
+    <sosa:hasSample rdf:resource="http://example.org/data/iceCore/14"/>
+  </rdf:Description>
+
+  <sosa:Sample rdf:about="http://example.org/data/iceCore/12">
+    <sosa:isSampleOf rdf:resource="http://dbpedia.org/resource/Antarctic_ice_sheet"/>
+    <sosa:isResultOf>
+      <sosa:Sampling rdf:about="http://example.org/data/WellDrilling/4578">
+        <geo:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-73.35</geo:lat>
+        <geo:long rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.32</geo:long>
+        <sosa:hasResult rdf:resource="http://example.org/data/iceCore/12"/>
+        <sosa:madeBySampler rdf:resource="http://example.org/data/thermalDrill/2"/>
+        <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-03T11:12:00Z</sosa:resultTime>
+        <sosa:hasFeatureOfInterest rdf:resource="http://dbpedia.org/resource/Antarctic_ice_sheet"/>
+      </sosa:Sampling>
+    </sosa:isResultOf>
+    <sosa:madeBySampler rdf:resource="http://example.org/data/thermalDrill/2"/>
+  </sosa:Sample>
+
+  <sosa:Observation rdf:about="http://example.org/data/iceCore/12#observation">
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+    <prov:wasAssociatedWith>
+      <prov:Agent rdf:about="http://example.org/data/Person/examplePerson">
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+        <foaf:familyName>Examplename</foaf:familyName>
+        <foaf:mbox rdf:resource="mailto:name@example.org"/>
+      </prov:Agent>
+    </prov:wasAssociatedWith>
+    <sosa:observedProperty>
+      <rdf:Description rdf:about="http://example.org/data/iceCore/12#CO2">
+        <ssn:isPropertyOf rdf:resource="http://example.org/data/iceCore/12"/>
+      </rdf:Description>
+    </sosa:observedProperty>
+    <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">240</sosa:hasSimpleResult>
+  </sosa:Observation>
+
+</rdf:RDF>

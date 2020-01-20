@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#sunspots-->
+<rdf:RDF
+    xmlns:oa="http://www.w3.org/ns/oa#"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:sosa="http://www.w3.org/ns/sosa/"
+    xmlns:duv="http://www.w3.org/ns/duv#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://example.org/data/rating/1">
+    <oa:motivatedBy rdf:resource="http://www.w3.org/ns/oa#assessing"/>
+    <oa:hasTarget rdf:resource="http://example.org/data/Observation/7536"/>
+    <oa:hasBody rdf:resource="http://example.org/data/good"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/duv#RatingFeedback"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T11:51:42+00:00</time:inXSDDateTimeStamp>
+    <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/rating">
+    <skos:prefLabel>A set of values to rate a observation.</skos:prefLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/good">
+    <skos:prefLabel xml:lang="en">good</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://example.org/data/rating"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/Observation/7536">
+    <duv:hasFeedback rdf:resource="http://example.org/data/rating/1"/>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2017-03-31T12:00:00+00:00</sosa:resultTime>
+    <sosa:phenomenonTime rdf:nodeID="A0"/>
+    <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">66</sosa:hasSimpleResult>
+    <sosa:observedProperty rdf:resource="http://example.org/data/Sun#sunspotNumber"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/bad">
+    <skos:prefLabel xml:lang="en">bad</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://example.org/data/rating"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF>

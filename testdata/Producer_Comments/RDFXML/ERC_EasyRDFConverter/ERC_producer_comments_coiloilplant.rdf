@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#coil_oil_plant-sosa-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:sosa="http://www.w3.org/ns/sosa#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+  <owl:Ontology rdf:about="http://example.org/data/IDEA">
+    <owl:imports rdf:resource="http://www.w3.org/ns/sosa"/>
+  </owl:Ontology>
+
+  <rdf:Description rdf:about="http://example.org/data/COPR">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa#FeatureOfInterest"/>
+    <sosa:hasSample rdf:resource="http://example.org/data/COPR_SL"/>
+    <rdfs:comment xml:lang="en">Coal Oil Point Reserve: UC Santa Barbara Natural Reserve System</rdfs:comment>
+    <rdfs:label xml:lang="en">Coal Oil Point Reserve</rdfs:label>
+  </rdf:Description>
+
+  <sosa:Sample rdf:about="http://example.org/data/COPR_Station_Location">
+    <rdfs:comment xml:lang="en">.</rdfs:comment>
+    <rdfs:label xml:lang="en">Air around COPR Station</rdfs:label>
+    <sosa:isSampleOf rdf:resource="http://example.org/data/COPR"/>
+  </sosa:Sample>
+
+  <sosa:Platform rdf:about="http://example.org/data/COPR_Station">
+    <rdfs:comment xml:lang="en">Station at Coal Oil Point Reserve, CA (see http://www.geog.ucsb.edu/ideas/COPR.html for details)</rdfs:comment>
+    <rdfs:label xml:lang="en">Coal Oil Point Reserve Wx Station</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://www.geog.ucsb.edu/ideas/COPR.html"/>
+    <sosa:hosts rdf:resource="http://example.org/data/COPR-HMP45C-L"/>
+  </sosa:Platform>
+
+  <sosa:Platform rdf:about="http://example.org/data/COPR-HMP45C-L">
+    <rdfs:label xml:lang="en">HMP45C-L Temperature and Relative Humidity Probe at Coal Oil Point, UCSB, CA</rdfs:label>
+    <sosa:hosts rdf:resource="http://example.org/data/HUMICAP-H"/>
+    <sosa:isHostedBy rdf:resource="http://example.org/data/COPR_Station"/>
+  </sosa:Platform>
+
+  <sosa:Sensor rdf:about="http://example.org/data/HUMICAP-H">
+    <rdfs:label xml:lang="en">Vaisala HUMICAP H-chip</rdfs:label>
+    <sosa:isHostedBy rdf:resource="http://example.org/data/COPR-HMP45C-L"/>
+  </sosa:Sensor>
+
+  <sosa:ObservableProperty rdf:about="http://example.org/data/RelativeHumidity">
+    <rdfs:comment xml:lang="en">Humidity is a measure of the moisture content of air.</rdfs:comment>
+    <rdfs:label xml:lang="en">Relative Humidity</rdfs:label>
+  </sosa:ObservableProperty>
+
+  <sosa:Procedure rdf:about="http://example.org/data/MeasuringRelativeHumidity">
+    <rdfs:comment xml:lang="en">Instructions for measuring relative humidity</rdfs:comment>
+  </sosa:Procedure>
+
+  <sosa:Observation rdf:about="http://example.org/data/RH_avg_1_COPR_15min_201706020300PM">
+    <rdfs:comment xml:lang="en">Relative humidity as averaged over 15min at COPR.</rdfs:comment>
+    <rdfs:label xml:lang="en">Relative humidity, AVG, 15min, COPR, 06.02.2017, 3:00 PM</rdfs:label>
+    <sosa:madeBySensor rdf:resource="http://example.org/data/HUMICAP-H"/>
+    <sosa:hasFeatureOfInterest rdf:resource="http://example.org/data/COPR_Station_Location"/>
+    <sosa:hasSimpleResult rdf:datatype="http://w3id.org/lindt/custom_datatypes#ucum">92.5 %</sosa:hasSimpleResult>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-02-T03:00:00-7:00</sosa:resultTime>
+    <sosa:observedProperty rdf:resource="http://example.org/data/RelativeHumidity"/>
+    <sosa:usedProcedure rdf:resource="http://example.org/data/MeasuringRelativeHumidity"/>
+  </sosa:Observation>
+
+</rdf:RDF>

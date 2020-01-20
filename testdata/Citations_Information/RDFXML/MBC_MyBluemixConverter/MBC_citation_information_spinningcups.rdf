@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#spinning-cups-->
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sosa="http://www.w3.org/ns/sosa/"
+    xmlns:frbr="http://purl.org/vocab/frbr/core#"
+    xmlns:fabio="http://purl.org/spar/fabio/"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:biro="http://purl.org/spar/biro/"
+    xmlns:ssn="http://www.w3.org/ns/ssn/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://example.org/data/observation/147#spinningCupsMovement">
+    <ssn:isProxyFor rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/ssn/Stimulus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/observation/148#spinningCupsMovement">
+    <ssn:isProxyFor rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/ssn/Stimulus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/observation/148">
+    <sosa:hasSimpleResult rdf:datatype="http://example.org/data/speed">43 km/h</sosa:hasSimpleResult>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-12T12:01:00Z</sosa:resultTime>
+    <ssn:wasOriginatedBy rdf:resource="http://example.org/data/observation/148#spinningCupsMovement"/>
+    <sosa:madeBySensor rdf:resource="http://example.org/data/windSensor/14"/>
+    <sosa:observedProperty rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <biro:isReferencedBy rdf:resource="http://example.org/data/paper"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/paperexpression">
+    <frbr:part rdf:resource="http://example.org/data/reference-to-windSensor14-data"/>
+    <rdf:type rdf:resource="http://purl.org/spar/fabio/JournalArticel"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/paper">
+    <frbr:realization rdf:resource="http://example.org/data/paperexpression"/>
+    <rdf:type rdf:resource="http://purl.org/spar/fabio/ResearchPaper"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/observation/147">
+    <sosa:hasSimpleResult rdf:datatype="http://example.org/data/speed">47 km/h</sosa:hasSimpleResult>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-12T12:00:00Z</sosa:resultTime>
+    <ssn:wasOriginatedBy rdf:resource="http://example.org/data/observation/147#spinningCupsMovement"/>
+    <sosa:madeBySensor rdf:resource="http://example.org/data/windSensor/14"/>
+    <sosa:observedProperty rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <biro:isReferencedBy rdf:resource="http://example.org/data/paper"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/windSensor/14">
+    <ssn:detects rdf:resource="http://example.org/data/observation/148#spinningCupsMovement"/>
+    <ssn:detects rdf:resource="http://example.org/data/observation/147#spinningCupsMovement"/>
+    <sosa:madeObservation rdf:resource="http://example.org/data/observation/148"/>
+    <sosa:madeObservation rdf:resource="http://example.org/data/observation/147"/>
+    <sosa:observes rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/reference-to-windSensor14-data">
+    <biro:references rdf:resource="http://example.org/data/observation/148"/>
+    <biro:references rdf:resource="http://example.org/data/observation/147"/>
+    <rdf:type rdf:resource="http://purl.org/spar/biro/BibliographicReference"/>
+  </rdf:Description>
+</rdf:RDF>

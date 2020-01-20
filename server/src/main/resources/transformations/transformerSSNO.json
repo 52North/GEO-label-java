@@ -1,0 +1,163 @@
+{
+    "transformationDescription": {
+        "name": "transformerSSNO",
+        "applicabilityPath": "boolean(/*[local-name()='RDF'])",
+        "namespaceMappings": [
+            {
+                "prefix": "sosa",
+                "namespace": "http://www.w3.org/ns/sosa/"
+            },
+            {
+                "prefix": "ssn",
+                "namespace": "http://www.w3.org/ns/ssn/"
+            },
+            {
+                "prefix": "ssn-system",
+                "namespace": "http://www.w3.org/ns/ssn/systems/"
+            },
+            {
+                "prefix": "rdfs",
+                "namespace": "http://www.w3.org/2000/01/rdf-schema#"
+            },
+            {
+                "prefix": "rdf",
+                "namespace": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            },
+            {
+                "prefix": "duv",
+                "namespace": "http://www.w3.org/ns/duv#"
+            },
+            {
+                "prefix": "prov",
+                "namespace": "http://www.w3.org/ns/prov#"
+            },
+            {
+                "prefix": "biro",
+                "namespace": "http://purl.org/spar/biro/"
+            }
+            
+        ],
+        "facetDescriptions": [
+            {
+                "producerProfile":{
+                    "availabilityPath":"(boolean(//*[rdf:Description[@rdf:about=//prov:wasAssociatedWith/@rdf:resource or @rdf:about=//prov:wasAttributedTo/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Organization' or @rdf:resource='http://www.w3.org/ns/prov#Person']])) or (boolean(//*[prov:wasAttributedTo/prov:Agent/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Person' or @rdf:resource='http://www.w3.org/ns/prov#Organization']])) or (boolean(//*[prov:wasAssociatedWith/prov:Agent/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Person' or @rdf:resource='http://www.w3.org/ns/prov#Organization']])) or (boolean(//*[prov:Agent[@rdf:about=//prov:wasAssociatedWith/@rdf:resource or @rdf:about=//prov:wasAttributedTo/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/prov#Organization' or @rdf:resource='http://www.w3.org/ns/prov#Person']]))",
+                    "hoverover":{
+                        "facetName":"Producer Profile",
+                        "template":"Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text":{
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown":{
+                        "url":"%s?metadata=%s&facet=producer_profile"
+                      }
+                   }
+                },
+            {
+                "producerComments":{
+                   "availabilityPath":"boolean(//*[rdfs:comment])",
+                   "hoverover":{
+                      "facetName":"Producer Comments",
+                      "template":"Hoverover and drilldown for %s / XML are not supported yet.",
+                      "text":{
+                          "placeholder":"local-name(/*)"
+                      }
+                   },
+                   "drilldown":{
+                      "url":"%s?metadata=%s&facet=producer_comments"
+                   }
+                }
+             },
+             {
+                "standardsCompliance": {
+                    "availabilityPath": "boolean(//*[contains(@*, 'w3.org')])",
+                    "hoverover": {
+                        "facetName":"Standards Compliance",
+                        "template":"Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=standards_complaince"
+                    }
+                }
+            },
+            {
+                "qualityInformation": {
+                    "availabilityPath": "boolean(//*[ssn-system:hasSystemProperty or ssn-system:hasOperatingProperty or ssn-system:hasSurvivalProperty or ssn-system:qualityOfObservation])",
+                    "hoverover": {
+                        "facetName":"Quality Information",
+                        "template":"Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=quality_information"
+                    }
+                }
+            },
+            {
+                "userFeedback":{
+                   "availabilityPath":"(boolean(//*[duv:hasFeedback/duv:UserFeedback[not(prov:qualifiedAssociation)] or duv:hasFeedback/duv:RatingFeedback])) or (boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/rdf:type[@rdf:resource='http://www.w3.org/ns/duv#UserFeedback' or @rdf:resource='http://www.w3.org/ns/duv#RatingFeedback']]) and boolean(//*[rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource][not(prov:qualifiedAssociation)]])) or (boolean(//*[duv:UserFeedback[@rdf:about=//duv:hasFeedback/@rdf:resource][not(prov:qualifiedAssociation)]])) or (boolean(//*[duv:RatingFeedback[@rdf:about=//duv:hasFeedback/@rdf:resource]]))",
+                   "hoverover": {
+                    "facetName": "User Feedback",
+                    "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                    "text": {
+                        "placeholder":"local-name(/*)"
+                    }
+                },
+                   "drilldown":{
+                      "url":"%s?metadata=%s&facet=user_feedback"
+                   }
+                }
+             },
+            {
+                "lineage": {
+                    "availabilityPath": "boolean(//*[ssn:implements or ssn:implementedBy or sosa:usedProcedure or sosa:Procedure or @rdf:resource='http://www.w3.org/ns/sosa/Procedure'])",
+                    "hoverover": {
+                        "facetName": "Lineage Information",
+                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=quality_information"
+                    }
+                }
+            },
+            {
+                "expertReview": {
+                    "availabilityPath": "(boolean(//*[duv:hasFeedback/duv:UserFeedback/prov:qualifiedAssociation/prov:Association/prov:hadRole/prov:Role[contains(@rdf:about, 'expert')]])) or (boolean(//*[rdf:Description[@rdf:nodeID=//rdf:Description[@rdf:about=//duv:hasFeedback/@rdf:resource]/prov:qualifiedAssociation/@rdf:nodeID]/prov:hadRole[contains(@rdf:resource, 'expert')]])) or (boolean(//*[duv:UserFeedback[@rdf:about=//duv:hasFeedback/@rdf:resource]/prov:qualifiedAssociation/prov:Association/prov:hadRole/prov:Role[contains(@rdf:about, 'expert')]]))",
+                    "hoverover": {
+                        "facetName": "Expert Review",
+                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=expert_review"
+                    }
+                }
+            },
+            {
+                "citations": {
+                    "availabilityPath": "boolean(//*[biro:isReferencedBy])",
+                    "hoverover": {
+                        "facetName": "Citations Information",
+                        "template": "Hoverover and drilldown for %s / XML are not supported yet.",
+                        "text": {
+                            "placeholder":"local-name(/*)"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=citations_information"
+                    }
+                }
+            }
+        ]
+    }
+}
