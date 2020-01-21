@@ -18,6 +18,7 @@ This project includes:
   Apache XML Graphics Commons under The Apache Software License, Version 2.0
   Avalon Framework API under The Apache Software License, Version 2.0
   Avalon Framework Implementation under The Apache Software License, Version 2.0
+  AWS Lambda Java Core Library under Apache License, Version 2.0
   Batik animation engine under The Apache Software License, Version 2.0
   Batik AWT utilities under The Apache Software License, Version 2.0
   Batik bridge classes under The Apache Software License, Version 2.0
@@ -45,6 +46,7 @@ This project includes:
   GEO label Java Client JSF Library under The Apache Software License, Version 2.0
   GEO label Java Client Library under The Apache Software License, Version 2.0
   GEO label Java commons under The Apache Software License, Version 2.0
+  GEO label Java for AWS Lambda under The Apache Software License, Version 2.0
   GEO label Java formats under The Apache Software License, Version 2.0
   GEO label Java Server under The Apache Software License, Version 2.0
   Google Guice - Core Library under The Apache Software License, Version 2.0

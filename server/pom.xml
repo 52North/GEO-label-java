@@ -233,8 +233,10 @@
 			</dependencies>
 		</profile>
 
+		<!-- DEV/FIXME: add support for AWS Lambda with Jersey Annotations -->
         <profile>
 			<!-- based on https://github.com/awslabs/aws-serverless-java-container/blob/master/samples/jersey/pet-store/pom.xml -->
+			<!-- see file server/src/main/java/org/n52/geolabel/server/lambda/StreamLambdaHandler.java.dev to continue this approach -->
             <id>lambda-jar</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
