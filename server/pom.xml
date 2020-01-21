@@ -7,14 +7,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>server</artifactId>
-	<packaging>war</packaging>
+	<packaging>${packaging.type}</packaging>
 
 	<name>GEO label Java Server</name>
 
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.2</version>
+		<version>0.3</version>
 	</parent>
 
 	<properties>
@@ -22,8 +22,6 @@
 	</properties>
 
 	<build>
-		<finalName>glbservice</finalName>
-
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -35,27 +33,6 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>src/main/webapp</directory>
-							<filtering>true</filtering>
-						</resource>
-						<resource>
-							<directory>src/main/resources</directory>
-							<filtering>true</filtering>
-							<targetPath>WEB-INF/classes</targetPath>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 
 	<pluginRepositories>
@@ -212,10 +189,34 @@
 			<!-- Profile for compiling for webserver, not ee-applicationserver, needs additional jsf components -->
 			<id>webserver</id>
 			<activation>
-				<property>
-					<name>!foo.bar</name>
-				</property>
+				<activeByDefault>true</activeByDefault>
 			</activation>
+            <properties>
+                <packaging.type>war</packaging.type>
+            </properties>
+			<build>
+				<finalName>glbservice</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.4</version>
+						<configuration>
+							<webResources>
+								<resource>
+									<directory>src/main/webapp</directory>
+									<filtering>true</filtering>
+								</resource>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+									<targetPath>WEB-INF/classes</targetPath>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 			<dependencies>
 				<dependency>
 					<groupId>com.sun.faces</groupId>
@@ -231,6 +232,72 @@
 				</dependency>
 			</dependencies>
 		</profile>
+
+		<!-- DEV/FIXME: add support for AWS Lambda with Jersey Annotations -->
+        <profile>
+			<!-- based on https://github.com/awslabs/aws-serverless-java-container/blob/master/samples/jersey/pet-store/pom.xml -->
+			<!-- see file server/src/main/java/org/n52/geolabel/server/lambda/StreamLambdaHandler.java.dev to continue this approach -->
+            <id>lambda-jar</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+            <properties>
+                <packaging.type>jar</packaging.type>
+				<jersey.version>2.29.1</jersey.version>
+            </properties>
+            <build>
+				<finalName>glblambda</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+			<dependencies>
+				<dependency>
+					<groupId>com.amazonaws.serverless</groupId>
+					<artifactId>aws-serverless-java-container-jersey</artifactId>
+					<version>[0.1,)</version>
+				</dependency>
+				<dependency>
+					<groupId>com.amazonaws</groupId>
+					<artifactId>aws-lambda-java-core</artifactId>
+					<version>1.2.0</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-json-jackson</artifactId>
+					<version>${jersey.version}</version>
+					<exclusions>
+						<exclusion>
+							<groupId>com.fasterxml.jackson.core</groupId>
+							<artifactId>jackson-annotations</artifactId>
+						</exclusion>
+						<exclusion>
+							<groupId>com.fasterxml.jackson.core</groupId>
+							<artifactId>jackson-databind</artifactId>
+						</exclusion>
+						<exclusion>
+							<groupId>com.fasterxml.jackson.core</groupId>
+							<artifactId>jackson-core</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			</dependencies>
+        </profile>
 
 	</profiles>
 </project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<license-lookup
+    xmlns="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup https://source.jasig.org/schemas/maven-notice-plugin/license-lookup/license-lookup-v1.0.xsd">
+
+    <!-- https://javaee.github.io/glassfish/LICENSE -->
+    <artifact>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-json-jackson</artifactId>
+        <version>1.18.2</version>
+        <license>CDDL 1.1</license>
+    </artifact>
+    <artifact>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-json</artifactId>
+        <version>2.29.1</version>
+        <license>CDDL 1.1</license>
+    </artifact>
+    <artifact>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>2.29.1</version>
+        <license>CDDL 1.1</license>
+    </artifact>
+    <artifact>
+        <groupId>com.sun.jersey.contribs</groupId>
+        <artifactId>jersey-guice</artifactId>
+        <version>2.29.1</version>
+        <license>CDDL 1.1</license>
+    </artifact>
+    <artifact>
+        <groupId>com.sun.jersey.contribs</groupId>
+        <artifactId>jersey-multipart</artifactId>
+        <version>2.29.1</version>
+        <license>CDDL 1.1</license>
+    </artifact>
+</license-lookup>

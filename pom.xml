@@ -18,7 +18,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.geolabel</groupId>
 	<artifactId>geolabel</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 	<packaging>pom</packaging>
 	<inceptionYear>2013</inceptionYear>
 	<name>GEO label Java</name>
@@ -29,6 +29,7 @@
 		<module>commons</module>
 		<module>jsf</module>
 		<module>formats</module>
+		<module>lambda</module>
 	</modules>
 
 	<organization>
@@ -338,6 +339,7 @@
 					<noticeTemplate>misc/NOTICE.template</noticeTemplate>
 					<licenseMapping>
 						<param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
+						<param>misc/license-mappings.xml</param>
 					</licenseMapping>
 					<generateChildNotices>false</generateChildNotices>
 				</configuration>
