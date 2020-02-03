@@ -186,6 +186,15 @@ Files:
 mvn notice:generate -P lambda-jar
 mvn clean package -P lambda-jar
 ```
+### JMeter Test Plan
+
+The installation instructions for JMeter can be found at http://jmeter.apache.org/download_jmeter.cgi.
+
+At misc/JMeterTests you find the GEO_Label_API.jmx test plan which can be open in Apache JMeter (File/Open). 
+
+On the left side are the user scenarios which can be run all together (green arrow) or separately (right click on scenario and "start").
+
+The results are shown in tables, trees and graphs.
 
 ## Contact
 
