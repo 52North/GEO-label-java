@@ -48,7 +48,8 @@ This project includes:
   GEO label Java commons under The Apache Software License, Version 2.0
   GEO label Java for AWS Lambda under The Apache Software License, Version 2.0
   GEO label Java formats under The Apache Software License, Version 2.0
-  GEO label Java Server under The Apache Software License, Version 2.0
+  GEO label Java server classes under The Apache Software License, Version 2.0
+  GEO label Java webserver under The Apache Software License, Version 2.0
   Google Guice - Core Library under The Apache Software License, Version 2.0
   Google Guice - Extensions - Servlet under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0

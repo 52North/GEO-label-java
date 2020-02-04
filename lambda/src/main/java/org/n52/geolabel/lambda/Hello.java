@@ -15,15 +15,22 @@
  */
 package org.n52.geolabel.lambda;
 
-import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.Context;
+import org.n52.geolabel.commons.Label;
+import org.n52.geolabel.server.config.GeoLabelObjectMapper;
 
 /**
  * https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-req-resp.html
  */
 public class Hello {
     public String myHandler(String name, Context context) {
-        return String.format("Hello %s.", name);
+        Label l = new Label();
+        GeoLabelObjectMapper m = new GeoLabelObjectMapper(null);
+        System.out.println(l);
+        System.out.println(m);
 
+        return String.format("Hello %s.", name);
+        
         // TODO create geolabel based on inputs and return it
     }
 }

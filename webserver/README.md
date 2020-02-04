@@ -1,4 +1,4 @@
-# GEO-label-java server
+# GEO-label-java Webserver
 
 ## Build Profiles
 
@@ -58,8 +58,6 @@ docker run --rm -it -v $(pwd)/server/target/glbservice:/var/lib/jetty/webapps/gl
 
 Landing page does not work but API is at http://localhost:8080/glbservice/api/
 
-
-   
 ## Metadata Transformation Mappings
 
 Transformation Mappings specify xpath expressions to map from supplied metadata to GEO label facet information. 
@@ -72,4 +70,3 @@ The server uses one main configuration file `src/main/resources/server.propertie
 ## XPathFactory and TransformerFactory
 
 The implmentations for the `XPathFactory` to be used is done via service loader configuration files in `\GEO-label-java\server\src\main\resources\META-INF\services` and is pre-configured to work with an Oracle JRE using the included Apache Xalan implementation (`com.sun.org.apache.xalan`). If you want to use a differen XPath implementation, change these configuration files.
- 

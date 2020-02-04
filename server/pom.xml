@@ -7,33 +7,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>server</artifactId>
-	<packaging>${packaging.type}</packaging>
+	<packaging>jar</packaging>
 
-	<name>GEO label Java Server</name>
+	<name>GEO label Java server classes</name>
 
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
 		<version>0.3</version>
 	</parent>
-
-	<properties>
-		<geolabel.logger.filepath>${catalina.base:-.}/logs/geolabel</geolabel.logger.filepath>
-	</properties>
-
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<excludes>
-            	    <!-- Exclude those since they are copied from the profile folder for the build -->
-					<exclude>**/logback.xml</exclude>
-					<exclude>**/logback-test.xml</exclude>
-				</excludes>
-				<filtering>false</filtering>
-			</resource>
-		</resources>
-	</build>
 
 	<pluginRepositories>
 		<pluginRepository>
