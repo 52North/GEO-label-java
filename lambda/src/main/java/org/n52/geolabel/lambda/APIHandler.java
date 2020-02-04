@@ -15,6 +15,8 @@
  */
 package org.n52.geolabel.lambda;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,12 +26,22 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
+import java.net.URL;
+import java.net.URLConnection;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import freemarker.template.SimpleHash;
+
+import org.n52.geolabel.commons.Label;
+import org.n52.geolabel.server.config.GeoLabelObjectMapper;
+import org.n52.geolabel.server.config.TransformationDescriptionLoader;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.n52.geolabel.server.mapping.MetadataTransformer;
+
 
 /**
  * @author Daniel Nüst
@@ -43,11 +55,12 @@ public class APIHandler implements RequestStreamHandler {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
+        Label label = new Label();
 
         try {
             JSONObject event = (JSONObject) parser.parse(reader);
             // JSONObject responseBody = new JSONObject();
-            String responseBody = "Hello, thanks for getting in touch!";
+            String responseBody = String.format("Hello, thanks for getting in touch! %s", event.get("queryStringParameters"));
 
             JSONObject pathParams = new JSONObject();
             JSONObject headerJson = new JSONObject();
@@ -64,27 +77,67 @@ public class APIHandler implements RequestStreamHandler {
                 responseBody = responseBody + "\n" + queryParams.toString();
             }
 
-            if (pathParams.values().contains("api/v1/svg")) {
+            if (pathParams.values().contains("api/v1/svg") && event.get("queryStringParameters") != null) {
                 headerJson.put("x-handled-by", "SVG creator");
                 headerJson.put("Content-Type", "image/svg+xml");
 
-                URL url = new URL("http://worldtimeapi.org/api/ip");
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                JSONObject time = (JSONObject) parser.parse(in);
+                MetadataTransformer transformer;
+                TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json,http://geoviqua.github.io/geolabel/mappings/transformerSML101.json=/transformations/transformerSML101.json,http://geoviqua.github.io/geolabel/mappings/transformerSOS20.json=/transformations/transformerSOS20.json,http://geoviqua.github.io/geolabel/mappings/transformerSML20.json=/transformations/transformerSML20.json,http://geoviqua.github.io/geolabel/mappings/transformerSSNO.json=/transformations/transformerSSNO.json");
+                transformer = new MetadataTransformer(new TransformationDescriptionLoader(res,
+                                                                                       new GeoLabelObjectMapper(res),
+                                                                                       true));
 
-                String template = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"30\" width=\"400\">"
-                        + "<text x=\"0\" y=\"15\" fill=\"red\">It is now %s in %s</text>" + "</svg>";
+                JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
 
-                responseBody = String.format(template, time.get("datetime"), time.get("timezone"));
+                if(queryParams.get("metadata") != null){
+
+                    //resource from url                                                                      
+                    URL metadataURL = new URL(queryParams.get("metadata").toString());
+                    URLConnection metadata = metadataURL.openConnection();
+                    InputStream metadataStream = metadata.getInputStream();                                                                      
+
+                    context.getLogger().log(String.format("Metadata Stream: %s", metadataStream));
+                    Label l = new Label();
+
+                    //drilldown urls
+                    l.setMetadataUrl(new URL("http://not.available.net"));
+                    l.setFeedbackUrl(new URL("http://not.available.net"));
+                    label = transformer.updateGeoLabel(metadataStream, l);
+                    context.getLogger().log(String.format("Label: %s", label));
+
+                }
+                
+                if(queryParams.get("feedback") != null){
+
+                    //resource from url                                                                      
+                    URL feedbackURL = new URL(queryParams.get("feedback").toString());
+                    URLConnection feedback = feedbackURL.openConnection();
+                    InputStream feedbackStream = feedback.getInputStream();                                                                      
+
+                    context.getLogger().log(String.format("Metadata Stream: %s", feedbackStream));
+                    Label l = new Label();
+
+                    //drilldown urls
+                    l.setMetadataUrl(new URL("http://not.available.net"));
+                    l.setFeedbackUrl(new URL("http://not.available.net"));
+                    label = transformer.updateGeoLabel(feedbackStream, l);
+                    context.getLogger().log(String.format("Label: %s", label));
+
+                }
+
+                //label.toSVG(fw, "test", 420);
+            
+                // String template = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"30\" width=\"400\">"
+                //         + "<text x=\"0\" y=\"15\" fill=\"red\">It is now %s in %s</text>" + "</svg>";
+
+               
             } else {
                 headerJson.put("Content-Type", "plain/text");
             }
 
             responseJson.put("statusCode", 200);
             responseJson.put("headers", headerJson);
-            responseJson.put("body", responseBody.toString());
+            responseJson.put("body", "noch leer");
 
         } catch (ParseException pex) {
             responseJson.put("statusCode", 400);
