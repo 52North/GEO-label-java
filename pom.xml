@@ -24,12 +24,13 @@
 	<name>GEO label Java</name>
 
 	<modules>
-		<module>server</module>
-		<module>client</module>
 		<module>commons</module>
+		<module>client</module>
 		<module>jsf</module>
 		<module>formats</module>
+		<module>server</module>
 		<module>lambda</module>
+		<module>webserver</module>
 	</modules>
 
 	<organization>
@@ -55,6 +56,9 @@
 
 		<developer>
 			<name>Victoria Lush</name>
+		</developer>
+		<developer>
+			<name>Anika Graupner</name>
 		</developer>
 	</developers>
 
@@ -383,7 +387,9 @@
 				<executions>
 					<execution>
 						<phase>package</phase>
-						<goals><goal>copy</goal></goals>
+						<goals>
+							<goal>copy</goal>
+						</goals>
 						<configuration>
 							<artifactItems>
 								<artifactItem>
