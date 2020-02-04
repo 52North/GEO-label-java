@@ -64,7 +64,7 @@ public class APIHandler implements RequestStreamHandler {
         try {
             JSONObject event = (JSONObject) parser.parse(reader);
             // JSONObject responseBody = new JSONObject();
-            String responseBody = "version : v1 , svg-label-generation : ...api/v1/svg";
+            String responseBody = "version : v1 , svg-label-generation : https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1/svg";
 
             JSONObject pathParams = new JSONObject();
             JSONObject headerJson = new JSONObject();
@@ -145,7 +145,7 @@ public class APIHandler implements RequestStreamHandler {
 
                     size = Integer.parseInt(queryParams.get("size").toString());
 
-                } else { size = 100;} // if not size = 100   
+                } else { size = 200;} // if not size = 100   
 
                 // label to svg using the svgtemplate
                 label.toSVG(new FileWriter(f), "geolabel", size);
