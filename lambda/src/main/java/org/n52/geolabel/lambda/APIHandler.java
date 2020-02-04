@@ -84,6 +84,11 @@ public class APIHandler implements RequestStreamHandler {
             // query parameters 
             JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
 
+            // no metadata or feedback url
+            if (pathParams.values().contains("api/v1/svg") && queryParams.get("metadata") == null && queryParams.get("feedback") == null) {
+                responseBody = "No metadata or feedback URL specified";
+            }
+
             // do only if a metadata or a feedback url is defined at the endpoint api/v1/svg
             if (pathParams.values().contains("api/v1/svg") && (queryParams.get("metadata") != null || queryParams.get("feedback") != null)) {
                 headerJson.put("x-handled-by", "SVG creator");
@@ -149,10 +154,10 @@ public class APIHandler implements RequestStreamHandler {
                 // get content of .svg file
                 responseBody = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
             
-            // if no metadata or feedback parameter is specified
+            
             } else {
                 headerJson.put("Content-Type", "plain/text");
-                responseBody = "No metadata or feedback URL specified";
+    
             }
 
             // create response
