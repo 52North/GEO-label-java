@@ -36,7 +36,7 @@ html,body {
 	}
 }
 
-@media ( max-width : 767px) {
+@media ( -width : 767px) {
 	#push,
 	#footer {
 		height: 180px;

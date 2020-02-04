@@ -163,6 +163,16 @@ More Information at https://cloud.google.com/run/docs/quickstarts/build-and-depl
 
 See [lambda/README.md](lambda/README.md).
 
+### JMeter Test Plan
+
+The installation instructions for JMeter can be found at http://jmeter.apache.org/download_jmeter.cgi.
+At misc/JMeterTests you find the GEO_Label_API.jmx test plan which can be open in Apache JMeter (File/Open). 
+
+
+On the left side are the user scenarios which can be run all together (green arrow) or separately (right click on scenario and "start").
+
+The results are shown in tables, trees and graphs.
+
 ## Contact
 
 Daniel Nüst (d.nuest@52north.org)
