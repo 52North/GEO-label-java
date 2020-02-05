@@ -24,6 +24,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.*;
+
+import javax.naming.NameNotFoundException;
+
 import java.net.URL;
 
 import org.apache.commons.io.*;
@@ -60,11 +63,12 @@ public class APIHandler implements RequestStreamHandler {
 
         // file for the filereader to process label to svg
         File f = File.createTempFile("geolabel_", ".svg");
+        String responseBody;
 
         try {
+
             JSONObject event = (JSONObject) parser.parse(reader);
             // JSONObject responseBody = new JSONObject();
-            String responseBody = "version : v1 , svg-label-generation : https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1/svg";
 
             JSONObject pathParams = new JSONObject();
             JSONObject headerJson = new JSONObject();
@@ -72,100 +76,137 @@ public class APIHandler implements RequestStreamHandler {
             if (event.get("pathParameters") != null) {
                 pathParams = (JSONObject) event.get("pathParameters");
                 context.getLogger().log(String.format("Path parameters: %s", pathParams));
-                responseBody = responseBody + "\n" + pathParams.toString();
-            }
 
-            if (event.get("queryStringParameters") != null) {
-                JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
-                context.getLogger().log(String.format("Query string parameters: %s", queryParams));
-                responseBody = responseBody + "\n" + queryParams.toString();
-            }
+                if (event.get("queryStringParameters") != null) {
+                    JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
+                    context.getLogger().log(String.format("Query string parameters: %s", queryParams));
 
-            // query parameters 
-            JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
+                    // do only if a metadata or a feedback url is defined at the endpoint api/v1/svg
+                    if (pathParams.values().contains("api/v1/svg") && (queryParams.get("metadata") != null || queryParams.get("feedback") != null)) {
 
-            // no metadata or feedback url
-            if (pathParams.values().contains("api/v1/svg") && queryParams.get("metadata") == null && queryParams.get("feedback") == null) {
-                responseBody = "No metadata or feedback URL specified";
-            }
+                        headerJson.put("x-handled-by", "SVG creator");
+                        headerJson.put("Content-Type", "image/svg+xml");
 
-            // do only if a metadata or a feedback url is defined at the endpoint api/v1/svg
-            if (pathParams.values().contains("api/v1/svg") && (queryParams.get("metadata") != null || queryParams.get("feedback") != null)) {
-                headerJson.put("x-handled-by", "SVG creator");
-                headerJson.put("Content-Type", "image/svg+xml");
+                        // transformation descriptions
+                        MetadataTransformer transformer;
+                        TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json,http://geoviqua.github.io/geolabel/mappings/transformerSML101.json=/transformations/transformerSML101.json,http://geoviqua.github.io/geolabel/mappings/transformerSOS20.json=/transformations/transformerSOS20.json,http://geoviqua.github.io/geolabel/mappings/transformerSML20.json=/transformations/transformerSML20.json,http://geoviqua.github.io/geolabel/mappings/transformerSSNO.json=/transformations/transformerSSNO.json");
+                        transformer = new MetadataTransformer(new TransformationDescriptionLoader(res,
+                                                                                            new GeoLabelObjectMapper(res),
+                                                                                            true));
 
-                // transformation descriptions
-                MetadataTransformer transformer;
-                TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json,http://geoviqua.github.io/geolabel/mappings/transformerSML101.json=/transformations/transformerSML101.json,http://geoviqua.github.io/geolabel/mappings/transformerSOS20.json=/transformations/transformerSOS20.json,http://geoviqua.github.io/geolabel/mappings/transformerSML20.json=/transformations/transformerSML20.json,http://geoviqua.github.io/geolabel/mappings/transformerSSNO.json=/transformations/transformerSSNO.json");
-                transformer = new MetadataTransformer(new TransformationDescriptionLoader(res,
-                                                                                       new GeoLabelObjectMapper(res),
-                                                                                       true));
+                        // temp label
+                        Label l = new Label();
 
-                // temp label
-                Label l = new Label();
+                        //drilldown urls
+                        l.setMetadataUrl(new URL("http://not.available.net"));
+                        l.setFeedbackUrl(new URL("http://not.available.net"));
 
-                //drilldown urls
-                l.setMetadataUrl(new URL("http://not.available.net"));
-                l.setFeedbackUrl(new URL("http://not.available.net"));
+                        // if a metadata url is specified
+                        if(queryParams.get("metadata") != null){
 
-                // if a metadata url is specified
-                if(queryParams.get("metadata") != null){
+                            //resource from url                                                                      
+                            URL metadataURL = new URL(queryParams.get("metadata").toString());
+                            URLConnection metadata = metadataURL.openConnection();
+                            InputStream metadataStream = metadata.getInputStream();                                                                      
 
-                    //resource from url                                                                      
-                    URL metadataURL = new URL(queryParams.get("metadata").toString());
-                    URLConnection metadata = metadataURL.openConnection();
-                    InputStream metadataStream = metadata.getInputStream();                                                                      
+                            // update label
+                            context.getLogger().log(String.format("Metadata Stream: %s", metadataStream));
+                            label = transformer.updateGeoLabel(metadataStream, l);
+                            context.getLogger().log(String.format("Label: %s", label));
 
-                    // update label
-                    context.getLogger().log(String.format("Metadata Stream: %s", metadataStream));
-                    label = transformer.updateGeoLabel(metadataStream, l);
-                    context.getLogger().log(String.format("Label: %s", label));
-
-                }
+                        }
                 
-                // if a feedback url is specified
-                if(queryParams.get("feedback") != null){
+                        // if a feedback url is specified
+                        if(queryParams.get("feedback") != null){
 
-                    //resource from url                                                                      
-                    URL feedbackURL = new URL(queryParams.get("feedback").toString());
-                    URLConnection feedback = feedbackURL.openConnection();
-                    InputStream feedbackStream = feedback.getInputStream();
+                            //resource from url                                                                      
+                            URL feedbackURL = new URL(queryParams.get("feedback").toString());
+                            URLConnection feedback = feedbackURL.openConnection();
+                            InputStream feedbackStream = feedback.getInputStream();
+                            
+                            // update label
+                            context.getLogger().log(String.format("Metadata Stream: %s", feedbackStream));
+                            label = transformer.updateGeoLabel(feedbackStream, l);
+                            context.getLogger().log(String.format("Label: %s", label));
+
+                        }
+
+                        int size;
+
+                        // if the size parameter is specified
+                        if(queryParams.get("size") != null){
+
+                            size = Integer.parseInt(queryParams.get("size").toString());
+
+                        } else { size = 200;} // if not size = 100   
+
+                        // label to svg using the svgtemplate
+                        label.toSVG(new FileWriter(f), "geolabel", size);
+                        context.getLogger().log(String.format("Metadata Stream: %s", f));
+
+                        // get content of .svg file
+                        responseBody = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
+                        responseJson.put("statusCode", 200);
+                        responseJson.put("headers", headerJson);
+                        responseJson.put("body", responseBody);
                     
-                    // update label
-                    context.getLogger().log(String.format("Metadata Stream: %s", feedbackStream));
-                    label = transformer.updateGeoLabel(feedbackStream, l);
-                    context.getLogger().log(String.format("Label: %s", label));
+                    } else {
 
+                        responseBody = "No metadata or feedback URL specified.";
+                        headerJson.put("Content-Type", "text/plain");
+                        responseJson.put("statusCode", 200);
+                        responseJson.put("headers", headerJson);
+                        responseJson.put("body", responseBody);
+                    }
+
+                // no metadata or feedback url
+                } else if (pathParams.values().contains("api")) {
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("currentVersion","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1");
+                    obj.put("v1","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1");
+                    responseBody = obj.toString();
+                    responseBody = responseBody.replace("\\","");
+                    headerJson.put("Content-Type", "application/json");
+                    responseJson.put("statusCode", 200);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+                
+
+                // no metadata or feedback url
+                } else if (pathParams.values().contains("api/v1")) {
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("version","v1");
+                    obj.put("svg-label-generation","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1/svg");
+                    responseBody = obj.toString();
+                    responseBody = responseBody.replace("\\","");
+                    headerJson.put("Content-Type", "application/json");
+                    responseJson.put("statusCode", 200);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+                
+                } else if(pathParams.values().contains("api/v1/svg")){
+
+                    responseBody = "No metadata or feedback URL specified.";
+                    headerJson.put("Content-Type", "text/plain");
+                    responseJson.put("statusCode", 200);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+
+                } else {
+
+                    responseBody = "Page not found.";
+                    headerJson.put("Content-Type", "text/plain");
+                    responseJson.put("statusCode", 404);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
                 }
-
-                int size;
-
-                // if the size parameter is specified
-                if(queryParams.get("size") != null){
-
-                    size = Integer.parseInt(queryParams.get("size").toString());
-
-                } else { size = 200;} // if not size = 100   
-
-                // label to svg using the svgtemplate
-                label.toSVG(new FileWriter(f), "geolabel", size);
-                context.getLogger().log(String.format("Metadata Stream: %s", f));
-
-                // get content of .svg file
-                responseBody = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
             
-            
-            } else {
-                headerJson.put("Content-Type", "plain/text");
-    
-            }
+            } 
 
-            // create response
-            responseJson.put("statusCode", 200);
-            responseJson.put("headers", headerJson);
-            responseJson.put("body", responseBody);
+        } catch (ParseException pex){
 
-        } catch (ParseException pex) {
             responseJson.put("statusCode", 400);
             responseJson.put("exception", pex.toString());
         }
@@ -173,5 +214,6 @@ public class APIHandler implements RequestStreamHandler {
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
         writer.write(responseJson.toString());
         writer.close();
+
     }
 }
