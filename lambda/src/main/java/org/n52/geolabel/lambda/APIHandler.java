@@ -25,8 +25,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.*;
 
-import javax.naming.NameNotFoundException;
-
 import java.net.URL;
 
 import org.apache.commons.io.*;
