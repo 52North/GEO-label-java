@@ -53,37 +53,31 @@ public class APIHandler implements RequestStreamHandler {
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        JSONObject responseJson = new JSONObject();
-
-        // new Label 
-        Label label = new Label();
-
-        // file for the filereader to process label to svg
-        File f = File.createTempFile("geolabel_", ".svg");
-        String responseBody;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream)); // get inputstream
+        
+        JSONObject responseJson = new JSONObject(); // JSON object for the response
+        Label label = new Label(); // new geolabel 
+        File f = File.createTempFile("geolabel_", ".svg"); // file for the filereader to process label to svg
+        String responseBody; // string for the response
 
         try {
 
-            JSONObject event = (JSONObject) parser.parse(reader);
-            // JSONObject responseBody = new JSONObject();
+            JSONObject event = (JSONObject) parser.parse(reader); // JSON object from the inputstream
+            JSONObject pathParams = new JSONObject(); // path Parameters
+            JSONObject headerJson = new JSONObject(); // header of response
 
-            JSONObject pathParams = new JSONObject();
-            JSONObject headerJson = new JSONObject();
-
+            // if the requests conatains path parameters
             if (event.get("pathParameters") != null) {
                 pathParams = (JSONObject) event.get("pathParameters");
                 context.getLogger().log(String.format("Path parameters: %s", pathParams));
 
+                // if the request contains query parameters
                 if (event.get("queryStringParameters") != null) {
                     JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
                     context.getLogger().log(String.format("Query string parameters: %s", queryParams));
 
                     // do only if a metadata or a feedback url is defined at the endpoint api/v1/svg
                     if (pathParams.values().contains("api/v1/svg") && (queryParams.get("metadata") != null || queryParams.get("feedback") != null)) {
-
-                        headerJson.put("x-handled-by", "SVG creator");
-                        headerJson.put("Content-Type", "image/svg+xml");
 
                         // transformation descriptions
                         MetadataTransformer transformer;
@@ -144,11 +138,15 @@ public class APIHandler implements RequestStreamHandler {
 
                         // get content of .svg file
                         responseBody = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
+
+                        // set response headers and body
                         responseJson.put("statusCode", 200);
+                        headerJson.put("x-handled-by", "SVG creator");
+                        headerJson.put("Content-Type", "image/svg+xml");
                         responseJson.put("headers", headerJson);
                         responseJson.put("body", responseBody);
                     
-                    } else {
+                    } else { // if no metadata or feedback url is defined
 
                         responseBody = "No metadata or feedback URL specified.";
                         headerJson.put("Content-Type", "text/plain");
@@ -157,8 +155,8 @@ public class APIHandler implements RequestStreamHandler {
                         responseJson.put("body", responseBody);
                     }
 
-                // no metadata or feedback url
-                } else if (pathParams.values().contains("api")) {
+                // if path od request is ...api  
+                } else if (pathParams.values().contains("api")) { 
 
                     JSONObject obj = new JSONObject();
                     obj.put("currentVersion","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1");
@@ -169,9 +167,8 @@ public class APIHandler implements RequestStreamHandler {
                     responseJson.put("statusCode", 200);
                     responseJson.put("headers", headerJson);
                     responseJson.put("body", responseBody);
-                
 
-                // no metadata or feedback url
+                // if path of request is ...api/v1 
                 } else if (pathParams.values().contains("api/v1")) {
 
                     JSONObject obj = new JSONObject();
@@ -184,6 +181,7 @@ public class APIHandler implements RequestStreamHandler {
                     responseJson.put("headers", headerJson);
                     responseJson.put("body", responseBody);
                 
+                // if path of request is ...api/v1/svg 
                 } else if(pathParams.values().contains("api/v1/svg")){
 
                     responseBody = "No metadata or feedback URL specified.";
@@ -192,6 +190,7 @@ public class APIHandler implements RequestStreamHandler {
                     responseJson.put("headers", headerJson);
                     responseJson.put("body", responseBody);
 
+                // if path parameters are specified which are not supported from the api   
                 } else {
 
                     responseBody = "Page not found.";
@@ -203,12 +202,14 @@ public class APIHandler implements RequestStreamHandler {
             
             } 
 
+        // if something went wrong by handling the request    
         } catch (ParseException pex){
 
             responseJson.put("statusCode", 400);
             responseJson.put("exception", pex.toString());
         }
 
+        // OutputStream for Response
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
         writer.write(responseJson.toString());
         writer.close();
