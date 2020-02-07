@@ -130,7 +130,7 @@ public class APIHandler implements RequestStreamHandler {
 
                             size = Integer.parseInt(queryParams.get("size").toString());
 
-                        } else { size = 200;} // if not size = 100   
+                        } else { size = 200;} // if not size = 200   
 
                         // label to svg using the svgtemplate
                         label.toSVG(new FileWriter(f), "geolabel", size);
