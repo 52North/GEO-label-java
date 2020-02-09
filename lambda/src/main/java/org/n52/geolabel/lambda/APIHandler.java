@@ -44,7 +44,7 @@ import org.n52.geolabel.server.mapping.MetadataTransformer;
 
 
 /**
- * @author Daniel Nüst
+ * @author Daniel Nüst, Anika Graupner
  */
 public class APIHandler implements RequestStreamHandler {
 
