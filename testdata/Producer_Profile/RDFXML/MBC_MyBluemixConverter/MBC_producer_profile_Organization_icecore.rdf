@@ -22,11 +22,6 @@
   <rdf:Description rdf:about="http://example.org/data/iceCore/12#CO2">
     <ssn:isPropertyOf rdf:resource="http://example.org/data/iceCore/12"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://example.org/data/Organization/exampleOrganization">
-    <foaf:name>Example Organization</foaf:name>
-    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
-    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/Antarctic_ice_sheet">
     <sosa:hasSample rdf:resource="http://example.org/data/iceCore/14"/>
     <sosa:hasSample rdf:resource="http://example.org/data/iceCore/13"/>
@@ -39,6 +34,11 @@
     <prov:wasAssociatedWith rdf:resource="http://example.org/data/Organization/exampleOrganization"/>
     <rdf:type rdf:resource="http://www.w3.org/ns/prov#Activity"/>
     <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/Organization/exampleOrganization">
+    <foaf:name>Example Organization</foaf:name>
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://example.org/data/iceCore/12">
     <sosa:madeBySampler rdf:resource="http://example.org/data/thermalDrill/2"/>
