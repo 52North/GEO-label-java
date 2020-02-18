@@ -1,0 +1,13 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1581014308374,340,GET Examplepage,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,10908,293,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/,231,0,191
+1581014308374,231,GET Examplepage-0,302,Found,Google_Cloud_Run_General_Tests 1-1,text,true,,393,146,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice,231,0,191
+1581014308605,109,GET Examplepage-1,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,10515,147,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/,103,0,0
+1581014308715,84,GET Editorpage,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,7864,157,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/editor.jsf,83,0,0
+1581014308800,39,GET API Info,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,807,150,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api,39,0,0
+1581014308840,51,GET API Version Info,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,807,150,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api,51,0,0
+1581014308892,246,GET SVG Label,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,22925,341,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/svg?metadata=https://raw.githubusercontent.com/anikagraupner/GEO-label-java/master/testdata/All_Facets_Available/RDFXML/MBC_MyBluemixConverter/MBC_all_factes_available_ip68smartsensor.rdf,234,0,0
+1581014309139,462,GET PNG Label,200,OK,Google_Cloud_Run_General_Tests 1-1,bin,true,,35788,341,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/png?metadata=https://raw.githubusercontent.com/anikagraupner/GEO-label-java/master/testdata/All_Facets_Available/RDFXML/MBC_MyBluemixConverter/MBC_all_factes_available_ip68smartsensor.rdf,448,0,0
+1581014309602,207,GET LML Label,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,3721,341,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/lml?metadata=https://raw.githubusercontent.com/anikagraupner/GEO-label-java/master/testdata/All_Facets_Available/RDFXML/MBC_MyBluemixConverter/MBC_all_factes_available_ip68smartsensor.rdf,207,0,0
+1581014309810,302,POST SVG Label,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,22629,16583,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/svg,299,0,0
+1581014310113,511,POST PNG Label,200,OK,Google_Cloud_Run_General_Tests 1-1,bin,true,,35788,16571,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/png,486,0,0
+1581014310625,552,POST LML Label,200,OK,Google_Cloud_Run_General_Tests 1-1,text,true,,3494,16571,1,1,https://glbservice-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/lml,552,0,145

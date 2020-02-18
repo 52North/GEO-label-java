@@ -15,15 +15,20 @@
  */
 package org.n52.geolabel.lambda;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
+import java.nio.charset.*;
+
 import java.net.URL;
-import java.util.Map;
+
+import org.apache.commons.io.*;
+import java.net.URLConnection;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
@@ -31,8 +36,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import org.n52.geolabel.commons.Label;
+import org.n52.geolabel.server.config.GeoLabelObjectMapper;
+import org.n52.geolabel.server.config.TransformationDescriptionLoader;
+import org.n52.geolabel.server.config.TransformationDescriptionResources;
+import org.n52.geolabel.server.mapping.MetadataTransformer;
+
+
 /**
- * @author Daniel Nüst
+ * @author Daniel Nüst, Anika Graupner
  */
 public class APIHandler implements RequestStreamHandler {
 
@@ -41,58 +53,166 @@ public class APIHandler implements RequestStreamHandler {
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        JSONObject responseJson = new JSONObject();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream)); // get inputstream
+        
+        JSONObject responseJson = new JSONObject(); // JSON object for the response
+        Label label = new Label(); // new geolabel 
+        File f = File.createTempFile("geolabel_", ".svg"); // file for the filereader to process label to svg
+        String responseBody; // string for the response
 
         try {
-            JSONObject event = (JSONObject) parser.parse(reader);
-            // JSONObject responseBody = new JSONObject();
-            String responseBody = "Hello, thanks for getting in touch!";
 
-            JSONObject pathParams = new JSONObject();
-            JSONObject headerJson = new JSONObject();
+            JSONObject event = (JSONObject) parser.parse(reader); // JSON object from the inputstream
+            JSONObject pathParams = new JSONObject(); // path Parameters
+            JSONObject headerJson = new JSONObject(); // header of response
 
+            // if the requests conatains path parameters
             if (event.get("pathParameters") != null) {
                 pathParams = (JSONObject) event.get("pathParameters");
                 context.getLogger().log(String.format("Path parameters: %s", pathParams));
-                responseBody = responseBody + "\n" + pathParams.toString();
-            }
 
-            if (event.get("queryStringParameters") != null) {
-                JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
-                context.getLogger().log(String.format("Query string parameters: %s", queryParams));
-                responseBody = responseBody + "\n" + queryParams.toString();
-            }
+                // if the request contains query parameters
+                if (event.get("queryStringParameters") != null) {
+                    JSONObject queryParams = (JSONObject) event.get("queryStringParameters");
+                    context.getLogger().log(String.format("Query string parameters: %s", queryParams));
 
-            if (pathParams.values().contains("api/v1/svg")) {
-                headerJson.put("x-handled-by", "SVG creator");
-                headerJson.put("Content-Type", "image/svg+xml");
+                    // do only if a metadata or a feedback url is defined at the endpoint api/v1/svg
+                    if (pathParams.values().contains("api/v1/svg") && (queryParams.get("metadata") != null || queryParams.get("feedback") != null)) {
 
-                URL url = new URL("http://worldtimeapi.org/api/ip");
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                JSONObject time = (JSONObject) parser.parse(in);
+                        // transformation descriptions
+                        MetadataTransformer transformer;
+                        TransformationDescriptionResources res = new TransformationDescriptionResources("http://geoviqua.github.io/geolabel/mappings/transformer.json=/transformations/transformer.json,http://geoviqua.github.io/geolabel/mappings/transformerSML101.json=/transformations/transformerSML101.json,http://geoviqua.github.io/geolabel/mappings/transformerSOS20.json=/transformations/transformerSOS20.json,http://geoviqua.github.io/geolabel/mappings/transformerSML20.json=/transformations/transformerSML20.json,http://geoviqua.github.io/geolabel/mappings/transformerSSNO.json=/transformations/transformerSSNO.json");
+                        transformer = new MetadataTransformer(new TransformationDescriptionLoader(res,
+                                                                                            new GeoLabelObjectMapper(res),
+                                                                                            true));
 
-                String template = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"30\" width=\"400\">"
-                        + "<text x=\"0\" y=\"15\" fill=\"red\">It is now %s in %s</text>" + "</svg>";
+                        // temp label
+                        Label l = new Label();
 
-                responseBody = String.format(template, time.get("datetime"), time.get("timezone"));
-            } else {
-                headerJson.put("Content-Type", "plain/text");
-            }
+                        //drilldown urls
+                        l.setMetadataUrl(new URL("http://not.available.net"));
+                        l.setFeedbackUrl(new URL("http://not.available.net"));
 
-            responseJson.put("statusCode", 200);
-            responseJson.put("headers", headerJson);
-            responseJson.put("body", responseBody.toString());
+                        // if a metadata url is specified
+                        if(queryParams.get("metadata") != null){
 
-        } catch (ParseException pex) {
+                            //resource from url                                                                      
+                            URL metadataURL = new URL(queryParams.get("metadata").toString());
+                            URLConnection metadata = metadataURL.openConnection();
+                            InputStream metadataStream = metadata.getInputStream();                                                                      
+
+                            // update label
+                            context.getLogger().log(String.format("Metadata Stream: %s", metadataStream));
+                            label = transformer.updateGeoLabel(metadataStream, l);
+                            context.getLogger().log(String.format("Label: %s", label));
+
+                        }
+                
+                        // if a feedback url is specified
+                        if(queryParams.get("feedback") != null){
+
+                            //resource from url                                                                      
+                            URL feedbackURL = new URL(queryParams.get("feedback").toString());
+                            URLConnection feedback = feedbackURL.openConnection();
+                            InputStream feedbackStream = feedback.getInputStream();
+                            
+                            // update label
+                            context.getLogger().log(String.format("Metadata Stream: %s", feedbackStream));
+                            label = transformer.updateGeoLabel(feedbackStream, l);
+                            context.getLogger().log(String.format("Label: %s", label));
+
+                        }
+
+                        int size;
+
+                        // if the size parameter is specified
+                        if(queryParams.get("size") != null){
+
+                            size = Integer.parseInt(queryParams.get("size").toString());
+
+                        } else { size = 200;} // if not size = 200   
+
+                        // label to svg using the svgtemplate
+                        label.toSVG(new FileWriter(f), "geolabel", size);
+                        context.getLogger().log(String.format("Metadata Stream: %s", f));
+
+                        // get content of .svg file
+                        responseBody = FileUtils.readFileToString(f, StandardCharsets.UTF_8);
+
+                        // set response headers and body
+                        responseJson.put("statusCode", 200);
+                        headerJson.put("x-handled-by", "SVG creator");
+                        headerJson.put("Content-Type", "image/svg+xml");
+                        responseJson.put("headers", headerJson);
+                        responseJson.put("body", responseBody);
+                    
+                    } else { // if no metadata or feedback url is defined
+
+                        responseBody = "No metadata or feedback URL specified.";
+                        headerJson.put("Content-Type", "text/plain");
+                        responseJson.put("statusCode", 200);
+                        responseJson.put("headers", headerJson);
+                        responseJson.put("body", responseBody);
+                    }
+
+                // if path od request is ...api  
+                } else if (pathParams.values().contains("api")) { 
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("currentVersion","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1");
+                    obj.put("v1","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1");
+                    responseBody = obj.toString();
+                    responseBody = responseBody.replace("\\","");
+                    headerJson.put("Content-Type", "application/json");
+                    responseJson.put("statusCode", 200);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+
+                // if path of request is ...api/v1 
+                } else if (pathParams.values().contains("api/v1")) {
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("version","v1");
+                    obj.put("svg-label-generation","https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1/svg");
+                    responseBody = obj.toString();
+                    responseBody = responseBody.replace("\\","");
+                    headerJson.put("Content-Type", "application/json");
+                    responseJson.put("statusCode", 200);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+                
+                // if path of request is ...api/v1/svg 
+                } else if(pathParams.values().contains("api/v1/svg")){
+
+                    responseBody = "No metadata or feedback URL specified.";
+                    headerJson.put("Content-Type", "text/plain");
+                    responseJson.put("statusCode", 200);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+
+                // if path parameters are specified which are not supported from the api   
+                } else {
+
+                    responseBody = "Page not found.";
+                    headerJson.put("Content-Type", "text/plain");
+                    responseJson.put("statusCode", 404);
+                    responseJson.put("headers", headerJson);
+                    responseJson.put("body", responseBody);
+                }
+            
+            } 
+
+        // if something went wrong by handling the request    
+        } catch (ParseException pex){
+
             responseJson.put("statusCode", 400);
             responseJson.put("exception", pex.toString());
         }
 
+        // OutputStream for Response
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
         writer.write(responseJson.toString());
         writer.close();
+
     }
 }
