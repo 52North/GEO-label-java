@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gvq:GVQ_FeedbackCollection xmlns:gvq="http://www.geoviqua.org/QualityInformationModel/4.0" 
+xmlns:gmd="http://www.isotc211.org/2005/gmd" 
+xmlns:gmd19157="http://www.geoviqua.org/gmd19157" 
+xmlns:updated19115="http://www.geoviqua.org/19115_updates" 
+xmlns:gsrC="http://www.w3.org/2001/XMLSchema" 
+xmlns:gsrD="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.geoviqua.org/QualityInformationModel/4.0 http://schemas.geoviqua.org/GVQ/4.0/GeoViQua_PQM_UQM.xsd">
+	<gvq:item>
+		<gvq:identifier>
+			<updated19115:MD_Identifier>
+				<gmd:code/>
+			</updated19115:MD_Identifier>
+		</gvq:identifier>
+		<gvq:subject>string</gvq:subject>
+		<gvq:primaryTarget>
+			<gvq:resourceRef>
+				<updated19115:MD_Identifier id="mtri2an1ib">
+					<gmd:code>
+						<gco:CharacterString>mtri2an1ib</gco:CharacterString>
+					</gmd:code>
+					<updated19115:codeSpace>
+						<gco:CharacterString>opengis.uab.cat</gco:CharacterString>
+					</updated19115:codeSpace>
+				</updated19115:MD_Identifier>
+			</gvq:resourceRef>
+			<gvq:natureOfTarget>
+				<gvq:MD_ScopeCode codeList="http://www.geoviqua.org/gmd19157/resources/codeList.xml#MD_ScopeCode" codeListValue="metadata"/>
+			</gvq:natureOfTarget>
+		</gvq:primaryTarget>
+		<gvq:userRole>
+			<gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_UserRoleCode" codeListValue=" NonresearchEndUser "/>
+		</gvq:userRole>
+		<gvq:user>
+			<gvq:userDetails>
+				<gmd:individualName>
+					<gco:CharacterString>Pepito</gco:CharacterString>
+				</gmd:individualName>
+				<gmd:organisationName>
+					<gco:CharacterString>Afrucat</gco:CharacterString>
+				</gmd:organisationName>
+				<gmd:contactInfo>
+					<gmd:CI_Contact>
+						<gmd:phone>
+							<gmd:CI_Telephone>
+								<gmd:voice>
+									<gco:CharacterString>00 34 973 22 01 49</gco:CharacterString>
+								</gmd:voice>
+								<gmd:facsimile>
+									<gco:CharacterString>00 34 973 22 01 49</gco:CharacterString>
+								</gmd:facsimile>
+							</gmd:CI_Telephone>
+						</gmd:phone>
+						<gmd:address>
+							<gmd:CI_Address>
+								<gmd:deliveryPoint>
+									<gco:CharacterString>Av. Tortosa n�1 Edificio Mercolleida</gco:CharacterString>
+								</gmd:deliveryPoint>
+								<gmd:city>
+									<gco:CharacterString>Lleida</gco:CharacterString>
+								</gmd:city>
+								<gmd:postalCode>
+									<gco:CharacterString>25005</gco:CharacterString>
+								</gmd:postalCode>
+								<gmd:country>
+									<gco:CharacterString>Spain</gco:CharacterString>
+								</gmd:country>
+								<gmd:electronicMailAddress>
+									<gco:CharacterString>administracio@afrucat.com</gco:CharacterString>
+								</gmd:electronicMailAddress>
+							</gmd:CI_Address>
+						</gmd:address>
+					</gmd:CI_Contact>
+				</gmd:contactInfo>
+				<gmd:role>
+					<gmd:CI_RoleCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_RoleCode" codeListValue="user"/>
+				</gmd:role>
+			</gvq:userDetails>
+			<gvq:applicationDomain>http://www.eionet.europa.eu/gemet/concept/3502</gvq:applicationDomain>
+			<!--
+what's this??? $$$ level 4? 
+  -->
+			<gvq:expertiseLevel>4</gvq:expertiseLevel>
+			<!-- 
+codelist???
+  -->
+			<gvq:userRole>
+				<gvq:GVQ_UserRoleCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_UserRoleCode" codeListValue="NonresearchEndUser"/>
+			</gvq:userRole>
+		</gvq:user>
+		<gvq:dateStamp>
+			<gco:DateTime>2006-01-31T00:00:00.0Z</gco:DateTime>
+		</gvq:dateStamp>
+		<gvq:qualityOverride>
+			<gvq:GVQ_DataQuality>
+				<gmd19157:scope/>
+				<gvq:discoveredIssue/>
+			</gvq:GVQ_DataQuality>
+		</gvq:qualityOverride>
+		<gvq:userComment>
+			<gvq:comment>When validating the Suitability Map of Golden Apple (link) with field survey evidences, we noticed that in the area of the �Corn de Borges Blanques, UTM: xxx� the results were not the expected. Instead of having high suitability rates for this particular fruit tree model matching the field reality, the multicriteria model shows low values. This conflict is caused by the GDD layer (an input in the fruit trees suitability multicriteria model). This layer is in turn derived from the mean June temperature, mean July temperature and mean August temperature layers included in the DCAIP  (MD_Identifier id). This leads us to discover that the climatic surfaces of these layers in the DCAIP do not reflect appropriately these local climate features ultimately favouring the golden apple suitability (i.e., the climatic model locally in this geographic area used as input in the fruit tree model gives lower values than the high suitability evidences found in the field). This is caused by the lower than expected values of the nearest in-situ meteorological sensors used in the climatic surfaces interpolation models, even though the values series of this sensor are compliant with the time series length specifications. This causes that the residual interpolation structure is not representative of these particular climatic features. </gvq:comment>
+			<gvq:mime-type>text/plain</gvq:mime-type>
+		</gvq:userComment>
+		<gvq:rating>
+			<gvq:score>5</gvq:score>
+			<gvq:justification>The data itself is appropriated for this application and the metadata records is beyond the expectation allowing for error traceability.</gvq:justification>
+		</gvq:rating>
+		<gvq:usage>
+			<gvq:reportAspect>
+				<gvq:GVQ_ReportAspectCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_ReportAspectCode" codeListValue="FitnessForPurpose"/>
+			</gvq:reportAspect>
+			<gvq:usageDescription> which is the difference between user comment, report aspect and discovered issue
+
+I purchased this data for suitability modelling, and had never dealt with supplier Y before. I found that the metadata on the supplier's website was compliant with the GeoViQua Producer Quality Model. However, for this particular application, this user feedback is relevant and should be linked to the PQM even if only affecting locally and for this particular fruit variety.</gvq:usageDescription>
+			<gvq:discoveredIssue>
+				<gvq:GVQ_DiscoveredIssue>
+					<gvq:target xlink:href="targetUID"/>
+					<gvq:knownProblem>
+						<gco:CharacterString> which is the difference between user comment, report aspect and discovered issue
+
+
+The data itself is of high quality, and the PQM states some usage recommendations. However, logically these records on the producer side, cannot foresee all potential uses. That�s why I want to contribute to the further understanding of this fit-for-purpose quality issue, which cannot be conveyed in the normal standards.</gco:CharacterString>
+					</gvq:knownProblem>
+					<gvq:referenceDoc>
+						<gvq:GVQ_Publication>
+							<gmd:title>
+								<gco:CharacterString>link to the Suitability map portal?</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2013-05-07</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://wis.wmo.int/2008/catalogues/draft_version_1-1/WMO_Codelists_ver1_1.xml#CI_DateTypeCode" codeListValue="creation"/>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gvq:target xlink:href="targetUID"/>
+							<gvq:category>
+								<gvq:GVQ_PublicationCategoryCode codeList="http://www.geoviqua.org/QualityInformationModel/4.0/resources/codeList.xml#GVQ_PublicationCategoryCode" codeListValue="webPage"/>
+							</gvq:category>
+							<gvq:onlineResource>
+								<gmd:CI_OnlineResource>
+									<gmd:linkage>
+										<gmd:URL><![CDATA[ ???
+http://www.ogc.uab.cat/cgi-bin/geossback/GEOSSBack.cgi?accio=EstilXML&AfegirEstil=rubric&URL=http://clearinghouse.cisc.gmu.edu/geonetwork/srv/en/iso19139.xml?id=491540
+  ]]></gmd:URL>
+									</gmd:linkage>
+								</gmd:CI_OnlineResource>
+							</gvq:onlineResource>
+						</gvq:GVQ_Publication>
+					</gvq:referenceDoc>
+				</gvq:GVQ_DiscoveredIssue>
+			</gvq:discoveredIssue>
+		</gvq:usage>
+		<gvq:domainURN>http://www.eionet.europa.eu/gemet/concept/9278</gvq:domainURN>
+		<gvq:tags>Climate ??? </gvq:tags>
+	</gvq:item>
+</gvq:GVQ_FeedbackCollection>
+<!-- ITEMS EXTRETS DEL UQM-UML QUE NO HAN ESTAT CONSIDERASTS EN LES METADADES
+QUALITY OVERRIDE
+EXTERNAL FEEDBACK
+REPLY TO -->

@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.n52.geolabel</groupId>
 		<artifactId>geolabel</artifactId>
-		<version>0.1</version>
+		<version>0.3</version>
 	</parent>
 
 	<profiles>
@@ -152,17 +152,6 @@
 								<goals>
 									<goal>stop</goal>
 								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					
-					<!-- disable swagger during integration-tests -->
-					<plugin>
-						<groupId>com.github.kongchen</groupId>
-						<artifactId>swagger-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>none</phase>
 							</execution>
 						</executions>
 					</plugin>

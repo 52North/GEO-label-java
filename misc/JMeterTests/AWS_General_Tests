@@ -1,0 +1,4 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1581016174561,1578,GET SVG Label,200,OK,AWS_Lambda_General_Tests 1-1,text,true,,21619,356,1,1,https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api/v1/svg?metadata=https://raw.githubusercontent.com/anikagraupner/GEO-label-java/master/testdata/All_Facets_Available/RDFXML/MBC_MyBluemixConverter/MBC_all_factes_available_ip68smartsensor.rdf,1578,0,163
+1581016176141,62,GET API Info,200,OK,AWS_Lambda_General_Tests 1-1,text,true,,471,165,1,1,https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api,62,0,0
+1581016176204,30,GET API Version Info,200,OK,AWS_Lambda_General_Tests 1-1,text,true,,471,165,1,1,https://6x843uryh9.execute-api.eu-central-1.amazonaws.com/glbservice/api,30,0,0

@@ -1,0 +1,152 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix schema: <http://schema.org/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix qudt-unit-1-1: <http://qudt.org/vocab/unit#> .
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix seas: <https://w3id.org/seas/>.
+@prefix cdt: <http://w3id.org/lindt/custom_datatypes#>.
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix biro:  <http://purl.org/spar/biro/> .
+@prefix fabio:  <http://purl.org/spar/fabio/> .
+@prefix frbr:  <http://purl.org/vocab/frbr/core#> .
+@prefix duv:  <http://www.w3.org/ns/duv#> .
+@prefix oa:  <http://www.w3.org/ns/oa#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+
+@base <https://data.grandlyon.com/> .
+
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ip68-smart-sensor.
+
+<Organization/1> a org:Organization ;
+    owl:sameAs <http://dbpedia.org/page/Metropolis_of_Lyon> .
+
+<Air> a sosa:FeatureOfInterest ;
+  rdfs:label "The air."@en .
+
+<IP68_Outdoor_Temperature_Sensor> a owl:Class , gr:ProductOrServiceModel ;
+  gr:name "IP68 Outdoor Temperature Sensor"@en ;
+  rdfs:label "IP68 Outdoor Temperature Sensor"@en ;
+  rdfs:subClassOf [
+    owl:onProperty ssn-system:hasOperatingRange ;
+    owl:hasValue <IP68_Outdoor_Temperature_Sensor#operatingRange> ] ;
+  rdfs:subClassOf [
+    owl:onProperty ssn-system:hasSystemCapability ;
+    owl:hasValue <IP68_Outdoor_Temperature_Sensor#systemCapability> ] .
+
+<IP68_Outdoor_Temperature_Sensor#operatingRange> a ssn-system:OperatingRange , ssn:Property ;
+  ssn-system:inCondition <IP68_Outdoor_Temperature_Sensor#normalOperatingCondition> .
+
+<IP68_Outdoor_Temperature_Sensor#normalOperatingCondition> a ssn-system:Condition , schema:PropertyValue ;
+  rdfs:comment "A temperature range of -20 to 70 Celsius."@en ;
+  schema:minValue -20.0 ;
+  schema:maxValue 70.0 ;
+  schema:unitCode qudt-unit-1-1:DegreeCelsius .
+
+<IP68_Outdoor_Temperature_Sensor#systemCapability> a ssn:Property , ssn-system:SystemCapability ;
+  rdfs:comment "The sensor capability in normal operating conditions."@en ;
+  ssn-system:hasSystemProperty <IP68_Outdoor_Temperature_Sensor#RFSensitivity> , <IP68_Outdoor_Temperature_Sensor#TemperatureAccuracy> , <IP68_Outdoor_Temperature_Sensor#TemperatureResolution> , <IP68_Outdoor_Temperature_Sensor#BatteryAccuracy> , <IP68_Outdoor_Temperature_Sensor#BatteryResolution> ;
+  ssn-system:inCondition <IP68_Outdoor_Temperature_Sensor#normalOperatingCondition> .
+
+<IP68_Outdoor_Temperature_Sensor#RFSensitivity> a ssn:Property , ssn-system:Sensitivity , schema:PropertyValue ;
+  schema:value -137 ;
+  schema:unitCode qudt-unit-1-1:DecibelReferredToOneMilliwatt .
+
+<IP68_Outdoor_Temperature_Sensor#TemperatureAccuracy> a ssn:Property , ssn-system:Accuracy , schema:PropertyValue ;
+  ssn:forProperty <Air?lat=45.75&long=4.85#temperature> ;
+  schema:minValue -0.2 ;
+  schema:maxValue 0.2 ;
+  schema:unitCode qudt-unit-1-1:DegreeCelsius .
+
+<IP68_Outdoor_Temperature_Sensor#TemperatureResolution> a ssn:Property , ssn-system:Resolution , schema:PropertyValue ;
+  ssn:forProperty <Air?lat=45.75&long=4.85#temperature> ;
+  schema:value 0.0625 ;
+  schema:unitCode qudt-unit-1-1:DegreeCelsius .
+
+<IP68_Outdoor_Temperature_Sensor#BatteryResolution> a ssn:Property , ssn-system:Resolution , schema:PropertyValue ;
+  ssn:forProperty <Sensor/SL-T-P1#battery> ;
+  schema:value 3.937e-3 ;
+  schema:unitCode qudt-unit-1-1:Percent .
+
+<Air?lat=45.75&long=4.85> a sosa:Sample ;
+  rdfs:label "The air at lat 45.75 and long 4.85."@en ;
+  sosa:isSampleOf <Air> ;
+  ssn:hasProperty <Air?lat=45.75&long=4.85#temperature> .
+
+<Air?lat=45.75&long=4.85#temperature> a ssn:Property , sosa:ObservableProperty ;
+  ssn:isPropertyOf <Air?lat=45.75&long=4.85> .
+
+<Sensor/SL-T-P1> a gr:ProductOrService, sosa:Sensor , prov:Entity, seas:LoRaCommunicationDevice , <IP68_Outdoor_Temperature_Sensor> ;
+	gr:hasBrand [ a gr:Brand ; gr:name "Sensing Labs"@en ] ;
+    geo:alt 100.0 ;
+    geo:lat 45.75 ;
+    geo:lon 4.85 ;
+    ssn:implements <IP68_Outdoor_Temperature_Sensor#temperatureSensingProcedure> ;
+    ssn:implements <IP68_Outdoor_Temperature_Sensor#batterySensingProcedure> ;
+    ssn:observes <Sensor/SL-T-P1#battery> ;
+    ssn:observes <Air?lat=45.75&long=4.85#temperature> .
+
+<Deployment/SL-T-P1/2017-06-06> a ssn:Deployment ;
+  ssn:deployedSystem <Sensor/SL-T-P1> ;
+  prov:startedAtTime "2017-06-06"^^xsd:date ;
+  prov:wasAssociatedWith <Organization/1> ;
+  ssn:deployedOnPlatform <Tree/1> .
+
+<Observation/5872357#temperature> a sosa:Observation , dcat:Dataset ;
+    duv:hasFeedback <rating/1> ;
+	duv:hasFeedback <comment/1> ;
+	prov:wasAssociatedWith <Person/exampleMan>;
+    sosa:hasSimpleResult "64.5244681928429 Cel"^^cdt:ucum ;
+    sosa:madeBySensor <Sensor/SL-T-P1> ;
+    sosa:hasFeatureOfInterest <Air?lat=45.75&long=4.85> ;
+    sosa:observedProperty <Air?lat=45.75&long=4.85#temperature> ;
+    sosa:resultTime "2017-06-20T21:49:18+00:00"^^xsd:dateTime .
+
+<Observation/5872357#battery> a sosa:Observation , dcat:Dataset;
+    duv:hasFeedback <comment/1> ;
+	prov:wasAssociatedWith <Person/exampleMan>;
+	biro:isReferencedBy <paper>;
+    sosa:hasSimpleResult "73.2 %"^^cdt:ucum ;
+    sosa:madeBySensor <Sensor/SL-T-P1> ;
+    sosa:hasFeatureOfInterest <Sensor/SL-T-P1> ;
+    sosa:observedProperty <Sensor/SL-T-P1#battery> ;
+    sosa:resultTime "2017-06-20T21:49:18+00:00"^^xsd:dateTime .
+
+<rating/1> rdf:type duv:RatingFeedback ;
+  oa:hasBody <good> ;
+  oa:hasTarget <Observation/5872357#temperature> ;
+  oa:motivatedBy oa:assessing .
+
+<good> a skos:Concept ;
+      skos:inScheme <rating> ;
+      skos:prefLabel "good"@en .
+
+<bad> a skos:Concept ;
+      skos:inScheme <rating> ;
+      skos:prefLabel "bad"@en .
+
+<rating> a skos:ConceptScheme ;
+      skos:prefLabel "A set of values to rate a observation." .
+	  
+<comment/1> rdf:type duv:UserFeedback ;
+  oa:hasBody "This is a comment of an user."^^xsd:string ;
+  oa:hasTarget <Observation/5872357#temperature> , <Observation/5872357#battery> ;
+  dct:creator <Person/exampleWoman> .
+
+<Person/exampleWoman> rdf:type prov:Agent, prov:Person;
+  foaf:givenName "Woman" .
+ 
+<Person/exampleMan> rdf:type prov:Agent, prov:Person;
+  foaf:familyName "Man" ;
+  foaf:mbox <mailto:man@example.org>.
+ 
+<paper> rdf:type fabio:ResearchPaper .

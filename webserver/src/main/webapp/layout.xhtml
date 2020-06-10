@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:glb="http://www.geolabel.net"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['image/GEOlabel.ico']}"></link> 
+	
+	<title>GEO label Service - <ui:insert name="title" /></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="utf-8" />
+	<h:outputStylesheet library="webjars/bootstrap/3.3.1/css"
+		name="bootstrap.min.css" />
+	<h:outputStylesheet name="css/layout.css" />
+	<h:outputScript library="webjars/jquery/1.11.1" name="jquery.min.js" />
+	<h:outputScript library="webjars/bootstrap/3.3.1/js"
+		name="bootstrap.min.js" />
+
+	<style type="text/css">
+		<ui:insert name="styles"/>
+	</style>
+</h:head>
+
+<h:body>
+	<div id="wrap">
+		<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">GEO label Service</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="index.jsf">Examples</a></li>
+						<li><a href="editor.jsf">Editor</a></li>
+						<li><a href="api.jsf">API</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="container" style="padding-top: 70px;">
+			<ui:insert name="content">
+
+			</ui:insert>
+		</div>
+
+		<div id="push"></div>
+	</div>
+
+	<div id="footer">
+		<div class="container">
+			<div class="row" style="margin-top: 10px;">
+				<dl class="dl-horizontal col-md-6" style="margin: 0px;">
+					<dt>52°North</dt>
+					<dd>
+						<a href="http://www.52north.org/">http://www.52north.org</a>
+					</dd>
+					<dt>GitHub Project</dt>
+					<dd>
+						<a href="https://github.com/52North/GEO-label-java/">https://github.com/52North/GEO-label-java
+						<span class="label label-info">Fork us!</span></a>
+					</dd>
+				</dl>
+				<dl class="dl-horizontal col-md-6" style="margin: 0px;">
+					<dt>GeoViQua</dt>
+					<dd>
+						<a href="http://www.geoviqua.org/">http://www.geoviqua.org/</a>
+					</dd>
+					<dt>GEO label</dt>
+					<dd>
+						<a href="http://geolabel.net/">http://geolabel.net/</a>
+					</dd>
+				</dl>
+			</div>
+			<p class="text-center" style="margin-top: 10px;">Copyright © 2013
+				52°North Initiative for Geospatial Open Source Software GmbH. All
+				Rights Reserved. | ${project.groupId}.${project.artifactId} version ${version}</p>
+		</div>
+	</div>
+</h:body>
+</html>

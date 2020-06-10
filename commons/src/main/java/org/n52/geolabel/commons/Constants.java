@@ -16,15 +16,16 @@
 package org.n52.geolabel.commons;
 
 public class Constants {
-	public static final String PARAM_METADATA = "metadata";
-	public static final String PARAM_METADATA_DRILL = "metadata_url";
-	public static final String PARAM_FEEDBACK = "feedback";
-	public static final String PARAM_FEEDBACK_DRILL = "feedback_url";
 
-	public static final String PARAM_LML = "lml";
+    public static final String PARAM_METADATA = "metadata";
+    public static final String PARAM_METADATA_DRILL = "metadata_url";
+    public static final String PARAM_FEEDBACK = "feedback";
+    public static final String PARAM_FEEDBACK_DRILL = "feedback_url";
 
-	public static final String PARAM_SIZE = "size";
-	public static final String PARAM_ID = "id";
+    public static final String PARAM_LML = "lml";
+
+    public static final String PARAM_SIZE = "size";
+    public static final String PARAM_ID = "id";
 
     public static final String PARAM_USECACHE = "useCache";
     public static final String PARAM_USECACHE_DEFAULT = "true";

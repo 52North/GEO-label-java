@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#spinning-cups-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:sosa="http://www.w3.org/ns/sosa/"
+         xmlns:ssn="http://www.w3.org/ns/ssn/">
+
+  <rdf:Description rdf:about="http://example.org/data/windSensor/14">
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    <sosa:observes rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+    <sosa:madeObservation>
+      <sosa:Observation rdf:about="http://example.org/data/observation/147">
+        <sosa:observedProperty rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+        <sosa:madeBySensor rdf:resource="http://example.org/data/windSensor/14"/>
+        <ssn:wasOriginatedBy rdf:resource="http://example.org/data/observation/147#spinningCupsMovement"/>
+        <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-12T12:00:00Z</sosa:resultTime>
+        <sosa:hasSimpleResult rdf:datatype="http://example.org/data/speed">47 km/h</sosa:hasSimpleResult>
+      </sosa:Observation>
+    </sosa:madeObservation>
+    <sosa:madeObservation>
+      <sosa:Observation rdf:about="http://example.org/data/observation/148">
+        <sosa:observedProperty rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+        <sosa:madeBySensor rdf:resource="http://example.org/data/windSensor/14"/>
+        <ssn:wasOriginatedBy rdf:resource="http://example.org/data/observation/148#spinningCupsMovement"/>
+        <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-12T12:01:00Z</sosa:resultTime>
+        <sosa:hasSimpleResult rdf:datatype="http://example.org/data/speed">43 km/h</sosa:hasSimpleResult>
+      </sosa:Observation>
+    </sosa:madeObservation>
+    <ssn:detects rdf:resource="http://example.org/data/observation/147#spinningCupsMovement"/>
+    <ssn:detects rdf:resource="http://example.org/data/observation/148#spinningCupsMovement"/>
+  </rdf:Description>
+
+  <ssn:Stimulus rdf:about="http://example.org/data/observation/147#spinningCupsMovement">
+    <ssn:isProxyFor rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+  </ssn:Stimulus>
+
+  <ssn:Stimulus rdf:about="http://example.org/data/observation/148#spinningCupsMovement">
+    <ssn:isProxyFor rdf:resource="http://example.org/data/location/4687#windSpeed"/>
+  </ssn:Stimulus>
+
+</rdf:RDF>

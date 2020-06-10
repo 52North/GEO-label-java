@@ -46,6 +46,7 @@ import com.google.inject.name.Names;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
+import org.n52.geolabel.server.resources.StandardizedGeolabelResourceV1;
 
 public class GeoLabelModule extends JerseyServletModule {
 
@@ -67,6 +68,7 @@ public class GeoLabelModule extends JerseyServletModule {
         bind(LMLResourceV1.class);
         bind(SVGResourceV1.class);
         bind(PNGResourceV1.class);
+        bind(StandardizedGeolabelResourceV1.class);
         bind(StaticLabelResourceV1.class);
         bind(TransformationsResourceV1.class);
         bind(CacheResourceV1.class);

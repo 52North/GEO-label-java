@@ -1,0 +1,38 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix duv:  <http://www.w3.org/ns/duv#> .
+@prefix oa:  <http://www.w3.org/ns/oa#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@base <http://example.org/data/> .
+
+# This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#dht22-description and https://www.w3.org/TR/prov-o/#Revision
+
+# The result of an observation of the sunspot number is available a few minutes 
+# after the phenomenon time, due to the light travel duration.
+
+<Observation/7536> rdf:type sosa:Observation , dcat:Dataset , prov:Activity;
+  sosa:observedProperty  <Sun#sunspotNumber> ;
+  sosa:hasSimpleResult 66 ;
+  sosa:phenomenonTime [
+    rdf:type time:Instant ;
+    time:inXSDDateTimeStamp "2017-03-31T11:51:42+00:00"^^xsd:dateTimeStamp ] ;
+  sosa:resultTime "2017-03-31T12:00:00+00:00"^^xsd:dateTimeStamp ;
+  duv:hasFeedback <comment/1> .
+
+<comment/1> rdf:type duv:UserFeedback, prov:Entity;
+  oa:hasBody "This is a comment of an expert."^^xsd:string ;
+  oa:hasTarget <Observation/7536> ;
+  prov:qualifiedAssociation [
+	a prov:Association;
+	prov:agent <Person/examplePerson>;
+	prov:hadRole <expert> ]; 
+.
+
+<Person/examplePerson> rdf:type prov:Agent, prov:Person;
+  foaf:givenName "Expertname" .
+ 
+<expert> rdf:type prov:Role .

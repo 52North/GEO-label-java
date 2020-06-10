@@ -34,11 +34,9 @@ import org.n52.geolabel.server.mapping.MetadataTransformer.LabelUrlKey;
 
 import com.google.inject.name.Named;
 import com.sun.jersey.spi.resource.Singleton;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("/v1/cache")
-@Api(value = "/v1/cache", description = "Operations to explore the service cache")
+//@Api(value = "/v1/cache", description = "Operations to explore the service cache")
 @Singleton
 public class CacheResourceV1 {
 
@@ -83,7 +81,7 @@ public class CacheResourceV1 {
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a list of currently cached metadata/feedback url mappings")
+//    @ApiOperation(value = "Returns a list of currently cached metadata/feedback url mappings")
     public CacheMappingsHolder getCacheInfo() {
         return new CacheMappingsHolder(this.transformer.get().getCacheContent(),
                                        this.cacheMaxHours,

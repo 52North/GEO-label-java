@@ -20,6 +20,7 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
+import static org.hamcrest.Matchers.not;
 
 import org.junit.Test;
 import org.n52.geolabel.server.mapping.description.FacetTransformationDescription.HoveroverInformation;
@@ -35,8 +36,22 @@ public class TemplateParsingTest {
 
         ArrayList<TypedPlaceholder> actual = hoverover.getTypedPlaceholders();
 
-        assertThat("placeholder array is correctly parsed", actual, hasItem(new TypedPlaceholder("%d", Type.DECIMAL)));
+        assertThat("placeholder array is correctly parsed", actual, hasItem(new TypedPlaceholder("%d", Type.INTEGER)));
         assertThat("placeholder array is correctly parsed", actual, hasItem(new TypedPlaceholder("%s", Type.STRING)));
+        assertThat("placeholder array is correctly parsed", actual, not(hasItem(new TypedPlaceholder("", Type.UNKNOWN))));
+    }
+    
+    @Test
+    public void testNumberPlaceholderTypes() {
+        HoveroverInformation hoverover = new HoveroverInformation();
+        hoverover.setTemplate("this is an integer %d and a float %f");
+
+        ArrayList<TypedPlaceholder> actual = hoverover.getTypedPlaceholders();
+
+        assertThat("placeholder array is correctly parsed", actual, hasItem(new TypedPlaceholder("%d", Type.INTEGER)));
+        assertThat("placeholder array is correctly parsed", actual, hasItem(new TypedPlaceholder("%f", Type.FLOAT)));
+        assertThat("placeholder array is correctly parsed", actual, not(hasItem(new TypedPlaceholder("%s", Type.STRING))));
+        assertThat("placeholder array is correctly parsed", actual, not(hasItem(new TypedPlaceholder("", Type.UNKNOWN))));
     }
 
 }

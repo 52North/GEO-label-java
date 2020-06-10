@@ -4,3 +4,7 @@ target
 .project
 .settings
 .classpath
+*/nb-configuration.xml
+server/faces-config.NavData
+
+logs/

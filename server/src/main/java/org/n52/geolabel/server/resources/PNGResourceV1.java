@@ -43,14 +43,9 @@ import org.n52.geolabel.formats.PngEncoder;
 import org.n52.geolabel.server.config.GeoLabelConfig;
 
 import com.sun.jersey.multipart.FormDataParam;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
 
 @Path("/v1/png")
-@Api(value = "/v1/png", description = "Operations to retrieve GEO label PNG representations")
+//@Api(value = "/v1/png", description = "Operations to retrieve GEO label PNG representations")
 public class PNGResourceV1 {
 
     private static final String MEDIA_TYPE = "image/png";
@@ -69,17 +64,17 @@ public class PNGResourceV1 {
 
     @GET
     @Produces(MEDIA_TYPE)
-    @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as url")
-    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
-    public Response getLabelSVGByURL(@ApiParam("Url to LML document")
+//    @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as url")
+//    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+    public Response getLabelSVGByURL(/*@ApiParam("Url to LML document")*/
     @QueryParam(Constants.PARAM_LML)
-    URL lmlURL, @ApiParam("Url to metadata document")
+    URL lmlURL, /*@ApiParam("Url to metadata document")*/
     @QueryParam(Constants.PARAM_METADATA)
-    URL metadataURL, @ApiParam("Url to feedback document")
+    URL metadataURL, /*@ApiParam("Url to feedback document")*/
     @QueryParam(Constants.PARAM_FEEDBACK)
-    URL feedbackURL, @ApiParam("Desired size of returned PNG")
+    URL feedbackURL, /*@ApiParam("Desired size of returned PNG")*/
     @QueryParam(Constants.PARAM_SIZE)
-    Integer size, @ApiParam("use cached labels")
+    Integer size, /*@ApiParam("use cached labels")*/
     @QueryParam(Constants.PARAM_USECACHE)
     @DefaultValue(Constants.PARAM_USECACHE_DEFAULT)
     boolean useCache) throws IOException {
@@ -101,8 +96,8 @@ public class PNGResourceV1 {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MEDIA_TYPE)
-    @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
-    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
+//    @ApiOperation(value = "Returns a GEO label", notes = "Requires metadata/feedback documents as data stream")
+//    @ApiResponses({@ApiResponse(code = 400, message = "Error in feedback/metadata document")})
     public Response getLabelSVGByFile(
     /* @ApiParam("LML representation") */@FormDataParam(Constants.PARAM_LML)
     Label label,

@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg:svg id="NA" height="200" width="200" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" version="1.1">
+    
+    <svg:title>GEO label</svg:title>
+    <svg:description>A visual and interactive summary for geospatial metadata.
+        This document was created by the GEO label API at http://geolabel.net/ and can be retrieved via the URL: 
+        http://geolabel.net/api/v1/geolabel?metadata=http://sensorweblabe.net/example/hydrophone.xml
+    </svg:description>
+    <svg:metadata>
+        <geolabel>true</geolabel>
+        <labelUrl>http://geolabel.net/api/v1/geolabel?metadata=http://sensorweblabe.net/example/hydrophone.xml</labelUrl>
+        <metadata>
+            <!--This document contains an exemplary description of specific hydrophone (instance of a type)-->
+            <sml:PhysicalSystem gml:id="ExampleHydrophone1" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
+                <gml:description>Exemplary description of a hydrophone</gml:description>
+                <sml:keywords><!--Keywords describing the hydrophone-->
+                    <sml:KeywordList>
+                        <sml:keyword>Earth Science > Oceans > Ocean Acoustics</sml:keyword>
+                        <sml:keyword>Ocean Acoustics</sml:keyword>
+                        <sml:keyword>SODAR Acoustic Receivers Hydrophone</sml:keyword>
+                        <sml:keyword>Projects:ESONET Platforms: Fixed Oberservation Stations</sml:keyword>
+                    </sml:KeywordList>
+                </sml:keywords>
+                <sml:identification><!--Identifiers of the hydrophone-->
+                    <sml:IdentifierList>
+                        <!--UUID of the hydrophone-->
+                        <sml:identifier>
+                            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#UUID">
+                                <sml:label>UUID</sml:label>
+                                <sml:value>C41969B6-F170-0501-432E-B43D5420140B</sml:value>
+                            </sml:Term>
+                        </sml:identifier>
+                        <!--Short name of the hydrophone-->
+                        <sml:identifier>
+                            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#shortName">
+                                <sml:label>Short name</sml:label>
+                                <sml:value>Example Hydrophone 1</sml:value>
+                            </sml:Term>
+                        </sml:identifier>
+                        <!--Long name of the hydrophone-->
+                        <sml:identifier>
+                            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#longName">
+                                <sml:label>Long name</sml:label>
+                                <sml:value>Example Hydrophone 1 NeXOS</sml:value>
+                            </sml:Term>
+                        </sml:identifier>
+                        <!--Device ID of the hydrophone-->
+                        <sml:identifier>
+                            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#deviceID">
+                                <sml:label>Device ID</sml:label>
+                                <sml:value>C6764FF3-A220-0001-2D56-19DB17401D90</sml:value>
+                            </sml:Term>
+                        </sml:identifier>
+                        <!--Serial number of the hydrophone-->
+                        <sml:identifier>
+                            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#serialNumber">
+                                <sml:label>Serial number</sml:label>
+                                <sml:value>1234567890</sml:value>
+                            </sml:Term>
+                        </sml:identifier>
+                        <!--WMO id of the hydrophone-->
+                        <sml:identifier>
+                            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#WMO_ID">
+                                <sml:label>WMO</sml:label>
+                                <sml:value>123456</sml:value>
+                            </sml:Term>
+                        </sml:identifier>
+                    </sml:IdentifierList>
+                </sml:identification>
+                <sml:validTime><!--Time period for which the description of this hydrophone is valid-->
+                    <gml:TimePeriod gml:id="validityPeriod">
+                        <gml:beginPosition>2015-01-10T13:22:31+00:00</gml:beginPosition>
+                        <gml:endPosition>2015-01-17T16:57:56+00:00</gml:endPosition>
+                    </gml:TimePeriod>
+                </sml:validTime>
+                <sml:contacts> <!--Contact details for this hydrophone-->
+                    <sml:ContactList>
+                        <!--Point of contact for this hydrophone-->
+                        <sml:contact xlink:title="pointOfContact">
+                            <gmd:CI_ResponsibleParty>
+                                <!--Name of the organisation responsible for the hydrophone-->
+                                <gmd:organisationName>
+                                    <gco:CharacterString>52°North GmbH</gco:CharacterString>
+                                </gmd:organisationName>
+                                <gmd:contactInfo>
+                                    <gmd:CI_Contact>
+                                        <gmd:address>
+                                            <gmd:CI_Address>
+                                                <!--City where the organisation responsible for the hydrophone is located-->
+                                                <gmd:city>
+                                                    <gco:CharacterString>Münster</gco:CharacterString>
+                                                </gmd:city>
+                                                <!--Country where the organisation responsible for the hydrophone is located-->
+                                                <gmd:country>
+                                                    <gco:CharacterString>Germany</gco:CharacterString>
+                                                </gmd:country>
+                                            </gmd:CI_Address>
+                                        </gmd:address>
+                                    </gmd:CI_Contact>
+                                </gmd:contactInfo>
+                                <!--The role of the responsible organisation should be CI_RoleCode_pointOfContact-->
+                                <gmd:role>
+                                    <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode/" codeListValue="CI_RoleCode_pointOfContact">Point of Contact</gmd:CI_RoleCode>
+                                </gmd:role>
+                            </gmd:CI_ResponsibleParty>
+                        </sml:contact>
+                        <!--Owner of this hydrophone-->
+                        <sml:contact xlink:title="owner">
+                            <gmd:CI_ResponsibleParty>
+                                <!--The name of the organisation which owns the hydrophone-->
+                                <gmd:organisationName>
+                                    <gco:CharacterString>52°North GmbH</gco:CharacterString>
+                                </gmd:organisationName>
+                                <gmd:contactInfo>
+                                    <gmd:CI_Contact>
+                                        <gmd:phone>
+                                            <gmd:CI_Telephone>
+                                                <!--Telephone number of the organisation which owns the hydrophone-->
+                                                <gmd:voice>
+                                                    <gco:CharacterString>+49-(0)-251-396371-31</gco:CharacterString>
+                                                </gmd:voice>
+                                                <!--Fax number of the organisation which owns the hydrophone-->
+                                                <gmd:facsimile>
+                                                    <gco:CharacterString>+49-(0)-251-396371-11</gco:CharacterString>
+                                                </gmd:facsimile>
+                                            </gmd:CI_Telephone>
+                                        </gmd:phone>
+                                        <gmd:address>
+                                            <gmd:CI_Address>
+                                                <!--Street and house number where the organisation which owns the hydrophone is located-->
+                                                <gmd:deliveryPoint>
+                                                    <gco:CharacterString>Martin-Luther-King-Weg 24</gco:CharacterString>
+                                                </gmd:deliveryPoint>
+                                                <!--City where the organisation which owns the hydrophone is located-->
+                                                <gmd:city>
+                                                    <gco:CharacterString>Münster</gco:CharacterString>
+                                                </gmd:city>
+                                                <!--Administrative area where the organisation which owns the hydrophone is located (e.g. the federal state within a country)-->
+                                                <gmd:administrativeArea>
+                                                    <gco:CharacterString>North Rhine-Westphalia</gco:CharacterString>
+                                                </gmd:administrativeArea>
+                                                <!--Postal code of the area where the organisation which owns the hydrophone is located-->
+                                                <gmd:postalCode>
+                                                    <gco:CharacterString>48155</gco:CharacterString>
+                                                </gmd:postalCode>
+                                                <!--Country where the organisation which owns the hydrophone is located-->
+                                                <gmd:country>
+                                                    <gco:CharacterString>Germany</gco:CharacterString>
+                                                </gmd:country>
+                                                <!--Email address of organisation which owns the hydrophone-->
+                                                <gmd:electronicMailAddress>
+                                                    <gco:CharacterString>jirka@52north.org</gco:CharacterString>
+                                                </gmd:electronicMailAddress>
+                                            </gmd:CI_Address>
+                                        </gmd:address>
+                                    </gmd:CI_Contact>
+                                </gmd:contactInfo>
+                                <!--The role for the organisation which owns the hydrophone should be CI_RoleCode_owner-->
+                                <gmd:role>
+                                    <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode/" codeListValue="CI_RoleCode_owner">Owner</gmd:CI_RoleCode>
+                                </gmd:role>
+                            </gmd:CI_ResponsibleParty>
+                        </sml:contact>
+                        <!--Operator of this hydrophone-->
+                        <sml:contact xlink:title="operator">
+                            <gmd:CI_ResponsibleParty>
+                                <!-- The name of the organisation which operates the hydrophone-->
+                                <gmd:organisationName>
+                                    <gco:CharacterString>Test Operator</gco:CharacterString>
+                                </gmd:organisationName>
+                                <gmd:contactInfo>
+                                    <gmd:CI_Contact>
+                                        <gmd:phone>
+                                            <gmd:CI_Telephone>
+                                                <!--Phone number of the organisation which operates the hydrophone-->
+                                                <gmd:voice>
+                                                    <gco:CharacterString>+49-(0)-251-396371-31</gco:CharacterString>
+                                                </gmd:voice>
+                                                <!--Fax number of the organisation which operates the hydrophone-->
+                                                <gmd:facsimile>
+                                                    <gco:CharacterString>+49-(0)-251-396371-11</gco:CharacterString>
+                                                </gmd:facsimile>
+                                            </gmd:CI_Telephone>
+                                        </gmd:phone>
+                                        <gmd:address>
+                                            <gmd:CI_Address>
+                                                <!--Street and house number where the organisation which operates the hydrophone is located-->
+                                                <gmd:deliveryPoint>
+                                                    <gco:CharacterString>Martin-Luther-King-Weg 24</gco:CharacterString>
+                                                </gmd:deliveryPoint>
+                                                <gmd:city>
+                                                    <gco:CharacterString>Münster</gco:CharacterString>
+                                                </gmd:city>
+                                                <!--Administrative area where the organisation which operates the hydrophone is located (e.g. the federal state within a country)-->
+                                                <gmd:administrativeArea>
+                                                    <gco:CharacterString>North Rhine-Westphalia</gco:CharacterString>
+                                                </gmd:administrativeArea>
+                                                <!--Postal code of the area where the organisation which operates the hydrophone is located-->
+                                                <gmd:postalCode>
+                                                    <gco:CharacterString>48155</gco:CharacterString>
+                                                </gmd:postalCode>
+                                                <!--Country where the organisation which operates the hydrophone is located-->
+                                                <gmd:country>
+                                                    <gco:CharacterString>Germany</gco:CharacterString>
+                                                </gmd:country>
+                                                <!--Email address of the organisation which operates the hydrophone-->
+                                                <gmd:electronicMailAddress>
+                                                    <gco:CharacterString>jirka@52north.org</gco:CharacterString>
+                                                </gmd:electronicMailAddress>
+                                            </gmd:CI_Address>
+                                        </gmd:address>
+                                    </gmd:CI_Contact>
+                                </gmd:contactInfo>
+                                <!--The role for the organisation which operates the hydrophone should be CI_RoleCode_custodian-->
+                                <gmd:role>
+                                    <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode/" codeListValue="CI_RoleCode_custodian">Operator</gmd:CI_RoleCode>
+                                </gmd:role>
+                            </gmd:CI_ResponsibleParty>
+                        </sml:contact>
+                        <!--Principal investigator responsible for this hydrophone-->
+                        <sml:contact xlink:title="principalInvestigator">
+                            <gmd:CI_ResponsibleParty>
+                                <!--Name of the principal investigator responsible for this hydrophone-->
+                                <gmd:individualName>
+                                    <gco:CharacterString>Dr. Simon Jirka</gco:CharacterString>
+                                </gmd:individualName>
+                                <!--Organisation of the principal investigator responsible for this hydrophone-->
+                                <gmd:organisationName>
+                                    <gco:CharacterString>52°North GmbH</gco:CharacterString>
+                                </gmd:organisationName>
+                                <!--Position of the principal investigator responsible for this hydrophone-->
+                                <gmd:positionName>
+                                    <gco:CharacterString>Project Manager</gco:CharacterString>
+                                </gmd:positionName>
+                                <gmd:contactInfo>
+                                    <gmd:CI_Contact>
+                                        <gmd:phone>
+                                            <gmd:CI_Telephone>
+                                                <!--Telephone number of the principal investigator responsible for this hydrophone-->
+                                                <gmd:voice>
+                                                    <gco:CharacterString>+49-(0)-251-396371-31</gco:CharacterString>
+                                                </gmd:voice>
+                                            </gmd:CI_Telephone>
+                                        </gmd:phone>
+                                        <gmd:address>
+                                            <gmd:CI_Address>
+                                                <!--City where the principal investigator responsible for this hydrophone is located-->
+                                                <gmd:city>
+                                                    <gco:CharacterString>Münster</gco:CharacterString>
+                                                </gmd:city>
+                                                <!--Country where the principal investigator responsible for this hydrophone is located-->
+                                                <gmd:country>
+                                                    <gco:CharacterString>Germany</gco:CharacterString>
+                                                </gmd:country>
+                                                <!--Email address of the principal investigator responsible for this hydrophone-->
+                                                <gmd:electronicMailAddress>
+                                                    <gco:CharacterString>jirka@52north.org</gco:CharacterString>
+                                                </gmd:electronicMailAddress>
+                                            </gmd:CI_Address>
+                                        </gmd:address>
+                                        <!--Web site of the principal investigator responsible for this hydrophone-->
+                                        <gmd:onlineResource>
+                                            <gmd:CI_OnlineResource>
+                                                <gmd:linkage>
+                                                    <gmd:URL>http://52north.org</gmd:URL>
+                                                </gmd:linkage>
+                                            </gmd:CI_OnlineResource>
+                                        </gmd:onlineResource>
+                                    </gmd:CI_Contact>
+                                </gmd:contactInfo>
+                                <!--The role of the principal investigator should be CI_RoleCode_principalInvestigator-->
+                                <gmd:role>
+                                    <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode/" codeListValue="CI_RoleCode_principalInvestigator">Principal Investigator</gmd:CI_RoleCode>
+                                </gmd:role>
+                            </gmd:CI_ResponsibleParty>
+                        </sml:contact>
+                    </sml:ContactList>
+                </sml:contacts>
+                <sml:history><!--Collection of events describing the history of the hydrophone-->
+                    <sml:EventList>
+                        <!--Event describing the installation-->
+                        <sml:event>
+                            <sml:Event>
+                                <!--Label describing the type of the event-->
+                                <swe:label>Installation</swe:label>
+                                <!--Documentation of the installation; a link to more detailed information about this event is provided (e.g. a log file)-->
+                                <sml:documentation>
+                                    <sml:DocumentList>
+                                        <sml:document>
+                                            <gmd:CI_OnlineResource>
+                                                <gmd:linkage>
+                                                    <gmd:URL>http://52north.org/hydrophone:9328_installation.log</gmd:URL>
+                                                </gmd:linkage>
+                                            </gmd:CI_OnlineResource>
+                                        </sml:document>
+                                    </sml:DocumentList>
+                                </sml:documentation>
+                                <!--Time stamp when the hydrophone was installed-->
+                                <sml:time>
+                                    <gml:TimeInstant gml:id="installationDate">
+                                        <gml:timePosition>2014-11-21T11:30:10.000Z</gml:timePosition>
+                                    </gml:TimeInstant>
+                                </sml:time>
+                            </sml:Event>
+                        </sml:event>
+                        <!--Event describing the deployment-->
+                        <sml:event>
+                            <sml:Event>
+                                <!--Label describing the type of the event-->
+                                <swe:label>Deployment</swe:label>
+                                <!--Documentation of the deployment; a link to more detailed information about this event is provided (e.g. a log file)-->
+                                <sml:documentation>
+                                    <sml:DocumentList>
+                                        <sml:document>
+                                            <gmd:CI_OnlineResource>
+                                                <gmd:linkage>
+                                                    <gmd:URL>http://52north.org/hydrophone:9328_initialization.log</gmd:URL>
+                                                </gmd:linkage>
+                                            </gmd:CI_OnlineResource>
+                                        </sml:document>
+                                    </sml:DocumentList>
+                                </sml:documentation>
+                                <!--Time stamp when the hydrophone was deployed-->
+                                <sml:time>
+                                    <gml:TimeInstant gml:id="deploymentDate">
+                                        <gml:timePosition>2014-11-21T12:02:22.000Z</gml:timePosition>
+                                    </gml:TimeInstant>
+                                </sml:time>
+                            </sml:Event>
+                        </sml:event>
+                        <!--Event describing when the data collection was started-->
+                        <sml:event>
+                            <sml:Event>
+                                <!--Label describing the type of the event-->
+                                <swe:label>Start of data collection</swe:label>
+                                <!--Time stamp when the data collection started-->
+                                <sml:time>
+                                    <gml:TimeInstant gml:id="dataCollectionStartDate">
+                                        <gml:timePosition>2014-11-21T13:12:20.000Z</gml:timePosition>
+                                    </gml:TimeInstant>
+                                </sml:time>
+                            </sml:Event>
+                        </sml:event>
+                        <!--Event describing a calibration event-->
+                        <sml:event>
+                            <sml:Event>
+                                <!--Label describing the type of the event-->
+                                <swe:label>Calibration</swe:label>
+                                <sml:identification>
+                                    <sml:IdentifierList>
+                                        <!--ID of the calibration event-->
+                                        <sml:identifier>
+                                            <sml:Term>
+                                                <sml:label>Calibration ID</sml:label>
+                                                <sml:value>cal000001</sml:value>
+                                            </sml:Term>
+                                        </sml:identifier>
+                                    </sml:IdentifierList>
+                                </sml:identification>
+                                <!--Documentation of the calibration event; a link to more detailed information about this event is provided (e.g. a log file)-->
+                                <sml:documentation>
+                                    <sml:DocumentList>
+                                        <sml:document>
+                                            <gmd:CI_OnlineResource>
+                                                <gmd:linkage>
+                                                    <gmd:URL>http://52north.org/hydrophone:9328_cal000001.log</gmd:URL>
+                                                </gmd:linkage>
+                                            </gmd:CI_OnlineResource>
+                                        </sml:document>
+                                    </sml:DocumentList>
+                                </sml:documentation>
+                                <!--Time stamp when the calibration was performed-->
+                                <sml:time>
+                                    <gml:TimeInstant gml:id="cal000001Date">
+                                        <gml:timePosition>2014-12-22T16:33:22.000Z</gml:timePosition>
+                                    </gml:TimeInstant>
+                                </sml:time>
+                            </sml:Event>
+                        </sml:event>
+                    </sml:EventList>
+                </sml:history>
+                <!--Reference to the description of the hydrophone type. The referenced URL links to a SensorML document describing all properties which are the same for all hydrophones of this type.-->
+                <sml:typeOf xlink:href="http://52north.org/hydrophone_Type_123456B.xml"/>
+                <sml:parameters><!--Parameters of the hydrophone (= properties which can be adjusted)-->
+                    <sml:ParameterList>
+                        <!--Indication if the hydrophone is active-->
+                        <sml:parameter name="isActive">
+                            <swe:Boolean definition="http://www.nexosproject.eu/dictionary/definitions.html#sensorStatus">
+                                <swe:label>Sensor Status</swe:label>
+                                <swe:description>true = active, false = not active</swe:description>
+                                <swe:value>true</swe:value>
+                            </swe:Boolean>
+                        </sml:parameter>
+                        <!--Pressure dynamic range of the hydrophone-->
+                        <sml:parameter name="pressureDynamicRange">
+                            <swe:QuantityRange definition="http://www.nexosproject.eu/dictionary/definitions.html#pressureDynamicRange">
+                                <swe:label>Pressure Dynamic Range (dB[1.uPa]) [min max])</swe:label>
+                                <swe:uom code="dB[1.V/uPa]"/>
+                                <swe:value>20 120</swe:value>
+                            </swe:QuantityRange>
+                        </sml:parameter>
+                        <!--Amplifier gain of the hydrophone-->
+                        <sml:parameter name="amplifierGain">
+                            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#amplifierGain">
+                                <swe:label>Amplifier Gain</swe:label>
+                                <swe:uom code="dB"/>
+                                <swe:value>5</swe:value>
+                            </swe:Quantity>
+                        </sml:parameter>
+                        <!--High pass filter of the hydrophone-->
+                        <sml:parameter name="highPassFilter">
+                            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#highPassFilter">
+                                <swe:label>High Pass Filter</swe:label>
+                                <swe:uom code="Hz_[-3.dB]"/>
+                                <swe:value>23</swe:value>
+                            </swe:Quantity>
+                        </sml:parameter>
+                        <!--Low pass filter of the hydrophone-->
+                        <sml:parameter name="lowPassFilter">
+                            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#lowPassFilter">
+                                <swe:label>Low Pass Filter</swe:label>
+                                <swe:uom code="Hz_[-3.dB]"/>
+                                <swe:value>23</swe:value>
+                            </swe:Quantity>
+                        </sml:parameter>
+                        <!--Output voltage of the hydrophone-->
+                        <sml:parameter name="outputVoltage">
+                            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#outputVoltage">
+                                <swe:label>OutputVoltage</swe:label>
+                                <swe:uom code="V"/>
+                                <swe:value>5</swe:value>
+                            </swe:Quantity>
+                        </sml:parameter>
+                    </sml:ParameterList>
+                </sml:parameters>
+                <sml:position><!--Position of the hydrphone-->
+                    <swe:DataRecord>
+                        <!--Longitude of the hydrophone position-->
+                        <swe:field name="longitude">
+                            <swe:Quantity referenceFrame="urn:ogc:crs:EPSG:4326" axisID="Lon">
+                                <swe:uom code="deg"/>
+                                <swe:value>7.99483</swe:value>
+                            </swe:Quantity>
+                        </swe:field>
+                        <!--Latitude of the hydrophone position-->
+                        <swe:field name="latitude">
+                            <swe:Quantity referenceFrame="urn:ogc:crs:EPSG:4326" axisID="Lat">
+                                <swe:uom code="deg"/>
+                                <swe:value>51.98942</swe:value>
+                            </swe:Quantity>
+                        </swe:field>
+                        <!-- Altitude of the hydrophone position-->
+                        <swe:field name="altitude">
+                            <swe:Quantity referenceFrame="urn:ogc:crs:EPSG:5715" axisID="Z">
+                                <swe:uom code="m"/>
+                                <swe:value>-84</swe:value>
+                            </swe:Quantity>
+                        </swe:field>
+                        <!--True heading of the hydrophone-->
+                        <swe:field name="trueHeading">
+                            <swe:Quantity>
+                                <swe:uom code="deg"/>
+                                <swe:value>96.95</swe:value>
+                            </swe:Quantity>
+                        </swe:field>
+                    </swe:DataRecord>
+                </sml:position>
+                <sml:components><!--Components that belong to this hydrophone-->
+                    <sml:ComponentList>
+                        <!--Reference to a SensorML document describing of the pressure detector of this hydrophone-->
+                        <sml:component name="pressureDetector_of_ExampleHydrophone1" xlink:href="http://52north.org/pressureDetector_of_ExampleHydrophone1.xml"/>
+                    </sml:ComponentList>
+                </sml:components>
+            </sml:PhysicalSystem>
+        </metadata>
+        <feedback />
+        <parent_metadata />
+        <parent_feedback />
+    </svg:metadata>
+    
+    <svg:metadata><!-- non GEO label metadata elements... --></svg:metadata>
+    <svg:svg viewBox="0 0 200 200" preserveAspectRatio="xMinYMin meet">
+        <svg:g transform="scale(0.8)" id="size_group" class="size_group">
+            <!-- Facets Group Opening -->
+            <svg:g id="facets_group" class="facets_group">
+                <!-- Producer Profile -->
+                <svg:g id="producer_profile" class="producer_profile">
+                    <svg:title>Producer Profile
+                        Organisation name: 52°North GmbH.</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?metadata=http://not.available.for.direct.upload&amp;facet=producer_profile">
+                        <svg:path d="M152.178,97.822l59.796-59.795
+							C187.958,14.008,156.478,2,125,2l0,84.563C134.837,86.563,144.674,90.316,152.178,97.822z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#ED1E7F"/>
+                        <svg:path d="M154.14,31.925
+								c2.306-0.358,5.972,1.384,5.972,1.384c-7.198,7.265-17.221,16.66-21.993,21.108c-1.67-0.165-3.921-0.971-3.979-2.51
+								c-0.066-1.755,2.612-3.657,4.608-5.616c4.082-4.008,6.06-6.125,10.018-10.091C150.775,34.184,152.558,32.167,154.14,31.925z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M167.306,26.13
+								c1.821,1.689,2.298,2.29,4.055,3.965c-7.401,7.411-22.163,21.813-24.745,24.211c-2.907,2.581-5.549,4.796-5.549,4.796
+								l-7.479,3.439l4.013-7.443c0,0,4.047-3.986,6.425-6.279C151.787,41.333,159.915,33.34,167.306,26.13z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M182.787,47.247l-1.194,11.154l-25.367-0.137
+								c-4.976,0.13-9.948,0.983-9.535-3.671c0.214-2.416,0.819-3.699,5.114-3.937h8.306c0,0-2.658-1.896-5.663-3.763
+								c1.758-1.844,8.417-8.233,11.033-10.81C167.033,36.949,182.787,47.247,182.787,47.247z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                    </svg:a>
+                </svg:g>
+                <!-- Lineage -->
+                <svg:g id="lineage" class="lineage">
+                    <svg:title>Lineage Information
+                        Number of process steps: 0.</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?metadata=http://not.available.for.direct.upload&amp;facet=lineage_information">
+                        <svg:path d="M152.178,152.021l59.795,59.794
+			C235.991,187.799,248,156.321,248,124.844l-84.563-0.001C163.437,134.68,159.684,144.517,152.178,152.021z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M180.26,138.392" stroke-miterlimit="10" stroke-width="2" stroke="#FFFFFF" fill="none"/>
+                        <svg:path d="
+			M198.977,166.95c3.001-0.276,5.433-1.629,7.384-3.96c0.974-1.57,1.49-2.521,1.815-4.25c-1.401-0.94-2.581-1.956-4.189-2.871
+			c-0.539-0.307-1.866-0.759-1.787-0.384c-0.142,0.803-0.347,1.723-1.121,2.895c-0.863,1.308-2.346,1.931-3.802,1.758
+			c-0.557-0.114-1.122-0.344-1.696-0.73c-3.696-2.486-7.398-4.966-11.098-7.448c-1.875-1.259-2.389-3.685-1.172-5.528
+			c0.863-1.308,2.346-1.931,3.801-1.759c0.557,0.114,1.123,0.344,1.697,0.73c2.202,1.481,4.015,2.695,6.219,4.174
+			c1.52-1.11,3.024-2.03,5-2.375c1.331-0.233,2.454-0.12,3.62,0.041c-0.698-0.446-3.011-2.064-4.323-2.938
+			c-2.435-1.753-4.902-3.548-7.528-5.071c-1.674-0.972-3.457-1.41-5.202-1.41c-0.388-0.008-0.781,0-1.182,0.037
+			c-3.001,0.276-5.433,1.629-7.384,3.96c-1.125,1.839-1.747,3.33-2.032,5.333c-0.1,0.702-0.115,1.416-0.169,2.124
+			c0.189,0.959,0.714,2.987,0.74,3.059c0.857,2.395,2.461,4.166,4.557,5.554c1.313,0.87,2.625,1.741,3.937,2.614
+			c2.436,1.754,4.904,3.549,7.531,5.074c1.674,0.972,3.457,1.41,5.202,1.41C198.183,166.995,198.576,166.986,198.977,166.95z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF" clip-rule="evenodd" fill-rule="evenodd"/>
+                        <svg:path d="
+			M201.202,147.875c-3.001,0.276-5.433,1.629-7.384,3.96c-0.974,1.57-1.49,2.521-1.815,4.25c1.401,0.94,2.581,1.956,4.189,2.871
+			c0.539,0.307,1.866,0.759,1.787,0.384c0.142-0.803,0.347-1.723,1.121-2.895c0.863-1.308,2.346-1.931,3.802-1.758
+			c0.557,0.114,1.122,0.344,1.696,0.73c3.696,2.486,7.398,4.966,11.098,7.448c1.875,1.259,2.389,3.685,1.172,5.528
+			c-0.863,1.308-2.346,1.931-3.801,1.759c-0.557-0.114-1.123-0.344-1.697-0.73c-2.202-1.481-4.015-2.695-6.219-4.174
+			c-1.52,1.11-3.024,2.03-5,2.375c-1.331,0.233-2.454,0.12-3.62-0.041c0.698,0.446,3.011,2.064,4.323,2.938
+			c2.435,1.753,4.902,3.548,7.528,5.071c1.674,0.972,3.457,1.41,5.202,1.41c0.388,0.008,0.781,0,1.182-0.037
+			c3.001-0.276,5.433-1.629,7.384-3.96c1.125-1.839,1.747-3.33,2.032-5.333c0.1-0.702,0.115-1.416,0.169-2.124
+			c-0.189-0.959-0.714-2.987-0.74-3.059c-0.857-2.395-2.461-4.166-4.557-5.554c-1.313-0.87-2.625-1.741-3.937-2.614
+			c-2.436-1.754-4.904-3.549-7.531-5.074c-1.674-0.972-3.457-1.41-5.202-1.41C201.996,147.829,201.603,147.838,201.202,147.875z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF" clip-rule="evenodd" fill-rule="evenodd"/>
+                    </svg:a>
+                </svg:g>
+                <!-- Producer Comments -->
+                <svg:g id="producer_comments" class="producer_comments">
+                    <svg:title>Producer Comments
+                        Supplemental information: unavailable. 
+                        First of 0 known issues: unavailable.</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?metadata=http://not.available.for.direct.upload&amp;facet=producer_comments">
+                        <svg:path d="M163.437,124.843H248
+			c0-33.965-13.768-64.716-36.026-86.974l-59.795,59.794C159.135,104.619,163.437,114.229,163.437,124.843z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M188.653,89.253c1.945-0.302,5.039,1.167,5.039,1.167
+			c-6.073,6.13-14.53,14.059-18.557,17.812c-1.409-0.141-3.309-0.82-3.358-2.119c-0.056-1.48,2.205-3.086,3.888-4.739
+			c3.445-3.38,5.113-5.168,8.452-8.515C185.815,91.159,187.318,89.458,188.653,89.253z" stroke-width="1" stroke-miterlimit="10" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M199.762,84.364c1.537,1.424,1.94,1.931,3.423,3.345
+			c-6.245,6.253-18.702,18.405-20.879,20.428c-2.453,2.179-4.681,4.047-4.681,4.047l-6.313,2.901l3.385-6.281
+			c0,0,3.415-3.363,5.421-5.298C186.669,97.192,193.528,90.447,199.762,84.364z" stroke-width="1" stroke-miterlimit="10" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M212.824,102.18l-1.007,9.414l-21.402-0.117
+			c-4.201,0.109-8.396,0.829-8.046-3.098c0.181-2.039,0.69-3.121,4.314-3.321h7.009c0,0-2.244-1.6-4.778-3.176
+			c1.483-1.555,7.1-6.947,9.309-9.12C199.533,93.493,212.824,102.18,212.824,102.18z" stroke-width="1" stroke-miterlimit="10" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:line y2="105.085" x2="196.407" y1="105.085" x1="191.161" stroke-miterlimit="10" stroke="#000000" fill="none"/>
+                        <svg:path d="M219.269,72.897c-3.805,0-7.246,0.454-9.912,1.958
+			c-2.04,1.151-4.286,3.034-4.286,6.494c0.001,5.772,4.373,6.634,7.295,7.61c-1.253,2.804-2.225,3.635-3.487,5.02
+			c5.856-0.267,10-3.14,10.791-4.208c8.587-0.133,13.083-3.408,13.077-8.111C232.741,76.221,226.722,72.897,219.269,72.897z" stroke-width="1" stroke-miterlimit="10" stroke="#000000" fill="#FFFFFF"/>
+                    </svg:a>
+                </svg:g>
+                <!-- Standards Compliance -->
+                <svg:g id="standards_compliance" class="standards_compliance">
+                    <svg:title>Standards Compliance
+                        Standard name: unavailable, version unavailable.</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?metadata=http://not.available.for.direct.upload&amp;facet=standards_complaince">
+                        <svg:path d="M125,163.28v84.563
+			c33.965,0,64.715-13.768,86.975-36.027l-59.796-59.795C145.223,158.977,135.614,163.28,125,163.28z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M151.773,187.599c-8.837,0-16,7.164-16,16s7.163,16,16,16s16-7.164,16-16S160.61,187.599,151.773,187.599z
+			 M151.773,215.599c-6.627,0-12-5.372-12-12s5.373-12,12-12s12,5.372,12,12S158.4,215.599,151.773,215.599z" fill="none"/>
+                        <svg:path d="M151.773,183.599c-11.046,0-20,8.954-20,20
+			s8.954,20,20,20s20-8.954,20-20S162.819,183.599,151.773,183.599z M151.773,219.599c-8.837,0-16-7.164-16-16s7.163-16,16-16
+			s16,7.164,16,16S160.61,219.599,151.773,219.599z" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M151.773,191.599c-6.627,0-12,5.372-12,12
+			s5.373,12,12,12s12-5.372,12-12S158.4,191.599,151.773,191.599z M151.773,211.599c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8
+			S156.191,211.599,151.773,211.599z" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:circle r="4" cy="203.599" cx="151.773" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M187.716,193.992
+			c-0.162-0.685-0.645-1.215-1.357-1.493c-1.251-0.488-2.524-0.186-3.466,0.825l-11.276,12.12c-3.174,3.411-6.348,6.822-9.495,10.219
+			c-0.342-0.174-0.686-0.342-1.022-0.506l-1.692-0.834c-1.663-0.823-3.326-1.645-4.996-2.463c-0.292-0.141-0.619-0.202-1.024-0.155
+			l-1.617,0.004l0.141,1.729c0.003,0.189,0.01,0.583,0.215,0.992c2.218,4.433,4.443,8.866,6.675,13.291
+			c0.26,0.517,0.536,1.026,0.803,1.514l0.383,0.707c0.604,1.127,1.423,1.389,1.975,1.409l0.091,0.004l0.046-0.003
+			c1.297-0.053,1.846-1.104,2.081-1.553c1.494-2.867,3.301-5.905,5.684-9.565c3.913-6.008,8.057-11.75,13.075-18.521
+			c0.917-1.238,1.842-2.471,2.768-3.701l1.521-2.026C187.702,195.357,187.873,194.648,187.716,193.992z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                    </svg:a>
+                </svg:g>
+                <!-- Quality Information -->
+                <svg:g id="quality_information" class="quality_information">
+                    <svg:title>Quality Information
+                        Quality information scope: unavailable</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?metadata=http://not.available.for.direct.upload&amp;facet=quality_information">
+                        <svg:path d="M98.128,152.021l-59.795,59.794
+			c24.018,24.019,55.496,36.027,86.974,36.027V163.28C115.47,163.28,105.633,159.527,98.128,152.021z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M107.311,209.518l-0.383,0.868
+			c-0.381,0.875-1.188,2.7-1.373,3.071c-0.662,1.331-1.5,2.022-2.719,2.241c-0.543,0.097-7.227,0.199-12.391,0.244l10.899-13.165
+			l-9.778-12.225l0.901-0.001c7.696,0,8.609,0.145,8.687,0.161c1.101,0.234,1.863,0.617,2.39,1.191
+			c0.212,0.275,0.869,2.236,1.431,4.447l0.212,0.844h4.382l-1.021-12.311H79.251l0.076,1.189c0.074,1.107,0.272,2.563,0.797,3.214
+			c2.51,3.103,10.165,12.648,12.326,15.344l-0.264,0.314c-2.605,3.1-9.064,10.784-11.98,14.224c-0.729,0.863-0.795,2.753-0.79,3.526
+			l0.007,1.115l29.674-0.162l2.155-13.123L107.311,209.518z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                    </svg:a>
+                </svg:g>
+                <!-- User Feedback -->
+                <svg:g id="user_feedback" class="user_feedback">
+                    <svg:title>User Feedback
+                        Number of feedbacks: 0. Average rating: 0,000000 (0 ratings).</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?feedback=http://not.available.for.direct.upload&amp;facet=user_feedback">
+                        <svg:path d="M86.563,124.844H2
+					c0,33.964,13.767,64.714,36.025,86.972l59.796-59.794C90.864,145.066,86.563,135.457,86.563,124.844z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:circle r="8.613" cy="153.606" cx="39.282" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M26.364,185.04c0,0,0.802-6.583,1.265-8.721
+				c0.417-1.933,0.466-4.443,1.951-7.488c1.427-2.923,3.765-5.322,3.765-5.322c1.961,1.415,9.282,1.596,11.875,0
+				c0,0,2.357,2.567,3.738,5.254c1.46,2.842,1.559,5.622,1.978,7.555c0.463,2.138,1.265,8.721,1.265,8.721H26.364z" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M63.206,134.761
+			c-3.804,0-7.245,0.455-9.911,1.959c-2.04,1.152-4.286,3.034-4.286,6.494c0,5.772,4.372,6.633,7.295,7.609
+			c-1.254,2.804-2.225,3.636-3.488,5.021c5.856-0.267,10-3.14,10.792-4.208c8.587-0.132,13.082-3.409,13.076-8.111
+			C76.678,138.085,70.659,134.761,63.206,134.761z" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                    </svg:a>
+                </svg:g>
+                <!-- Expert Feedback -->
+                <svg:g id="expert_review" class="expert_review">
+                    <svg:title>Expert Review
+                        Number of reviews: 0. Average rating: 0,000000 (0 ratings).</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?feedback=http://not.available.for.direct.upload&amp;facet=expert_review">
+                        <svg:path d="M97.822,97.664L38.025,37.869
+					C14.008,61.886,2,93.365,2,124.843h84.563C86.563,115.005,90.316,105.169,97.822,97.664z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:rect height="42.866" width="35.208" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF" y="72.558" x="23.24"/>
+                        <svg:line y2="82.002" x2="52.908" y1="82.002" x1="27.649" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="none"/>
+                        <svg:line y2="89.924" x2="52.908" y1="89.924" x1="27.649" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="none"/>
+                        <svg:line y2="97.53" x2="53.141" y1="97.53" x1="27.881" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="none"/>
+                        <svg:line y2="105.914" x2="52.908" y1="105.914" x1="27.649" stroke-miterlimit="10" stroke-width="0,75" stroke="#000000" fill="none"/>
+                        <svg:path d="M53.752,61.481" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="none"/>
+                        <svg:rect height="6.867" width="23.373" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF" transform="matrix(0.8492 0.5281 -0.5281 0.8492 65.179 -16.148)" y="102.612" x="49.176"/>
+                        <svg:circle r="11.393" cy="94.266" cx="42.84" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:circle r="8.584" cy="94.265" cx="42.84" stroke-miterlimit="10" stroke-width="1" stroke="#000000" fill="#FFFFFF"/>
+                    </svg:a>
+                </svg:g>
+                <!-- Citation Information -->
+                <svg:g id="citations_information" class="citations_information">
+                    <svg:title>Citations Information
+                        Number of citations: 0.</svg:title>
+                    <svg:a target="_blank" xlink:href="http://geolabel.net/api/v1/drilldown?metadata=http://not.available.for.direct.upload&amp;feedback=http://not.available.for.direct.upload&amp;facet=citations_information">
+                        <svg:path d="M125,86.563V2
+					C91.035,2,60.285,15.768,38.025,38.026l59.796,59.795C104.777,90.865,114.386,86.563,125,86.563z" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="#FFFFFF"/>
+                        <svg:path d="M86.79,24.714L75.591,56.886c5.157,3.054,9.518,8.798,9.596,8.926l11.452-31.27
+			C95.097,29.475,90.677,26.012,86.79,24.714z" fill="#FFFFFF"/>
+                        <svg:path d="M94.73,65.396c2.31,0,5.556,0.446,5.662,0.466l11.737-31.821c-2.068-1.111-7.352-1.74-7.388-1.738
+			c-2.786,0.075-5.224,0.994-6.909,2.608L86.34,66.293l-0.035,0.092c2.635-0.647,5.427-0.979,8.311-0.987
+			C94.654,65.398,94.692,65.396,94.73,65.396z" fill="#FFFFFF"/>
+                        <svg:path d="M74.645,57.775l-3.218-0.224l0.044,0.03l11.189,7.21l0.671,0.433
+			C81.372,62.314,79.401,60.566,74.645,57.775z" fill="#FFFFFF"/>
+                        <svg:polygon points="85.511,24.602 80.932,24.809 69.908,56.197 74.4,56.506 	" fill="#FFFFFF"/>
+                        <svg:path d="M94.663,66.638c-0.034,0-0.068,0.002-0.101,0.003c-1.989,0.005-3.946,0.175-5.847,0.51l14.35,2.246
+			l-2.557-2.239C99.859,67.026,97.667,66.638,94.663,66.638z" fill="#FFFFFF"/>
+                        <svg:polygon points="104.827,69.282 116.6,37.59 113.182,34.797 101.527,66.394 	" fill="#FFFFFF"/>
+                        <svg:path d="M86.79,24.714L75.591,56.886c5.157,3.054,9.518,8.798,9.596,8.926l11.452-31.27
+			C95.097,29.475,90.677,26.012,86.79,24.714z" fill="none"/>
+                        <svg:path d="M94.73,65.396c2.31,0,5.556,0.446,5.662,0.466l11.737-31.821c-2.068-1.111-7.352-1.74-7.388-1.738
+			c-2.786,0.075-5.224,0.994-6.909,2.608L86.34,66.293l-0.035,0.092c2.635-0.647,5.427-0.979,8.311-0.987
+			C94.654,65.398,94.692,65.396,94.73,65.396z" fill="none"/>
+                        <svg:path d="M74.645,57.775l-3.218-0.224l0.044,0.03l11.189,7.21l0.671,0.433C81.372,62.314,79.401,60.566,74.645,57.775z
+			" fill="none"/>
+                        <svg:polygon points="85.511,24.602 80.932,24.809 69.908,56.197 74.4,56.506 		" fill="none"/>
+                        <svg:path d="M94.663,66.638c-0.034,0-0.068,0.002-0.101,0.003c-1.989,0.005-3.946,0.175-5.847,0.51l14.35,2.246
+			l-2.557-2.239C99.859,67.026,97.667,66.638,94.663,66.638z" fill="none"/>
+                        <svg:polygon points="113.182,34.797 101.527,66.394 104.827,69.282 116.6,37.59 		" fill="none"/>
+                        <svg:path d="M112.726,33.128c0,0-5-1.833-7.611-1.833c-3.021,0-5.705,0.914-7.634,2.583c-1.777-5.302-6.495-8.89-10.589-10.186
+			l-6.682,0.144L68.591,56.918l15.98,10.552l1.032,0.307l19.882,2.925l12.306-33.434L112.726,33.128z M80.932,24.809l4.58-0.207
+			L74.4,56.506l-4.493-0.309L80.932,24.809z M82.66,64.791l-11.189-7.21l-0.044-0.03l3.218,0.224
+			c4.757,2.791,6.728,4.54,8.687,7.449L82.66,64.791z M85.188,65.813c-0.079-0.128-4.439-5.873-9.596-8.926L86.79,24.714
+			c3.887,1.298,8.307,4.761,9.849,9.829L85.188,65.813z M86.34,66.293l11.493-31.381c1.685-1.615,4.123-2.533,6.909-2.608
+			c0.036-0.002,5.319,0.627,7.388,1.738l-11.737,31.821c-0.106-0.021-3.352-0.466-5.662-0.466c-0.038,0-0.077,0.001-0.114,0.001
+			c-2.884,0.008-5.676,0.34-8.311,0.987L86.34,66.293z M88.715,67.15c1.901-0.334,3.858-0.505,5.847-0.51
+			c0.033,0,0.067-0.003,0.101-0.003c3.005,0,5.197,0.389,5.845,0.52l2.557,2.239L88.715,67.15z M104.827,69.282l-3.3-2.888
+			l11.655-31.597l3.418,2.793L104.827,69.282z"/>
+                        <svg:path d="M53.752,61.481" stroke-miterlimit="10" stroke-width="2" stroke="#000000" fill="none"/>
+                    </svg:a>
+                </svg:g>
+            </svg:g>
+            <!-- Branding Group -->
+            <svg:g id="branding_group" class="branding_group">
+                <!-- Branding -->
+                <svg:g id="branding" class="branding">
+                    <svg:a target="_blank" xlink:title="Visit GeoViQua website" xlink:href="http://www.geoviqua.org">
+                        <svg:circle r="38.437" cy="124.996" cx="125.277" stroke-miterlimit="10" stroke-width="2" stroke="#010101" fill="#FFFFFF"/>
+                        <svg:path d="M125.916,109.439c2.668-0.264,5.231-0.307,9.245,1.796c0,1.933,0,3.865,0,5.797
+						c-1.369-0.791-2.898-1.576-4.831-2.21c-1.233-0.359-2.406-0.349-4.136-0.134c-3.008,0.312-5.577,2.172-7.041,4.141
+						c-0.55,0.74-1.397,2.952-1.481,3.737c3.175,0,6.726-0.009,9.899-0.009c0.154,1.494,0.052,3.445,0.138,5.109
+						c-3.313,0.089-6.737,0.236-9.83,0.145c0.582,1.575,1.446,6.615,7.896,7.725c1.381,0.202,2.385,0.229,4.002,0
+						c2.361-0.171,4.006-1.793,5.382-2.486c0,2.025,0,3.775,0,5.798c-1.876,0.887-3.932,2.072-8.003,2.072
+						c-6.18-0.533-10.35-3.499-12.97-7.595c1.529-2.79,3.383-6.091,2.696-10.518c-1.154-0.034-4.688,0.174-4.688-0.058
+						c0.172-0.719,0.232-1.163,0.473-2.266C114.366,114.754,118.991,110.609,125.916,109.439z" fill="#324E9C"/>
+                        <svg:path d="M147.857,138.161c-6.26,0.323-9.772-2.096-12.28-5.524c1.146-1.616,2.29-3.232,2.759-5.524
+						c1.405,3.672,4.125,6.397,8.555,6.077c4.194-0.303,7.484-3.642,7.449-8.147c-0.068-9.666-14.354-10.389-15.866-1.795
+						c-0.702-2.106-1.589-4.025-2.897-5.525c2.547-3.337,5.729-5.914,11.314-5.661c7.209,0.333,12.946,6.724,12.42,14.085
+						C158.847,132.609,154.705,137.361,147.857,138.161z" fill="#057E67"/>
+                        <svg:path d="M114.188,133.326c-2.029,2.252-4.652,3.908-8.141,4.695c-0.092,0-0.186,0-0.277,0
+						c-1.695,0.228-4.05,0.136-5.934-0.554c-4.131-1.709-7.015-4.667-8.417-9.112c0-0.047,0-0.091,0-0.137
+						c-0.767-3.22-0.126-7.266,0.965-8.976c2.676-4.245,6.749-7.76,14.076-6.904c0.045,0,0.879,0.192,1.24,0.246
+						c0,1.702-0.137,3.438-0.137,5.138c-1.694-0.789-4.73-0.923-6.486-0.137c-2.945,1.198-5.099,3.643-5.243,7.181
+						c-0.219,5.25,4.253,9.377,9.796,8.284c0.047,0,0.094,0,0.138,0c3.129-0.548,4.947-3.107,6.024-5.713
+						c-2.944,0.063-6.758,0.156-10.163,0.054c0-1.52,0-3.038,0-4.558c3.404-0.089,13.874-0.119,15.253-0.026
+						C118.21,126.969,114.189,133.603,114.188,133.326z" fill="#246F7E"/>
+                    </svg:a>
+                </svg:g>
+            </svg:g>
+            <!-- Error Group -->
+            <svg:g display="none" id="error_group" class="error_group">
+                <svg:g transform="matrix(0.06021327,0,0,0.06021327,211.00551,215.92913)" id="error" class="error">
+                    <!-- public domain image used: http://upload.wikimedia.org/wikipedia/commons/d/dd/Achtung.svg -->
+                    <svg:a target="_blank" xlink:title="No Error.">
+                        <svg:path style="fill:#ea0000" d="M 614.57,504.94 335.17,21 C 330.79,13.412 322.7,8.738 313.94,8.738 c -8.76,0 -16.85,4.674 -21.23,12.258 L 13.3,504.936 c -4.375,7.58 -4.375,16.93 0.003,24.52 4.379,7.58 12.472,12.25 21.23,12.25 h 558.81 c 8.76,0 16.86,-4.67 21.23,-12.25 4.38,-7.59 4.38,-16.94 0,-24.52 z" id="path2231"/>
+                        <svg:polygon style="fill:#ffffff" points="313.94,101.89 93.977,482.88 533.9,482.88 " id="polygon2233"/>
+                        <svg:path d="m 291.87,343.36 c 1.21,11.49 3.21,20.04 6.02,25.66 2.81,5.63 7.82,8.43 15.04,8.43 h 2.01 c 7.22,0 12.24,-2.8 15.04,-8.43 2.81,-5.62 4.82,-14.17 6.02,-25.66 l 6.42,-88.75 c 1.21,-17.3 1.81,-29.71 1.81,-37.25 0,-10.25 -2.91,-18.25 -8.73,-23.99 -5.53,-5.46 -13.38,-8.59 -21.56,-8.59 -8.18,0 -16.04,3.13 -21.57,8.59 -5.81,5.74 -8.72,13.74 -8.72,23.99 0,7.54 0.6,19.95 1.8,37.25 l 6.42,88.75 z" id="path2235"/>
+                        <svg:circle d="m 344.687,430.79001 c 0,16.9811 -13.7659,30.747 -30.747,30.747 -16.9811,0 -30.747,-13.7659 -30.747,-30.747 0,-16.9811 13.7659,-30.747 30.747,-30.747 16.9811,0 30.747,13.7659 30.747,30.747 z" r="30.747" cx="313.94" cy="430.79001" id="circle2237"/>
+                    </svg:a>
+                </svg:g>
+            </svg:g>
+        </svg:g>
+    </svg:svg>
+</svg:svg>

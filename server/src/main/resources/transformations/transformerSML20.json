@@ -1,0 +1,95 @@
+{
+    "transformationDescription": {
+        "name": "transformerSML20",
+        "applicabilityPath": "boolean(//*[local-name()='PhysicalComponent'] //*[local-name()='SimpleProcess']) //*[local-name()='PhysicalSystem']) | //*[local-name()='AggregateProcess'])",
+        "xpathVersion": "1.0",
+        "namespaceMappings": [
+            {
+                "prefix": "sml",
+                "namespace": "http://www.opengis.net/sensorML/2.0"
+            },
+            {
+                "prefix": "gml",
+                "namespace": "http://www.opengis.net/gml"
+            },
+            {
+                "prefix": "swe",
+                "namespace": "http://www.opengis.net/swe/2.0"
+            },
+            {
+                "prefix": "xlink",
+                "namespace": "http://www.w3.org/1999/xlink"
+            }
+        ],
+        "facetDescriptions": [
+            {
+                "producerProfile": {
+                    "availabilityPath": "boolean(//*[local-name()='contact']//*[local-name()='gmd:CI_ResponsibleParty'])",
+                    "hoverover": {
+                        "facetName": "Producer Profile",
+                        "template": "%d responsible parties, first  contact is %s from %s (role: %s)",
+                        "text": {
+                            "responsiblePartiesCountPath": "count(//*[local-name()='contact']//*[local-name()='gmd:CI_ResponsibleParty'])",
+                            "individualName": "//*[local-name()='contact']//*[local-name()='CI_ResponsibleParty']//*[local-name()='individualName']/*/text()",
+                            "orgNamePath": "//*[local-name()='contact']//*[local-name()='CI_ResponsibleParty']//*[local-name()='organisationName']",
+                            "rolePath": "//*[local-name()='contact']//*[local-name()='CI_ResponsibleParty']//*[local-name()='role']/*/@codeListValue"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=producer_profile"
+                    }
+                }
+            },
+            {
+                "standardsCompliance": {
+                    "availabilityPath": "boolean(//*[local-name()='PhysicalComponent'] | //*[local-name()='SimpleProcess']) | //*[local-name()='PhysicalSystem']) | //*[local-name()='AggregateProcess'])",
+                    "hoverover": {
+                        "facetName": "Standards Compliance",
+                        "template": "Standard: SensorML %s",
+                        "text": {
+                            "standardVersion": "normalize-space(string(2.0))"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=standards_complaince"
+                    }
+                }
+            },
+            {
+                "qualityInformation": {
+                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='capabilities']//*[local-name()='quality'] | //*[local-name()='output']//*[local-name()='quality'])))",
+                    "hoverover": {
+                        "facetName": "Quality Information",
+                        "template": "Outputs with quality information: %d, of which %d are textual, %d are categorical, and %d are quantities.",
+                        "text": {
+                            "qualityCount": "count(//*[local-name()='quality'])",
+                            "textQualityCount": "count(//*[local-name()='quality']/*[local-name()='Text'])",
+                            "categeoryQualityCount": "count(//*[local-name()='quality']/*[local-name()='Category'])",
+                            "quantityAndQuantityRangeCount": "count(//*[local-name()='quality']/*[local-name()='QuantityRange'] | //*[local-name()='quality']/*[local-name()='Quantity'])"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=quality_information"
+                    }
+                }
+            },
+            {
+                "lineage": {
+                    "availabilityPath": "boolean(normalize-space(string(//*[local-name()='method'] | //*[local-name()='history'] | //*[local-name()='connections'])))",
+                    "hoverover": {
+                        "facetName": "Lineage Information",
+                        "template": "Number of process steps: %d. Number of history entries: %d. Algorithm described: %s",
+                        "text": {
+                            "processStepCountPath": "count(//*[local-name()='connections']//*[local-name()='connection'])",
+                            "historyCountPath": "count(//*[local-name()='history']//*[local-name()='event'])",
+                            "methodPath": "string(boolean(//*[local-name()='method']//*[local-name()='ProcessMethod']))"
+                        }
+                    },
+                    "drilldown": {
+                        "url": "%s?metadata=%s&facet=lineage_information"
+                    }
+                }
+            }
+        ]
+    }
+}

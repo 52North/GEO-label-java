@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:Capabilities xmlns:sos="http://www.opengis.net/sos/2.0"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ows="http://www.opengis.net/ows/1.1"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" version="2.0.0"
+                  xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetCapabilities.xsd http://www.opengis.net/ows/1.1 http://schemas.opengis.net/ows/1.1.0/owsAll.xsd">
+    <ows:ServiceIdentification>
+        <ows:Title>52N SOS</ows:Title>
+        <ows:Abstract>52N SOS capbilities for testing</ows:Abstract>
+        <ows:ServiceType>OGC:SOS</ows:ServiceType>
+        <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+        <ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+        <ows:Profile>http://www.opengis.net/extension/SOSDO/1.0/observationDeletion</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/categoryObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/countObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/geometryObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/measurement</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/textObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/truthObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/categoryObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/countObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/geometryObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/measurement</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingCurve</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingPoint</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingSurface</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/spatialSampling</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/textObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/truthObservation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/1.0/conf/core</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/1.0/conf/enhanced</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/core</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/daRetrieval</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/foiRetrieval</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/insertionCap</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/json</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/kvp-core</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsByIdRetrieval</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsInsertion</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/pox</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/rest</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultInsertion</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultRetrieval</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorDeletion</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorInsertion</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/soap</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/updateSensorDescription</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/core</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/general-encoding-rules</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/text-encoding-rules</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-block-components</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-record-components</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-simple-components</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-simple-encodings</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-block-components</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-record-components</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-simple-components</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-simple-encodings</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/uml-measurement-timeries-tvp-observation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/uml-timeseries-tvp-observation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-measurement-timeseries-tvp</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-timeseries-observation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-timeseries-tvp-observation</ows:Profile>
+        <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-xml-rules</ows:Profile>
+        <ows:Fees>NONE</ows:Fees>
+        <ows:AccessConstraints>NONE</ows:AccessConstraints>
+    </ows:ServiceIdentification>
+    <ows:ServiceProvider>
+        <ows:ProviderName>52North</ows:ProviderName>
+        <ows:ProviderSite xlink:href="http://52north.org/swe" />
+        <ows:ServiceContact>
+            <ows:IndividualName>Lucy</ows:IndividualName>
+            <ows:PositionName>Dog</ows:PositionName>
+            <ows:ContactInfo>
+                <ows:Phone>
+                    <ows:Voice>+49(0)251/396 371-0</ows:Voice>
+                </ows:Phone>
+                <ows:Address>
+                    <ows:DeliveryPoint>Martin-Luther-King-Weg 24</ows:DeliveryPoint>
+                    <ows:City>Münster</ows:City>
+                    <ows:AdministrativeArea>North Rhine-Westphalia</ows:AdministrativeArea>
+                    <ows:PostalCode>48155</ows:PostalCode>
+                    <ows:Country>Germany</ows:Country>
+                    <ows:ElectronicMailAddress>lucy@52north.org</ows:ElectronicMailAddress>
+                </ows:Address>
+            </ows:ContactInfo>
+        </ows:ServiceContact>
+    </ows:ServiceProvider>
+    <sos:contents>
+        <sos:Contents>
+            <swes:offering>
+                <sos:ObservationOffering>
+                    <swes:identifier>http://www.52north.org/test/offering/1</swes:identifier>
+                    <swes:name codeSpace="eng">Offering for sensor 1</swes:name>
+                    <swes:extension>
+                        <geolabel dateOfCreation="2015-01-01" generator="http://sensorweblabel.net/api">
+                            <labelUrl>http://sweserver.com/sensorweblabel-service.xml</labelUrl>
+                        </geolabel>
+                    </swes:extension>
+                    <swes:procedure>http://www.52north.org/test/procedure/1</swes:procedure>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/1</swes:observableProperty>
+                    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:ObservationOffering>
+            </swes:offering>
+            <swes:offering>
+                <sos:ObservationOffering>
+                    <swes:identifier>http://www.52north.org/test/offering/10</swes:identifier>
+                    <swes:name codeSpace="eng">Offering for sensor 9</swes:name>
+                    <swes:procedure>http://www.52north.org/test/procedure/11</swes:procedure>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_7</swes:observableProperty>
+                    <sos:responseFormat>application/json</sos:responseFormat>
+                    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+                    <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+                    <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_SWEArrayObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:ObservationOffering>
+            </swes:offering>
+            <swes:offering>
+                <sos:ObservationOffering>
+                    <swes:identifier>http://www.52north.org/test/offering/2</swes:identifier>
+                    <swes:name codeSpace="eng">Offering for sensor 2</swes:name>
+                    <swes:procedure>http://www.52north.org/test/procedure/2</swes:procedure>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+                    <swes:observableProperty>http://www.52north.org/test/observableProperty/2</swes:observableProperty>
+                    <sos:observedArea>
+                        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+                            <gml:lowerCorner>34.056517 -117.195711</gml:lowerCorner>
+                            <gml:upperCorner>34.056517 -117.195711</gml:upperCorner>
+                        </gml:Envelope>
+                    </sos:observedArea>
+                    <sos:phenomenonTime>
+                        <gml:TimePeriod gml:id="phenomenonTime_3">
+                            <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:phenomenonTime>
+                    <sos:resultTime>
+                        <gml:TimePeriod gml:id="resultTime_3">
+                            <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:resultTime>
+                    <sos:responseFormat>application/json</sos:responseFormat>
+                    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+                    <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+                    <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:ObservationOffering>
+            </swes:offering>
+        </sos:Contents>
+    </sos:contents>
+</sos:Capabilities>

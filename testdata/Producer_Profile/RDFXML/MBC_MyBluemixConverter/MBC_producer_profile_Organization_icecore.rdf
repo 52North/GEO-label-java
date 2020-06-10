@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--This file is based on a sensor description published at https://www.w3.org/TR/vocab-ssn/#ice-core-->
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:sosa="http://www.w3.org/ns/sosa/"
+    xmlns:ssn="http://www.w3.org/ns/ssn/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://example.org/data/WellDrilling/4578">
+    <sosa:hasFeatureOfInterest rdf:resource="http://dbpedia.org/resource/Antarctic_ice_sheet"/>
+    <sosa:resultTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-03T11:12:00Z</sosa:resultTime>
+    <sosa:madeBySampler rdf:resource="http://example.org/data/thermalDrill/2"/>
+    <sosa:hasResult rdf:resource="http://example.org/data/iceCore/12"/>
+    <geo:long rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.32</geo:long>
+    <geo:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-73.35</geo:lat>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sampling"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/iceCore/12#CO2">
+    <ssn:isPropertyOf rdf:resource="http://example.org/data/iceCore/12"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Antarctic_ice_sheet">
+    <sosa:hasSample rdf:resource="http://example.org/data/iceCore/14"/>
+    <sosa:hasSample rdf:resource="http://example.org/data/iceCore/13"/>
+    <sosa:hasSample rdf:resource="http://example.org/data/iceCore/12"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/FeatureOfInterest"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/iceCore/12#observation">
+    <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">240</sosa:hasSimpleResult>
+    <sosa:observedProperty rdf:resource="http://example.org/data/iceCore/12#CO2"/>
+    <prov:wasAssociatedWith rdf:resource="http://example.org/data/Organization/exampleOrganization"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/Organization/exampleOrganization">
+    <foaf:name>Example Organization</foaf:name>
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/data/iceCore/12">
+    <sosa:madeBySampler rdf:resource="http://example.org/data/thermalDrill/2"/>
+    <sosa:isResultOf rdf:resource="http://example.org/data/WellDrilling/4578"/>
+    <sosa:isSampleOf rdf:resource="http://dbpedia.org/resource/Antarctic_ice_sheet"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sample"/>
+  </rdf:Description>
+</rdf:RDF>

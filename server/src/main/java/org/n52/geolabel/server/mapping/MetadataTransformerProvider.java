@@ -45,7 +45,7 @@ public class MetadataTransformerProvider implements Provider<MetadataTransformer
         this.cacheMaxLabels = cacheMaxLabels;
         this.cacheMaxHours = cacheMaxHours;
 
-        log.info("NEW {}", this);
+        log.debug("NEW {}", this);
     }
 
     @Override

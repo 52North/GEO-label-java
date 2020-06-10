@@ -46,11 +46,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.servlet.SessionScoped;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("/v1/transformations")
-@Api(value = "/v1/transformations", description = "Access to the transformation rules used to generate a label")
+//@Api(value = "/v1/transformations", description = "Access to the transformation rules used to generate a label")
 @SessionScoped
 public class TransformationsResourceV1 {
 
@@ -142,7 +140,7 @@ public class TransformationsResourceV1 {
 
     private UriInfo uri;
 
-	@Inject
+    @Inject
     public TransformationsResourceV1(@Context
     UriInfo uri, TransformationDescriptionResources resources,
                                      TransformationDescriptionLoader loader) {
@@ -155,10 +153,10 @@ public class TransformationsResourceV1 {
         return fallback.substring(fallback.lastIndexOf("/") + 1, fallback.length());
     }
 
-	@GET
+    @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a list of used transformations")
+//    @ApiOperation(value = "Returns a list of used transformations")
     public Response getTransformationsInfo(@PathParam("id")
     String id) {
         Collection<String> res = this.resources.getResources().values();
@@ -186,7 +184,7 @@ public class TransformationsResourceV1 {
     @GET
     @Path("/")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Returns a list of used transformations")
+//    @ApiOperation(value = "Returns a list of used transformations")
     public Response getTransformationsInfo() {
         TransformationsHolder holder = new TransformationsHolder(this.uri,
                                                                  this.resources.getResources(),

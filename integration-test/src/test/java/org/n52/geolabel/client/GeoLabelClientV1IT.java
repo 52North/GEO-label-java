@@ -28,13 +28,15 @@ import org.junit.Test;
 
 public class GeoLabelClientV1IT {
 
-    private String gvqExample = "http://schemas.geoviqua.org/GVQ/4.0/example_documents/PQM_UQM_combined/DigitalClimaticAtlas_mt_an_v10.xml";
+    private String gvqExample = "https://raw.githubusercontent.com/anikagraupner/GEO-label-java/master/integration-test/src/test/resources/4.0/DigitalClimaticAtlas_mt_an_v10.xml";
 
     private GeoLabelRequestBuilder requestBuilder;
 
     // private static String serviceUrl = "http://www.geolabel.net/api/v1/geolabel";
 
     private static String serviceUrl = "http://localhost:8080/glbservice/api/v1/svg";
+
+    // private static String serviceUrl = "https://geolabel-nvrpuhxwyq-ew.a.run.app/glbservice/api/v1/svg";
 
     // private String serviceUrl = "http://www.geolabel.net/api/v1/geolabel";
 
@@ -62,7 +64,7 @@ public class GeoLabelClientV1IT {
         String svgString = IOUtils.toString(svg);
 
         // using 3.1 model, nothing there anymore
-        assertTrue(svgString.contains("Number of feedbacks: 0. Average rating: 0 (0 ratings).</title>"));
+        assertTrue(svgString.contains("Number of feedbacks: 0. Average rating: 0.000000 (0 ratings).</title>"));
     }
 
     @Test
@@ -84,7 +86,7 @@ public class GeoLabelClientV1IT {
 
         // using 3.1 model, nothing there anymore
         assertTrue(svgString.contains("<title>User Feedback"));
-        assertTrue(svgString.contains("Number of feedbacks: 0. Average rating: 0 (0 ratings)."));
+        assertTrue(svgString.contains("Number of feedbacks: 0. Average rating: 0.000000 (0 ratings)."));
     }
 
     @Test
@@ -110,6 +112,7 @@ public class GeoLabelClientV1IT {
             fail("Server should send error code");
         }
         catch (IOException e) {
+            System.out.println(e.getMessage());
             assertTrue(e.getMessage().contains("Bad Request"));
         }
 

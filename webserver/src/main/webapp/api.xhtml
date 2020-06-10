@@ -1,0 +1,379 @@
+<ui:composition template="layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:glb="http://www.geolabel.net" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- Endpoint for form actions -->
+	<ui:param name="apiEndpoint" value="api/v1" />
+
+	<ui:define name="title">API</ui:define>
+
+	<ui:define name="styles">
+	.tab-content-border {
+	    border-left: 1px solid #ddd;
+	    border-right: 1px solid #ddd;
+	    border-bottom: 1px solid #ddd;
+	    border-bottom-right-radius: 4px;
+	    border-bottom-left-radius: 4px;
+	    padding: 10px;
+	}
+	
+	</ui:define>
+
+	<ui:define name="content">
+
+
+		<div class="row">
+
+			<div class="col-md-2 well" role="navigation">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+					<li><a href="#doc" data-toggle="tab">Documentation</a></li>
+					<li><a href="#upload" data-toggle="tab">POST Examples</a></li>
+				</ul>
+			</div>
+
+			<div class="col-md-10 tab-content">
+
+				<div class="tab-pane active" id="overview">
+
+					<div class="page-header">
+						<h3>Overview</h3>
+					</div>
+
+					<div class="form-horizontal">
+
+						<div class="form-group">
+							<label class="col-md-2 control-label">GEO label Endpoint</label>
+							<div class="col-md-10">
+								<p class="form-control-static">
+									<code>
+										<h:outputText value="#{landingPageBean.serviceEndpoint}" />
+									</code>
+								</p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-2 control-label">API Description</label>
+							<div class="col-md-10">
+								<p class="form-control-static">
+									See <a href="api/application.wadl" target="_blank">WADL</a><br />
+								</p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-2 control-label">Cache</label>
+							<div class="col-md-10">
+								<p class="form-control-static">
+									Explore <a href="#{apiEndpoint}/cache" target="_blank">Currently cached url/label mappings</a>
+								</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="tab-pane" id="upload">
+
+					<div class="page-header">
+						<h3>POST Examples</h3>
+					</div>
+
+
+					<div class="panel panel-default">
+
+						<div class="panel-heading">
+							<h3 class="panel-title">XML to SVG</h3>
+						</div>
+
+						<div class="panel-body">
+							<p>Send XML metadata records to see the GEO label SVG representation.</p>
+							<form action="#{apiEndpoint}/svg" method="post" enctype="multipart/form-data" class="form-horizontal"
+								target="_blank">
+								<div class="form-group">
+									<label for="metadata" class="col-md-2 control-label">Metadata Document</label>
+									<div class="col-md-10">
+										<input type="file" name="metadata" id="metadata" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="feedback" class="col-md-2 control-label">Feedback Document</label>
+									<div class="col-md-10">
+										<input type="file" name="feedback" id="feedback" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-10">
+										<input type="submit" name="submit" value="Submit" class="btn btn-primary" /> <input class="btn" type="reset"
+											value="Reset" />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+
+						<div class="panel-heading">
+							<h3 class="panel-title">XML to LML</h3>
+						</div>
+
+						<div class="panel-body">
+							<p>Send XML metadata records to see the GEO label LML representation.</p>
+							<form action="#{apiEndpoint}/lml" method="post" enctype="multipart/form-data" class="form-horizontal"
+								target="_blank">
+								<div class="form-group">
+									<label for="metadata2" class="col-md-2 control-label">Metadata Document</label>
+									<div class="col-md-10">
+										<input type="file" name="metadata" id="metadata2" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="feedback2" class="col-md-2 control-label">Feedback Document</label>
+									<div class="col-md-10">
+										<input type="file" name="feedback" id="feedback2" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-10">
+										<input type="submit" name="submit" value="Submit" class="btn btn-primary" /> <input class="btn" type="reset"
+											value="Reset" />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+
+						<div class="panel-heading">
+							<h3 class="panel-title">LML to SVG</h3>
+						</div>
+
+						<div class="panel-body">
+							<p>Send LML records to see the GEO label SVG representation.</p>
+							<form action="#{apiEndpoint}/svg" method="post" enctype="multipart/form-data" class="form-horizontal"
+								target="_blank">
+								<div class="form-group">
+									<label for="lml" class="col-md-2 control-label">LML Document</label>
+									<div class="col-md-10">
+										<input type="file" name="lml" id="lml" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-10">
+										<input type="submit" name="submit" value="Submit" class="btn btn-primary" /> <input class="btn" type="reset"
+											value="Reset" />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+				<!-- 
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">Static Label</h3>
+			</div>
+
+			
+			<div class="panel-body">
+				<p>Get GEO label only based on facet availability.</p>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-md-2 control-label">Facet Specification</label>
+						<div class="col-md-10">
+
+
+							<div class="btn-group-vertical" data-toggle="buttons">
+								<button type="button" class="btn btn-default">Producer
+									Profile</button>
+
+
+								<label class="btn btn-primary"> <input type="radio"
+									name="options" id="option1">Availabe</input></label> <label
+									class="btn btn-primary"> <input type="radio"
+									name="options" id="option2">Not Available</input></label> <label
+									class="btn btn-primary"> <input type="radio"
+									name="options" id="option3">Higher</input></label>
+							</div>
+							<div class="btn-group-vertical" data-toggle="buttons">
+								<span class="btn btn-default">Producer Comments</span> <label
+									class="btn btn-primary"> <input type="radio"
+									name="options" id="option1">Availabe</input></label> <label
+									class="btn btn-primary"> <input type="radio"
+									name="options" id="option2">Not Available</input></label> <label
+									class="btn btn-primary"> <input type="radio"
+									name="options" id="option3">Higher</input></label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>-->
+
+				<div class="tab-pane" id="doc">
+					<div class="page-header">
+						<h3>Resources</h3>
+					</div>
+
+					{{#apiDocuments}}
+
+					<h4>
+						<span class="label label-default">{{resourcePath}}</span>
+					</h4>
+					<p>{{{description}}}</p>
+
+					<div class="panel-group" id="accordion">
+						{{#apis}} {{#operations}}
+						<!-- Panel per operation -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+										href="#collapse{{index}}_{{apiIndex}}_{{opIndex}}"> <span style="font-weight: bold;">{{httpMethod}}
+									</span><span>{{{path}}}</span> <span class="pull-right"><small>{{summary}}</small></span>
+									</a>
+								</h4>
+							</div>
+
+
+							<div id="collapse{{index}}_{{apiIndex}}_{{opIndex}}" class="panel-collapse collapse">
+								<div class="panel-body">
+
+									<dl>
+										<dt>Summary</dt>
+										<dd>{{summary}}</dd>
+
+										{{#notes}}
+										<dt>Notes</dt>
+										<dd>{{notes}}</dd>
+										{{/notes}}
+									</dl>
+
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-1" data-toggle="tab">Request
+												Parameters</a></li>
+										<!-- <li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-2" data-toggle="tab">Response Body</a></li> -->
+										<li><a href="#tabs{{index}}{{apiIndex}}{{opIndex}}-3" data-toggle="tab">Response Status Codes</a></li>
+									</ul>
+
+
+									<div class="tab-content tab-content-border">
+
+										<!-- Request parameters -->
+										<div class="tab-pane active" id="tabs{{index}}{{apiIndex}}{{opIndex}}-1">
+
+											{{#parameters}}
+											<div class="panel panel-default">
+
+												<div class="panel-heading">{{paramType}} parameters</div>
+
+												<table class="table">
+													<tr>
+														<th>Name</th>
+														<th>Required</th>
+														<th>Data Type</th>
+														<th>Description</th>
+													</tr>
+													{{#paras}}
+													<tr>
+														<th>{{name}}</th>
+														<td>{{#required}}required{{/required}} {{^required}}optional{{/required}}</td>
+														<td>{{type}}</td>
+														<td>{{description}}</td>
+													</tr>
+													{{/paras}}
+												</table>
+											</div>
+											{{/parameters}}
+
+										</div>
+
+										<!-- Response body 
+										<div class="tab-pane" id="tabs{{index}}{{apiIndex}}{{opIndex}}-2">
+											<p>
+												{{#responseClass}}<a href="#{{classLinkName}}">{{className}}</a>{{/responseClass}} {{^responseClass}}No
+												Content{{/responseClass}}
+											</p>
+										</div>-->
+
+										<!--  Response status code -->
+										<div class="tab-pane" id="tabs{{index}}{{apiIndex}}{{opIndex}}-3">
+											<table class="table">
+												<tr>
+													<th>Status Code</th>
+													<th>Reason</th>
+												</tr>
+												{{#errorResponses}}
+												<tr>
+													<td>{{code}}</td>
+													<td>{{{reason}}}</td>
+												</tr>
+												{{/errorResponses}}
+											</table>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+						{{/operations}} {{/apis}}
+					</div>
+
+					<hr />
+
+					{{/apiDocuments}}
+
+					<!-- 
+					<div class="page-header">
+						<h3>Data Types</h3>
+					</div>
+
+
+
+					{{#dataTypes}}
+					<h4>
+						<a name="{{name}}">{{name}}</a>
+					</h4>
+
+
+					<table class="table">
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Access</th>
+							<th>Schema</th>
+							<th>Notes</th>
+						</tr>
+						{{#items}}
+						<tr>
+							<th>{{name}}</th>
+							<td>{{#linkType}}<a href="#{{linkType}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}}
+							</td>
+							<td>{{required}}</td>
+							<td>{{access}}</td>
+							<td>{{{description}}}</td>
+							<td>{{{notes}}}</td>
+						</tr>
+						{{/items}}
+					</table>
+
+					{{/dataTypes}}
+ -->
+
+				</div>
+
+			</div>
+			<!-- /content -->
+
+		</div>
+	</ui:define>
+</ui:composition>
